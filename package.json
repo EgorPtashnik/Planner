@@ -3,14 +3,12 @@
   "version": "1.0.0",
   "description": "PlanneR Application",
   "scripts": {
-    "watch": "cds watch",
-    "deploy": "cds deploy",
-    "start": "ui5 serve -o index.html"
+    "start": "cds watch",
+    "deploy": "cds deploy"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2.2.0",
-    "@sap/cds-dk": "^9.8.4",
-    "@ui5/cli": "^4"
+    "@sap/cds-dk": "^9.8.4"
   },
   "cds": {
     "requires": {

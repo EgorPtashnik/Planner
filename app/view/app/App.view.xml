@@ -1,0 +1,24 @@
+<mvc:View
+    xmlns='sap.tnt'
+    xmlns:m='sap.m'
+    xmlns:f='sap.f'
+    xmlns:mvc='sap.ui.core.mvc'
+	controllerName='planner.controller.app.App'>
+
+    <ToolPage>
+
+        <header>
+            <ToolHeader>
+                <m:Title text='Planner' />
+            </ToolHeader>
+        </header>
+
+        <mainContents>
+            <f:FlexibleColumnLayout
+                id='app'
+                layout="{/layout}" />
+        </mainContents>
+
+    </ToolPage>
+
+</mvc:View>

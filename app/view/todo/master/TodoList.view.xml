@@ -1,0 +1,22 @@
+<mvc:View
+    xmlns='sap.f'
+    xmlns:mvc='sap.ui.core.mvc'
+    xmlns:core="sap.ui.core"
+	controllerName='planner.controller.todo.master.TodoList'>
+
+    <DynamicPage>
+
+        <title>
+            <core:Fragment fragmentName="planner.view.todo.master.components.Header" />
+        </title>
+
+        <content>
+
+        </content>
+
+        <footer>
+        </footer>
+
+    </DynamicPage>
+
+</mvc:View>

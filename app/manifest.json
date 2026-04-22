@@ -1,0 +1,52 @@
+{
+    "_version": "1.38.0",
+    "sap.app": {
+        "id": "planner",
+        "type": "application",
+        "applicationVersion": {
+            "version": "1.0.0"
+        }
+    },
+    "sap.ui5": {
+        "config": { "fullWidth": true },
+        "dependencies": {
+            "minUI5Version": "1.98.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.f": {},
+                "sap.tnt": {}
+            }
+        },
+        "rootView": {
+            "viewName": "planner.view.app.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.f.routing.Router",
+                "type": "View",
+                "viewType": "XML",
+                "path": "planner.view",
+                "controlId": "app",
+                "transition": "slide",
+                "async": "true"
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "home",
+                    "target": ["home"]
+                }
+            ],
+            "targets": {
+                "home": {
+                    "name": "todo.master.TodoList",
+                    "controlAggregation": "beginColumnPages"
+                }
+            }
+        }
+    }
+}
