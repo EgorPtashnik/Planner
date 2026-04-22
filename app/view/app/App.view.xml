@@ -3,20 +3,19 @@
     xmlns:m='sap.m'
     xmlns:f='sap.f'
     xmlns:mvc='sap.ui.core.mvc'
+    xmlns:core='sap.ui.core'
 	controllerName='planner.controller.app.App'>
 
     <ToolPage>
 
         <header>
-            <ToolHeader>
-                <m:Title text='Planner' />
-            </ToolHeader>
+            <core:Fragment fragmentName='planner.view.app.component.Header' />
         </header>
 
         <mainContents>
             <f:FlexibleColumnLayout
                 id='app'
-                layout="{/layout}" />
+                layout='{/layout}' />
         </mainContents>
 
     </ToolPage>

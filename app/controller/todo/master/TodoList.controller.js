@@ -1,7 +1,7 @@
 sap.ui.define([
     'planner/controller/BaseController'
 ], (BaseController) => {
-    "use strict";
+    'use strict';
 
     return BaseController.extend('planner.todo.master.TodoList', {
 

@@ -1,8 +1,9 @@
 sap.ui.define([
 	'sap/ui/core/UIComponent',
     'sap/ui/model/json/JSONModel',
-    'sap/f/library'
-], function(UIComponent, JSONModel, FLib) {
+    'sap/f/library',
+    'sap/ui/Device'
+], function(UIComponent, JSONModel, FLib, Device) {
 	'use strict';
 
 	return UIComponent.extend('planner.Component', {
@@ -15,10 +16,15 @@ sap.ui.define([
 			UIComponent.prototype.init.apply(this, arguments);
 
             this.setModel(new JSONModel());
+            this.setModel(new JSONModel(Device), 'device');
             
             const oRouter = this.getRouter();
             oRouter.attachBeforeRouteMatched(this._onBeforeRouteMatched, this);
             oRouter.initialize();
+        },
+
+        getContentDensityClass() {
+            return Device.support.touch ? 'sapUiSizeCozy' : 'sapUiSizeCompact';
         },
 
         _onBeforeRouteMatched(oEvent) {
@@ -28,8 +34,8 @@ sap.ui.define([
                 sLayout = FLib.LayoutType.OneColumn;
             }
 
-            this.getModel().setProperty("/layout", sLayout);
-        }
+            this.getModel().setProperty('/layout', sLayout);
+        },
 
 	});
 });

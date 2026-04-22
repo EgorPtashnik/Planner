@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <OverflowToolbar>
+        <content>
+            <ToolbarSpacer />
+
+            <Button
+                text='Create'
+                tooltip='Create'
+                type='Emphasized' />
+        </content>
+    </OverflowToolbar>
+
+</core:FragmentDefinition>

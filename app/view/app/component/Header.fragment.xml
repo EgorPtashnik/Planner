@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:tnt='sap.tnt'
+    xmlns:core='sap.ui.core'>
+
+    <tnt:ToolHeader>
+        <tnt:content>
+            <IconTabHeader tabDensityMode="Compact">
+                <items>
+                    <IconTabFilter
+                        text="Home" />
+                    <IconTabFilter text="Manage">
+                        <items>
+                            <IconTabFilter text="ArmA Missions" />
+                            <IconTabFilter text="Games Backlog" />
+                            <IconTabFilter text="TODO" />
+                        </items>
+                    </IconTabFilter>
+                </items>
+            </IconTabHeader>
+
+            <OverflowToolbarButton icon='sap-icon://palette' />
+        </tnt:content>
+    </tnt:ToolHeader>
+
+</core:FragmentDefinition>

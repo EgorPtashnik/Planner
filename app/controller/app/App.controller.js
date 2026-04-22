@@ -1,11 +1,12 @@
 sap.ui.define([
     'planner/controller/BaseController'
 ], (BaseController) => {
-    "use strict";
+    'use strict';
 
     return BaseController.extend('planner.App', {
 
         onInit() {
+            this.getView().addStyleClass(this.getContentDensityClass());
         }
 
     });

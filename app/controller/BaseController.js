@@ -7,6 +7,17 @@ sap.ui.define([
 
         getRouter() {
             return this.getOwnerComponent().getRouter()        
+        },
+
+        getContentDensityClass() {
+            return this.getOwnerComponent().getContentDensityClass();
+        },
+
+        getFragment(sPath) {
+            return this.loadFragment({name: sPath}).then(oFragment => {
+                oFragment.addStyleClass(this.getContentDensityClass());
+                return oFragment;
+            });
         }
         
     })
