@@ -1,0 +1,12 @@
+{
+  "name": "planner",
+  "version": "1.0.0",
+  "description": "PlanneR Application",
+  "scripts": {
+    "start": "ui5 serve -o index.html"
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "^9.8.4",
+    "@ui5/cli": "^4"
+  }
+}
