@@ -61,6 +61,8 @@
 
         <!-- SECTIONS -->
         <uxap:sections>
+
+            <!-- INFORMATION -->
             <uxap:ObjectPageSection title='Information' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
@@ -71,6 +73,7 @@
                 </uxap:subSections>
             </uxap:ObjectPageSection>
             
+            <!-- ACTIVITIES -->
             <uxap:ObjectPageSection title='Activities({todoService>items/$count})' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
