@@ -43,6 +43,10 @@
             ],
             "targets": {
                 "home": {
+                    "name": "home.Home",
+                    "controlAggregation": "beginColumnPages"
+                },
+                "todoMaster": {
                     "name": "todo.master.TodoList",
                     "controlAggregation": "beginColumnPages"
                 }
