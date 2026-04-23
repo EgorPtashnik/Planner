@@ -9,8 +9,11 @@ sap.ui.define([
             this.init('home');
         },
 
-        _onRouteMatched() {
-            this.App.getModel().setProperty('/selectedRoute', 'home');
+        _onRouteMatched(oEvent) {
+            const oParameters = oEvent.getParameters();
+            if (oParameters.name === 'home') {
+                this.App.getModel().setProperty('/selectedRoute', 'home');
+            }
         }
 
     });

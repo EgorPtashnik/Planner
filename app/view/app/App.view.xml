@@ -11,7 +11,7 @@
             <customHeader>
                 <OverflowToolbar>
                     <content>
-                        <Title text='Planner' />
+                        <Title text='PlanneR' />
                         <IconTabHeader
                             select='onSelectNavItem'
                             visible='{= !%{device>/system/phone} }'

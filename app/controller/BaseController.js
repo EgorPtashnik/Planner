@@ -8,16 +8,15 @@ sap.ui.define([
 
     return Controller.extend('planner.BaseController', {
 
-        init(sRouteName) {
+        init() {
             this.LayoutType = FLib.LayoutType;
-
 
             this.App = this.getOwnerComponent();
             this.AppConfig = this.App.getModel();
             this.Config = new JSONModel();
             this.getView().setModel(this.Config, 'config');
 
-            this.getRouter().getRoute(sRouteName).attachPatternMatched(this._onRouteMatched, this);
+            this.getRouter().attachRoutePatternMatched(this._onRouteMatched, this);
         },
 
         getRouter() {

@@ -4,9 +4,12 @@
     xmlns:form='sap.ui.layout.form'
     xmlns:core='sap.ui.core'
     xmlns:mvc='sap.ui.core.mvc'
-	controllerName='planner.controller.todo.detail.TodoParent'>
+	controllerName='planner.controller.todo.detail.TodoDetail'>
 
-    <uxap:ObjectPageLayout upperCaseAnchorBar='false'>
+    <uxap:ObjectPageLayout
+        upperCaseAnchorBar='false'
+        useIconTabBar='true'
+        showHeaderContent='{config>/showHeaderContent}'>
 
         <!-- HEADER -->
         <uxap:headerTitle>
@@ -14,7 +17,7 @@
 
                 <uxap:navigationActions>
                     <Button
-                        press='onPressClosePage'
+                        press='.header.onPressClosePage'
                         icon='sap-icon://decline'
                         visible='{= %{/layout} !== "OneColumn" }' />
                 </uxap:navigationActions>
@@ -24,7 +27,7 @@
                 </uxap:expandedHeading>
 
                 <uxap:expandedContent>
-                    <ObjectStatus title='Updated' text='{todoService>modifiedAt}' />
+                    <ObjectStatus title='Обновлено' text='{todoService>modifiedAt}' />
                 </uxap:expandedContent>
 
                 <uxap:snappedHeading>
@@ -32,7 +35,7 @@
                 </uxap:snappedHeading>
 
                 <uxap:snappedContent>
-                    <ObjectStatus title='Updated' text='{todoService>modifiedAt}' />
+                    <ObjectStatus title='Обновлено' text='{todoService>modifiedAt}' />
                 </uxap:snappedContent>
 
             </uxap:ObjectPageDynamicHeaderTitle>
@@ -48,11 +51,11 @@
                 columnsM='1'
                 labelSpanM='12'>
                 <form:content>
-                    <core:Title text='General' />
-                    <Label text='List Name' />
+                    <core:Title text='Общее' />
+                    <Label text='Название' />
                     <Input id='idTodoListNameInput' value='{todoService>name}' />
 
-                    <Label text='Information' />
+                    <Label text='Описание' />
                     <TextArea rows='5' value='{todoService>info}' />
 
                 </form:content>
@@ -63,7 +66,7 @@
         <uxap:sections>
 
             <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Information' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Информация' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
@@ -74,11 +77,12 @@
             </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Activities({todoService>items/$count})' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Этапы({todoService>items/$count})' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
                             <Table
+                                id='idTodoParentList'
                                 items='{todoService>items}'>
 
                                 <noData>
@@ -87,16 +91,23 @@
 
                                 <headerToolbar>
                                     <OverflowToolbar>
+                                        <ToolbarSpacer />
+
+                                        <Button
+                                            press='onPressAddTodoParent'
+                                            text='Добавить Этап'
+                                            tooltip='Добавить Этап' />
                                     </OverflowToolbar>
                                 </headerToolbar>
 
                                 <columns>
                                     <Column>
-                                        <Text text='Name' />
+                                        <Text text='Этап' />
                                     </Column>
                                 </columns>
 
                                 <ColumnListItem
+                                    press='.list.onPressTodoParentItem'
                                     navigated='{= %{/detailDetailID} === %{todoService>ID} }'
                                     type='{= %{/detailDetailID} === %{todoService>ID} ? "Active" : "Navigation" }'>
                                     <cells>

@@ -20,8 +20,8 @@ sap.ui.define([
             this.setModel(new JSONModel({
                 layout: LayoutType.OneColumn,
                 routes: [
-                    {text: 'Dashboard', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Manage Activities', icon: 'sap-icon://activities', key: 'todoMaster'}
+                    {text: 'Овервью', icon: 'sap-icon://home', key: 'home'},
+                    {text: 'Списки Дел', icon: 'sap-icon://activities', key: 'todoMaster'}
                 ],
                 selectedRoute: 'home',
                 detailID: null,
@@ -50,6 +50,10 @@ sap.ui.define([
 
             if (oParameters.id) {
                 this.getModel().setProperty('/detailID', oParameters.id);
+            }
+
+            if (oParameters.item) {
+                this.getModel().setProperty('/detailDetailID', oParameters.item);
             }
         },
 

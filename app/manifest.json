@@ -62,6 +62,11 @@
                     "pattern": "todo/{id}/:layout:",
                     "name": "todoDetail",
                     "target": ["todoMaster", "todoDetail"]
+                },
+                {
+                    "pattern": "todo/{id}/{item}/:layout:",
+                    "name": "todoDetailDetail",
+                    "target": ["todoMaster", "todoDetail", "todoDetailDetail"]
                 }
             ],
             "targets": {
@@ -74,7 +79,7 @@
                     }
                 },
                 "todoMaster": {
-                    "name": "todo.master.TodoList",
+                    "name": "todo.master.TodoMaster",
                     "controlAggregation": "beginColumnPages",
                     "placeholder": {
                         "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
@@ -82,8 +87,16 @@
                     }
                 },
                 "todoDetail": {
-                    "name": "todo.detail.TodoParent",
+                    "name": "todo.detail.TodoDetail",
                     "controlAggregation": "midColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
+                        "autoClose": true
+                    }
+                },
+                "todoDetailDetail": {
+                    "name": "todo.detailDetail.TodoDetailDetail",
+                    "controlAggregation": "endColumnPages",
                     "placeholder": {
                         "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
                         "autoClose": true

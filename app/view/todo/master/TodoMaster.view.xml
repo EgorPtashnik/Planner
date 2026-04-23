@@ -3,7 +3,7 @@
     xmlns:f='sap.f'
     xmlns:mvc='sap.ui.core.mvc'
     xmlns:core='sap.ui.core'
-	controllerName='planner.controller.todo.master.TodoList'>
+	controllerName='planner.controller.todo.master.TodoMaster'>
 
     <f:DynamicPage showFooter='true'>
 
@@ -12,7 +12,7 @@
             <f:DynamicPageTitle>
 
                 <f:heading>
-                    <Title text='Activity Lists' />
+                    <Title text='Списки Дел' />
                 </f:heading>
 
             </f:DynamicPageTitle>
@@ -30,13 +30,13 @@
 
                 <columns>
                     <Column>
-                        <Text text='Name' />
+                        <Text text='Список' />
                     </Column>
                 </columns>
 
                 <items>
                     <ColumnListItem
-                        press='onPressTodoListItem'
+                        press='.list.onPressTodoListItem'
                         navigated='{= %{/detailID} === %{todoService>ID} }'
                         type='{= %{/detailID} === %{todoService>ID} ? "Active" : "Navigation" }'>
                         <cells>
@@ -55,9 +55,9 @@
                     <ToolbarSpacer />
                     
                     <Button
-                        press='onPressCreateTodoList'
-                        text='Create'
-                        tooltip='Create'
+                        press='.footer.onPressCreateTodoList'
+                        text='Создать Список'
+                        tooltip='Создать Список'
                         type='Emphasized' />
                 </content>
             </OverflowToolbar>
