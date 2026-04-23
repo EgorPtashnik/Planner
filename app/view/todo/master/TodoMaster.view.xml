@@ -36,7 +36,7 @@
 
                 <items>
                     <ColumnListItem
-                        press='.list.onPressTodoListItem'
+                        press='.list.onPressListItem'
                         navigated='{= %{/detailID} === %{todoService>ID} }'
                         type='{= %{/detailID} === %{todoService>ID} ? "Active" : "Navigation" }'>
                         <cells>
@@ -55,7 +55,7 @@
                     <ToolbarSpacer />
                     
                     <Button
-                        press='.footer.onPressCreateTodoList'
+                        press='.footer.onPressCreate'
                         text='Создать Список'
                         tooltip='Создать Список'
                         type='Emphasized' />

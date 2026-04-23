@@ -21,13 +21,13 @@ sap.ui.define([
         },
 
         list: {
-            onPressTodoListItem(oEvent) {
+            onPressListItem(oEvent) {
                 this._navToDetail(oEvent.getSource().getBindingContext('todoService').getProperty('ID'));
             },
         },
 
         footer: {
-            async onPressCreateTodoList() {
+            async onPressCreate() {
                 const oContext = this.TodoList.getBinding('items').create({name: 'Новый Список'});
                 await oContext.created();
                 this._navToDetail(oContext.getProperty('ID'));

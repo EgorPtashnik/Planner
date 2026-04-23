@@ -27,24 +27,36 @@ sap.ui.define([
                 this.getView().bindElement({
                     path: `todoService>/TodoParent(ID=${sID},list_ID=${sListID})`,
                     parameters: {
-                        $expand: 'items'
+                        $expand: 'items,list'
                     }
                 });
             }
         },
 
-        header: {
-            async onPressClosePage() {
-                const oModel = this.App.getModel('todoService');
-                if (oModel.hasPendingChanges()) {
-                    await oModel.submitBatch('$auto');
-                }
-
-                this.getRouter().navTo('todoDetail', {
-                    id: this.AppConfig.getProperty('/detailID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                });
+        async onPressClosePage() {
+            const oModel = this.App.getModel('todoService');
+            if (oModel.hasPendingChanges()) {
+                await oModel.submitBatch('$auto');
             }
+
+            this.getRouter().navTo('todoDetail', {
+                id: this.AppConfig.getProperty('/detailID'),
+                layout: this.LayoutType.TwoColumnsMidExpanded
+            });
+        },
+
+        async onPressCloseAllPages() {
+            const oModel = this.App.getModel('todoService');
+            if (oModel.hasPendingChanges()) {
+                await oModel.submitBatch('$auto');
+            }
+
+            this.getRouter().navTo('todoMaster');
+        },
+
+        onPressDelete() {
+            this.onPressClosePage();
+            this.getView().getBindingContext('todoService').delete();
         }
 
     });

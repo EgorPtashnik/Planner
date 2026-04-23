@@ -8,19 +8,38 @@
 
     <uxap:ObjectPageLayout
         upperCaseAnchorBar='false'
-        useIconTabBar='true'
-        showHeaderContent='{config>/showHeaderContent}'>
+        useIconTabBar='true'>
 
         <!-- HEADER -->
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
 
+                <uxap:breadcrumbs>
+                    <Breadcrumbs currentLocationText='{todoService>name}'>
+                        <links>
+                            <Link press='onPressClosePage' text='Списки Дел' />
+                        </links>
+                    </Breadcrumbs>
+                </uxap:breadcrumbs>
+
                 <uxap:navigationActions>
                     <Button
-                        press='.header.onPressClosePage'
+                        press='onPressClosePage'
                         icon='sap-icon://decline'
-                        visible='{= %{/layout} !== "OneColumn" }' />
+                        visible='{= !%{/layout}.includes("One") &amp;&amp; !%{/layout}.includes("Three") }' />
                 </uxap:navigationActions>
+
+                <uxap:actions>
+                    <Button
+                        press='onPressDelete'
+                        text='Удалить'
+                        icon='sap-icon://delete'
+                        type='Reject'>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                        </layoutData>
+                    </Button>
+                </uxap:actions>
 
                 <uxap:expandedHeading>
                     <Title text='{todoService>name}' />
@@ -70,14 +89,14 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <Text text='{todoService>info}' emptyIndicatorMode='{= !!%{todoService>info} ? "Off" : "On" }'/>
+                            <Text class='sapUiTinyMargin' text='{todoService>info}' emptyIndicatorMode='{= !!%{todoService>info} ? "Off" : "On" }'/>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Этапы({todoService>items/$count})' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Этапы ({todoService>items/$count})' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
@@ -91,6 +110,7 @@
 
                                 <headerToolbar>
                                     <OverflowToolbar>
+                                        <Title text='Этапы ({todoService>items/$count})' />
                                         <ToolbarSpacer />
 
                                         <Button
@@ -107,7 +127,7 @@
                                 </columns>
 
                                 <ColumnListItem
-                                    press='.list.onPressTodoParentItem'
+                                    press='onPressTodoParentItem'
                                     navigated='{= %{/detailDetailID} === %{todoService>ID} }'
                                     type='{= %{/detailDetailID} === %{todoService>ID} ? "Active" : "Navigation" }'>
                                     <cells>

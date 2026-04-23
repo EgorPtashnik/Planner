@@ -9,9 +9,6 @@ sap.ui.define([
             this.init('todoDetail');
 
             this.TodoParentList = this.byId('idTodoParentList');
-            this.Config.setData({
-                showHeaderContent: false
-            })
         },
 
         _onRouteMatched(oEvent) {
@@ -20,7 +17,6 @@ sap.ui.define([
                 this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
                 this.byId('idTodoListNameInput').focus();
                 this.bindView(oParameters.arguments.id);
-                this.Config.setProperty('/showHeaderContent', true);
             }
 
             if (!this.getView().getBindingContext('todoService')) {
@@ -40,21 +36,22 @@ sap.ui.define([
             }
         },
 
-        header: {
-            async onPressClosePage() {
-                const oModel = this.App.getModel('todoService');
-                if (oModel.hasPendingChanges()) {
-                    await oModel.submitBatch('$auto');
-                }
-
-                this.getRouter().navTo('todoMaster');
+        async onPressClosePage() {
+            const oModel = this.App.getModel('todoService');
+            if (oModel.hasPendingChanges()) {
+                await oModel.submitBatch('$auto');
             }
+
+            this.getRouter().navTo('todoMaster');
         },
 
-        list: {
-            onPressTodoParentItem(oEvent) {
-                this._navToDetailDetail(oEvent.getSource().getBindingContext('todoService').getProperty('ID'));
-            }
+        onPressDelete() {
+            this.onPressClosePage();
+            this.getView().getBindingContext('todoService').delete();
+        },
+
+        onPressTodoParentItem(oEvent) {
+            this._navToDetailDetail(oEvent.getSource().getBindingContext('todoService').getProperty('ID'));
         },
 
         async onPressAddTodoParent() {
@@ -64,7 +61,6 @@ sap.ui.define([
         },
 
         _navToDetailDetail(sID) {
-            this.Config.setProperty('/showHeaderContent', false);
             this.getRouter().navTo('todoDetailDetail', {
                 id: this.AppConfig.getProperty('/detailID'),
                 item: sID,

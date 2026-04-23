@@ -14,11 +14,32 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
 
+                <uxap:breadcrumbs>
+                    <Breadcrumbs currentLocationText='{todoService>name}'>
+                        <links>
+                            <Link press='onPressCloseAllPages' text='Списки Дел' />
+                            <Link press='onPressClosePage' text='{todoService>list/name}' />
+                        </links>
+                    </Breadcrumbs>
+                </uxap:breadcrumbs>
+
                 <uxap:navigationActions>
                     <Button
-                        press='.header.onPressClosePage'
+                        press='onPressClosePage'
                         icon='sap-icon://decline' />
                 </uxap:navigationActions>
+
+                <uxap:actions>
+                    <Button
+                        press='onPressDelete'
+                        text='Удалить'
+                        icon='sap-icon://delete'
+                        type='Reject'>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                        </layoutData>
+                    </Button>
+                </uxap:actions>
 
                 <uxap:expandedHeading>
                     <Title text='{todoService>name}' />
