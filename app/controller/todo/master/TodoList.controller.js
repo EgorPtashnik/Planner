@@ -13,6 +13,8 @@ sap.ui.define([
 
         _onRouteMatched() {
             this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
+
+            this.TodoList?.getBinding('items')?.refresh();
         },
 
         async onPressCreateTodoList() {
@@ -22,9 +24,7 @@ sap.ui.define([
         },
 
         onPressTodoListItem(oEvent) {
-            const sID = oEvent.getSource().getBindingContext('todoService').getProperty('ID');
-            this.Config.setProperty('/selectedTodoListID', oEvent.getSource().getBindingContext('todoService').getProperty('ID'));
-            this._navToDetail(sID);
+            this._navToDetail(oEvent.getSource().getBindingContext('todoService').getProperty('ID'));
         },
 
         _navToDetail(sID) {

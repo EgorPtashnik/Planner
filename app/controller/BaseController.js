@@ -11,11 +11,13 @@ sap.ui.define([
         init(sRouteName) {
             this.LayoutType = FLib.LayoutType;
 
-            this.getRouter().getRoute(sRouteName).attachPatternMatched(this._onRouteMatched, this);
 
-            this.AppConfig = this.getOwnerComponent().getModel();
+            this.App = this.getOwnerComponent();
+            this.AppConfig = this.App.getModel();
             this.Config = new JSONModel();
             this.getView().setModel(this.Config, 'config');
+
+            this.getRouter().getRoute(sRouteName).attachPatternMatched(this._onRouteMatched, this);
         },
 
         getRouter() {
@@ -23,7 +25,7 @@ sap.ui.define([
         },
 
         getContentDensityClass() {
-            return this.getOwnerComponent().getContentDensityClass();
+            return this.App.getContentDensityClass();
         },
 
         getFragment(sPath) {

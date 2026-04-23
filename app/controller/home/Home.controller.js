@@ -6,11 +6,11 @@ sap.ui.define([
     return BaseController.extend('planner.home.Home', {
 
         onInit() {
-            this.init("home");
+            this.init('home');
         },
 
         _onRouteMatched() {
-            this.getOwnerComponent().getModel().setProperty('/selectedRoute', 'home');
+            this.App.getModel().setProperty('/selectedRoute', 'home');
         }
 
     });

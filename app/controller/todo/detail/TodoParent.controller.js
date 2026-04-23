@@ -9,13 +9,30 @@ sap.ui.define([
             this.init('todoDetail');
         },
 
-        onPressClosePage() {
-            this.getRouter().navTo('todoMaster');
+        _onRouteMatched(oEvent) {
+            this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
+
+            this.bindView(oEvent.getParameters().arguments.id);
+            this.byId('idTodoListNameInput').focus();
         },
 
-        _onRouteMatched() {
-            this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
-        }
+        bindView(sID) {
+            this.getView().bindElement({
+                path: `todoService>/TodoList(${sID})`,
+                parameters: {
+                    $expand: 'items'
+                }
+            });
+        },
+
+        async onPressClosePage() {
+            const oModel = this.App.getModel('todoService');
+            if (oModel.hasPendingChanges()) {
+                await oModel.submitBatch('$auto');
+            }
+
+            this.getRouter().navTo('todoMaster');
+        },
 
     });
 });

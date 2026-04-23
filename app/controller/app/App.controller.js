@@ -6,15 +6,15 @@ sap.ui.define([
     return BaseController.extend('planner.App', {
 
         onInit() {
-            this.getView().addStyleClass(this.getContentDensityClass());
+            this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
         },
 
         onSelectNavItem(oEvent) {
-            this.getRouter().navTo(oEvent.getParameter("selectedKey"));
+            this.getRouter().navTo(oEvent.getParameter('selectedKey'));
         },
 
         onPressFooterNavItem(oEvent) {
-            this.getRouter().navTo(oEvent.getSource().getBindingContext().getProperty("key"));
+            this.getRouter().navTo(oEvent.getSource().getBindingContext().getProperty('key'));
         }
 
     });
