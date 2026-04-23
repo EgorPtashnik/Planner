@@ -21,7 +21,7 @@ sap.ui.define([
                 layout: LayoutType.OneColumn,
                 routes: [
                     {text: 'Dashboard', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Manage Activities', icon: 'sap-icon://activities', key: 'todo'}
+                    {text: 'Manage Activities', icon: 'sap-icon://activities', key: 'todoMaster'}
                 ],
                 selectedRoute: 'home'
             }));

@@ -1,12 +1,15 @@
 sap.ui.define([
     'sap/ui/core/mvc/Controller',
-    'sap/ui/core/UIComponent'
-], (Controller, UIComponent) => {
+    'sap/ui/core/UIComponent',
+    'sap/f/library'
+], (Controller, UIComponent, FLib) => {
     'use strict';
 
     return Controller.extend('planner.BaseController', {
 
         init(sRouteName) {
+            this.LayoutType = FLib.LayoutType;
+
             this.getRouter().getRoute(sRouteName).attachPatternMatched(this._onRouteMatched, this);
         },
 

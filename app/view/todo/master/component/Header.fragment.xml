@@ -6,7 +6,7 @@
     <f:DynamicPageTitle>
 
         <f:heading>
-            <Title text='Todo' />
+            <Title text='Activity Lists' />
         </f:heading>
 
     </f:DynamicPageTitle>

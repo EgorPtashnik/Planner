@@ -5,6 +5,13 @@
         "type": "application",
         "applicationVersion": {
             "version": "1.0.0"
+        },
+        "dataSources": {
+            "todoService": {
+                "uri": "/odata/v4/todo/",
+                "type": "OData",
+                "settings": { "odataVersion": "4.0" }
+            }
         }
     },
     "sap.ui5": {
@@ -16,6 +23,12 @@
                 "sap.m": {},
                 "sap.f": {},
                 "sap.fe.placeholder": { "lazy": false }
+            }
+        },
+        "models": {
+            "todoService": {
+                "dataSource": "todoService",
+                "type": "sap.ui.model.odata.v4.ODataModel"
             }
         },
         "rootView": {
@@ -31,7 +44,7 @@
                 "viewType": "XML",
                 "path": "planner.view",
                 "controlId": "app",
-                "transition": "show",
+                "transition": "slide",
                 "async": "true"
             },
             "routes": [
@@ -42,8 +55,13 @@
                 },
                 {
                     "pattern": "todo",
-                    "name": "todo",
+                    "name": "todoMaster",
                     "target": ["todoMaster"]
+                },
+                {
+                    "pattern": "todo/{id}/:layout:",
+                    "name": "todoDetail",
+                    "target": ["todoMaster", "todoDetail"]
                 }
             ],
             "targets": {
@@ -60,6 +78,14 @@
                     "controlAggregation": "beginColumnPages",
                     "placeholder": {
                         "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
+                        "autoClose": true
+                    }
+                },
+                "todoDetail": {
+                    "name": "todo.detail.TodoParent",
+                    "controlAggregation": "midColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
                         "autoClose": true
                     }
                 }
