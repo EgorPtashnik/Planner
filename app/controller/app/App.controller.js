@@ -7,6 +7,14 @@ sap.ui.define([
 
         onInit() {
             this.getView().addStyleClass(this.getContentDensityClass());
+        },
+
+        onSelectNavItem(oEvent) {
+            this.getRouter().navTo(oEvent.getParameter("selectedKey"));
+        },
+
+        onPressFooterNavItem(oEvent) {
+            this.getRouter().navTo(oEvent.getSource().getBindingContext().getProperty("key"));
         }
 
     });

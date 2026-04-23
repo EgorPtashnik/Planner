@@ -1,12 +1,17 @@
 sap.ui.define([
-    'sap/ui/core/mvc/Controller'
-], (Controller) => {
+    'sap/ui/core/mvc/Controller',
+    'sap/ui/core/UIComponent'
+], (Controller, UIComponent) => {
     'use strict';
 
     return Controller.extend('planner.BaseController', {
 
+        init(sRouteName) {
+            this.getRouter().getRoute(sRouteName).attachPatternMatched(this._onRouteMatched, this);
+        },
+
         getRouter() {
-            return this.getOwnerComponent().getRouter()        
+            return UIComponent.getRouterFor(this);
         },
 
         getContentDensityClass() {

@@ -6,6 +6,8 @@ sap.ui.define([
 ], function(UIComponent, JSONModel, FLib, Device) {
 	'use strict';
 
+    const { LayoutType } = FLib;
+
 	return UIComponent.extend('planner.Component', {
 
 		metadata: {
@@ -15,7 +17,14 @@ sap.ui.define([
         init() {
 			UIComponent.prototype.init.apply(this, arguments);
 
-            this.setModel(new JSONModel());
+            this.setModel(new JSONModel({
+                layout: LayoutType.OneColumn,
+                routes: [
+                    {text: 'Dashboard', icon: 'sap-icon://home', key: 'home'},
+                    {text: 'Manage Activities', icon: 'sap-icon://activities', key: 'todo'}
+                ],
+                selectedRoute: 'home'
+            }));
             this.setModel(new JSONModel(Device), 'device');
             
             const oRouter = this.getRouter();

@@ -2,15 +2,23 @@
     xmlns='sap.m'
     xmlns:core='sap.ui.core'>
 
-    <Bar>
-        <contentMiddle>
-            <ScrollContainer width="100%">
-                <HBox justifyContent="SpaceAround" alignItems="Center">
-                    <items>
-                    </items>
-                </HBox>
-            </ScrollContainer>
-        </contentMiddle>
-    </Bar>
+    <OverflowToolbar>
+        <content>
+            <Title text='Planner' />
+            <IconTabHeader
+                select='onSelectNavItem'
+                visible='{= !%{device>/system/phone} }'
+                selectedKey='{/selectedRoute}'
+                items='{/routes}'>
+                <items>
+                    <IconTabFilter
+                        text='{text}'
+                        key='{key}' />
+                </items>
+            </IconTabHeader>
+
+            <ToolbarSpacer />
+        </content>
+    </OverflowToolbar>
 
 </core:FragmentDefinition>

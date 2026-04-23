@@ -15,7 +15,7 @@
                 "sap.ui.core": {},
                 "sap.m": {},
                 "sap.f": {},
-                "sap.tnt": {}
+                "sap.fe.placeholder": { "lazy": false }
             }
         },
         "rootView": {
@@ -31,7 +31,7 @@
                 "viewType": "XML",
                 "path": "planner.view",
                 "controlId": "app",
-                "transition": "slide",
+                "transition": "show",
                 "async": "true"
             },
             "routes": [
@@ -39,16 +39,29 @@
                     "pattern": "",
                     "name": "home",
                     "target": ["home"]
+                },
+                {
+                    "pattern": "todo",
+                    "name": "todo",
+                    "target": ["todoMaster"]
                 }
             ],
             "targets": {
                 "home": {
                     "name": "home.Home",
-                    "controlAggregation": "beginColumnPages"
+                    "controlAggregation": "beginColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
+                        "autoClose": true
+                    }
                 },
                 "todoMaster": {
                     "name": "todo.master.TodoList",
-                    "controlAggregation": "beginColumnPages"
+                    "controlAggregation": "beginColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
+                        "autoClose": true
+                    }
                 }
             }
         }

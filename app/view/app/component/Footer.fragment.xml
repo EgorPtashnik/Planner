@@ -4,9 +4,16 @@
 
     <Bar>
         <contentMiddle>
-            <ScrollContainer width="100%">
-                <HBox justifyContent="SpaceAround" alignItems="Center">
+            <ScrollContainer width='100%'>
+                <HBox
+                    justifyContent='SpaceAround'
+                    alignItems='Center'
+                    items='{/routes}'>
                     <items>
+                        <Button
+                            press='onPressFooterNavItem'
+                            icon='{icon}'
+                            type='{= %{/selectedRoute} === %{key} ? "Neutral" : "Transparent" }' />
                     </items>
                 </HBox>
             </ScrollContainer>

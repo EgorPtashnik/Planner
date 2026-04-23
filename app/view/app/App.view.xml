@@ -3,10 +3,10 @@
     xmlns:f='sap.f'
     xmlns:mvc='sap.ui.core.mvc'
     xmlns:core='sap.ui.core'
-    displayBlock="true"
-    height="100%"
+    displayBlock='true'
+    height='100%'
 	controllerName='planner.controller.app.App'>
-        <Page showFooter="{device>/system/phone}">
+        <Page showFooter='{device>/system/phone}'>
 
             <customHeader>
                 <core:Fragment fragmentName='planner.view.app.component.Header' />

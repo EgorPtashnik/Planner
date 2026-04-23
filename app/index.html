@@ -1,28 +1,28 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta charset="UTF-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+    <meta charset='UTF-8'>
     <title>PlanneR</title>
 
-    <script src="config.js"></script>
-    <script id="sap-ui-bootstrap" src="https://ui5.sap.com/resources/sap-ui-core.js" data-sap-ui-flexibility-services='[{"connector": "LocalStorageConnector"}]'></script>
+    <script src='config.js'></script>
+    <script id='sap-ui-bootstrap' src='https://ui5.sap.com/resources/sap-ui-core.js' data-sap-ui-flexibility-services='[{"connector": "LocalStorageConnector"}]'></script>
 
     <script>
         sap.ui.getCore().attachInit(function () {
             sap.ui.core.Component.create({
-                name: "planner",
-                id: "planner"
+                name: 'planner',
+                id: 'planner'
             }).then(function (oComponent) {
                 new sap.m.Shell({
                     appWidthLimited: false,
-                    app: new sap.ui.core.ComponentContainer({component: oComponent, height: "100%"})
-                }).placeAt("content");
+                    app: new sap.ui.core.ComponentContainer({component: oComponent, height: '100%'})
+                }).placeAt('content');
             });
         });
     </script>
 </head>
 
-<body class="sapUiBody" id="content"></body>
+<body class='sapUiBody' id='content'></body>
 
 </html>
