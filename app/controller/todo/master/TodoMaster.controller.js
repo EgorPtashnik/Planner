@@ -20,18 +20,14 @@ sap.ui.define([
             this.TodoList?.getBinding('items')?.refresh();
         },
 
-        list: {
-            onPressListItem(oEvent) {
-                this._navToDetail(oEvent.getSource().getBindingContext('todoService').getProperty('ID'));
-            },
+        onPressListItem(oEvent) {
+            this._navToDetail(oEvent.getSource().getBindingContext('todo').getProperty('ID'));
         },
 
-        footer: {
-            async onPressCreate() {
-                const oContext = this.TodoList.getBinding('items').create({name: 'Новый Список'});
-                await oContext.created();
-                this._navToDetail(oContext.getProperty('ID'));
-            }
+        async onPressCreate() {
+            const oContext = this.TodoList.getBinding('items').create({name: 'Новый Список'});
+            await oContext.created();
+            this._navToDetail(oContext.getProperty('ID'));
         },
 
         _navToDetail(sID) {

@@ -22,7 +22,7 @@
         <f:content>
             <Table
                 id='idTodoList'
-                items='{todoService>/TodoList}'>
+                items='{todo>/TodoList}'>
 
                 <noData>
                     <IllustratedMessage />
@@ -36,11 +36,11 @@
 
                 <items>
                     <ColumnListItem
-                        press='.list.onPressListItem'
-                        navigated='{= %{/detailID} === %{todoService>ID} }'
-                        type='{= %{/detailID} === %{todoService>ID} ? "Active" : "Navigation" }'>
+                        press='onPressListItem'
+                        navigated='{= %{/detailID} === %{todo>ID} }'
+                        type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>
                         <cells>
-                            <ObjectIdentifier title='{todoService>name}' />
+                            <ObjectIdentifier title='{todo>name}' />
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -55,7 +55,7 @@
                     <ToolbarSpacer />
                     
                     <Button
-                        press='.footer.onPressCreate'
+                        press='onPressCreate'
                         text='Создать Список'
                         tooltip='Создать Список'
                         type='Emphasized' />

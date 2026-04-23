@@ -17,7 +17,7 @@ sap.ui.define([
                 this.byId('idTodoParentNameInput').focus();
             }
 
-            if (!this.getView().getBindingContext('todoService')) {
+            if (!this.getView().getBindingContext('todo')) {
                 this.bindView(oParameters.arguments.item, oParameters.arguments.id);
             }
         },
@@ -25,7 +25,7 @@ sap.ui.define([
         bindView(sID, sListID) {
             if (sID && sListID) {
                 this.getView().bindElement({
-                    path: `todoService>/TodoParent(ID=${sID},list_ID=${sListID})`,
+                    path: `todo>/TodoParent(ID=${sID},list_ID=${sListID})`,
                     parameters: {
                         $expand: 'items,list'
                     }
@@ -34,7 +34,7 @@ sap.ui.define([
         },
 
         async onPressClosePage() {
-            const oModel = this.App.getModel('todoService');
+            const oModel = this.App.getModel('todo');
             if (oModel.hasPendingChanges()) {
                 await oModel.submitBatch('$auto');
             }
@@ -46,7 +46,7 @@ sap.ui.define([
         },
 
         async onPressCloseAllPages() {
-            const oModel = this.App.getModel('todoService');
+            const oModel = this.App.getModel('todo');
             if (oModel.hasPendingChanges()) {
                 await oModel.submitBatch('$auto');
             }
@@ -56,7 +56,7 @@ sap.ui.define([
 
         onPressDelete() {
             this.onPressClosePage();
-            this.getView().getBindingContext('todoService').delete();
+            this.getView().getBindingContext('todo').delete();
         }
 
     });

@@ -15,7 +15,7 @@
             <uxap:ObjectPageDynamicHeaderTitle>
 
                 <uxap:breadcrumbs>
-                    <Breadcrumbs currentLocationText='{todoService>name}'>
+                    <Breadcrumbs currentLocationText='{todo>name}'>
                         <links>
                             <Link press='onPressClosePage' text='Списки Дел' />
                         </links>
@@ -42,19 +42,19 @@
                 </uxap:actions>
 
                 <uxap:expandedHeading>
-                    <Title text='{todoService>name}' />
+                    <Title text='{todo>name}' />
                 </uxap:expandedHeading>
 
                 <uxap:expandedContent>
-                    <ObjectStatus title='Обновлено' text='{todoService>modifiedAt}' />
+                    <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
                 </uxap:expandedContent>
 
                 <uxap:snappedHeading>
-                    <Title text='{todoService>name}' />
+                    <Title text='{todo>name}' />
                 </uxap:snappedHeading>
 
                 <uxap:snappedContent>
-                    <ObjectStatus title='Обновлено' text='{todoService>modifiedAt}' />
+                    <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
                 </uxap:snappedContent>
 
             </uxap:ObjectPageDynamicHeaderTitle>
@@ -72,10 +72,10 @@
                 <form:content>
                     <core:Title text='Общее' />
                     <Label text='Название' />
-                    <Input id='idTodoListNameInput' value='{todoService>name}' />
+                    <Input id='idTodoListNameInput' value='{todo>name}' />
 
                     <Label text='Описание' />
-                    <TextArea rows='5' value='{todoService>info}' />
+                    <TextArea rows='5' value='{todo>info}' />
 
                 </form:content>
             </form:SimpleForm>
@@ -89,20 +89,20 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <Text class='sapUiTinyMargin' text='{todoService>info}' emptyIndicatorMode='{= !!%{todoService>info} ? "Off" : "On" }'/>
+                            <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Этапы ({todoService>items/$count})' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Этапы ({todo>items/$count})' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
                             <Table
                                 id='idTodoParentList'
-                                items='{todoService>items}'>
+                                items='{todo>items}'>
 
                                 <noData>
                                     <IllustratedMessage />
@@ -110,7 +110,7 @@
 
                                 <headerToolbar>
                                     <OverflowToolbar>
-                                        <Title text='Этапы ({todoService>items/$count})' />
+                                        <Title text='Этапы ({todo>items/$count})' />
                                         <ToolbarSpacer />
 
                                         <Button
@@ -128,10 +128,10 @@
 
                                 <ColumnListItem
                                     press='onPressTodoParentItem'
-                                    navigated='{= %{/detailDetailID} === %{todoService>ID} }'
-                                    type='{= %{/detailDetailID} === %{todoService>ID} ? "Active" : "Navigation" }'>
+                                    navigated='{= %{/detailDetailID} === %{todo>ID} }'
+                                    type='{= %{/detailDetailID} === %{todo>ID} ? "Active" : "Navigation" }'>
                                     <cells>
-                                        <ObjectIdentifier title='{todoService>name}' />
+                                        <ObjectIdentifier title='{todo>name}' />
                                     </cells>
                                 </ColumnListItem>
 

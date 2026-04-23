@@ -2,11 +2,15 @@ sap.ui.define([
     'sap/ui/core/mvc/Controller',
     'sap/ui/core/UIComponent',
     'sap/f/library',
-    'sap/ui/model/json/JSONModel'
-], (Controller, UIComponent, FLib, JSONModel) => {
+    'sap/ui/model/json/JSONModel',
+    'planner/util/Formatter'
+], (Controller, UIComponent, FLib, JSONModel,
+    Formatter) => {
     'use strict';
 
     return Controller.extend('planner.BaseController', {
+
+        Formatter,
 
         init() {
             this.LayoutType = FLib.LayoutType;
