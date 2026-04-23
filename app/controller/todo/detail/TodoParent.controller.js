@@ -1,20 +1,20 @@
 sap.ui.define([
-    'planner/controller/BaseController',
-
-    'planner/controller/todo/detail/component/Header'
-], (BaseController, HeaderLogic) => {
+    'planner/controller/BaseController'
+], (BaseController) => {
     'use strict';
 
     return BaseController.extend('planner.todo.detail.TodoParent', {
-
-        ...HeaderLogic,
 
         onInit() {
             this.init('todoDetail');
         },
 
+        onPressClosePage() {
+            this.getRouter().navTo('todoMaster');
+        },
+
         _onRouteMatched() {
-            this.getOwnerComponent().getModel().setProperty('/selectedRoute', 'todo');
+            this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
         }
 
     });

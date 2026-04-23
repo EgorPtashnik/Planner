@@ -9,7 +9,24 @@
         <Page showFooter='{device>/system/phone}'>
 
             <customHeader>
-                <core:Fragment fragmentName='planner.view.app.component.Header' />
+                <OverflowToolbar>
+                    <content>
+                        <Title text='Planner' />
+                        <IconTabHeader
+                            select='onSelectNavItem'
+                            visible='{= !%{device>/system/phone} }'
+                            selectedKey='{/selectedRoute}'
+                            items='{/routes}'>
+                            <items>
+                                <IconTabFilter
+                                    text='{text}'
+                                    key='{key}' />
+                            </items>
+                        </IconTabHeader>
+
+                        <ToolbarSpacer />
+                    </content>
+                </OverflowToolbar>
             </customHeader>
 
             <content>
@@ -19,7 +36,23 @@
             </content>
 
             <footer>
-                <core:Fragment fragmentName='planner.view.app.component.Footer' />
+                <Bar>
+                    <contentMiddle>
+                        <ScrollContainer width='100%'>
+                            <HBox
+                                justifyContent='SpaceAround'
+                                alignItems='Center'
+                                items='{/routes}'>
+                                <items>
+                                    <Button
+                                        press='onPressFooterNavItem'
+                                        icon='{icon}'
+                                        type='{= %{/selectedRoute} === %{key} ? "Neutral" : "Transparent" }' />
+                                </items>
+                            </HBox>
+                        </ScrollContainer>
+                    </contentMiddle>
+                </Bar>
             </footer>
 
         </Page>

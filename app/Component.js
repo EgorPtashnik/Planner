@@ -23,7 +23,9 @@ sap.ui.define([
                     {text: 'Dashboard', icon: 'sap-icon://home', key: 'home'},
                     {text: 'Manage Activities', icon: 'sap-icon://activities', key: 'todoMaster'}
                 ],
-                selectedRoute: 'home'
+                selectedRoute: 'home',
+                detailID: null,
+                detailDetailID: null
             }));
             this.setModel(new JSONModel(Device), 'device');
             
@@ -37,13 +39,18 @@ sap.ui.define([
         },
 
         _onBeforeRouteMatched(oEvent) {
-            let sLayout = oEvent.getParameters().arguments.layout;
+            const oParameters = oEvent.getParameters().arguments;
+            let sLayout = oParameters.layout;
 
             if (!sLayout) {
                 sLayout = FLib.LayoutType.OneColumn;
             }
 
             this.getModel().setProperty('/layout', sLayout);
+
+            if (oParameters.id) {
+                this.getModel().setProperty('/detailID', oParameters.id);
+            }
         },
 
 	});
