@@ -83,38 +83,36 @@
 
         <!-- SECTIONS -->
         <uxap:sections>
-
-            <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Информация' titleUppercase='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
-                        <uxap:blocks>
-                            <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Этапы ({todo>items/$count})' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Этапы ({config>/todoParentCount})' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
                             <Table
                                 id='idTodoParentList'
-                                items='{todo>items}'>
+                                sticky='ColumnHeaders,HeaderToolbar'
+                                items='{
+                                    path: "todo>items",
+                                    parameters: {
+                                        $$ownRequest: true,
+                                        $count: true,
+                                        $expand: "items"
+                                    }
+                                }'>
 
                                 <noData>
-                                    <IllustratedMessage />
+                                    <IllustratedMessage illustrationType='sapIllus-NoActivities' />
                                 </noData>
 
                                 <headerToolbar>
                                     <OverflowToolbar>
-                                        <Title text='Этапы ({todo>items/$count})' />
+                                        <Title text='Этапы ({config>/todoParentCount})' />
                                         <ToolbarSpacer />
-
-                                        <Button
+                                        <OverflowToolbarButton
+                                            type='Transparent'
                                             press='onPressAddTodoParent'
+                                            icon='sap-icon://add-activity'
                                             text='Добавить Этап'
                                             tooltip='Добавить Этап' />
                                     </OverflowToolbar>
@@ -124,6 +122,9 @@
                                     <Column>
                                         <Text text='Этап' />
                                     </Column>
+                                    <Column hAlign='Right'>
+                                        <Text text='Приоритет' />
+                                    </Column>
                                 </columns>
 
                                 <ColumnListItem
@@ -131,11 +132,29 @@
                                     navigated='{= %{/detailDetailID} === %{todo>ID} }'
                                     type='{= %{/detailDetailID} === %{todo>ID} ? "Active" : "Navigation" }'>
                                     <cells>
-                                        <ObjectIdentifier title='{todo>name}' />
+                                        <VBox>
+                                            <ObjectIdentifier title='{todo>name}' />
+                                            <ObjectStatus state='Indication06' text='{todo>items/$count}' />
+                                        </VBox>
+                                        <GenericTag
+                                            design='StatusIconHidden'
+                                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
                                     </cells>
                                 </ColumnListItem>
 
                             </Table>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- INFORMATION -->
+            <uxap:ObjectPageSection title='Информация' titleUppercase='false'>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>

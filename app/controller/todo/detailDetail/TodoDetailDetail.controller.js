@@ -1,62 +1,106 @@
 sap.ui.define([
-    'planner/controller/BaseController'
-], (BaseController) => {
+    'planner/controller/BaseController',
+    'planner/controller/todo/detailDetail/Events'
+], (BaseController, Events) => {
     'use strict';
 
-    return BaseController.extend('planner.todo.detailDetail.TodoDetail', {
+    return BaseController.extend('planner.todo.detailDetail.TodoDetailDetail', {
+
+        ...Events,
 
         onInit() {
             this.init('todoDetailDetail');
+            this.setSubscriptions();
+            
+            this.Config.setData({
+                ID: null,
+                editTodoItems: false
+            });
         },
 
         _onRouteMatched(oEvent) {
             const oParameters = oEvent.getParameters();
             if (oParameters.name === 'todoDetailDetail') {
-                this.bindView(oParameters.arguments.item, oParameters.arguments.id);
-                this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
-                this.byId('idTodoParentNameInput').focus();
-            }
-
-            if (!this.getView().getBindingContext('todo')) {
-                this.bindView(oParameters.arguments.item, oParameters.arguments.id);
-            }
-        },
-
-        bindView(sID, sListID) {
-            if (sID && sListID) {
-                this.getView().bindElement({
-                    path: `todo>/TodoParent(ID=${sID},list_ID=${sListID})`,
-                    parameters: {
-                        $expand: 'items,list'
-                    }
+                this.publish(this.EVENT.NAV_CHANGED, {
+                    route: oParameters.name,
+                    parameters: oParameters.arguments
                 });
             }
         },
 
-        async onPressClosePage() {
-            const oModel = this.App.getModel('todo');
-            if (oModel.hasPendingChanges()) {
-                await oModel.submitBatch('$auto');
+        bindView(sID, sListID) {
+            try {
+                this.getView().bindElement({
+                    path: `todo>/TodoParent(ID=${sID},list_ID=${sListID})`,
+                    parameters: {
+                        $expand: 'items,list'
+                    },
+                    events: {
+                        patchCompleted: () => this.publish(this.EVENT.TODOPARENT_CHANGED)
+                    }
+                });
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
             }
+        },
 
-            this.getRouter().navTo('todoDetail', {
-                id: this.AppConfig.getProperty('/detailID'),
-                layout: this.LayoutType.TwoColumnsMidExpanded
+        async onPressClosePage() {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: 'todoDetail',
+                parameters: {
+                    id: this.AppConfig.getProperty('/detailID'),
+                    layout: this.LayoutType.TwoColumnsMidExpanded
+                }
             });
         },
 
         async onPressCloseAllPages() {
-            const oModel = this.App.getModel('todo');
-            if (oModel.hasPendingChanges()) {
-                await oModel.submitBatch('$auto');
-            }
-
-            this.getRouter().navTo('todoMaster');
+            this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
         },
 
-        onPressDelete() {
-            this.onPressClosePage();
-            this.getView().getBindingContext('todo').delete();
+        async onPressDelete() {
+            try {
+                const oContext = this.getView().getBindingContext('todo');
+                await oContext.delete();
+                if (oContext.isDeleted()) {
+                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Этап удален.');
+                    this.publish(this.EVENT.NAV_CHANGED, {
+                        route: 'todoDetail',
+                        parameters: {
+                            id: this.AppConfig.getProperty('/detailID'),
+                            layout: this.LayoutType.TwoColumnsMidExpanded
+                        }
+                    });
+                    this.publish(this.EVENT.TODOPARENT_CHANGED);
+                }
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
+        },
+
+        async onPressAddTodoItem() {
+            try {
+                const oContext = this.byId('idTodoItemList').getBinding('items').create({name: 'Новый Шаг', priority: 2});
+                await oContext.created();
+
+                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Шаг создан.');
+                this.publish(this.EVENT.TODOPARENT_CHANGED);
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
+        },
+
+        async onPressDeleteTodoItem(oEvent) {
+            try {
+                const oContext = oEvent.getParameter('listItem').getBindingContext('todo');
+                await oContext.delete();
+                if (oContext.isDeleted()) {
+                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Шаг удален.');
+                    this.publish(this.EVENT.TODOPARENT_CHANGED);
+                }
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
         }
 
     });

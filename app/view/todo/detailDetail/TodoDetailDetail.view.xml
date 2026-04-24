@@ -100,17 +100,6 @@
 
         <!-- SECTIONS -->
         <uxap:sections>
-
-            <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Информация' titleUppercase='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
-                        <uxap:blocks>
-                            <Text text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
             <uxap:ObjectPageSection title='Шаги({todo>items/$count})' titleUppercase='false'>
@@ -118,14 +107,33 @@
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
                             <Table
+                                id='idTodoItemList'
+                                delete='onPressDeleteTodoItem'
+                                sticky='ColumnHeaders,HeaderToolbar'
+                                mode='{= %{config>/editTodoItems} ? "Delete" : "MultiSelect"}'
                                 items='{todo>items}'>
 
                                 <noData>
-                                    <IllustratedMessage />
+                                    <IllustratedMessage illustrationType='sapIllus-NoActivities' />
                                 </noData>
 
                                 <headerToolbar>
                                     <OverflowToolbar>
+                                        <Title text='Шаги ({todo>items/$count})' />
+                                        <ToolbarSpacer />
+                                        <OverflowToolbarButton
+                                            press='onPressAddTodoItem'
+                                            icon='sap-icon://add'
+                                            text='Добавить Шаг'
+                                            tooltip='Добавить Шаг'
+                                            visible='{config>/editTodoItems}' />
+                                        <ToggleButton
+                                            icon='sap-icon://edit'
+                                            pressed='{config>/editTodoItems}'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                            </layoutData>
+                                        </ToggleButton>
                                     </OverflowToolbar>
                                 </headerToolbar>
 
@@ -133,15 +141,51 @@
                                     <Column>
                                         <Text text='Шаг' />
                                     </Column>
+                                    <Column hAlign='Right'>
+                                        <Text text='Приоритет' />
+                                    </Column>
                                 </columns>
 
                                 <ColumnListItem>
                                     <cells>
-                                        <ObjectIdentifier title='{todo>name}' />
+                                        <VBox>
+                                            <ObjectIdentifier
+                                                title='{todo>name}'
+                                                visible='{= !%{config>/editTodoItems} }'/>
+                                            <Input
+                                                value='{todo>name}'
+                                                visible='{config>/editTodoItems}' />
+                                        </VBox>
+                                        <VBox>
+                                            <GenericTag
+                                                design='StatusIconHidden'
+                                                text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
+                                                visible='{= !%{config>/editTodoItems} }' />
+                                            <Select
+                                                selectedKey='{todo>priority}'
+                                                visible='{config>/editTodoItems}'
+                                                items='{path: "common>/PriorityCode", templateShareable: false}'>
+                                                <items>
+                                                    <core:Item key='{common>code}' text='{common>name}' />
+                                                </items>
+                                            </Select>
+                                        </VBox>
                                     </cells>
                                 </ColumnListItem>
 
                             </Table>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- INFORMATION -->
+            <uxap:ObjectPageSection title='Информация' titleUppercase='false'>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <Text text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>

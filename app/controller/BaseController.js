@@ -3,16 +3,19 @@ sap.ui.define([
     'sap/ui/core/UIComponent',
     'sap/f/library',
     'sap/ui/model/json/JSONModel',
+    'planner/controller/EventCatalog',
+
     'planner/util/Formatter'
-], (Controller, UIComponent, FLib, JSONModel,
+], (Controller, UIComponent, FLib, JSONModel, EVENT,
     Formatter) => {
     'use strict';
 
     return Controller.extend('planner.BaseController', {
 
+        EVENT,
         Formatter,
 
-        init() {
+        init(sRouteName) {
             this.LayoutType = FLib.LayoutType;
 
             this.App = this.getOwnerComponent();
@@ -20,7 +23,7 @@ sap.ui.define([
             this.Config = new JSONModel();
             this.getView().setModel(this.Config, 'config');
 
-            this.getRouter().attachRoutePatternMatched(this._onRouteMatched, this);
+            this.getRouter().getRoute(sRouteName).attachPatternMatched(this._onRouteMatched, this);
         },
 
         getRouter() {
@@ -36,6 +39,24 @@ sap.ui.define([
                 oFragment.addStyleClass(this.getContentDensityClass());
                 return oFragment;
             });
+        },
+        
+        //Event Bus Methods
+        subscribe(sEventId, fnFunction) {
+            this.getOwnerComponent().getEventBus().subscribe(sEventId, fnFunction, this);
+        },
+        
+        subscribeOnce(sEventId, fnFunction) {
+            this.getOwnerComponent().getEventBus().subscribe(sEventId, fnFunction, this);
+        },
+
+        publish(sEventId, vData) {
+            const oData = typeof vData === 'object' ? vData : {value: vData};
+            this.getOwnerComponent().getEventBus().publish(sEventId, oData);
+        },
+
+        unsubscribe(sEventId, fnFunction) {
+            this.getOwnerComponent().getEventBus().unsubscribe(sEventId, fnFunction, this);
         }
         
     })

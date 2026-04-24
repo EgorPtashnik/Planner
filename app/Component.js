@@ -21,7 +21,7 @@ sap.ui.define([
                 layout: LayoutType.OneColumn,
                 routes: [
                     {text: 'Овервью', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Списки Дел', icon: 'sap-icon://activities', key: 'todoMaster'}
+                    {text: 'Дела', icon: 'sap-icon://activities', key: 'todoMaster'}
                 ],
                 selectedRoute: 'home',
                 detailID: null,
@@ -55,6 +55,11 @@ sap.ui.define([
             if (oParameters.item) {
                 this.getModel().setProperty('/detailDetailID', oParameters.item);
             }
+
+            this.getEventBus().publish('NAV_CHANGED', {
+                route: oEvent.getParameters().name,
+                parameters: oEvent.getParameters().arguments
+            })
         },
 
 	});
