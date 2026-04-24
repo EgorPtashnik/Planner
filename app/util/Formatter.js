@@ -22,6 +22,24 @@ sap.ui.define([
                 case '3': return ValueState.Warning;
                 case '4': return ValueState.Error;
             }
+        },
+
+        getProgressStatusText(iPriorityCode) {
+            switch(iPriorityCode) {
+                case '0': return 'Создан';
+                case '1': return 'Выполняется';
+                case '2': return 'Выполнен';
+                case '3': return 'Отменен';
+            }
+        },
+        
+        getProgressStatusState(iPriorityCode) {
+            switch(iPriorityCode) {
+                case '0': return ValueState.Information;
+                case '1': return ValueState.Warning;
+                case '2': return ValueState.Success;
+                case '3': return ValueState.Error;
+            }
         }
     };
 });

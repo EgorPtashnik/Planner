@@ -74,7 +74,7 @@
                     <Label text='Название' />
                     <Input id='idTodoListNameInput' value='{todo>name}' />
 
-                    <Label text='Описание' />
+                    <Label text='Заметки' />
                     <TextArea rows='5' value='{todo>info}' />
 
                 </form:content>
@@ -83,6 +83,16 @@
 
         <!-- SECTIONS -->
         <uxap:sections>
+            <!-- INFORMATION -->
+            <uxap:ObjectPageSection title='Заметки' titleUppercase='false'>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
             <uxap:ObjectPageSection title='Этапы ({config>/todoParentCount})' titleUppercase='false'>
@@ -91,13 +101,14 @@
                         <uxap:blocks>
                             <Table
                                 id='idTodoParentList'
+                                showSeparators='Inner'
                                 sticky='ColumnHeaders,HeaderToolbar'
                                 items='{
                                     path: "todo>items",
                                     parameters: {
                                         $$ownRequest: true,
                                         $count: true,
-                                        $expand: "items"
+                                        $expand: "items,doneItems"
                                     }
                                 }'>
 
@@ -134,7 +145,9 @@
                                     <cells>
                                         <VBox>
                                             <ObjectIdentifier title='{todo>name}' />
-                                            <ObjectStatus state='Indication06' text='{todo>items/$count}' />
+                                            <ObjectStatus
+                                                state='Indication06'
+                                                text='{todo>doneItems/$count} из {todo>items/$count}' />
                                         </VBox>
                                         <GenericTag
                                             design='StatusIconHidden'
@@ -144,17 +157,6 @@
                                 </ColumnListItem>
 
                             </Table>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
-
-            <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Информация' titleUppercase='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
-                        <uxap:blocks>
-                            <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>

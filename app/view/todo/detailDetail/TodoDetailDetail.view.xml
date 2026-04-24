@@ -42,7 +42,7 @@
                 </uxap:actions>
 
                 <uxap:expandedHeading>
-                    <Title text='{todo>name}' />
+                    <Title text='{todo>name}' wrapping='true' />
                 </uxap:expandedHeading>
 
                 <uxap:expandedContent>
@@ -50,7 +50,7 @@
                 </uxap:expandedContent>
 
                 <uxap:snappedHeading>
-                    <Title text='{todo>name}' />
+                    <Title text='{todo>name}' wrapping='true' />
                 </uxap:snappedHeading>
 
                 <uxap:snappedContent>
@@ -91,7 +91,7 @@
                         </items>
                     </Select>
 
-                    <Label text='Описание' />
+                    <Label text='Заметки' />
                     <TextArea rows='5' value='{todo>info}' />
 
                 </form:content>
@@ -100,17 +100,28 @@
 
         <!-- SECTIONS -->
         <uxap:sections>
+            <!-- INFORMATION -->
+            <uxap:ObjectPageSection title='Заметки' titleUppercase='false'>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <Text text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Шаги({todo>items/$count})' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Шаги ({todo>items/$count})' titleUppercase='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
                             <Table
                                 id='idTodoItemList'
                                 delete='onPressDeleteTodoItem'
+                                showSeparators='Inner'
                                 sticky='ColumnHeaders,HeaderToolbar'
-                                mode='{= %{config>/editTodoItems} ? "Delete" : "MultiSelect"}'
+                                mode='{= %{config>/editTodoItems} ? "Delete" : "None"}'
                                 items='{todo>items}'>
 
                                 <noData>
@@ -121,19 +132,19 @@
                                     <OverflowToolbar>
                                         <Title text='Шаги ({todo>items/$count})' />
                                         <ToolbarSpacer />
-                                        <OverflowToolbarButton
-                                            press='onPressAddTodoItem'
-                                            icon='sap-icon://add'
-                                            text='Добавить Шаг'
-                                            tooltip='Добавить Шаг'
-                                            visible='{config>/editTodoItems}' />
                                         <ToggleButton
                                             icon='sap-icon://edit'
+                                            tooltip='Редактировать'
                                             pressed='{config>/editTodoItems}'>
                                             <layoutData>
                                                 <OverflowToolbarLayoutData priority='NeverOverflow' />
                                             </layoutData>
                                         </ToggleButton>
+                                        <OverflowToolbarButton
+                                            press='onPressAddTodoItem'
+                                            icon='sap-icon://add'
+                                            text='Добавить Шаг'
+                                            tooltip='Добавить Шаг' />
                                     </OverflowToolbar>
                                 </headerToolbar>
 
@@ -155,6 +166,9 @@
                                             <Input
                                                 value='{todo>name}'
                                                 visible='{config>/editTodoItems}' />
+                                            <ObjectStatus
+                                                text='{path: "todo>status", formatter: ".Formatter.getProgressStatusText"}' 
+                                                state='{path: "todo>status", formatter: ".Formatter.getProgressStatusState"}' />
                                         </VBox>
                                         <VBox>
                                             <GenericTag
@@ -175,17 +189,6 @@
                                 </ColumnListItem>
 
                             </Table>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
-
-            <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Информация' titleUppercase='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
-                        <uxap:blocks>
-                            <Text text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
