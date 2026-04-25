@@ -7,8 +7,8 @@
 	controllerName='planner.controller.todo.detail.TodoDetail'>
 
     <uxap:ObjectPageLayout
-        upperCaseAnchorBar='false'
-        useIconTabBar='true'>
+        preserveHeaderStateOnScroll='true'
+        upperCaseAnchorBar='false'>
 
         <!-- HEADER -->
         <uxap:headerTitle>
@@ -84,25 +84,28 @@
         <!-- SECTIONS -->
         <uxap:sections>
             <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Заметки' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Заметки' titleUppercase='false' showTitle='false'>
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection showTitle='false'>
                         <uxap:blocks>
-                            <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
+                            <Panel headerText='Заметки'>
+                                <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
+                            </Panel>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Этапы ({config>/todoParentCount})' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Этапы ({config>/todoParentCount})' titleUppercase='false' showTitle='false'>
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection showTitle='false'>
                         <uxap:blocks>
                             <Table
                                 id='idTodoParentList'
                                 showSeparators='Inner'
-                                sticky='ColumnHeaders,HeaderToolbar'
+                                autoPopinMode='true'
+                                sticky='HeaderToolbar'
                                 items='{
                                     path: "todo>items",
                                     parameters: {
@@ -130,25 +133,21 @@
                                 </headerToolbar>
 
                                 <columns>
-                                    <Column>
+                                    <Column importance='High' autoPopinWidth='15'>
                                         <Text text='Этап' />
                                     </Column>
-                                    <Column hAlign='Right'>
+                                    <Column hAlign='Right' popinDisplay='WithoutHeader'>
                                         <Text text='Приоритет' />
                                     </Column>
                                 </columns>
 
                                 <ColumnListItem
                                     press='onPressTodoParentItem'
+                                    vAlign='Top'
                                     navigated='{= %{/detailDetailID} === %{todo>ID} }'
                                     type='{= %{/detailDetailID} === %{todo>ID} ? "Active" : "Navigation" }'>
                                     <cells>
-                                        <VBox>
-                                            <ObjectIdentifier title='{todo>name}' />
-                                            <ObjectStatus
-                                                state='Indication06'
-                                                text='{todo>doneItems/$count} из {todo>items/$count}' />
-                                        </VBox>
+                                        <ObjectIdentifier title='{todo>name}' text='{todo>doneItems/$count} из {todo>items/$count}' />
                                         <GenericTag
                                             design='StatusIconHidden'
                                             text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'

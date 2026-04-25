@@ -7,8 +7,8 @@
 	controllerName='planner.controller.todo.detailDetail.TodoDetailDetail'>
 
     <uxap:ObjectPageLayout
-        upperCaseAnchorBar='false'
-        useIconTabBar='true'>
+        preserveHeaderStateOnScroll='true'
+        upperCaseAnchorBar='false'>
 
         <!-- HEADER -->
         <uxap:headerTitle>
@@ -46,23 +46,28 @@
                 </uxap:expandedHeading>
 
                 <uxap:expandedContent>
-                    <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+                    <VBox>
+                        <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+                        <GenericTag
+                            design='StatusIconHidden'
+                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
+                    </VBox>
                 </uxap:expandedContent>
 
                 <uxap:snappedHeading>
-                    <Title text='{todo>name}' wrapping='true' />
+                    <Title text='{todo>name}' />
                 </uxap:snappedHeading>
 
                 <uxap:snappedContent>
-                    <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+                    <VBox>
+                        <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+                        <GenericTag
+                            design='StatusIconHidden'
+                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
+                    </VBox>
                 </uxap:snappedContent>
-
-                <uxap:content>
-                    <GenericTag
-                        design='StatusIconHidden'
-                        text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                        status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
-                </uxap:content>
 
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
@@ -101,18 +106,20 @@
         <!-- SECTIONS -->
         <uxap:sections>
             <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Заметки' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Заметки' titleUppercase='false' showTitle='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <Text text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
+                            <Panel headerText='Заметки'>
+                                <Text text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
+                            </Panel>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Шаги ({todo>items/$count})' titleUppercase='false'>
+            <uxap:ObjectPageSection title='Шаги ({todo>items/$count})' titleUppercase='false' showTitle='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
@@ -120,7 +127,8 @@
                                 id='idTodoItemList'
                                 delete='onPressDeleteTodoItem'
                                 showSeparators='Inner'
-                                sticky='ColumnHeaders,HeaderToolbar'
+                                sticky='HeaderToolbar'
+                                autoPopinMode='true'
                                 mode='{= %{config>/editTodoItems} ? "Delete" : "None"}'
                                 items='{todo>items}'>
 
@@ -142,40 +150,47 @@
                                         </ToggleButton>
                                         <OverflowToolbarButton
                                             press='onPressAddTodoItem'
-                                            icon='sap-icon://add'
+                                            icon='sap-icon://add-activity'
                                             text='Добавить Шаг'
                                             tooltip='Добавить Шаг' />
                                     </OverflowToolbar>
                                 </headerToolbar>
 
                                 <columns>
-                                    <Column>
-                                        <Text text='Шаг' />
+                                    <Column importance='High' >
+                                        <Text text='Шаг'/>
                                     </Column>
-                                    <Column hAlign='Right'>
+                                    <Column hAlign='Right' importance='Low' popinDisplay='WithoutHeader'>
                                         <Text text='Приоритет' />
                                     </Column>
+                                    <Column width='8rem' hAlign='Right' importance='High' />
                                 </columns>
 
-                                <ColumnListItem>
+                                <ColumnListItem vAlign='Top'>
                                     <cells>
                                         <VBox>
+                                            <!-- DISPLAY -->
                                             <ObjectIdentifier
                                                 title='{todo>name}'
                                                 visible='{= !%{config>/editTodoItems} }'/>
+                                            <ObjectStatus
+                                                text='{path: "todo>status", formatter: ".Formatter.getProgressStatusText"}' 
+                                                state='{path: "todo>status", formatter: ".Formatter.getProgressStatusState"}'
+                                                visible='{= !%{config>/editTodoItems} }' />
+                                            <!-- EDIT -->
                                             <Input
                                                 value='{todo>name}'
                                                 visible='{config>/editTodoItems}' />
-                                            <ObjectStatus
-                                                text='{path: "todo>status", formatter: ".Formatter.getProgressStatusText"}' 
-                                                state='{path: "todo>status", formatter: ".Formatter.getProgressStatusState"}' />
                                         </VBox>
+
                                         <VBox>
+                                            <!-- DISPLAY -->
                                             <GenericTag
                                                 design='StatusIconHidden'
                                                 text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
                                                 status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
                                                 visible='{= !%{config>/editTodoItems} }' />
+                                            <!-- EDIT -->
                                             <Select
                                                 selectedKey='{todo>priority}'
                                                 visible='{config>/editTodoItems}'
@@ -185,6 +200,40 @@
                                                 </items>
                                             </Select>
                                         </VBox>
+
+                                        <OverflowToolbar style='Clear'>
+                                            <ToolbarSpacer />
+                                            <Button
+                                                press='onPressChangeTodoItemStatus($event, 1)'
+                                                type='Accept'
+                                                icon='sap-icon://process'
+                                                tooltip='Начать'
+                                                visible='{= %{todo>status} === 0 &amp;&amp; !%{config>/editTodoItems} }'>
+                                                <layoutData>
+                                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                                </layoutData>
+                                            </Button>
+                                            <Button
+                                                press='onPressChangeTodoItemStatus($event, 2)'
+                                                type='Accept'
+                                                icon='sap-icon://accept'
+                                                tooltip='Завершить'
+                                                visible='{= %{todo>status} === 1 &amp;&amp; !%{config>/editTodoItems} }'>
+                                                <layoutData>
+                                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                                </layoutData>
+                                            </Button>
+                                            <Button
+                                                press='onPressChangeTodoItemStatus($event, 3)'
+                                                type='Reject'
+                                                icon='sap-icon://decline'
+                                                tooltip='Отменить'
+                                                visible='{= %{todo>status} === 1 &amp;&amp; !%{config>/editTodoItems} }'>
+                                                <layoutData>
+                                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                                </layoutData>
+                                            </Button>
+                                        </OverflowToolbar>
                                     </cells>
                                 </ColumnListItem>
 

@@ -15,6 +15,13 @@ sap.ui.define([
         EVENT,
         Formatter,
 
+        PROGRESS_STATUS: {
+            CREATED: 0,
+            INPROGRESS: 1,
+            COMPLETED: 2,
+            CANCELED: 3
+        },
+
         init(sRouteName) {
             this.LayoutType = FLib.LayoutType;
 
@@ -23,7 +30,7 @@ sap.ui.define([
             this.Config = new JSONModel();
             this.getView().setModel(this.Config, 'config');
 
-            this.getRouter().getRoute(sRouteName).attachPatternMatched(this._onRouteMatched, this);
+            this.getRouter().attachRoutePatternMatched(this._onRouteMatched, this);
         },
 
         getRouter() {

@@ -14,12 +14,6 @@ sap.ui.define(function() {
             if (oData.route === 'todoMaster') {
                 this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
             }
-            if (!this.ODataEventsAttached) {
-                this.ODataEventsAttached = true;
-                this.byId('idTodoList').getBinding('items').attachDataReceived(oEvent =>
-                    oEvent.getSource().getHeaderContext().requestProperty('$count')
-                        .then(value => this.Config.setProperty('/todoListCount', value)));
-            }
         },
 
         _onTodoListChanged() {

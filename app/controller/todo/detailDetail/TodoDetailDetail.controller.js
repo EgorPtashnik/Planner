@@ -101,6 +101,10 @@ sap.ui.define([
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
+        },
+
+        async onPressChangeTodoItemStatus(oEvent, iStatus) {
+            oEvent.getSource().getBindingContext('todo').setProperty('status', iStatus);
         }
 
     });
