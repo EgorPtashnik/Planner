@@ -34,7 +34,7 @@
                         press='onPressDelete'
                         text='Удалить'
                         icon='sap-icon://delete'
-                        type='Reject'>
+                        type='Negative'>
                         <layoutData>
                             <OverflowToolbarLayoutData priority='AlwaysOverflow' />
                         </layoutData>
