@@ -13,10 +13,8 @@ sap.ui.define(function() {
             if (oData.route.includes('todo')) {
                 this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
                 if (oData?.parameters?.item && this.Config.getProperty('/ID') !== oData.parameters.item) {
-                    this.Config.setData({
-                        ID: oData.parameters.item,
-                        editTodoItems: false
-                    });
+                    this.Config.setProperty("/ID", oData.parameters.item);
+                    this.Config.setProperty("/editTodoItems", false);
                     this.bindView(oData.parameters.item, oData.parameters.id);
                 }
             }

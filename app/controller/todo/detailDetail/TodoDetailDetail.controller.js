@@ -1,12 +1,19 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/todo/detailDetail/Events'
-], (BaseController, Events) => {
+    'planner/controller/todo/detailDetail/Events',
+
+    'planner/controller/todo/detailDetail/component/TodoItems'
+], (BaseController, Events,
+
+    TodoItemsLogic
+) => {
     'use strict';
 
     return BaseController.extend('planner.todo.detailDetail.TodoDetailDetail', {
 
         ...Events,
+
+        ...TodoItemsLogic,
 
         onInit() {
             this.init('todoDetailDetail');
@@ -14,7 +21,10 @@ sap.ui.define([
             
             this.Config.setData({
                 ID: null,
-                editTodoItems: false
+
+                editTodoItems: false,
+                showCompletedTodoItems: false,
+                fullScreenTodoItems: false
             });
         },
 
@@ -44,7 +54,7 @@ sap.ui.define([
             }
         },
 
-        async onPressClosePage() {
+         onPressClosePage() {
             this.publish(this.EVENT.NAV_CHANGED, {
                 route: 'todoDetail',
                 parameters: {
@@ -54,7 +64,11 @@ sap.ui.define([
             });
         },
 
-        async onPressCloseAllPages() {
+        onPressToggleTodoItemsFullScreen() {
+            this.Config.setProperty('/fullScreenTodoItems', !this.Config.getProperty('/fullScreenTodoItems'));
+        },
+
+        onPressCloseAllPages() {
             this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
         },
 
@@ -76,35 +90,6 @@ sap.ui.define([
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
-        },
-
-        async onPressAddTodoItem() {
-            try {
-                const oContext = this.byId('idTodoItemList').getBinding('items').create({name: 'Новый Шаг', priority: 2});
-                await oContext.created();
-
-                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Шаг создан.');
-                this.publish(this.EVENT.TODOPARENT_CHANGED);
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            }
-        },
-
-        async onPressDeleteTodoItem(oEvent) {
-            try {
-                const oContext = oEvent.getParameter('listItem').getBindingContext('todo');
-                await oContext.delete();
-                if (oContext.isDeleted()) {
-                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Шаг удален.');
-                    this.publish(this.EVENT.TODOPARENT_CHANGED);
-                }
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            }
-        },
-
-        async onPressChangeTodoItemStatus(oEvent, iStatus) {
-            oEvent.getSource().getBindingContext('todo').setProperty('status', iStatus);
         }
 
     });

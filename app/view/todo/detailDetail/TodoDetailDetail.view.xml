@@ -7,6 +7,8 @@
 	controllerName='planner.controller.todo.detailDetail.TodoDetailDetail'>
 
     <uxap:ObjectPageLayout
+        showAnchorBar='{= !%{config>/fullScreenTodoItems} }'
+        showHeaderContent='{= !%{config>/fullScreenTodoItems} }'
         preserveHeaderStateOnScroll='true'
         upperCaseAnchorBar='false'>
 
@@ -24,17 +26,24 @@
                 </uxap:breadcrumbs>
 
                 <uxap:navigationActions>
+
+                    <Button
+                        press='onPressToggleTodoItemsFullScreen'
+                        icon='{= !%{config>/fullScreenTodoItems} ? "sap-icon://decrease-line-height" : "sap-icon://increase-line-height" }'
+                        tooltip='{= %{config>/fullScreenTodoItems} ? "Показать Меньше" : "Показать Больше"}' />
                     <Button
                         press='onPressClosePage'
-                        icon='sap-icon://decline' />
+                        icon='sap-icon://decline'
+                        tooltip='Закрыть' />
                 </uxap:navigationActions>
 
                 <uxap:actions>
                     <Button
                         press='onPressDelete'
                         text='Удалить'
+                        tooltip='Удалить'
                         icon='sap-icon://delete'
-                        type='Reject'>
+                        type='Negative'>
                         <layoutData>
                             <OverflowToolbarLayoutData priority='AlwaysOverflow' />
                         </layoutData>
@@ -42,11 +51,11 @@
                 </uxap:actions>
 
                 <uxap:expandedHeading>
-                    <Title text='{todo>name}' wrapping='true' />
+                    <Title text='{todo>name}' wrapping='{= !%{config>/fullScreenTodoItems} }' />
                 </uxap:expandedHeading>
 
                 <uxap:expandedContent>
-                    <VBox>
+                    <VBox visible='{= !%{config>/fullScreenTodoItems} }'>
                         <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
                         <GenericTag
                             design='StatusIconHidden'
@@ -60,7 +69,7 @@
                 </uxap:snappedHeading>
 
                 <uxap:snappedContent>
-                    <VBox>
+                    <VBox visible='{= !%{config>/fullScreenTodoItems} }'>
                         <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
                         <GenericTag
                             design='StatusIconHidden'
@@ -106,142 +115,10 @@
         <!-- SECTIONS -->
         <uxap:sections>
             <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Заметки' titleUppercase='false' showTitle='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
-                        <uxap:blocks>
-                            <Panel headerText='Заметки'>
-                                <Text text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
-                            </Panel>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
+            <core:Fragment fragmentName='planner.view.todo.detailDetail.component.Notes' type='XML' />
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Шаги ({todo>items/$count})' titleUppercase='false' showTitle='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection>
-                        <uxap:blocks>
-                            <Table
-                                id='idTodoItemList'
-                                delete='onPressDeleteTodoItem'
-                                showSeparators='Inner'
-                                sticky='HeaderToolbar'
-                                autoPopinMode='true'
-                                mode='{= %{config>/editTodoItems} ? "Delete" : "None"}'
-                                items='{todo>items}'>
-
-                                <noData>
-                                    <IllustratedMessage illustrationType='sapIllus-NoActivities' />
-                                </noData>
-
-                                <headerToolbar>
-                                    <OverflowToolbar>
-                                        <Title text='Шаги ({todo>items/$count})' />
-                                        <ToolbarSpacer />
-                                        <ToggleButton
-                                            icon='sap-icon://edit'
-                                            tooltip='Редактировать'
-                                            pressed='{config>/editTodoItems}'>
-                                            <layoutData>
-                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                            </layoutData>
-                                        </ToggleButton>
-                                        <OverflowToolbarButton
-                                            press='onPressAddTodoItem'
-                                            icon='sap-icon://add-activity'
-                                            text='Добавить Шаг'
-                                            tooltip='Добавить Шаг' />
-                                    </OverflowToolbar>
-                                </headerToolbar>
-
-                                <columns>
-                                    <Column importance='High' >
-                                        <Text text='Шаг'/>
-                                    </Column>
-                                    <Column hAlign='Right' importance='Low' popinDisplay='WithoutHeader'>
-                                        <Text text='Приоритет' />
-                                    </Column>
-                                    <Column width='8rem' hAlign='Right' importance='High' />
-                                </columns>
-
-                                <ColumnListItem vAlign='Top'>
-                                    <cells>
-                                        <VBox>
-                                            <!-- DISPLAY -->
-                                            <ObjectIdentifier
-                                                title='{todo>name}'
-                                                visible='{= !%{config>/editTodoItems} }'/>
-                                            <ObjectStatus
-                                                text='{path: "todo>status", formatter: ".Formatter.getProgressStatusText"}' 
-                                                state='{path: "todo>status", formatter: ".Formatter.getProgressStatusState"}'
-                                                visible='{= !%{config>/editTodoItems} }' />
-                                            <!-- EDIT -->
-                                            <Input
-                                                value='{todo>name}'
-                                                visible='{config>/editTodoItems}' />
-                                        </VBox>
-
-                                        <VBox>
-                                            <!-- DISPLAY -->
-                                            <GenericTag
-                                                design='StatusIconHidden'
-                                                text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
-                                                visible='{= !%{config>/editTodoItems} }' />
-                                            <!-- EDIT -->
-                                            <Select
-                                                selectedKey='{todo>priority}'
-                                                visible='{config>/editTodoItems}'
-                                                items='{path: "common>/PriorityCode", templateShareable: false}'>
-                                                <items>
-                                                    <core:Item key='{common>code}' text='{common>name}' />
-                                                </items>
-                                            </Select>
-                                        </VBox>
-
-                                        <OverflowToolbar style='Clear'>
-                                            <ToolbarSpacer />
-                                            <Button
-                                                press='onPressChangeTodoItemStatus($event, 1)'
-                                                type='Accept'
-                                                icon='sap-icon://process'
-                                                tooltip='Начать'
-                                                visible='{= %{todo>status} === 0 &amp;&amp; !%{config>/editTodoItems} }'>
-                                                <layoutData>
-                                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                                </layoutData>
-                                            </Button>
-                                            <Button
-                                                press='onPressChangeTodoItemStatus($event, 2)'
-                                                type='Accept'
-                                                icon='sap-icon://accept'
-                                                tooltip='Завершить'
-                                                visible='{= %{todo>status} === 1 &amp;&amp; !%{config>/editTodoItems} }'>
-                                                <layoutData>
-                                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                                </layoutData>
-                                            </Button>
-                                            <Button
-                                                press='onPressChangeTodoItemStatus($event, 3)'
-                                                type='Reject'
-                                                icon='sap-icon://decline'
-                                                tooltip='Отменить'
-                                                visible='{= %{todo>status} === 1 &amp;&amp; !%{config>/editTodoItems} }'>
-                                                <layoutData>
-                                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                                </layoutData>
-                                            </Button>
-                                        </OverflowToolbar>
-                                    </cells>
-                                </ColumnListItem>
-
-                            </Table>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
+            <core:Fragment fragmentName='planner.view.todo.detailDetail.component.TodoItems' type='XML' />
         </uxap:sections>
 
     </uxap:ObjectPageLayout>
