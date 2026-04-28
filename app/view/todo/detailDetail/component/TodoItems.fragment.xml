@@ -16,6 +16,7 @@
                         showSeparators='Inner'
                         sticky='HeaderToolbar'
                         autoPopinMode='true'
+                        fixedLayout='false'
                         mode='{= %{config>/editTodoItems} ? "Delete" : "None"}'
                         items='{todo>items}'>
 
@@ -70,11 +71,14 @@
                         </headerToolbar>
 
                         <columns>
-                            <Column importance='High' >
+                            <Column width='auto' importance='High' >
                                 <Text text='Шаг'/>
                             </Column>
-                            <Column hAlign='Right' importance='Low' popinDisplay='WithoutHeader'>
+                            <Column hAlign='Right' importance='Medium' popinDisplay='{= %{config>/editTodoItems} ? "Block" : "WithoutHeader" }'>
                                 <Text text='Приоритет' />
+                            </Column>
+                            <Column importance='Low' autoPopinWidth='999' popinDisplay='{= %{config>/editTodoItems} ? "Block" : "Inline" }'>
+                                <Text text='Заметка' />
                             </Column>
                             <Column width='8rem' hAlign='Right' importance='High' />
                         </columns>
@@ -97,6 +101,7 @@
                                         visible='{= !%{config>/editTodoItems} }' />
                                     <!-- EDIT -->
                                     <Input
+                                        width='100%'
                                         value='{todo>name}'
                                         visible='{config>/editTodoItems}' />
                                 </VBox>
@@ -110,6 +115,7 @@
                                         visible='{= !%{config>/editTodoItems} }' />
                                     <!-- EDIT -->
                                     <Select
+                                        width='100%'
                                         selectedKey='{todo>priority}'
                                         visible='{config>/editTodoItems}'
                                         items='{path: "common>/PriorityCode", templateShareable: false}'>
@@ -117,6 +123,19 @@
                                             <core:Item key='{common>code}' text='{common>name}' />
                                         </items>
                                     </Select>
+                                </VBox>
+
+                                <VBox>
+                                    <!-- DISPLAY -->
+                                    <Text
+                                        emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'
+                                        text='{todo>info}'
+                                        visible='{= !%{config>/editTodoItems} }' />
+                                    <!-- EDIT -->
+                                    <Input
+                                        width='100%'
+                                        value='{todo>info}'
+                                        visible='{config>/editTodoItems}' />
                                 </VBox>
 
                                 <OverflowToolbar style='Clear'>
