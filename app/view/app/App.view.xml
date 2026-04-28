@@ -32,6 +32,7 @@
             <content>
                 <f:FlexibleColumnLayout
                     id='app'
+                    stateChange='onFCLStateChange'
                     layout='{/layout}' />
             </content>
 

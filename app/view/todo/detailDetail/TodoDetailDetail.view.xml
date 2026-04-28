@@ -32,6 +32,11 @@
                         icon='{= !%{config>/fullScreenTodoItems} ? "sap-icon://decrease-line-height" : "sap-icon://increase-line-height" }'
                         tooltip='{= %{config>/fullScreenTodoItems} ? "Показать Меньше" : "Показать Больше"}' />
                     <Button
+                        press='onToggleFullScreen(%{/layout} === "EndColumnFullScreen")'
+                        icon='{= %{/layout} === "EndColumnFullScreen" ? "sap-icon://exit-full-screen" : "sap-icon://full-screen" }'
+                        tooltip='Полный Экран'
+                        visible='{= !%{/isOnlyOneColumn} }' />
+                    <Button
                         press='onPressClosePage'
                         icon='sap-icon://decline'
                         tooltip='Закрыть' />

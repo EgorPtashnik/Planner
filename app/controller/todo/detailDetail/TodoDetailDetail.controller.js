@@ -53,6 +53,10 @@ sap.ui.define([
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
         },
+        
+        onToggleFullScreen(bIsFullScreen) {
+            this.AppConfig.setProperty('/layout', bIsFullScreen ? this.LayoutType.ThreeColumnsEndExpanded : this.LayoutType.EndColumnFullScreen);
+        },
 
          onPressClosePage() {
             this.publish(this.EVENT.NAV_CHANGED, {
