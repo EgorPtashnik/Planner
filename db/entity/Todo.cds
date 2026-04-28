@@ -22,4 +22,5 @@ entity TodoItem: cuid, managed, baseInfo, priority {
     key parent: Association to TodoParent;
 
     status: ProgressStatus default 0;
+    sort: Integer not null default 0;
 };

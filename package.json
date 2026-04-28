@@ -4,7 +4,9 @@
   "description": "PlanneR Application",
   "scripts": {
     "start": "cds watch",
-    "deploy": "cds deploy"
+    "deploy": "npm run backup:db && cds deploy && npm run restore:db",
+    "backup:db": "node scripts/backup-sqlite.js",
+    "restore:db": "node scripts/restore-from-backup.js"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2.2.0",
