@@ -22,7 +22,7 @@ sap.ui.define([
             CANCELED: 3
         },
 
-        init(sRouteName) {
+        init() {
             this.LayoutType = FLib.LayoutType;
 
             this.App = this.getOwnerComponent();

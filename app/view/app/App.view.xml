@@ -5,6 +5,7 @@
     xmlns:core='sap.ui.core'
     displayBlock='true'
     height='100%'
+    busyIndicatorDelay='0'
 	controllerName='planner.controller.app.App'>
         <Page showFooter='{device>/system/phone}'>
 
@@ -25,6 +26,11 @@
                         </IconTabHeader>
 
                         <ToolbarSpacer />
+
+                        <Button
+                            press='onPressToggleDarkMode'
+                            icon='{= %{/darkMode} ? "sap-icon://light-mode" : "sap-icon://dark-mode" }'
+                            tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
                     </content>
                 </OverflowToolbar>
             </customHeader>
