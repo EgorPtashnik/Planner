@@ -54,9 +54,9 @@ sap.ui.define([
         },
 
         _applyTheme() {
-            if (localStorage.getItem('theme')) {
+            if (localStorage.getItem('theme') && localStorage.getItem('theme') !== Theming.getTheme()) {
                 this.getView().setBusy(true);
-                Theming.setTheme(localStorage.getItem('theme'));
+                Theming.setTheme(localStorage.getItem('theme') );
                 this.getOwnerComponent().getModel().setProperty('/darkMode', localStorage.getItem('theme') === this.THEME.DARK);
             }
         }
