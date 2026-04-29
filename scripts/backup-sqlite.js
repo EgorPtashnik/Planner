@@ -51,7 +51,6 @@ function run() {
   if (!fs.existsSync(dbPath)) {
     console.error(`SQLite database file was not found: ${dbPath}`);
     return;
-    process.exit(1);
   }
 
   const backupDir = process.env.BACKUP_DIR
