@@ -2,9 +2,9 @@ FROM node:22
 
 ENV NODE_ENV=production
 
-WORKDIR /
+WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./"]
+COPY . ./app
 
 RUN npm install && npm run deploy
 
