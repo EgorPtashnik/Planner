@@ -5,11 +5,11 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=4004
 
-COPY package*.json ./app
+COPY package*.json ./
 
 RUN npm install
 
-COPY . ./app
+COPY . ./
 
 RUN npm run deploy
 
