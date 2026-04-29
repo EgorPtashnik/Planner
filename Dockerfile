@@ -15,4 +15,4 @@ RUN npm run deploy
 
 EXPOSE 4004
 
-CMD ["sh", "-c", "npx cds-serve --port ${PORT:-4004}"]
+CMD ["cds", "serve"]
