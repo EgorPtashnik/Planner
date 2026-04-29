@@ -102,7 +102,6 @@ function run() {
   if (!oldDbPath) {
     console.error("Backup source was not found. Pass --from=<path> or set RESTORE_FROM.");
     return;
-    process.exit(1);
   }
 
   if (!fs.existsSync(currentDbPath)) {
