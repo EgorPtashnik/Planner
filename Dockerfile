@@ -15,4 +15,4 @@ RUN npm run deploy
 
 EXPOSE 4004
 
-CMD ["cds", "serve"]
+RUN npm start
