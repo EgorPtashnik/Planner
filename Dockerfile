@@ -6,4 +6,4 @@ RUN npm install && npm run deploy
 
 EXPOSE 4004
 
-RUN npm start
+CMD ["npm", "start"]
