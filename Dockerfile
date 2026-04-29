@@ -10,6 +10,6 @@ COPY . .
 
 RUN npm run deploy
 
-EXPOSE 8080
+EXPOSE 4004
 
 CMD [ "npm", "start" ]
