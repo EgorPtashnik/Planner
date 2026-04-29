@@ -10,14 +10,21 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2.2.0",
-    "@sap/cds-dk": "^9.8.4"
+    "@sap/cds-dk": "^9.9.0"
   },
   "cds": {
     "requires": {
       "db": {
         "kind": "sqlite",
-        "credentials": { "url": "db.sqlite" }
+        "credentials": {
+          "url": "db.sqlite"
+        }
       }
     }
+  },
+  "dependencies": {
+    "@sap/cds-dk": "^9.9.0",
+    "@cap-js/sqlite": "^2.2.0",
+    "@sap/xssec": "^4.13.0"
   }
 }
