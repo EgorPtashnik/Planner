@@ -40,7 +40,7 @@ sap.ui.define([
             this.publish(this.EVENT.NAV_CHANGED, {
                 route: 'todoDetail',
                 parameters: {
-                    id: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
+                    id: oEvent.getParameter('listItem').getBindingContext('todo').getProperty('ID'),
                     layout: this.LayoutType.TwoColumnsMidExpanded
                 }
             });
