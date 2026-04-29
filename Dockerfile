@@ -1,15 +1,15 @@
 FROM node:22
 
-WORKDIR /
+WORKDIR /app
 
 ENV NODE_ENV=production
 ENV PORT=4004
 
-COPY package*.json ./
+COPY package*.json ./app
 
 RUN npm install
 
-COPY . .
+COPY . ./app
 
 RUN npm run deploy
 
