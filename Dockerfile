@@ -1,6 +1,6 @@
 FROM node:22
 
-WORKDIR /app
+WORKDIR /
 
 ENV NODE_ENV=production
 ENV PORT=4004
