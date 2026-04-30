@@ -20,9 +20,7 @@
                         mode='{= %{config>/editTodoItems} ? "Delete" : "None"}'
                         items='{
                             path: "todo>items",
-                            parameters: {
-                                $orderby: "sort desc, priority desc"
-                            }
+                            parameters: { $orderby: "priority desc" }
                         }'>
 
                         <noData>
