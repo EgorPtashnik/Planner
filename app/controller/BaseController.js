@@ -15,13 +15,6 @@ sap.ui.define([
         EVENT,
         Formatter,
 
-        PROGRESS_STATUS: {
-            CREATED: 0,
-            INPROGRESS: 1,
-            COMPLETED: 2,
-            CANCELED: 3
-        },
-
         init() {
             this.LayoutType = FLib.LayoutType;
 
