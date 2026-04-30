@@ -1,7 +1,5 @@
 <mvc:View
-    xmlns='sap.m'
     xmlns:uxap='sap.uxap'
-    xmlns:form='sap.ui.layout.form'
     xmlns:core='sap.ui.core'
     xmlns:mvc='sap.ui.core.mvc'
     busyIndicatorDelay='0'
@@ -15,107 +13,12 @@
 
         <!-- HEADER -->
         <uxap:headerTitle>
-            <uxap:ObjectPageDynamicHeaderTitle>
-
-                <uxap:breadcrumbs>
-                    <Breadcrumbs currentLocationText='{todo>name}'>
-                        <links>
-                            <Link press='onPressCloseAllPages' text='Списки Дел' />
-                            <Link press='onPressClosePage' text='{todo>list/name}' />
-                        </links>
-                    </Breadcrumbs>
-                </uxap:breadcrumbs>
-
-                <uxap:navigationActions>
-
-                    <Button
-                        press='onPressToggleTodoItemsFullScreen'
-                        icon='{= !%{config>/fullScreenTodoItems} ? "sap-icon://decrease-line-height" : "sap-icon://increase-line-height" }'
-                        tooltip='{= %{config>/fullScreenTodoItems} ? "Показать Меньше" : "Показать Больше"}' />
-                    <Button
-                        press='onToggleFullScreen(%{/layout} === "EndColumnFullScreen")'
-                        icon='{= %{/layout} === "EndColumnFullScreen" ? "sap-icon://exit-full-screen" : "sap-icon://full-screen" }'
-                        tooltip='Полный Экран'
-                        visible='{= !%{/isOnlyOneColumn} }' />
-                    <Button
-                        press='onPressClosePage'
-                        icon='sap-icon://decline'
-                        tooltip='Закрыть' />
-                </uxap:navigationActions>
-
-                <uxap:actions>
-                    <Button
-                        press='onPressDelete'
-                        text='Удалить'
-                        tooltip='Удалить'
-                        icon='sap-icon://delete'
-                        type='Negative'>
-                        <layoutData>
-                            <OverflowToolbarLayoutData priority='AlwaysOverflow' />
-                        </layoutData>
-                    </Button>
-                </uxap:actions>
-
-                <uxap:expandedHeading>
-                    <Title text='{todo>name}' wrapping='{= !%{config>/fullScreenTodoItems} }' />
-                </uxap:expandedHeading>
-
-                <uxap:expandedContent>
-                    <VBox visible='{= !%{config>/fullScreenTodoItems} }'>
-                        <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
-                        <GenericTag
-                            design='StatusIconHidden'
-                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
-                    </VBox>
-                </uxap:expandedContent>
-
-                <uxap:snappedHeading>
-                    <Title text='{todo>name}' />
-                </uxap:snappedHeading>
-
-                <uxap:snappedContent>
-                    <VBox visible='{= !%{config>/fullScreenTodoItems} }'>
-                        <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
-                        <GenericTag
-                            design='StatusIconHidden'
-                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
-                    </VBox>
-                </uxap:snappedContent>
-
-            </uxap:ObjectPageDynamicHeaderTitle>
+            <core:Fragment fragmentName='planner.view.todo.detailDetail.component.Header' type='XML' />
         </uxap:headerTitle>
 
         <!-- HEADER CONTENT -->
         <uxap:headerContent>
-            <form:SimpleForm
-                editable='true'
-                layout='ColumnLayout'
-                columnsL='1'
-                labelSpanL='12'
-                columnsM='1'
-                labelSpanM='12'>
-                <form:content>
-                    <core:Title text='Общее' />
-                    <Label text='Название' />
-                    <Input id='idTodoParentNameInput' value='{todo>name}' />
-
-                    <Label text='Приоритет' />
-                    <Select
-                        forceSelection='false'
-                        selectedKey='{todo>priority}'
-                        items='{common>/PriorityCode}'>
-                        <items>
-                            <core:Item key='{common>code}' text='{common>name}' />
-                        </items>
-                    </Select>
-
-                    <Label text='Заметки' />
-                    <TextArea rows='5' value='{todo>info}' />
-
-                </form:content>
-            </form:SimpleForm>
+            <core:Fragment fragmentName='planner.view.todo.detailDetail.component.HeaderContent' type='XML' />
         </uxap:headerContent>
 
         <!-- SECTIONS -->

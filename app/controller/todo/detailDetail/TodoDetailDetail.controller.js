@@ -2,10 +2,11 @@ sap.ui.define([
     'planner/controller/BaseController',
     'planner/controller/todo/detailDetail/Events',
 
-    'planner/controller/todo/detailDetail/component/TodoItems'
+    'planner/controller/todo/detailDetail/component/TodoItems',
+    'planner/controller/todo/detailDetail/component/Header'
 ], (BaseController, Events,
 
-    TodoItemsLogic
+    TodoItemsLogic, HeaderLogic
 ) => {
     'use strict';
 
@@ -14,10 +15,13 @@ sap.ui.define([
         ...Events,
 
         ...TodoItemsLogic,
+        ...HeaderLogic,
 
         onInit() {
             this.init('todoDetailDetail');
             this.setSubscriptions();
+
+            this.ODataEventsAttached = false;
             
             this.Config.setData({
                 ID: null,
@@ -36,6 +40,11 @@ sap.ui.define([
                     parameters: oParameters.arguments
                 });
             }
+
+            if (!this.ODataEventsAttached) {
+                this.ODataEventsAttached = true;
+                this.byId('idTodoItemsList').getBinding('items').attachPatchCompleted(() => this.publish(this.EVENT.TODOPARENT_CHANGED));
+            }
         },
 
         bindView(sID, sListID) {
@@ -49,48 +58,6 @@ sap.ui.define([
                         patchCompleted: () => this.publish(this.EVENT.TODOPARENT_CHANGED)
                     }
                 });
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            }
-        },
-        
-        onToggleFullScreen(bIsFullScreen) {
-            this.AppConfig.setProperty('/layout', bIsFullScreen ? this.LayoutType.ThreeColumnsEndExpanded : this.LayoutType.EndColumnFullScreen);
-        },
-
-         onPressClosePage() {
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetail',
-                parameters: {
-                    id: this.AppConfig.getProperty('/detailID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                }
-            });
-        },
-
-        onPressToggleTodoItemsFullScreen() {
-            this.Config.setProperty('/fullScreenTodoItems', !this.Config.getProperty('/fullScreenTodoItems'));
-        },
-
-        onPressCloseAllPages() {
-            this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
-        },
-
-        async onPressDelete() {
-            try {
-                const oContext = this.getView().getBindingContext('todo');
-                await oContext.delete();
-                if (oContext.isDeleted()) {
-                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Этап удален.');
-                    this.publish(this.EVENT.NAV_CHANGED, {
-                        route: 'todoDetail',
-                        parameters: {
-                            id: this.AppConfig.getProperty('/detailID'),
-                            layout: this.LayoutType.TwoColumnsMidExpanded
-                        }
-                    });
-                    this.publish(this.EVENT.TODOPARENT_CHANGED);
-                }
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }

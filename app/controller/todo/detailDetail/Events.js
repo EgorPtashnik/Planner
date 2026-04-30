@@ -3,7 +3,8 @@ sap.ui.define(function() {
 
         setSubscriptions() {
             const aEvents = [
-                {id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged}
+                {id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged},
+                {id: this.EVENT.TODOPARENT_CHANGED, fnc: this._onTodoParentChanged}
             ];
                 
             aEvents.forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
@@ -18,6 +19,10 @@ sap.ui.define(function() {
                     this.bindView(oData.parameters.item, oData.parameters.id);
                 }
             }
+        },
+
+        _onTodoParentChanged(_, sEventId, oData) {
+            this.getView().getBindingContext('todo')?.refresh();
         }
     }
 });
