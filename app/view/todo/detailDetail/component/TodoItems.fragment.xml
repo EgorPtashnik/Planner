@@ -20,7 +20,7 @@
                         mode='{= %{config>/editTodoItems} ? "Delete" : "None"}'
                         items='{
                             path: "todo>items",
-                            parameters: { $orderby: "status desc,priority desc" }
+                            parameters: { $orderby: "status desc,priority desc,createdAt asc" }
                         }'>
 
                         <noData>
@@ -80,7 +80,7 @@
                             <Column hAlign='Right' importance='Medium' popinDisplay='{= %{config>/editTodoItems} ? "Block" : "WithoutHeader" }'>
                                 <Text text='Приоритет' />
                             </Column>
-                            <Column importance='Low' autoPopinWidth='999' popinDisplay='{= %{config>/editTodoItems} ? "Block" : "Inline" }'>
+                            <Column importance='Low' autoPopinWidth='999' popinDisplay='{= %{config>/editTodoItems} ? "Block" : "WithoutHeader" }'>
                                 <Text text='Заметка' />
                             </Column>
                             <Column hAlign='Right' importance='High' visible='{= !%{config>/editTodoItems} }' />
@@ -130,13 +130,16 @@
 
                                 <VBox>
                                     <!-- DISPLAY -->
-                                    <Text
+                                    <ExpandableText
+                                        maxCharacters='0'
                                         emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'
                                         text='{todo>info}'
                                         visible='{= !%{config>/editTodoItems} }' />
                                     <!-- EDIT -->
-                                    <Input
+                                    <TextArea
                                         width='100%'
+                                        rows='1'
+                                        growing='true'
                                         value='{todo>info}'
                                         visible='{config>/editTodoItems}' />
                                 </VBox>
