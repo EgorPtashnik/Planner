@@ -1,4 +1,4 @@
-using { Todo } from '../db/entity/Todo';
+using { Todo } from '../db/entity/Todo.cds';
 
 service TodoService {
 
