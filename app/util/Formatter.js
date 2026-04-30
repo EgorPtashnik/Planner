@@ -28,8 +28,8 @@ sap.ui.define([
             switch(iPriorityCode) {
                 case '0': return 'Создан';
                 case '1': return 'Выполняется';
-                case '2': return 'Выполнен';
-                case '3': return 'Отменен';
+                case '2': return 'Сделан';
+                case '3': return 'Закрыт';
             }
         },
         
