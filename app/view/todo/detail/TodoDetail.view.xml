@@ -111,7 +111,8 @@
                                     parameters: {
                                         $$ownRequest: true,
                                         $count: true,
-                                        $expand: "items,doneItems"
+                                        $expand: "items,doneItems",
+                                        $orderby: "priority desc"
                                     }
                                 }'>
 
@@ -145,6 +146,7 @@
                                     press='onPressTodoParentItem'
                                     vAlign='Top'
                                     navigated='{= %{/detailDetailID} === %{todo>ID} }'
+                                    highlight='{= %{/detailDetailID} === %{todo>ID} ? "Information" : "None" }'
                                     type='{= %{/detailDetailID} === %{todo>ID} ? "Active" : "Navigation" }'>
                                     <cells>
                                         <ObjectIdentifier title='{todo>name}' text='{todo>doneItems/$count} из {todo>items/$count}' />

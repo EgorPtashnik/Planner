@@ -23,8 +23,6 @@
         <f:content>
             <Table
                 id='idTodoList'
-                selectionChange='onPressListItem'
-                mode='SingleSelectMaster'
                 items='{
                     path: "todo>/TodoList",
                     parameters: { $count: true }
@@ -42,12 +40,10 @@
 
                 <items>
                     <ColumnListItem
+                        press='onPressListItem'
                         navigated='{= %{/detailID} === %{todo>ID} }'
-                        type='{= %{/detailID} === %{todo>ID} ? "Inactive" : "Navigation" }'
-                        selected="{=
-                            %{/detailID} === %{todo>ID} &amp;&amp;
-                            !%{/isOnlyOneColumn}
-                        }">
+                        highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
+                        type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>
                         <cells>
                             <ObjectIdentifier title='{todo>name}' />
                         </cells>

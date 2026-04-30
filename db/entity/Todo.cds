@@ -11,7 +11,6 @@ entity TodoList: cuid, managed, baseInfo {
 entity TodoParent: cuid, managed, baseInfo, priority {
     key list: Association to TodoList;
 
-    status: ProgressStatus default 0;
     doneItems = items[status=2];
 
     items: Composition of many TodoItem on items.parent = $self;
