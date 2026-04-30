@@ -174,7 +174,6 @@
                                         </layoutData>
                                     </Button>
                                     <ObjectStatus
-                                        width='7rem'
                                         inverted='true'
                                         icon='{= %{todo>status} === 2 ? "sap-icon://accept" : "sap-icon://decline"}'
                                         text='{path: "todo>status", formatter: ".Formatter.getProgressStatusText"}' 
