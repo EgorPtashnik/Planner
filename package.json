@@ -18,7 +18,7 @@
       "db": {
         "kind": "sqlite",
         "credentials": {
-          "url": "./scripts/db.sqlite"
+          "url": "./storage/db.sqlite"
         }
       }
     }
