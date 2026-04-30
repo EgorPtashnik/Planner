@@ -6,6 +6,8 @@
 	controllerName='planner.controller.todo.detail.TodoDetail'>
 
     <uxap:ObjectPageLayout
+        showAnchorBar='{= !%{config>/compactView} }'
+        showHeaderContent='{= !%{config>/compactView} }'
         preserveHeaderStateOnScroll='true'
         upperCaseAnchorBar='false'>
 

@@ -17,9 +17,9 @@
         <uxap:navigationActions>
 
             <Button
-                press='onPressToggleTodoItemsFullScreen'
-                icon='{= !%{config>/fullScreenTodoItems} ? "sap-icon://decrease-line-height" : "sap-icon://increase-line-height" }'
-                tooltip='{= %{config>/fullScreenTodoItems} ? "Показать Меньше" : "Показать Больше"}' />
+                press='onPressToggleCompactView'
+                icon='{= !%{config>/compactView} ? "sap-icon://decrease-line-height" : "sap-icon://increase-line-height" }'
+                tooltip='{= %{config>/compactView} ? "Показать Меньше" : "Показать Больше"}' />
             <Button
                 press='onToggleFullScreen(%{/layout} === "EndColumnFullScreen")'
                 icon='{= %{/layout} === "EndColumnFullScreen" ? "sap-icon://exit-full-screen" : "sap-icon://full-screen" }'
@@ -45,11 +45,11 @@
         </uxap:actions>
 
         <uxap:expandedHeading>
-            <Title text='{todo>name}' wrapping='{= !%{config>/fullScreenTodoItems} }' />
+            <Title text='{todo>name}' wrapping='{= !%{config>/compactView} }' />
         </uxap:expandedHeading>
 
         <uxap:expandedContent>
-            <VBox visible='{= !%{config>/fullScreenTodoItems} }'>
+            <VBox visible='{= !%{config>/compactView} }'>
                 <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
                 <GenericTag
                     design='StatusIconHidden'
@@ -63,7 +63,7 @@
         </uxap:snappedHeading>
 
         <uxap:snappedContent>
-            <VBox visible='{= !%{config>/fullScreenTodoItems} }'>
+            <VBox visible='{= !%{config>/compactView} }'>
                 <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
                 <GenericTag
                     design='StatusIconHidden'

@@ -25,10 +25,10 @@ sap.ui.define([
             
             this.Config.setData({
                 ID: null,
+                compactView: true,
 
                 editTodoItems: false,
-                showCompletedTodoItems: false,
-                fullScreenTodoItems: false
+                showCompletedTodoItems: false
             });
         },
 

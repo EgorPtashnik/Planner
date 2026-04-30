@@ -15,6 +15,10 @@
 
         <uxap:navigationActions>
             <Button
+                press='onPressToggleCompactView'
+                icon='{= !%{config>/compactView} ? "sap-icon://decrease-line-height" : "sap-icon://increase-line-height" }'
+                tooltip='{= %{config>/compactView} ? "Показать Меньше" : "Показать Больше"}' />
+            <Button
                 press='onPressClosePage'
                 icon='sap-icon://decline'
                 visible='{= !%{/layout}.includes("One") &amp;&amp; !%{/layout}.includes("Three") }' />
@@ -33,11 +37,11 @@
         </uxap:actions>
 
         <uxap:expandedHeading>
-            <Title text='{todo>name}' />
+            <Title text='{todo>name}' wrapping='{= !%{config>/compactView} }' />
         </uxap:expandedHeading>
 
         <uxap:expandedContent>
-            <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+            <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' visible='{= !%{config>/compactView} }' />
         </uxap:expandedContent>
 
         <uxap:snappedHeading>
@@ -45,7 +49,7 @@
         </uxap:snappedHeading>
 
         <uxap:snappedContent>
-            <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+            <ObjectStatus title='Обновлено' text='{todo>modifiedAt}'  visible='{= !%{config>/compactView} }' />
         </uxap:snappedContent>
 
     </uxap:ObjectPageDynamicHeaderTitle>

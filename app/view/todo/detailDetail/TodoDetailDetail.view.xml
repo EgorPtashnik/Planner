@@ -6,8 +6,8 @@
 	controllerName='planner.controller.todo.detailDetail.TodoDetailDetail'>
 
     <uxap:ObjectPageLayout
-        showAnchorBar='{= !%{config>/fullScreenTodoItems} }'
-        showHeaderContent='{= !%{config>/fullScreenTodoItems} }'
+        showAnchorBar='{= !%{config>/compactView} }'
+        showHeaderContent='{= !%{config>/compactView} }'
         preserveHeaderStateOnScroll='true'
         upperCaseAnchorBar='false'>
 

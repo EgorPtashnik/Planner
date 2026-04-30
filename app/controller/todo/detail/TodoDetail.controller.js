@@ -16,6 +16,8 @@ sap.ui.define([
 
             this.Config.setData({
                 ID: null,
+                compactView: true,
+
                 todoParentCount: 0
             })
         },
@@ -55,6 +57,10 @@ sap.ui.define([
 
         async onPressClosePage() {
             this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
+        },
+
+        onPressToggleCompactView() {
+            this.Config.setProperty('/compactView', !this.Config.getProperty('/compactView'));
         },
 
         async onPressDelete() {

@@ -7,7 +7,7 @@
         title='Заметки'
         titleUppercase='false'
         showTitle='false'
-        visible='{= !%{config>/fullScreenTodoItems} }'>
+        visible='{= !%{config>/compactView} }'>
         <uxap:subSections>
             <uxap:ObjectPageSubSection>
                 <uxap:blocks>

@@ -17,8 +17,8 @@ sap.ui.define(() => {
             });
         },
 
-        onPressToggleTodoItemsFullScreen() {
-            this.Config.setProperty('/fullScreenTodoItems', !this.Config.getProperty('/fullScreenTodoItems'));
+        onPressToggleCompactView() {
+            this.Config.setProperty('/compactView', !this.Config.getProperty('/compactView'));
         },
 
         onPressCloseAllPages() {
