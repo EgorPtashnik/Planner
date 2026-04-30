@@ -15,6 +15,6 @@ async function onAfterUpsertTodoItem(_, req) {
         .orderBy `priority desc`;
 
     await UPDATE (TodoParent)
-        .set `priority = ${oHighestPriorityTodoItem?.priority || PriorityType.Medium}`
+        .set `priority = ${oHighestPriorityTodoItem?.priority || PriorityType.Low}`
         .where `ID = ${req.data.parent_ID}`;
 };
