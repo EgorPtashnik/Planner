@@ -148,7 +148,7 @@
                                     <Button
                                         press='onPressChangeTodoItemStatus($event, 1)'
                                         type='Accept'
-                                        icon='sap-icon://process'
+                                        text='Начать'
                                         tooltip='Начать'
                                         visible='{= %{todo>status} === 0 &amp;&amp; !%{config>/editTodoItems} }'>
                                         <layoutData>

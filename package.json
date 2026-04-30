@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "PlanneR Application",
   "scripts": {
-    "start": "cds watch",
+    "start": "cds serve",
     "deploy": "npm run backup:db && cds deploy && npm run restore:db",
     "backup:db": "node scripts/backup-sqlite.js",
     "restore:db": "node scripts/restore-from-backup.js"
