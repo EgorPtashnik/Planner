@@ -1,0 +1,53 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:uxap='sap.uxap'
+    xmlns:core='sap.ui.core'>
+    
+    <uxap:ObjectPageDynamicHeaderTitle>
+
+        <uxap:breadcrumbs>
+            <Breadcrumbs currentLocationText='{todo>name}'>
+                <links>
+                    <Link press='onPressClosePage' text='Списки Дел' />
+                </links>
+            </Breadcrumbs>
+        </uxap:breadcrumbs>
+
+        <uxap:navigationActions>
+            <Button
+                press='onPressClosePage'
+                icon='sap-icon://decline'
+                visible='{= !%{/layout}.includes("One") &amp;&amp; !%{/layout}.includes("Three") }' />
+        </uxap:navigationActions>
+
+        <uxap:actions>
+            <Button
+                press='onPressDelete'
+                text='Удалить'
+                icon='sap-icon://delete'
+                type='Negative'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                </layoutData>
+            </Button>
+        </uxap:actions>
+
+        <uxap:expandedHeading>
+            <Title text='{todo>name}' />
+        </uxap:expandedHeading>
+
+        <uxap:expandedContent>
+            <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+        </uxap:expandedContent>
+
+        <uxap:snappedHeading>
+            <Title text='{todo>name}' />
+        </uxap:snappedHeading>
+
+        <uxap:snappedContent>
+            <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
+        </uxap:snappedContent>
+
+    </uxap:ObjectPageDynamicHeaderTitle>
+
+</core:FragmentDefinition>

@@ -1,9 +1,8 @@
 <mvc:View
-    xmlns='sap.m'
     xmlns:uxap='sap.uxap'
-    xmlns:form='sap.ui.layout.form'
     xmlns:core='sap.ui.core'
     xmlns:mvc='sap.ui.core.mvc'
+    busyIndicatorDelay='0'
 	controllerName='planner.controller.todo.detail.TodoDetail'>
 
     <uxap:ObjectPageLayout
@@ -12,156 +11,21 @@
 
         <!-- HEADER -->
         <uxap:headerTitle>
-            <uxap:ObjectPageDynamicHeaderTitle>
-
-                <uxap:breadcrumbs>
-                    <Breadcrumbs currentLocationText='{todo>name}'>
-                        <links>
-                            <Link press='onPressClosePage' text='Списки Дел' />
-                        </links>
-                    </Breadcrumbs>
-                </uxap:breadcrumbs>
-
-                <uxap:navigationActions>
-                    <Button
-                        press='onPressClosePage'
-                        icon='sap-icon://decline'
-                        visible='{= !%{/layout}.includes("One") &amp;&amp; !%{/layout}.includes("Three") }' />
-                </uxap:navigationActions>
-
-                <uxap:actions>
-                    <Button
-                        press='onPressDelete'
-                        text='Удалить'
-                        icon='sap-icon://delete'
-                        type='Negative'>
-                        <layoutData>
-                            <OverflowToolbarLayoutData priority='AlwaysOverflow' />
-                        </layoutData>
-                    </Button>
-                </uxap:actions>
-
-                <uxap:expandedHeading>
-                    <Title text='{todo>name}' />
-                </uxap:expandedHeading>
-
-                <uxap:expandedContent>
-                    <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
-                </uxap:expandedContent>
-
-                <uxap:snappedHeading>
-                    <Title text='{todo>name}' />
-                </uxap:snappedHeading>
-
-                <uxap:snappedContent>
-                    <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' />
-                </uxap:snappedContent>
-
-            </uxap:ObjectPageDynamicHeaderTitle>
+            <core:Fragment fragmentName='planner.view.todo.detail.component.Header' type='XML' />
         </uxap:headerTitle>
 
         <!-- HEADER CONTENT -->
         <uxap:headerContent>
-            <form:SimpleForm
-                editable='true'
-                layout='ColumnLayout'
-                columnsL='1'
-                labelSpanL='12'
-                columnsM='1'
-                labelSpanM='12'>
-                <form:content>
-                    <core:Title text='Общее' />
-                    <Label text='Название' />
-                    <Input id='idTodoListNameInput' value='{todo>name}' />
-
-                    <Label text='Заметки' />
-                    <TextArea rows='5' value='{todo>info}' />
-
-                </form:content>
-            </form:SimpleForm>
+            <core:Fragment fragmentName='planner.view.todo.detail.component.HeaderContent' type='XML' />
         </uxap:headerContent>
 
         <!-- SECTIONS -->
         <uxap:sections>
             <!-- INFORMATION -->
-            <uxap:ObjectPageSection title='Заметки' titleUppercase='false' showTitle='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection showTitle='false'>
-                        <uxap:blocks>
-                            <Panel headerText='Заметки'>
-                                <Text class='sapUiTinyMargin' text='{todo>info}' emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'/>
-                            </Panel>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
+            <core:Fragment fragmentName='planner.view.todo.detail.component.Notes' type='XML' />
             
             <!-- ACTIVITIES -->
-            <uxap:ObjectPageSection title='Этапы ({config>/todoParentCount})' titleUppercase='false' showTitle='false'>
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection showTitle='false'>
-                        <uxap:blocks>
-                            <Table
-                                id='idTodoParentList'
-                                showSeparators='Inner'
-                                autoPopinMode='true'
-                                sticky='HeaderToolbar'
-                                items='{
-                                    path: "todo>items",
-                                    parameters: {
-                                        $$ownRequest: true,
-                                        $count: true,
-                                        $expand: "items,doneItems",
-                                        $orderby: "priority desc"
-                                    }
-                                }'>
-
-                                <noData>
-                                    <IllustratedMessage illustrationType='sapIllus-NoActivities' />
-                                </noData>
-
-                                <headerToolbar>
-                                    <OverflowToolbar>
-                                        <Title text='Этапы ({config>/todoParentCount})' />
-                                        <ToolbarSpacer />
-                                        <OverflowToolbarButton
-                                            type='Transparent'
-                                            press='onPressAddTodoParent'
-                                            icon='sap-icon://add-activity'
-                                            text='Добавить Этап'
-                                            tooltip='Добавить Этап' />
-                                    </OverflowToolbar>
-                                </headerToolbar>
-
-                                <columns>
-                                    <Column importance='High' autoPopinWidth='15'>
-                                        <Text text='Этап' />
-                                    </Column>
-                                    <Column hAlign='Right' popinDisplay='WithoutHeader'>
-                                        <Text text='Приоритет' />
-                                    </Column>
-                                </columns>
-
-                                <ColumnListItem
-                                    press='onPressTodoParentItem'
-                                    vAlign='Top'
-                                    navigated='{= %{/detailDetailID} === %{todo>ID} }'
-                                    highlight='{= %{/detailDetailID} === %{todo>ID} ? "Information" : "None" }'
-                                    type='{= %{/detailDetailID} === %{todo>ID} ? "Active" : "Navigation" }'>
-                                    <cells>
-                                        <ObjectIdentifier title='{todo>name}' text='{todo>doneItems/$count} из {todo>items/$count}' />
-                                        <GenericTag
-                                            design='StatusIconHidden'
-                                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
-                                    </cells>
-                                </ColumnListItem>
-
-                            </Table>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
+            <core:Fragment fragmentName='planner.view.todo.detail.component.TodoParents' type='XML' />
         </uxap:sections>
 
     </uxap:ObjectPageLayout>

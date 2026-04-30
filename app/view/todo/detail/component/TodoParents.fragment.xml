@@ -1,0 +1,72 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:uxap='sap.uxap'
+    xmlns:core='sap.ui.core'>
+
+    <uxap:ObjectPageSection title='Этапы ({config>/todoParentCount})' titleUppercase='false' showTitle='false'>
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection showTitle='false'>
+                <uxap:blocks>
+                    <Table
+                        id='idTodoParentList'
+                        showSeparators='Inner'
+                        autoPopinMode='true'
+                        sticky='HeaderToolbar'
+                        items='{
+                            path: "todo>items",
+                            parameters: {
+                                $$ownRequest: true,
+                                $count: true,
+                                $expand: "items,doneItems",
+                                $orderby: "priority desc"
+                            }
+                        }'>
+
+                        <noData>
+                            <IllustratedMessage illustrationType='sapIllus-NoActivities' />
+                        </noData>
+
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text='Этапы ({config>/todoParentCount})' />
+                                <ToolbarSpacer />
+                                <OverflowToolbarButton
+                                    type='Transparent'
+                                    press='onPressAddTodoParent'
+                                    icon='sap-icon://add-activity'
+                                    text='Добавить Этап'
+                                    tooltip='Добавить Этап' />
+                            </OverflowToolbar>
+                        </headerToolbar>
+
+                        <columns>
+                            <Column importance='High' autoPopinWidth='15'>
+                                <Text text='Этап' />
+                            </Column>
+                            <Column hAlign='Right' popinDisplay='WithoutHeader'>
+                                <Text text='Приоритет' />
+                            </Column>
+                        </columns>
+
+                        <ColumnListItem
+                            press='onPressTodoParentItem'
+                            vAlign='Top'
+                            navigated='{= %{/detailDetailID} === %{todo>ID} }'
+                            highlight='{= %{/detailDetailID} === %{todo>ID} ? "Information" : "None" }'
+                            type='{= %{/detailDetailID} === %{todo>ID} ? "Active" : "Navigation" }'>
+                            <cells>
+                                <ObjectIdentifier title='{todo>name}' text='{todo>doneItems/$count} из {todo>items/$count}' />
+                                <GenericTag
+                                    design='StatusIconHidden'
+                                    text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                    status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
+                            </cells>
+                        </ColumnListItem>
+
+                    </Table>
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+
+</core:FragmentDefinition>

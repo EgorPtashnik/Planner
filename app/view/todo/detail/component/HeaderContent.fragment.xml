@@ -1,0 +1,24 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:form='sap.ui.layout.form'
+    xmlns:core='sap.ui.core'>
+
+    <form:SimpleForm
+        editable='true'
+        layout='ColumnLayout'
+        columnsL='1'
+        labelSpanL='12'
+        columnsM='1'
+        labelSpanM='12'>
+        <form:content>
+            <core:Title text='Общее' />
+            <Label text='Название' />
+            <Input id='idTodoListNameInput' value='{todo>name}' />
+
+            <Label text='Заметки' />
+            <TextArea rows='5' value='{todo>info}' />
+
+        </form:content>
+    </form:SimpleForm>
+
+</core:FragmentDefinition>
