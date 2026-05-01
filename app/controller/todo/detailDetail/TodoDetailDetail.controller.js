@@ -10,7 +10,7 @@ sap.ui.define([
 ) => {
     'use strict';
 
-    return BaseController.extend('planner.todo.detailDetail.TodoDetailDetail', {
+    return BaseController.extend('planner.controller.todo.detailDetail.TodoDetailDetail', {
 
         ...Events,
 

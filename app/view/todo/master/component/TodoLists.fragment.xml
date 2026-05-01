@@ -4,6 +4,7 @@
 
     <Table
         id='idTodoListsList'
+        inset='true'
         items='{
             path: "todo>/TodoList",
             parameters: { $count: true }

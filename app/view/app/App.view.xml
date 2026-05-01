@@ -7,13 +7,21 @@
     height='100%'
     busyIndicatorDelay='0'
 	controllerName='planner.controller.app.App'>
-        <Page showFooter='{device>/system/phone}'>
 
-            <customHeader>
-                <OverflowToolbar>
-                    <content>
-                        <Title text='PlanneR' />
+    <f:DynamicPage
+        class='sapUiNoContentPadding'
+        showFooter='{device>/system/phone}'>
+
+        <f:title>
+            <f:DynamicPageTitle backgroundDesign='Transparent'>
+                <f:heading>
+                    <Title text='PlanneR' />
+                </f:heading>
+
+                <f:content>
+                    <Toolbar style='Clear'>
                         <IconTabHeader
+                            backgroundDesign='Transparent'
                             select='onSelectNavItem'
                             visible='{= !%{device>/system/phone} }'
                             selectedKey='{/selectedRoute}'
@@ -24,44 +32,42 @@
                                     key='{key}' />
                             </items>
                         </IconTabHeader>
+                    </Toolbar>
+                </f:content>
 
-                        <ToolbarSpacer />
+                <f:actions>
+                    <Button
+                        press='onPressToggleDarkMode'
+                        icon='{= %{/darkMode} ? "sap-icon://light-mode" : "sap-icon://dark-mode" }'
+                        tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
 
-                        <Button
-                            press='onPressToggleDarkMode'
-                            icon='{= %{/darkMode} ? "sap-icon://light-mode" : "sap-icon://dark-mode" }'
-                            tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
-                    </content>
-                </OverflowToolbar>
-            </customHeader>
+        <f:content>
+            <f:FlexibleColumnLayout
+                id='app'
+                stateChange='onFCLStateChange'
+                layout='{/layout}' />
+        </f:content>
 
-            <content>
-                <f:FlexibleColumnLayout
-                    id='app'
-                    stateChange='onFCLStateChange'
-                    layout='{/layout}' />
-            </content>
-
-            <footer>
-                <Bar>
-                    <contentMiddle>
-                        <ScrollContainer width='100%'>
-                            <HBox
-                                justifyContent='SpaceAround'
-                                alignItems='Center'
-                                items='{/routes}'>
-                                <items>
-                                    <Button
-                                        press='onPressFooterNavItem'
-                                        icon='{icon}'
-                                        type='{= %{/selectedRoute} === %{key} ? "Neutral" : "Transparent" }' />
-                                </items>
-                            </HBox>
-                        </ScrollContainer>
-                    </contentMiddle>
-                </Bar>
-            </footer>
-
-        </Page>
-
+        <f:footer>
+            <Toolbar class='mobileFooter'>
+                <ScrollContainer width='100%'>
+                    <HBox
+                        justifyContent='SpaceAround'
+                        alignItems='Center'
+                        items='{/routes}'>
+                        <items>
+                            <Button
+                                press='onPressFooterNavItem'
+                                icon='{icon}'
+                                type='{= %{/selectedRoute} === %{key} ? "Neutral" : "Transparent" }' />
+                        </items>
+                    </HBox>
+                </ScrollContainer>
+            </Toolbar>
+        </f:footer>
+    </f:DynamicPage>
+     
 </mvc:View>

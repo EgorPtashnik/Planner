@@ -9,7 +9,7 @@ sap.ui.define([
     HeaderLogic, TodoParentsLogic) => {
     'use strict';
 
-    return BaseController.extend('planner.todo.detail.TodoDetail', {
+    return BaseController.extend('planner.controller.todo.detail.TodoDetail', {
 
         ...Events,
 

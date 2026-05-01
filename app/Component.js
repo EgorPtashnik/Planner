@@ -22,7 +22,8 @@ sap.ui.define([
                 isOnlyOneColumn: false,
                 routes: [
                     {text: 'Овервью', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Дела', icon: 'sap-icon://activities', key: 'todoMaster'}
+                    {text: 'Дела', icon: 'sap-icon://activities', key: 'todoMaster'},
+                    {text: 'Тренировки', icon: 'sap-icon://physical-activity', key: 'gym'}
                 ],
                 selectedRoute: 'home',
                 detailID: null,
