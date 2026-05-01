@@ -60,8 +60,7 @@
                                     type='Emphasized'
                                     icon='sap-icon://create-form'
                                     text='Новый Этап'
-                                    tooltip='Новый Этап'
-                                    visible='{= !%{device>/system/phone} }' />
+                                    tooltip='Новый Этап' />
                             </OverflowToolbar>
                         </headerToolbar>
 

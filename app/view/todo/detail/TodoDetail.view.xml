@@ -31,11 +31,6 @@
             <core:Fragment fragmentName='planner.view.todo.detail.component.TodoParents' type='XML' />
         </uxap:sections>
 
-        <!-- FOOTER -->
-        <uxap:footer>
-            <core:Fragment fragmentName='planner.view.todo.detail.component.Footer' type='XML' />
-        </uxap:footer>
-
     </uxap:ObjectPageLayout>
 
 </mvc:View>

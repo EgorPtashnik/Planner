@@ -30,8 +30,7 @@
                 text='Удалить Спиосок'
                 tooltip='Удалить Спиосок'
                 icon='sap-icon://delete'
-                type='Negative'
-                visible='{= !%{device>/system/phone} }'>
+                type='Negative'>
                 <layoutData>
                     <OverflowToolbarLayoutData priority='AlwaysOverflow' />
                 </layoutData>

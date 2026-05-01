@@ -48,8 +48,7 @@
                     type='Emphasized'
                     icon='sap-icon://create-form'
                     text='Создать Список'
-                    tooltip='Создать Список'
-                    visible='{= !%{device>/system/phone} }' />
+                    tooltip='Создать Список' />
 
             </OverflowToolbar>
         </headerToolbar>

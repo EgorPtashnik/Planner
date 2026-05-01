@@ -17,11 +17,6 @@
             <core:Fragment fragmentName='planner.view.todo.master.component.TodoLists' type='XML' />
         </f:content>
 
-        <!-- FOOTER -->
-        <f:footer>
-            <core:Fragment fragmentName='planner.view.todo.master.component.Footer' type='XML' />
-        </f:footer>
-
     </f:DynamicPage>
 
 </mvc:View>

@@ -37,8 +37,7 @@
                 text='Удалить Этап'
                 tooltip='Удалить Этап'
                 icon='sap-icon://delete'
-                type='Negative'
-                visible='{= !%{device>/system/phone} }'>
+                type='Negative'>
                 <layoutData>
                     <OverflowToolbarLayoutData priority='AlwaysOverflow' />
                 </layoutData>
