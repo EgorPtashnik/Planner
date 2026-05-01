@@ -12,6 +12,7 @@ sap.ui.define(function() {
 
         _onNavChanged(_, sEventId, oData) {
             if (oData.route === 'todoMaster') {
+                this.getView().setBusy(true);
                 this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
             }
         },
