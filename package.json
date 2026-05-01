@@ -4,7 +4,7 @@
   "description": "PlanneR Application",
   "scripts": {
     "start": "cds serve",
-    "deploy": "cds deploy",
+    "deploy": "cds deploy && npm run restore:db",
     "backup:db": "node scripts/backup-sqlite.js",
     "restore:db": "node scripts/restore-from-backup.js"
   },
