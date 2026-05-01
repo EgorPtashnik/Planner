@@ -22,7 +22,7 @@ sap.ui.define(function() {
         },
 
         _onTodoParentChanged(_, sEventId, oData) {
-            this.byId('idTodoParentList').getBinding('items').refresh();
+            this.byId('idTodoParentsList').getBinding('items').refresh();
         }
     }
 });

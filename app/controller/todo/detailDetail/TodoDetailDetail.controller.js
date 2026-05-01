@@ -27,7 +27,9 @@ sap.ui.define([
                 ID: null,
                 compactView: true,
 
+                todoItemsCount: 0,
                 editTodoItems: false,
+                showTodoItemsSearch: false,
                 showCompletedTodoItems: false
             });
         },
@@ -44,6 +46,7 @@ sap.ui.define([
             if (!this.ODataEventsAttached) {
                 this.ODataEventsAttached = true;
                 this.byId('idTodoItemsList').getBinding('items').attachPatchCompleted(() => this.publish(this.EVENT.TODOPARENT_CHANGED));
+                this.byId('idTodoItemsList').getBinding('items').attachDataReceived(oEvent => this.Config.setProperty('/todoItemsCount', oEvent.getSource().getCount()));
             }
         },
 

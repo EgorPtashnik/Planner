@@ -1,12 +1,18 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/todo/detail/Events'
-], (BaseController, Events) => {
+    'planner/controller/todo/detail/Events',
+
+    'planner/controller/todo/detail/component/Header',
+    'planner/controller/todo/detail/component/TodoParents',
+], (BaseController, Events, HeaderLogic, TodoParentsLogic) => {
     'use strict';
 
     return BaseController.extend('planner.todo.detail.TodoDetail', {
 
         ...Events,
+
+        ...HeaderLogic,
+        ...TodoParentsLogic,
 
         onInit() {
             this.init('todoDetail');
@@ -18,7 +24,8 @@ sap.ui.define([
                 ID: null,
                 compactView: true,
 
-                todoParentCount: 0
+                todoParentCount: 0,
+                showTodoParentsSearch: false,
             })
         },
 
@@ -47,65 +54,13 @@ sap.ui.define([
 
                 if (!this.ODataEventsAttached) {
                     this.ODataEventsAttached = true;
-                    this.byId('idTodoParentList').getBinding('items').attachDataReceived(oEvent => 
+                    this.byId('idTodoParentsList').getBinding('items').attachDataReceived(oEvent => 
                         this.Config.setProperty('/todoParentCount', oEvent.getSource().getCount()));
                 }
 
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
-        },
-
-        async onPressClosePage() {
-            this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
-        },
-
-        onPressToggleCompactView() {
-            this.Config.setProperty('/compactView', !this.Config.getProperty('/compactView'));
-        },
-
-        async onPressDelete() {
-            try {
-                const oContext = this.getView().getBindingContext('todo');
-                await oContext.delete();
-                if (oContext.isDeleted()) {
-                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Список удален.');
-                    this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
-                    this.publish(this.EVENT.TODOLIST_CHANGED);
-                }
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            }
-        },
-
-        async onPressAddTodoParent() {
-            try {
-                const oContext = this.byId('idTodoParentList').getBinding('items').create({name: 'Новый Этап', priority: 1});
-                await oContext.created();
-
-                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Этап создан.');
-                this.publish(this.EVENT.NAV_CHANGED, {
-                    route: 'todoDetailDetail',
-                    parameters: {
-                        id: this.AppConfig.getProperty('/detailID'),
-                        item: oContext.getProperty('ID'),
-                        layout: this.LayoutType.ThreeColumnsEndExpanded
-                    }
-                });
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            }
-        },
-
-        onPressTodoParentItem(oEvent) {
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetailDetail',
-                parameters: {
-                    id: this.AppConfig.getProperty('/detailID'),
-                    item: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
-                    layout: this.LayoutType.ThreeColumnsEndExpanded
-                }
-            });
         }
 
     });

@@ -4,7 +4,7 @@
     xmlns:core='sap.ui.core'>
 
     <uxap:ObjectPageSection
-        title='Шаги ({todo>items/$count})'
+        title='Шаги ({config>/todoItemsCount})'
         titleUppercase='false'
         showTitle='false'>
         <uxap:subSections>
@@ -29,9 +29,34 @@
 
                         <headerToolbar>
                             <OverflowToolbar design='Solid'>
-                                <Title text='Шаги ({todo>items/$count})' />
+                                <Title
+                                    text='Шаги ({config>/todoItemsCount})'
+                                    visible='{= !%{config>/showTodoItemsSearch} }' />
+                                
+                                <VBox
+                                    width='100%'
+                                    visible='{config>/showTodoItemsSearch}'>
+                                    <SearchField
+                                        change='onChangeTodoItemsSearch'
+                                        showSearchButton='false'>
+                                        <layoutData>
+                                            <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                        </layoutData>
+                                    </SearchField>
+                                </VBox>
 
                                 <ToolbarSpacer />
+
+                                <ToggleButton
+                                    icon='sap-icon://search'
+                                    tooltip='Поиск'
+                                    pressed='{config>/showTodoItemsSearch}'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                    </layoutData>
+                                </ToggleButton>
+
+                                <ToolbarSeparator />
 
                                 <ToggleButton
                                     type='Ghost'

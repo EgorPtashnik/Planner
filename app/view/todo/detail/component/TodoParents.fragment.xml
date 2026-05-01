@@ -8,7 +8,7 @@
             <uxap:ObjectPageSubSection showTitle='false'>
                 <uxap:blocks>
                     <Table
-                        id='idTodoParentList'
+                        id='idTodoParentsList'
                         showSeparators='Inner'
                         autoPopinMode='true'
                         sticky='HeaderToolbar'
@@ -27,9 +27,36 @@
                         </noData>
 
                         <headerToolbar>
-                            <OverflowToolbar>
-                                <Title text='Этапы ({config>/todoParentCount})' />
+                            <OverflowToolbar design='Solid'>
+                                <Title
+                                    text='Этапы ({config>/todoParentCount})'
+                                    visible='{= !%{config>/showTodoParentsSearch} }' />
+                                
+                                <VBox
+                                    width='100%'
+                                    visible='{config>/showTodoParentsSearch}'>
+                                    <SearchField
+                                        change='onChangeTodoParentsSearch'
+                                        showSearchButton='false'>
+                                        <layoutData>
+                                            <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                        </layoutData>
+                                    </SearchField>
+                                </VBox>
+
                                 <ToolbarSpacer />
+
+                                <ToggleButton
+                                    icon='sap-icon://search'
+                                    tooltip='Поиск'
+                                    pressed='{config>/showTodoParentsSearch}'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                    </layoutData>
+                                </ToggleButton>
+
+                                <ToolbarSeparator />
+
                                 <OverflowToolbarButton
                                     type='Transparent'
                                     press='onPressAddTodoParent'

@@ -4,6 +4,10 @@ sap.ui.define(() => {
     return {
         
         // TOOLBAR
+        onChangeTodoItemsSearch(oEvent) {
+            this.byId('idTodoItemsList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
+        },
+
         async onPressAddTodoItem() {
             try {
                 const oContext = this.byId('idTodoItemsList').getBinding('items').create({name: 'Новый Шаг', priority: 2});
