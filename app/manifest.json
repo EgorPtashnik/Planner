@@ -1,4 +1,13 @@
 {
+    "name": "PlanneR",
+    "display": "standalone",
+    "icons": [{
+        "src": "icons/512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+    }],
+    "start_url": "./",
+
     "_version": "1.38.0",
     "sap.app": {
         "id": "planner",
