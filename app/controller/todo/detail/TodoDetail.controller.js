@@ -40,6 +40,7 @@ sap.ui.define([
                         $expand: 'items'
                     },
                     events: {
+                        dataReceived: () => this.getView().setBusy(false),
                         patchCompleted: () => this.publish(this.EVENT.TODOLIST_CHANGED)
                     }
                 });

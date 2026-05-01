@@ -18,7 +18,6 @@ sap.ui.define(function() {
                     this.Config.setProperty("/ID", oData.parameters.item);
                     this.Config.setProperty("/editTodoItems", false);
                     this.bindView(oData.parameters.item, oData.parameters.id);
-                    this.getView().setBusy(false);
                 }
             }
         },

@@ -14,6 +14,7 @@ sap.ui.define(function() {
             if (oData.route === 'todoMaster') {
                 this.getView().setBusy(true);
                 this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
+                setTimeout(() => this.getView().setBusy(false));
             }
         },
 

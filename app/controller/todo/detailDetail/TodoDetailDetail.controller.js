@@ -55,6 +55,7 @@ sap.ui.define([
                         $expand: 'items,list'
                     },
                     events: {
+                        dataReceived: () => this.getView().setBusy(false),
                         patchCompleted: () => this.publish(this.EVENT.TODOPARENT_CHANGED)
                     }
                 });

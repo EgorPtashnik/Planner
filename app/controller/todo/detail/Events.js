@@ -17,7 +17,6 @@ sap.ui.define(function() {
                     this.getView().setBusy(true);
                     this.Config.setProperty('/ID', oData.parameters.id);
                     this.bindView(oData.parameters.id);
-                    this.getView().setBusy(false);
                 }
             }
         },

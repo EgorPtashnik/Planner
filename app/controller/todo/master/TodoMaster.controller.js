@@ -32,8 +32,7 @@ sap.ui.define([
                 this.ODataEventsAttached = true;
                 this.byId('idTodoList').getBinding('items').attachDataReceived(oEvent =>
                     oEvent.getSource().getHeaderContext().requestProperty('$count')
-                        .then(value => this.Config.setProperty('/todoListCount', value))).requestRefresh()
-                            .finally(() => this.getView().setBusy(false));
+                        .then(value => this.Config.setProperty('/todoListCount', value))).refresh();
             }
         },
 
