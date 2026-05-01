@@ -13,7 +13,7 @@
         showFooter='{device>/system/phone}'>
 
         <f:title>
-            <f:DynamicPageTitle backgroundDesign='Transparent'>
+            <f:DynamicPageTitle backgroundDesign='{= %{/darkMode} ? "Transparent" : "Solid" }'>
                 <f:heading>
                     <Title text='PlanneR' />
                 </f:heading>
