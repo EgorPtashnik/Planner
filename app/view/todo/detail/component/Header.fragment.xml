@@ -27,8 +27,8 @@
         <uxap:actions>
             <Button
                 press='onPressDeleteTodoList'
-                text='Удалить Спиосок'
-                tooltip='Удалить Спиосок'
+                text='Удалить Список'
+                tooltip='Удалить Список'
                 icon='sap-icon://delete'
                 type='Negative'>
                 <layoutData>

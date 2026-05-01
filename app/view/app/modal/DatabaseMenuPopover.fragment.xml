@@ -1,0 +1,24 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+    <Popover
+        title='База Данных'
+        placement='Bottom'>
+        <content>
+            <VBox>
+                <Button
+                    width='100%'
+                    type='Transparent'
+                    icon='sap-icon://save'
+                    text='Сохранить Копию'
+                    class='actionItemButton' />
+                <Button
+                    width='100%'
+                    type='Transparent'
+                    icon='sap-icon://download'
+                    text='Скачать Копию'
+                    class='actionItemButton' />
+            </VBox>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

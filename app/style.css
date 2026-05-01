@@ -1,3 +1,7 @@
 .mobileFooter {
     bottom: 1rem !important;
 }
+.actionItemButton > .sapMBtnInner  {
+    text-align: left !important;
+    justify-content: left;
+}

@@ -3,7 +3,7 @@ sap.ui.define([
     'sap/ui/model/json/JSONModel',
     'sap/f/library',
     'sap/ui/Device'
-], function(UIComponent, JSONModel, FLib, Device) {
+], (UIComponent, JSONModel, FLib, Device) => {
 	'use strict';
 
     const { LayoutType } = FLib;

@@ -40,6 +40,11 @@
                         press='onPressToggleDarkMode'
                         icon='{= %{/darkMode} ? "sap-icon://light-mode" : "sap-icon://dark-mode" }'
                         tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
+                    <Button
+                        ariaHasPopup='Menu'
+                        press='onOpenDatabaseMenu'
+                        icon='sap-icon://database'
+                        tooltip='База Данных' />
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>

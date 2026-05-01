@@ -31,7 +31,7 @@ sap.ui.define([
         },
 
         getContentDensityClass() {
-            return this.App.getContentDensityClass();
+            return this.getOwnerComponent().getContentDensityClass();
         },
 
         getFragment(sPath) {

@@ -2,13 +2,16 @@ sap.ui.define([
     'planner/controller/BaseController',
     'sap/ui/core/Theming',
 
-    'planner/controller/app/Events'
-], (BaseController, Theming, Events) => {
+    'planner/controller/app/Events',
+    'planner/controller/app/Header'
+], (BaseController, Theming, Events, HeaderLogic) => {
     'use strict';
 
     return BaseController.extend('planner.App', {
 
         ...Events,
+
+        ...HeaderLogic,
 
         THEME: {
             LIGHT: 'sap_horizon',
@@ -21,21 +24,14 @@ sap.ui.define([
 
             Theming.attachApplied(() => this.getView().setBusy(false));
             this._applyTheme();
+
+            this.DatabaseMenu = null;
         },
 
         onSelectNavItem(oEvent) {
             this.publish(this.EVENT.NAV_CHANGED, {
                 route: oEvent.getParameter('selectedKey')
             });
-        },
-
-        onPressToggleDarkMode() {
-            if (localStorage.getItem('theme') === this.THEME.DARK) {
-                localStorage.setItem('theme', this.THEME.LIGHT);
-            } else {
-                localStorage.setItem('theme', this.THEME.DARK);
-            }
-            this._applyTheme();
         },
 
         onPressFooterNavItem(oEvent) {

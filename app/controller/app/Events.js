@@ -1,7 +1,7 @@
 sap.ui.define([
     'sap/m/MessageToast',
     'sap/m/MessageBox'
-], function(MessageToast) {
+], (MessageToast, MessageBox) => {
     return {
 
         setSubscriptions() {
