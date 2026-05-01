@@ -34,7 +34,7 @@
                                     visible='{= !%{config>/showTodoItemsSearch} }' />
                                 
                                 <VBox
-                                    width='100%'
+                                    width='80%'
                                     visible='{config>/showTodoItemsSearch}'>
                                     <SearchField
                                         change='onChangeTodoItemsSearch'
@@ -58,21 +58,20 @@
 
                                 <ToolbarSeparator />
 
+                                <OverflowToolbarButton
+                                    press='onPressAddTodoItem'
+                                    type='Emphasized'
+                                    icon='sap-icon://create-form'
+                                    text='Новый Шаг'
+                                    tooltip='Новый Шаг'
+                                    visible='{= !%{device>/system/phone} }' />
+
                                 <ToggleButton
                                     type='Ghost'
                                     icon='sap-icon://edit'
                                     tooltip='Редактировать'
-                                    pressed='{config>/editTodoItems}'>
-                                    <layoutData>
-                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                    </layoutData>
-                                </ToggleButton>
-
-                                <OverflowToolbarButton
-                                    press='onPressAddTodoItem'
-                                    icon='sap-icon://add-activity'
-                                    text='Добавить Шаг'
-                                    tooltip='Добавить Шаг' />
+                                    text='{= %{config>/showTodoItemsSearch} ? "Редактировать" : ""}'
+                                    pressed='{config>/editTodoItems}' />
 
                                 <OverflowToolbarButton
                                     press='onPressToggleVisibleItems'

@@ -1,0 +1,28 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <OverflowToolbar>
+        <ToolbarSpacer />
+
+        <Button
+            press='onPressAddTodoParent'
+            type='Emphasized'
+            icon='sap-icon://create-form'
+            text='Новый Этап'
+            tooltip='Новый Этап' />
+
+        <Button
+            press='onPressDeleteTodoList'
+            text='Удалить Список'
+            tooltip='Удалить Список'
+            icon='sap-icon://delete'
+            type='Negative'>
+            <layoutData>
+                <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+            </layoutData>
+        </Button>
+
+    </OverflowToolbar>
+    
+</core:FragmentDefinition>

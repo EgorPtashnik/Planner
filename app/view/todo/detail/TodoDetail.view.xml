@@ -6,10 +6,11 @@
 	controllerName='planner.controller.todo.detail.TodoDetail'>
 
     <uxap:ObjectPageLayout
+        preserveHeaderStateOnScroll='true'
+        upperCaseAnchorBar='false'
         showAnchorBar='{= !%{config>/compactView} }'
         showHeaderContent='{= !%{config>/compactView} }'
-        preserveHeaderStateOnScroll='true'
-        upperCaseAnchorBar='false'>
+        showFooter='{device>/system/phone}'>
 
         <!-- HEADER -->
         <uxap:headerTitle>
@@ -29,6 +30,11 @@
             <!-- ACTIVITIES -->
             <core:Fragment fragmentName='planner.view.todo.detail.component.TodoParents' type='XML' />
         </uxap:sections>
+
+        <!-- FOOTER -->
+        <uxap:footer>
+            <core:Fragment fragmentName='planner.view.todo.detail.component.Footer' type='XML' />
+        </uxap:footer>
 
     </uxap:ObjectPageLayout>
 

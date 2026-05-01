@@ -25,7 +25,7 @@ sap.ui.define(() => {
             this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
         },
 
-        async onPressDelete() {
+        async onPressDeleteTodoParent() {
             try {
                 const oContext = this.getView().getBindingContext('todo');
                 await oContext.delete();

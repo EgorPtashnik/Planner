@@ -7,7 +7,7 @@
 	controllerName='planner.controller.todo.master.TodoMaster'>
 
     <f:DynamicPage
-        showFooter='true'>
+        showFooter='{device>/system/phone}'>
 
         <!-- HEADER -->
         <f:title>

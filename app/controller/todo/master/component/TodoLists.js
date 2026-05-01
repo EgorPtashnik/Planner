@@ -8,7 +8,7 @@ sap.ui.define(() => {
             this.byId('idTodoListsList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
         },
 
-        async onPressCreate() {
+        async onPressCreateTodoList() {
             const oContext = this.byId('idTodoListsList').getBinding('items').create({name: 'Новый Список'});
             await oContext.created();
 

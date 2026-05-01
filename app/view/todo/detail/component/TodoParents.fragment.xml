@@ -55,14 +55,13 @@
                                     </layoutData>
                                 </ToggleButton>
 
-                                <ToolbarSeparator />
-
                                 <OverflowToolbarButton
-                                    type='Transparent'
                                     press='onPressAddTodoParent'
-                                    icon='sap-icon://add-activity'
-                                    text='Добавить Этап'
-                                    tooltip='Добавить Этап' />
+                                    type='Emphasized'
+                                    icon='sap-icon://create-form'
+                                    text='Новый Этап'
+                                    tooltip='Новый Этап'
+                                    visible='{= !%{device>/system/phone} }' />
                             </OverflowToolbar>
                         </headerToolbar>
 

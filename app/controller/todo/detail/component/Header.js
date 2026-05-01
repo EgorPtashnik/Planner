@@ -11,7 +11,7 @@ sap.ui.define(() => {
             this.Config.setProperty('/compactView', !this.Config.getProperty('/compactView'));
         },
 
-        async onPressDelete() {
+        async onPressDeleteTodoList() {
             try {
                 const oContext = this.getView().getBindingContext('todo');
                 await oContext.delete();

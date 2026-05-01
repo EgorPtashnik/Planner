@@ -26,10 +26,12 @@
 
         <uxap:actions>
             <Button
-                press='onPressDelete'
-                text='Удалить'
+                press='onPressDeleteTodoList'
+                text='Удалить Спиосок'
+                tooltip='Удалить Спиосок'
                 icon='sap-icon://delete'
-                type='Negative'>
+                type='Negative'
+                visible='{= !%{device>/system/phone} }'>
                 <layoutData>
                     <OverflowToolbarLayoutData priority='AlwaysOverflow' />
                 </layoutData>

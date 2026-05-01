@@ -42,6 +42,14 @@
                     </layoutData>
                 </ToggleButton>
 
+                <OverflowToolbarButton
+                    press='onPressCreateTodoList'
+                    type='Emphasized'
+                    icon='sap-icon://create-form'
+                    text='Создать Список'
+                    tooltip='Создать Список'
+                    visible='{= !%{device>/system/phone} }' />
+
             </OverflowToolbar>
         </headerToolbar>
 

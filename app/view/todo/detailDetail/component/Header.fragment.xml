@@ -33,11 +33,12 @@
 
         <uxap:actions>
             <Button
-                press='onPressDelete'
-                text='Удалить'
-                tooltip='Удалить'
+                press='onPressDeleteTodoParent'
+                text='Удалить Этап'
+                tooltip='Удалить Этап'
                 icon='sap-icon://delete'
-                type='Negative'>
+                type='Negative'
+                visible='{= !%{device>/system/phone} }'>
                 <layoutData>
                     <OverflowToolbarLayoutData priority='AlwaysOverflow' />
                 </layoutData>
