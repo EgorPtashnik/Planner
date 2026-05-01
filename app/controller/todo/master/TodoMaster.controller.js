@@ -1,12 +1,18 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/todo/master/Events'
-], (BaseController, Events) => {
+    'planner/controller/todo/master/Events',
+
+    'planner/controller/todo/master/component/TodoLists'
+], (BaseController, Events,
+
+    TodoListsLogic
+) => {
     'use strict';
 
     return BaseController.extend('planner.todo.master.TodoLTodoMaster', {
 
         ...Events,
+        ...TodoListsLogic,
 
         onInit() {
             this.init('todoMaster');
@@ -15,7 +21,8 @@ sap.ui.define([
             this.ODataEventsAttached = false;
 
             this.Config.setData({
-                todoListCount: 0
+                todoListCount: 0,
+                showTodoListsSearch: false
             });
         },
 
@@ -30,33 +37,10 @@ sap.ui.define([
 
             if (!this.ODataEventsAttached) {
                 this.ODataEventsAttached = true;
-                this.byId('idTodoList').getBinding('items').attachDataReceived(oEvent =>
+                this.byId('idTodoListsList').getBinding('items').attachDataReceived(oEvent =>
                     oEvent.getSource().getHeaderContext().requestProperty('$count')
                         .then(value => this.Config.setProperty('/todoListCount', value))).refresh();
             }
-        },
-
-        onPressListItem(oEvent) {
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetail',
-                parameters: {
-                    id: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                }
-            });
-        },
-
-        async onPressCreate() {
-            const oContext = this.byId('idTodoList').getBinding('items').create({name: 'Новый Список'});
-            await oContext.created();
-
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetail',
-                parameters: {
-                    id: oContext.getProperty('ID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                }
-            });
         }
 
     });

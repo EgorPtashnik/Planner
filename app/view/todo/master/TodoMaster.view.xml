@@ -11,62 +11,17 @@
 
         <!-- HEADER -->
         <f:title>
-            <f:DynamicPageTitle>
-
-                <f:heading>
-                    <Title text='Списки Дел ({config>/todoListCount})' />
-                </f:heading>
-
-            </f:DynamicPageTitle>
+            <core:Fragment fragmentName='planner.view.todo.master.component.Header' type='XML' />
         </f:title>
 
-        <!-- CONTENT -->
+        <!-- TODO LISTS -->
         <f:content>
-            <Table
-                id='idTodoList'
-                items='{
-                    path: "todo>/TodoList",
-                    parameters: { $count: true }
-                }'>
-
-                <noData>
-                    <IllustratedMessage />
-                </noData>
-
-                <columns>
-                    <Column>
-                        <Text text='Список' />
-                    </Column>
-                </columns>
-
-                <items>
-                    <ColumnListItem
-                        press='onPressListItem'
-                        navigated='{= %{/detailID} === %{todo>ID} }'
-                        highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
-                        type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>
-                        <cells>
-                            <ObjectIdentifier title='{todo>name}' />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-
-            </Table>
+            <core:Fragment fragmentName='planner.view.todo.master.component.TodoLists' type='XML' />
         </f:content>
 
         <!-- FOOTER -->
         <f:footer>
-            <OverflowToolbar>
-                <content>
-                    <ToolbarSpacer />
-                    
-                    <Button
-                        press='onPressCreate'
-                        text='Создать Список'
-                        tooltip='Создать Список'
-                        type='Emphasized' />
-                </content>
-            </OverflowToolbar>
+            <core:Fragment fragmentName='planner.view.todo.master.component.Footer' type='XML' />
         </f:footer>
 
     </f:DynamicPage>

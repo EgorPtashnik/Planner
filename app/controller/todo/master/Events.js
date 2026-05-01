@@ -19,7 +19,7 @@ sap.ui.define(function() {
         },
 
         _onTodoListChanged() {
-            this.byId('idTodoList').getBinding('items').refresh();
+            this.byId('idTodoListsList').getBinding('items').refresh();
         }
 
     }

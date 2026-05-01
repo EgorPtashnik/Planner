@@ -18,7 +18,7 @@
                                 $$ownRequest: true,
                                 $count: true,
                                 $expand: "items,doneItems",
-                                $orderby: "priority desc"
+                                $orderby: "createdAt desc"
                             }
                         }'>
 

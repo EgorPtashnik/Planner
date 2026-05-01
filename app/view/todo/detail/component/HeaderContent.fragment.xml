@@ -13,7 +13,7 @@
         <form:content>
             <core:Title text='Общее' />
             <Label text='Название' />
-            <Input id='idTodoListNameInput' value='{todo>name}' />
+            <Input value='{todo>name}' />
 
             <Label text='Заметки' />
             <TextArea rows='5' value='{todo>info}' />
