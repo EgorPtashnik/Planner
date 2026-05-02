@@ -17,6 +17,7 @@
                         sticky='HeaderToolbar'
                         autoPopinMode='true'
                         fixedLayout='false'
+                        hiddenInPopin='{= %{config>/showTodoItemsDetails}.toString() === "true" || %{config>/editTodoItems} ? [] : ["Low","Medium"]}'
                         mode='{= %{config>/editTodoItems} ? "Delete" : "None"}'
                         items='{
                             path: "todo>items",
@@ -71,6 +72,36 @@
                                     tooltip='Редактировать'
                                     text='{= %{config>/showTodoItemsSearch} ? "Редактировать" : ""}'
                                     pressed='{config>/editTodoItems}' />
+
+                                <ToggleButton
+                                    type='Ghost'
+                                    icon='sap-icon://detail-more'
+                                    tooltip='Показать Детали'
+                                    text='Показать Детали'
+                                    visible='{device>/system/phone}'
+                                    pressed='{config>/showTodoItemsDetails}'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                                    </layoutData>
+                                </ToggleButton>
+
+                                <SegmentedButton
+                                    selectedKey='{path: "config>/showTodoItemsDetails", targetType: "Boolean" }'
+                                    visible='{= !%{device>/system/phone} }'>
+                                    <items>
+                                        <SegmentedButtonItem
+                                            key='false'
+                                            icon='sap-icon://detail-less'
+                                            tooltip='Скрыть Детали' />
+                                        <SegmentedButtonItem
+                                            key='true'
+                                            icon='sap-icon://detail-more'
+                                            tooltip='Показать Детали' />
+                                    </items>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                    </layoutData>
+                                </SegmentedButton>
 
                                 <OverflowToolbarButton
                                     press='onPressToggleVisibleItems'

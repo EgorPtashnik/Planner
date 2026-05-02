@@ -30,7 +30,8 @@ sap.ui.define([
                 todoItemsCount: 0,
                 editTodoItems: false,
                 showTodoItemsSearch: false,
-                showCompletedTodoItems: false
+                showCompletedTodoItems: false,
+                showTodoItemsDetails: false
             });
         },
 

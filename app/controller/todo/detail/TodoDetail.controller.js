@@ -28,6 +28,7 @@ sap.ui.define([
 
                 todoParentCount: 0,
                 showTodoParentsSearch: false,
+                showTodoParentsDetails: false
             })
         },
 
