@@ -1,4 +1,7 @@
-sap.ui.define(() => {
+sap.ui.define([
+    'sap/m/MessageToast',
+    'sap/m/MessageBox'
+], (MessageToast, MessageBox) => {
     'use strict';
 
     return {
@@ -18,11 +21,11 @@ sap.ui.define(() => {
         },
 
         _onActionSucceeded(_, sEventId, oData) {
-            this.MessageHelper.toast({ message: oData.value });
+            MessageToast.show(oData.value);
         },
 
         _onActionFailed(_, sEventId, oData) {
-            this.MessageHelper.error({ message: oData.error.message });
+            MessageBox.error(oData.error.message);
         }
 
     }

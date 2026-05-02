@@ -11,6 +11,7 @@ sap.ui.define(() => {
         async onPressCreateTodoList() {
             const oContext = this.byId('idTodoListsList').getBinding('items').create({name: 'Новый Список'});
             await oContext.created();
+            this.publish(this.EVENT.ACTION_SUCCEEDED, 'Список создан.');
 
             this.publish(this.EVENT.NAV_CHANGED, {
                 route: 'todoDetail',
