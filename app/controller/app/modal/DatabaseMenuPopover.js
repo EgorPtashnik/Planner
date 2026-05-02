@@ -5,6 +5,13 @@ sap.ui.define(() => {
 
         onPressDownloadDatabase() {
             this.DatabaseMenuPopover.close();
+            const oLink = document.createElement('a');
+            oLink.href = '/api/database/download';
+            oLink.download = 'db.sqlite';
+            oLink.style.display = 'none';
+            document.body.appendChild(oLink);
+            oLink.click();
+            oLink.remove();
         },
 
         onPressBackupDatabase() {

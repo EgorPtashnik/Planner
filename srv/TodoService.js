@@ -1,8 +1,8 @@
 import { PriorityType, ProgressStatusType } from './reuse/types.js';
 
 export default class TodoService extends cds.ApplicationService { init(){
-    const { TodoItem } = this.entities;
-    this.after (['CREATE', 'UPDATE', 'DELETE'], TodoItem, onAfterUpsertTodoItem)
+
+    this.after (['CREATE', 'UPDATE', 'DELETE'], this.entities.TodoItem, onAfterUpsertTodoItem)
 
     return super.init()
 }};
