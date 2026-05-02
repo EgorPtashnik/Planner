@@ -1,7 +1,6 @@
-sap.ui.define([
-    'sap/m/MessageToast',
-    'sap/m/MessageBox'
-], (MessageToast, MessageBox) => {
+sap.ui.define(() => {
+    'use strict';
+
     return {
 
         setSubscriptions() {
@@ -19,11 +18,11 @@ sap.ui.define([
         },
 
         _onActionSucceeded(_, sEventId, oData) {
-            MessageToast.show(oData.value);
+            this.MessageHelper.toast({ message: oData.value });
         },
 
         _onActionFailed(_, sEventId, oData) {
-            MessageBox.error(oData.error.message);
+            this.MessageHelper.error({ message: oData.error.message });
         }
 
     }

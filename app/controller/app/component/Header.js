@@ -1,5 +1,13 @@
 sap.ui.define(() => {
+    'use strict';
+
     return {
+
+        onSelectNavItem(oEvent) {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: oEvent.getParameter('selectedKey')
+            });
+        },
 
         onPressToggleDarkMode() {
             if (localStorage.getItem('theme') === this.THEME.DARK) {
@@ -11,9 +19,9 @@ sap.ui.define(() => {
         },
 
         async onOpenDatabaseMenu(oEvent) {
-            this.DatabaseMenu ??= await this.getFragment('planner.view.app.modal.DatabaseMenuPopover');
+            this.DatabaseMenuPopover ??= await this.getFragment('planner.view.app.modal.DatabaseMenuPopover');
 
-            this.DatabaseMenu.openBy(oEvent.getSource());
+            this.DatabaseMenuPopover.openBy(oEvent.getSource());
         }
 
     }

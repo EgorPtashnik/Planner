@@ -7,16 +7,25 @@
         <content>
             <VBox>
                 <Button
-                    width='100%'
-                    type='Transparent'
-                    icon='sap-icon://save'
-                    text='Сохранить Копию'
-                    class='actionItemButton' />
-                <Button
+                    press='onPressDownloadDatabase'
                     width='100%'
                     type='Transparent'
                     icon='sap-icon://download'
-                    text='Скачать Копию'
+                    text='Скачать'
+                    class='actionItemButton' />
+                <Button
+                    press='onPressBackupDatabase'
+                    width='100%'
+                    type='Transparent'
+                    icon='sap-icon://save'
+                    text='Сохранить'
+                    class='actionItemButton' />
+                <Button
+                    press='onPressRestoreDatabase'
+                    width='100%'
+                    type='Transparent'
+                    icon='sap-icon://synchronize'
+                    text='Восстановить'
                     class='actionItemButton' />
             </VBox>
         </content>

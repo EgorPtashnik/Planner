@@ -3,8 +3,14 @@ sap.ui.define([
     'sap/ui/core/Theming',
 
     'planner/controller/app/Events',
-    'planner/controller/app/Header'
-], (BaseController, Theming, Events, HeaderLogic) => {
+    'planner/controller/app/component/Header',
+    'planner/controller/app/component/Footer',
+    'planner/controller/app/modal/DatabaseMenuPopover'
+], (BaseController, Theming, Events,
+    
+    HeaderLogic, FooterLogic,
+    
+    DatabaseMenuPopoverLogic) => {
     'use strict';
 
     return BaseController.extend('planner.App', {
@@ -12,6 +18,9 @@ sap.ui.define([
         ...Events,
 
         ...HeaderLogic,
+        ...FooterLogic,
+
+        ...DatabaseMenuPopoverLogic,
 
         THEME: {
             LIGHT: 'sap_horizon',
@@ -25,19 +34,7 @@ sap.ui.define([
             Theming.attachApplied(() => this.getView().setBusy(false));
             this._applyTheme();
 
-            this.DatabaseMenu = null;
-        },
-
-        onSelectNavItem(oEvent) {
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: oEvent.getParameter('selectedKey')
-            });
-        },
-
-        onPressFooterNavItem(oEvent) {
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: oEvent.getSource().getBindingContext().getProperty('key')
-            });
+            this.DatabaseMenuPopover = null;
         },
 
         onFCLStateChange(oEvent) {
