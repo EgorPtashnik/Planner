@@ -6,6 +6,4 @@ service CommonService {
     action BackupDatabase() returns Boolean;
 
     action RestoreDatabase() returns Boolean;
-
-    action DownloadDatabase() returns Boolean;
 }
