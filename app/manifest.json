@@ -21,7 +21,7 @@
                 "type": "OData",
                 "settings": { "odataVersion": "4.0" }
             },
-            "todo": {
+            "todoService": {
                 "uri": "/odata/v4/todo/",
                 "type": "OData",
                 "settings": { "odataVersion": "4.0" }
@@ -42,7 +42,7 @@
         },
         "models": {
             "common": { "dataSource": "commonService", "type": "sap.ui.model.odata.v4.ODataModel" },
-            "todo": { "dataSource": "todo", "type": "sap.ui.model.odata.v4.ODataModel" }
+            "todo": { "dataSource": "todoService", "type": "sap.ui.model.odata.v4.ODataModel" }
         },
         "rootView": {
             "viewName": "planner.view.app.App",

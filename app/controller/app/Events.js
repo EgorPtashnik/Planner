@@ -1,7 +1,4 @@
-sap.ui.define([
-    'sap/m/MessageToast',
-    'sap/m/MessageBox'
-], (MessageToast, MessageBox) => {
+sap.ui.define(() => {
     'use strict';
 
     return {
@@ -9,6 +6,7 @@ sap.ui.define([
         setSubscriptions() {
             const aEvents = [
                 {id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged},
+                {id: this.EVENT.ACTION_REQUESTED, fnc: this._onActionRequested},
                 {id: this.EVENT.ACTION_SUCCEEDED, fnc: this._onActionSucceeded},
                 {id: this.EVENT.ACTION_FAILED, fnc: this._onActionFailed}
             ];
@@ -20,13 +18,31 @@ sap.ui.define([
             this.getRouter().navTo(oData.route, oData.parameters);
         },
 
+        _onActionRequested(_, sEventId, oData) {
+            const oAction = this.getView().getModel(oData.model).bindContext(oData.action, oData.context);
+            Object.entries(oData.parameters || {}).forEach(entry => oAction.setParameter(entry[0], entry[1]));
+
+            return oAction.invoke(oData.group || "$auto")
+                .then(oResult => {
+                    this.publish(this.EVENT.ACTION_SUCCEEDED, oData.message || 'Выполнено успешно.');
+                    oData.then?.call(this, oResult, oAction);
+                })
+                .catch(oError => {
+                    this.publish(this.EVENT.ACTION_FAILED, oError);
+                    oData.catch?.call(this, oError, oAction);
+                })
+                .finally(() => oAction.destroy());
+        },
+
         _onActionSucceeded(_, sEventId, oData) {
-            MessageToast.show(oData.value);
+            this.MessageHelper.toast({ message: oData.value });
         },
 
         _onActionFailed(_, sEventId, oData) {
-            MessageBox.error(oData.error.message);
-        }
+            this.MessageHelper.error({ message: oData.error?.message || oData.message || 'Произошла ошибка.' });
+        },
+
+
 
     }
 });

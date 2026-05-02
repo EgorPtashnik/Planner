@@ -5,7 +5,8 @@ sap.ui.define([
     'sap/ui/model/json/JSONModel',
     'planner/controller/EventCatalog',
 
-    'planner/util/Formatter'
+    'planner/util/Formatter',
+    'planner/util/MessageHelper'
 ], (Controller, UIComponent, FLib, JSONModel,
     
     EVENT, Formatter, MessageHelper) => {
@@ -15,6 +16,7 @@ sap.ui.define([
 
         EVENT,
         Formatter,
+        MessageHelper,
 
         init() {
             this.LayoutType = FLib.LayoutType;

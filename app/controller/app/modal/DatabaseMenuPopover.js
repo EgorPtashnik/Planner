@@ -9,10 +9,31 @@ sap.ui.define(() => {
 
         onPressBackupDatabase() {
             this.DatabaseMenuPopover.close();
+            this.publish(this.EVENT.ACTION_REQUESTED, {
+                model: 'common',
+                action: '/BackupDatabase(...)',
+                message: 'Копия сохранена.'
+            });
         },
 
         onPressRestoreDatabase() {
             this.DatabaseMenuPopover.close();
+            this.publish(this.EVENT.ACTION_REQUESTED, {
+                model: 'common',
+                action: '/RestoreDatabase(...)',
+                message: 'Данные восстановлены.',
+                then: (_, oAction) => {
+                    if (oAction.getBoundContext().getObject().value) {
+                        this.MessageHelper.success({
+                            message: 'Данные восстановлены успешно. Приложение будет перезагружена после подтверждения.',
+                            title: 'Успех',
+                            actions: 'Перезагрузить',
+                            emphasizedAction: 'Перезагрузить',
+                            onClose: () => globalThis.location.reload()
+                    });
+                    }
+                }
+            });
         }
 
     }
