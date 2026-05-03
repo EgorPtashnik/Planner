@@ -1,12 +1,26 @@
 sap.ui.define([
-    'planner/controller/BaseController'
-], (BaseController) => {
+    'planner/controller/BaseController',
+
+    'planner/controller/gym/component/Info',
+    'planner/controller/gym/modal/AddTrainingDialog'
+], (BaseController,
+
+    InfoLogic,
+
+    AddTrainingDialogLogic
+) => {
     'use strict';
 
     return BaseController.extend('planner.controller.gym.Gym', {
 
+        ...InfoLogic,
+        ...AddTrainingDialogLogic,
+
         onInit() {
             this.init();
+
+            this.TrainingListBinding = null;
+            this.AddTrainingDialog = null;
             
             this.Config.setData({
                 totalCost: 0
@@ -18,6 +32,10 @@ sap.ui.define([
             if (oParameters.name === 'gym') {
                 this.App.getModel().setProperty('/selectedRoute', 'gym');
                 this._getTotalCost();
+
+                if (!this.TrainingListBinding) {
+                    this.TrainingListBinding = this.getView().getModel('gym').bindList('/Training');
+                }
             }
         },
 

@@ -2,8 +2,9 @@ sap.ui.define([
 	'sap/ui/core/UIComponent',
     'sap/ui/model/json/JSONModel',
     'sap/f/library',
-    'sap/ui/Device'
-], (UIComponent, JSONModel, FLib, Device) => {
+    'sap/ui/Device',
+    "sap/base/i18n/Localization"
+], (UIComponent, JSONModel, FLib, Device, Localization) => {
 	'use strict';
 
     const { LayoutType } = FLib;
@@ -34,6 +35,8 @@ sap.ui.define([
             const oRouter = this.getRouter();
             oRouter.attachBeforeRouteMatched(this._onBeforeRouteMatched, this);
             oRouter.initialize();
+
+            Localization.setLanguage('RU');
         },
 
         getContentDensityClass() {

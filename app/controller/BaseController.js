@@ -60,6 +60,10 @@ sap.ui.define([
 
         unsubscribe(sEventId, fnFunction) {
             this.getOwnerComponent().getEventBus().unsubscribe(sEventId, fnFunction, this);
+        },
+
+        onPressCloseDialog(oEvent) {
+            oEvent.getSource().getParent().close();
         }
         
     })

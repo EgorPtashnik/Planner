@@ -12,6 +12,7 @@
             <additionalContent>
                 <HBox justifyContent='SpaceBetween'>
                     <Button
+                        press='onPressAddTraining'
                         width='100%'
                         type='Emphasized'
                         text='Записать Тренировку'

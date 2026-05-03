@@ -14,7 +14,8 @@
                 icon='sap-icon://payment-approval'
                 type='Accept'
                 text='Оплачено'
-                tooltip='Оплачено'>
+                tooltip='Оплачено'
+                visible='{= !!%{config>/totalCost} }'>
                 <layoutData>
                     <OverflowToolbarLayoutData priority='NeverOverflow' />
                 </layoutData>

@@ -10,7 +10,10 @@ sap.ui.define(() => {
 
         async onPressAddTodoParent() {
             try {
-                const oContext = this.byId('idTodoParentsList').getBinding('items').create({name: 'Новый Этап', priority: 1});
+                const oContext = this.byId('idTodoParentsList').getBinding('items').create({
+                    name: 'Новый Этап',
+                    priority: 1
+                });
                 await oContext.created();
 
                 this.publish(this.EVENT.ACTION_SUCCEEDED, 'Этап создан.');

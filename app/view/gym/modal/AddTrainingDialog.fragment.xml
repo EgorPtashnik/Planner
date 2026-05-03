@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:form='sap.ui.layout.form'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog
+        title='Записать Тренировку'>
+
+        <content>
+            <form:SimpleForm layout='ColumnLayout'>
+                <Label text='Тип' />
+                <RadioButtonGroup
+                    columns='2'
+                    selectedIndex='{config>/AddTrainingDialog/selectedType}'>
+                    <RadioButton text='Одиночная' />
+                    <RadioButton text='Групповая' />
+                </RadioButtonGroup>
+                
+                <Label text='Дата' />
+                <DatePicker dateValue='{config>/AddTrainingDialog/date}' />
+            </form:SimpleForm>
+        </content>
+
+        <buttons>
+            <Button
+                press='onAddTraining'
+                type='Emphasized'
+                text='Записать'
+                tooltip='Записать' />
+            <Button
+                press='onPressCloseDialog'
+                text='Отменить'
+                tooltip='Отменить' />
+        </buttons>
+    </Dialog>
+
+</core:FragmentDefinition>
