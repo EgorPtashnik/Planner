@@ -14,7 +14,7 @@ context Aspects {
 
 context Types {
 
-    type Priority : Integer enum {
+    type Priority: Integer enum {
         Low = 1;
         Medium = 2;
         High = 3;

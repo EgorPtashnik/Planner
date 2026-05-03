@@ -5,7 +5,7 @@
     busyIndicatorDelay='0'
 	controllerName='planner.controller.todo.master.TodoMaster'>
 
-    <f:DynamicPage showFooter='{device>/system/phone}'>
+    <f:DynamicPage>
 
         <!-- HEADER -->
         <f:title>

@@ -6,16 +6,18 @@
     busyIndicatorDelay='0'
 	controllerName='planner.controller.gym.Gym'>
 
-    <Page>
+    <f:DynamicPage>
 
-        <footer>
-            <Toolbar style='Clear' design='Transparent'>
-                <Button
-                    width='100%'
-                    type='Emphasized'
-                    text='Добавить'/>
-            </Toolbar>
-        </footer>
-    </Page>
+        <!-- HEADER -->
+        <f:title>
+            <core:Fragment fragmentName='planner.view.gym.component.Header' type='XML' />
+        </f:title>
+
+        <!-- TODO LISTS -->
+        <f:content>
+            <core:Fragment fragmentName='planner.view.gym.component.Info' type='XML' />
+        </f:content>
+
+    </f:DynamicPage>
 
 </mvc:View>
