@@ -14,5 +14,6 @@ service GymService {
     } where paid = false;
 
     function GetTotalCost() returns Integer;
+    action Settle() returns Boolean;
 
 }

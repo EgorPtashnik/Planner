@@ -29,8 +29,8 @@
                 tooltip='Записать' />
             <Button
                 press='onPressCloseDialog'
-                text='Отменить'
-                tooltip='Отменить' />
+                text='Закрыть'
+                tooltip='Закрыть' />
         </buttons>
     </Dialog>
 

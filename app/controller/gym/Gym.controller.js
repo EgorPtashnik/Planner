@@ -50,6 +50,7 @@ sap.ui.define([
                 message: null,
                 then: (_, oFunciton) => {
                     this.Config.setProperty('/totalCost', oFunciton.getBoundContext().getObject().value);
+                    this.byId('idTrainingHistoryCalendar')?.getBinding('specialDates').refresh();
                 }
             });
         }

@@ -8,12 +8,14 @@
         <content>
             <u:Calendar
                 id='idTrainingHistoryCalendar'
+                select='onSelectTrainingHistoryDate'
                 width='100%'
                 legend='idTrainingHistoryLegend'
                 specialDates='{gym>/Training}'>
                 <u:specialDates>
                     <u:DateTypeRange
-                        type='{= %{gym>paid} ? "Type08" : %{gym>solo} ? "Type06" : "Type02" }'
+                        type='{= %{gym>solo} ? "Type06" : "Type02" }'
+                        secondaryType='{= %{gym>paid} ? "NonWorking" : "Working" }'
                         startDate='{gym>date}' />
                 </u:specialDates>
             </u:Calendar>

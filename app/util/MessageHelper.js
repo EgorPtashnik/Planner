@@ -48,6 +48,21 @@ sap.ui.define([
                 title, onClose, actions, emphasizedAction, initialFocus, details,
                 styleClass: sContentDensity
             });
+        },
+
+        confirm({
+            message = '',
+            title = 'Подтверждение',
+            onClose = null,
+            actions = ['ОК', 'Закрыть'],
+            emphasizedAction = 'ОК',
+            initialFocus = 'ОК',
+            details = null
+        }) {
+            MessageBox.confirm(message, {
+                title, onClose, actions, emphasizedAction, initialFocus, details,
+                styleClass: sContentDensity
+            });
         }
     };
 

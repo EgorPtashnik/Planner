@@ -11,6 +11,7 @@
 
         <f:actions>
             <Button
+                press='onSettle'
                 icon='sap-icon://payment-approval'
                 type='Accept'
                 text='Оплачено'
