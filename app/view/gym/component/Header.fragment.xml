@@ -20,6 +20,14 @@
                     <OverflowToolbarLayoutData priority='NeverOverflow' />
                 </layoutData>
             </Button>
+            <Button
+                press='onPressTrainingHistory'
+                type='Ghost'
+                icon='sap-icon://calendar'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                </layoutData>
+            </Button>
         </f:actions>
 
     </f:DynamicPageTitle>

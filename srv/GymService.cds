@@ -11,7 +11,7 @@ service GymService {
             when solo = true then 45
             else 80
         end as cost : Integer
-    };
+    } where paid = false;
 
     function GetTotalCost() returns Integer;
 

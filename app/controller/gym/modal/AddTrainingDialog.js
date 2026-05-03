@@ -14,6 +14,7 @@ sap.ui.define(() => {
                 await oContext.created();
                 this.publish(this.EVENT.ACTION_SUCCEEDED, 'Тренировка записана.');
                 this._getTotalCost();
+                this.byId('idTrainingHistoryCalendar')?.getBinding('specialDates').refresh();
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }

@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:u='sap.ui.unified'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog title='История Тренировок'>
+
+        <content>
+            <u:Calendar
+                id='idTrainingHistoryCalendar'
+                width='100%'
+                legend='idTrainingHistoryLegend'
+                specialDates='{gym>/Training}'>
+                <u:specialDates>
+                    <u:DateTypeRange
+                        type='{= %{gym>paid} ? "Type08" : %{gym>solo} ? "Type06" : "Type02" }'
+                        startDate='{gym>date}' />
+                </u:specialDates>
+            </u:Calendar>
+            <u:CalendarLegend id='idTrainingHistoryLegend' standardItems='Today'>
+                <u:items>
+                    <u:CalendarLegendItem
+                        type='Type08'
+                        text='Оплачено' />
+                    <u:CalendarLegendItem
+                        type='Type06'
+                        text='Одиночная' />
+                    <u:CalendarLegendItem
+                        type='Type02'
+                        text='Групповая' />
+                </u:items>
+            </u:CalendarLegend>
+        </content>
+
+        <buttons>
+            <Button
+                press='onPressCloseDialog'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

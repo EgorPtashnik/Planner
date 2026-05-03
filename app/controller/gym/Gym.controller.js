@@ -1,11 +1,12 @@
 sap.ui.define([
     'planner/controller/BaseController',
 
+    'planner/controller/gym/component/Header',
     'planner/controller/gym/component/Info',
     'planner/controller/gym/modal/AddTrainingDialog'
 ], (BaseController,
 
-    InfoLogic,
+    HeaerLogic, InfoLogic,
 
     AddTrainingDialogLogic
 ) => {
@@ -13,6 +14,7 @@ sap.ui.define([
 
     return BaseController.extend('planner.controller.gym.Gym', {
 
+        ...HeaerLogic,
         ...InfoLogic,
         ...AddTrainingDialogLogic,
 
@@ -20,7 +22,9 @@ sap.ui.define([
             this.init();
 
             this.TrainingListBinding = null;
+
             this.AddTrainingDialog = null;
+            this.TrainingHistoryDialog = null;
             
             this.Config.setData({
                 totalCost: 0
