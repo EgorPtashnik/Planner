@@ -8,7 +8,7 @@
             enableDefaultTitleAndDescription='false'
             illustrationType='sapIllus-EmptyPlanningCalendar'
             illustrationSize='Large'
-            title='Сумма: 240 BYN'>
+            title='Сумма: {config>/totalCost} BYN'>
             <additionalContent>
                 <HBox justifyContent='SpaceBetween'>
                     <Button
@@ -25,4 +25,4 @@
         </IllustratedMessage>
     </VBox>
 
-</core:FragmentDefintion>
+</core:FragmentDefinition>

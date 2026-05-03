@@ -17,7 +17,7 @@ sap.ui.define([
         ...TodoParentsLogic,
 
         onInit() {
-            this.init('todoDetail');
+            this.init();
             this.setSubscriptions();
 
             this.ODataEventsAttached = false;
@@ -29,7 +29,7 @@ sap.ui.define([
                 todoParentCount: 0,
                 showTodoParentsSearch: false,
                 showTodoParentsDetails: false
-            })
+            });
         },
 
         _onRouteMatched(oEvent) {

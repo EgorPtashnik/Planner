@@ -13,9 +13,11 @@ sap.ui.define([
             autoClose = true,
             animationDuration = 1000
         }) {
-            MessageToast.show(message, {
-                duration, width, autoClose, animationDuration
-            });
+            if (message){
+                MessageToast.show(message, {
+                    duration, width, autoClose, animationDuration
+                });
+            }
         },
 
         error({

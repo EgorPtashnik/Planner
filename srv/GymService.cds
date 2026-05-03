@@ -5,11 +5,14 @@ service GymService {
     entity Training as projection on Gym.Training;
 
     view TrainingCost as select from Gym.Training {
+        key ID,
         solo,
         case
             when solo = true then 45
             else 80
         end as cost : Integer
     };
+
+    function GetTotalCost() returns Integer;
 
 }

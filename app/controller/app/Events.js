@@ -24,7 +24,7 @@ sap.ui.define(() => {
 
             return oAction.invoke(oData.group || "$auto")
                 .then(oResult => {
-                    this.publish(this.EVENT.ACTION_SUCCEEDED, oData.message || 'Выполнено успешно.');
+                    this.publish(this.EVENT.ACTION_SUCCEEDED, oData.message);
                     oData.then?.call(this, oResult, oAction);
                 })
                 .catch(oError => {
