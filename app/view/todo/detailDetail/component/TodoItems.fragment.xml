@@ -182,7 +182,7 @@
                                 <VBox>
                                     <!-- DISPLAY -->
                                     <ExpandableText
-                                        maxCharacters='0'
+                                        maxCharacters='50'
                                         emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'
                                         text='{todo>info}'
                                         visible='{= !%{config>/editTodoItems} }' />
