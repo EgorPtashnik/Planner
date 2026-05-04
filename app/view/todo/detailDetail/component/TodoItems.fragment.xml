@@ -84,7 +84,7 @@
                                     visible='{device>/system/phone}'
                                     pressed='{config>/showTodoItemsDetails}'>
                                     <layoutData>
-                                        <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                                        <OverflowToolbarLayoutData group='1' />
                                     </layoutData>
                                 </ToggleButton>
 
@@ -107,13 +107,24 @@
                                 </SegmentedButton>
 
                                 <OverflowToolbarButton
+                                    press='.TableHelper.onPressSort("idTodoItemsList")'
+                                    type='Transparent'
+                                    icon='sap-icon://sort'
+                                    text='Сортировка'
+                                    tooltip='Сортировка'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData group='1' />
+                                    </layoutData>
+                                </OverflowToolbarButton>
+
+                                <OverflowToolbarButton
                                     press='onPressToggleVisibleItems'
                                     type='Transparent'
                                     icon='{= %{config>/showCompletedTodoItems} ? "sap-icon://hide" : "sap-icon://show" }'
                                     text='{= %{config>/showCompletedTodoItems} ? "Скрыть" : "Показать" } Законченные'
                                     tooltip='{= %{config>/showCompletedTodoItems} ? "Скрыть" : "Показать" } Законченные'>
                                     <layoutData>
-                                        <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                                        <OverflowToolbarLayoutData group='1' />
                                     </layoutData>
                                 </OverflowToolbarButton>
 
@@ -124,7 +135,7 @@
                                     text='Удалить Законченные'
                                     tooltip='Удалить Законченные'>
                                     <layoutData>
-                                        <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                                        <OverflowToolbarLayoutData group='1' />
                                     </layoutData>
                                 </OverflowToolbarButton>
                             </OverflowToolbar>

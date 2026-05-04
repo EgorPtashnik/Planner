@@ -1,0 +1,54 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog
+        title='Сортировка'
+        stretch='{device>/system/phone}'>
+
+        <content>
+            <VBox>
+                <List
+                    id='idTableHelperSortListOption'
+                    mode='SingleSelect'
+                    includeItemInSelection='true'
+                    headerText='Порядок'
+                    items='{/sortOptions}'>
+                    <items>
+                        <StandardListItem
+                            selected='{= %{key} === %{/tableConfig/sort/order}}'
+                            title='{text}' />
+                    </items>
+                </List>
+
+                <List
+                    id='idTableHelperSortListColumn'
+                    headerText='Колонка'
+                    mode='SingleSelectLeft'
+                    includeItemInSelection='true'
+                    items='{/tableConfig/columns}'>
+                    <items>
+                        <StandardListItem
+                            title='{label}'
+                            selected='{= %{path} === %{/tableConfig/sort/path} }' />
+                    </items>
+                </List>
+            </VBox>
+        </content>
+
+        <buttons>
+            <Button
+                press='.TableHelper.onSort( %{/tableConfig/id} )'
+                type='Emphasized'
+                text='OK'
+                tooltip='OK' />
+            <Button
+                press='onPressCloseDialog'
+                type='Transparent'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+
+    </Dialog>
+
+</core:FragmentDefinition>

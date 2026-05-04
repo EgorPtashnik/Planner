@@ -6,10 +6,11 @@ sap.ui.define([
     'planner/controller/EventCatalog',
 
     'planner/util/Formatter',
-    'planner/util/MessageHelper'
+    'planner/util/MessageHelper',
+    'planner/util/TableHelper'
 ], (Controller, UIComponent, FLib, JSONModel,
     
-    EVENT, Formatter, MessageHelper) => {
+    EVENT, Formatter, MessageHelper, TableHelper) => {
     'use strict';
 
     return Controller.extend('planner.controller.BaseController', {
@@ -17,6 +18,7 @@ sap.ui.define([
         EVENT,
         Formatter,
         MessageHelper,
+        TableHelper,
 
         init() {
             this.LayoutType = FLib.LayoutType;

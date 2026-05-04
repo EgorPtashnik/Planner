@@ -22,7 +22,7 @@ sap.ui.define([
             this.setSubscriptions();
 
             this.ODataEventsAttached = false;
-            
+
             this.Config.setData({
                 ID: null,
                 compactView: true,
@@ -33,6 +33,10 @@ sap.ui.define([
                 showCompletedTodoItems: false,
                 showTodoItemsDetails: false
             });
+        },
+
+        onAfterRendering() {
+            this._setTableHelperConfig();
         },
 
         _onRouteMatched(oEvent) {
@@ -66,6 +70,20 @@ sap.ui.define([
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
+        },
+
+        _setTableHelperConfig() {
+            this.TableHelper.setController(this);
+            this.TableHelper.register('idTodoItemsList', {
+                columns: [
+                    { label: 'Имя', path: 'name' },
+                    { label: 'Приоритет', path: 'priority' },
+                    { label: 'Статус', path: 'status'},
+                    { label: 'Дата Создания', path: 'createdAt' },
+                    { label: 'Дата Обновления', path: 'modifiedAt' }
+                ],
+                sort: { path: 'createdAt', order: 'desc' }
+            });
         }
 
     });
