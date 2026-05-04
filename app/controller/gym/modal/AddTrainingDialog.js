@@ -27,9 +27,9 @@ sap.ui.define(() => {
                 onClose: async sAction => {
                     if (sAction === 'Удалить') {
                         try {
-                            const sSelectedDate = oEvent.getSource().getSelectedDates()[0].getStartDate().toString();
+                            const sSelectedDate = oEvent.getSource().getSelectedDates()[0].getStartDate().toDateString();
                             const aSpecialDates = oEvent.getSource().getAggregation('specialDates');
-                            const oContext = aSpecialDates.find(oDateRange => oDateRange.getStartDate().toString() === sSelectedDate).getBindingContext('gym');
+                            const oContext = aSpecialDates.find(oDateRange => oDateRange.getStartDate().toDateString() === sSelectedDate).getBindingContext('gym');
                             await oContext.delete();
                             if (oContext.isDeleted()) {
                                 this.publish(this.EVENT.ACTION_SUCCEEDED, 'Тренировка удалена.');

@@ -12,7 +12,7 @@ sap.ui.define([
     EVENT, Formatter, MessageHelper) => {
     'use strict';
 
-    return Controller.extend('planner.BaseController', {
+    return Controller.extend('planner.controller.BaseController', {
 
         EVENT,
         Formatter,
@@ -66,5 +66,5 @@ sap.ui.define([
             oEvent.getSource().getParent().close();
         }
         
-    })
+    });
 });

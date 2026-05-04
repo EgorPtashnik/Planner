@@ -13,7 +13,7 @@ sap.ui.define([
     DatabaseMenuPopoverLogic) => {
     'use strict';
 
-    return BaseController.extend('planner.App', {
+    return BaseController.extend('planner.controller.App', {
 
         ...Events,
 
