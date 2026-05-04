@@ -11,7 +11,10 @@
         }'>
 
         <noData>
-            <IllustratedMessage />
+            <IllustratedMessage
+                title='Списки еще не добавлены'
+                description='Создайте новый список чтобы увидеть данные.'
+                illustrationType='sapIllus-NoActivities' />
         </noData>
 
         <headerToolbar>

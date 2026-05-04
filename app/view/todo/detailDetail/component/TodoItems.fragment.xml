@@ -25,7 +25,10 @@
                         }'>
 
                         <noData>
-                            <IllustratedMessage illustrationType='sapIllus-NoActivities' />
+                            <IllustratedMessage
+                                title='Нет активных шагов'
+                                description='Отдыхайте. Или создайте новый шаг для выполнения этапа.'
+                                illustrationType='sapIllus-NoActivities' />
                         </noData>
 
                         <headerToolbar>
@@ -190,7 +193,7 @@
                                     <TextArea
                                         width='100%'
                                         rows='1'
-                                        growing='true'
+                                        growing='true'  
                                         value='{todo>info}'
                                         visible='{config>/editTodoItems}' />
                                 </VBox>

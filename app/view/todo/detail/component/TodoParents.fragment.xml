@@ -24,7 +24,10 @@
                         }'>
 
                         <noData>
-                            <IllustratedMessage illustrationType='sapIllus-NoActivities' />
+                            <IllustratedMessage
+                                title='Этапы еще не добавлены'
+                                description='Создайте этап чтобы увидеть данные.'
+                                illustrationType='sapIllus-NoActivities' />
                         </noData>
 
                         <headerToolbar>
