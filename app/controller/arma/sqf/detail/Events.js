@@ -13,9 +13,12 @@ sap.ui.define(() => {
 
         _onNavChanged(_, sEventId, oData) {
             if (oData.route.includes('sqf')) {
-                this.getView().setBusy(true);
                 this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
-                setTimeout(() => this.getView().setBusy(false));
+                if (oData?.parameters?.id && this.Config.getProperty('/ID') !== oData.parameters.id) {
+                    this.getView().setBusy(true);
+                    this.Config.setProperty('/ID', oData.parameters.id);
+                    this.bindView(oData.parameters.id);
+                }
             }
         }
     }

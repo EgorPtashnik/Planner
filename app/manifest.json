@@ -30,6 +30,11 @@
                 "uri": "/odata/v4/gym/",
                 "type": "OData",
                 "settings": { "odataVersion": "4.0" }
+            },
+            "armaService": {
+                "uri": "/odata/v4/arma/",
+                "type": "OData",
+                "settings": { "odataVersion": "4.0" }
             }
         }
     },
@@ -51,7 +56,8 @@
         "models": {
             "common": { "dataSource": "commonService", "type": "sap.ui.model.odata.v4.ODataModel" },
             "todo": { "dataSource": "todoService", "type": "sap.ui.model.odata.v4.ODataModel" },
-            "gym": { "dataSource": "gymService", "type": "sap.ui.model.odata.v4.ODataModel" }
+            "gym": { "dataSource": "gymService", "type": "sap.ui.model.odata.v4.ODataModel" },
+            "arma": { "dataSource": "armaService", "type": "sap.ui.model.odata.v4.ODataModel" }
         },
         "rootView": {
             "viewName": "planner.view.app.App",
@@ -104,7 +110,7 @@
                     "target": ["sqfMaster"]
                 },
                 {
-                    "pattern": "arma/sqf/detail/:layout:",
+                    "pattern": "arma/sqf/{id}/:layout:",
                     "name": "sqfDetail",
                     "target": ["sqfMaster", "sqfDetail"]
                 }
@@ -165,7 +171,7 @@
                     "name": "arma.sqf.detail.SQFDetail",
                     "controlAggregation": "midColumnPages",
                     "placeholder": {
-                        "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
+                        "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
                         "autoClose": true
                     }
                 }

@@ -12,6 +12,8 @@ sap.ui.define([
             this.init();
             this.setSubscriptions();
 
+            this.ODataEventsAttached = false;
+
             this.Config.setData({});
         },
 
@@ -22,6 +24,23 @@ sap.ui.define([
                     route: oParameters.name,
                     parameters: oParameters.arguments
                 });
+            }
+        },
+
+        bindView(sID) {
+            try {
+                this.getView().bindElement({
+                    path: `arma>/SqfCommand(${sID})`,
+                    parameters: {
+                        $expand: 'type,source,params,examples'
+                    },
+                    events: {
+                        dataReceived: () => this.getView().setBusy(false)
+                    }
+                });
+
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
             }
         }
 

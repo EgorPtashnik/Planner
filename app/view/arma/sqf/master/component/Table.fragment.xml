@@ -1,23 +1,77 @@
 <core:FragmentDefinition
     xmlns='sap.m'
+    xmlns:uxap='sap.uxap'
     xmlns:core='sap.ui.core'>
 
-    <Table>
+    <uxap:ObjectPageSection showTitle='false'>
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection>
+                <uxap:blocks>
 
-        <noData>
-            <IllustratedMessage />
-        </noData>
+                    <Table
+                        id='idSqfCommandsList'
+                        sticky='HeaderToolbar'
+                        showSeparators='Inner'
+                        fixedLayout='false'
+                        items="{
+                            path: 'arma>/SqfCommand',
+                            parameters: {
+                                $count: true,
+                                $expand: 'type,source'
+                            }
+                        }">
 
-        <columns>
-        </columns>
+                        <noData>
+                            <IllustratedMessage
+                                title='Функции еще не добавлены'
+                                description='Создайте функцию чтобы увидеть данные.'
+                                illustrationType='sapIllus-NoData' />
+                        </noData>
 
-        <items>
-            <ColumnListItem>
-                <cells>
-                </cells>
-            </ColumnListItem>
-        </items>
+                        <headerToolbar>
+                            <OverflowToolbar design='Solid'>
+                                <Title text='Функции ({config>/sqfCommandsCount})' />
 
-    </Table>
+                                <ToolbarSpacer />
 
+                            </OverflowToolbar>
+                        </headerToolbar>
+
+                        <columns>
+                            <Column>
+                                <Text text='Функция' />
+                            </Column>
+                            <Column>
+                                <Text text='Тип' />
+                            </Column>
+                            <Column>
+                                <Text text='Описание' />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+
+                                    <HBox>
+                                        <ObjectIdentifier title='{arma>name}' />
+                                        <GenericTag text='{arma>source/name}' />
+                                    </HBox>
+
+                                    <ObjectStatus
+                                        inverted='true'
+                                        text='{arma>type/name}' />
+
+                                    <Text text='{arma>info}' />
+                                    
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+
+                    </Table>
+
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
 </core:FragmentDefinition>

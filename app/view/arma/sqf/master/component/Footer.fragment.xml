@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <OverflowToolbar>
+        <ToolbarSpacer />
+
+        <Button
+            press='onPressCreateSqfCommand'
+            type='Emphasized'
+            text='Добавить Функцию'
+            tooltip='Добавить Функцию' />
+    </OverflowToolbar>
+
+</core:FragmentDefinition>

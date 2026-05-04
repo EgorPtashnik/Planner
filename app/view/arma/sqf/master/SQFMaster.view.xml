@@ -1,25 +1,34 @@
 <mvc:View
     xmlns:f='sap.f'
+    xmlns:uxap='sap.uxap'
     xmlns:mvc='sap.ui.core.mvc'
     xmlns:core='sap.ui.core'
     busyIndicatorDelay='0'
 	controllerName='planner.controller.arma.sqf.master.SQFMaster'>
 
-    <f:DynamicPage
-        headerExpanded='false'>
+    <uxap:ObjectPageLayout
+        preserveHeaderStateOnScroll='true'
+        upperCaseAnchorBar='false'
+        showFooter='true'>
 
-        <f:title>
+        <!-- HEADER -->
+        <uxap:headerTitle>
             <core:Fragment fragmentName='planner.view.arma.sqf.master.component.Header' type='XML' />
-        </f:title>
+        </uxap:headerTitle>
 
-        <f:header>
+        <!-- HEADER CONTENT -->
+        <uxap:headerContent>
             <core:Fragment fragmentName='planner.view.arma.sqf.master.component.FilterBar' type='XML' />
-        </f:header>
+        </uxap:headerContent>
 
-        <f:content>
+        <uxap:sections>
             <core:Fragment fragmentName='planner.view.arma.sqf.master.component.Table' type='XML' />
-        </f:content>
+        </uxap:sections>
 
-    </f:DynamicPage>
+        <uxap:footer>
+            <core:Fragment fragmentName='planner.view.arma.sqf.master.component.Footer' type='XML' />
+        </uxap:footer>
+
+    </uxap:ObjectPageLayout>
 
 </mvc:View>
