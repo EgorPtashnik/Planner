@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Table>
+
+        <noData>
+            <IllustratedMessage />
+        </noData>
+
+        <columns>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                </cells>
+            </ColumnListItem>
+        </items>
+
+    </Table>
+
+</core:FragmentDefinition>

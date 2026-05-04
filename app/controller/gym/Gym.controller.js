@@ -6,7 +6,7 @@ sap.ui.define([
     'planner/controller/gym/modal/AddTrainingDialog'
 ], (BaseController,
 
-    HeaerLogic, InfoLogic,
+    HeaderLogic, InfoLogic,
 
     AddTrainingDialogLogic
 ) => {
@@ -14,7 +14,7 @@ sap.ui.define([
 
     return BaseController.extend('planner.controller.gym.Gym', {
 
-        ...HeaerLogic,
+        ...HeaderLogic,
         ...InfoLogic,
         ...AddTrainingDialogLogic,
 

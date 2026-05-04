@@ -75,6 +75,7 @@
                     "name": "home",
                     "target": ["home"]
                 },
+
                 {
                     "pattern": "todo",
                     "name": "todoMaster",
@@ -90,10 +91,22 @@
                     "name": "todoDetailDetail",
                     "target": ["todoMaster", "todoDetail", "todoDetailDetail"]
                 },
+
                 {
                     "pattern": "gym",
                     "name": "gym",
-                    "target": "gym"
+                    "target": ["gym"]
+                },
+
+                {
+                    "pattern": "arma/sqf",
+                    "name": "sqfMaster",
+                    "target": ["sqfMaster"]
+                },
+                {
+                    "pattern": "arma/sqf/detail/:layout:",
+                    "name": "sqfDetail",
+                    "target": ["sqfMaster", "sqfDetail"]
                 }
             ],
             "targets": {
@@ -105,6 +118,7 @@
                         "autoClose": true
                     }
                 },
+
                 "todoMaster": {
                     "name": "todo.master.TodoMaster",
                     "controlAggregation": "beginColumnPages",
@@ -129,6 +143,7 @@
                         "autoClose": true
                     }
                 },
+
                 "gym": {
                     "name": "gym.Gym",
                     "controlAggregation": "beginColumnPages",
@@ -136,7 +151,25 @@
                         "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
                         "autoClose": true
                     }
+                },
+
+                "sqfMaster": {
+                    "name": "arma.sqf.master.SQFMaster",
+                    "controlAggregation": "beginColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
+                        "autoClose": true
+                    }
+                },
+                "sqfDetail": {
+                    "name": "arma.sqf.detail.SQFDetail",
+                    "controlAggregation": "midColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
+                        "autoClose": true
+                    }
                 }
+
             }
         }
     }

@@ -12,7 +12,7 @@
             <core:Fragment fragmentName='planner.view.gym.component.Header' type='XML' />
         </f:title>
 
-        <!-- TODO LISTS -->
+        <!-- Information Message -->
         <f:content>
             <core:Fragment fragmentName='planner.view.gym.component.Info' type='XML' />
         </f:content>

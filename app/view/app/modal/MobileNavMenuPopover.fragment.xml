@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+    <Popover
+        title='Приложения'
+        placement='Auto'>
+        <content>
+            <VBox items='{/routes}'>
+                <Button
+                    press='onPressMobileNavItem'
+                    width='100%'
+                    type='{= %{/selectedRoute} === %{key} ? "Neutral" : "Transparent" }'
+                    icon='{icon}'
+                    text='{text}'
+                    class='actionItemButton' />
+            </VBox>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

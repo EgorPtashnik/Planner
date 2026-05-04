@@ -1,0 +1,20 @@
+<mvc:View
+    xmlns:f='sap.f'
+    xmlns:mvc='sap.ui.core.mvc'
+    xmlns:core='sap.ui.core'
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    busyIndicatorDelay='0'
+	controllerName='planner.controller.arma.sqf.detail.SQFDetail'>
+
+    <f:DynamicPage>
+
+        <f:title>
+            <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.Header' type='XML' />
+        </f:title>
+
+        <f:content>
+        </f:content>
+
+    </f:DynamicPage>
+
+</mvc:View>

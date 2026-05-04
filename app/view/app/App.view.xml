@@ -9,8 +9,7 @@
 	controllerName='planner.controller.app.App'>
 
     <f:DynamicPage
-        class='sapUiNoContentPadding'
-        showFooter='{device>/system/phone}'>
+        class='sapUiNoContentPadding'>
 
         <f:title>
             <core:Fragment fragmentName='planner.view.app.component.Header' />
@@ -23,9 +22,6 @@
                 layout='{/layout}' />
         </f:content>
 
-        <f:footer>
-            <core:Fragment fragmentName='planner.view.app.component.Footer' />
-        </f:footer>
     </f:DynamicPage>
      
 </mvc:View>
