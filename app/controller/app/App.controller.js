@@ -4,6 +4,7 @@ sap.ui.define([
 
     'planner/controller/app/Events',
     'planner/controller/app/component/Header',
+    'planner/controller/app/component/Footer',
     'planner/controller/app/modal/DatabaseMenuPopover'
 ], (BaseController, Theming, Events,
     
