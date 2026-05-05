@@ -9,6 +9,18 @@
             <Title text='Дела' />
         </f:heading>
 
+        <f:actions>
+            <Button
+                press='onPressCreateTodoList'
+                type='Emphasized'
+                text='Создать Список'
+                tooltip='Создать Список'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                </layoutData>
+            </Button>
+        </f:actions>
+
     </f:DynamicPageTitle>
 
 </core:FragmentDefinition>

@@ -22,12 +22,8 @@
         </uxap:headerContent>
 
         <uxap:sections>
-            <core:Fragment fragmentName='planner.view.arma.sqf.master.component.Table' type='XML' />
+            <core:Fragment fragmentName='planner.view.arma.sqf.master.component.SqfCommands' type='XML' />
         </uxap:sections>
-
-        <uxap:footer>
-            <core:Fragment fragmentName='planner.view.arma.sqf.master.component.Footer' type='XML' />
-        </uxap:footer>
 
     </uxap:ObjectPageLayout>
 

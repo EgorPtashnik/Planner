@@ -26,6 +26,16 @@
 
         <uxap:actions>
             <Button
+                press='onPressAddTodoParent'
+                type='Emphasized'
+                text='Создать Этап'
+                tooltip='Создать Этап'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                </layoutData>
+            </Button>
+
+            <Button
                 press='onPressDeleteTodoList'
                 text='Удалить Список'
                 tooltip='Удалить Список'

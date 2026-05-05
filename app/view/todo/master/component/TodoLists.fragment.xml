@@ -45,14 +45,6 @@
                         <OverflowToolbarLayoutData priority='NeverOverflow' />
                     </layoutData>
                 </ToggleButton>
-
-                <OverflowToolbarButton
-                    press='onPressCreateTodoList'
-                    type='Emphasized'
-                    icon='sap-icon://create-form'
-                    text='Создать Список'
-                    tooltip='Создать Список' />
-
             </OverflowToolbar>
         </headerToolbar>
 

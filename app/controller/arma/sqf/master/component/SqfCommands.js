@@ -2,7 +2,7 @@ sap.ui.define(() => {
     'use strict';
 
     return {
-
+        
         async onPressCreateSqfCommand() {
             try {
                 const oContext = this.byId('idSqfCommandsList').getBinding('items').create({

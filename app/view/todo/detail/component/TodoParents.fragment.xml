@@ -59,13 +59,6 @@
                                     </layoutData>
                                 </ToggleButton>
 
-                                <OverflowToolbarButton
-                                    press='onPressAddTodoParent'
-                                    type='Emphasized'
-                                    icon='sap-icon://create-form'
-                                    text='Новый Этап'
-                                    tooltip='Новый Этап' />
-
                                 <ToggleButton
                                     type='Ghost'
                                     icon='sap-icon://detail-more'

@@ -62,13 +62,6 @@
 
                                 <ToolbarSeparator />
 
-                                <OverflowToolbarButton
-                                    press='onPressAddTodoItem'
-                                    type='Emphasized'
-                                    icon='sap-icon://create-form'
-                                    text='Новый Шаг'
-                                    tooltip='Новый Шаг' />
-
                                 <ToggleButton
                                     type='Ghost'
                                     icon='sap-icon://edit'

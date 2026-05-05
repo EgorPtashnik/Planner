@@ -34,6 +34,11 @@
 
                                 <ToolbarSpacer />
 
+                                <Button
+                                    press='onPressCreateSqfCommand'
+                                    type='Ghost'
+                                    text='Создать'
+                                    tooltip='Создать' />
                             </OverflowToolbar>
                         </headerToolbar>
 

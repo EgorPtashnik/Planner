@@ -3,10 +3,10 @@ sap.ui.define([
     'planner/controller/arma/sqf/master/Events',
     
     'planner/controller/arma/sqf/master/component/FilterBar',
-    'planner/controller/arma/sqf/master/component/Footer'
+    'planner/controller/arma/sqf/master/component/SqfCommands'
 ], (BaseController, Events,
 
-    FilterBarLogic, FooterLogic
+    FilterBarLogic, SqfCommandsLogic
 ) => {
     'use strict';
 
@@ -15,7 +15,7 @@ sap.ui.define([
         ...Events,
 
         ...FilterBarLogic,
-        ...FooterLogic,
+        ...SqfCommandsLogic,
 
         onInit() {
             this.init();
