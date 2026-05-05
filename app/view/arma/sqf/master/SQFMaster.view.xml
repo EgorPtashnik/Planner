@@ -1,30 +1,26 @@
 <mvc:View
     xmlns:f='sap.f'
-    xmlns:uxap='sap.uxap'
     xmlns:mvc='sap.ui.core.mvc'
     xmlns:core='sap.ui.core'
     busyIndicatorDelay='0'
 	controllerName='planner.controller.arma.sqf.master.SQFMaster'>
 
-    <uxap:ObjectPageLayout
-        preserveHeaderStateOnScroll='true'
-        upperCaseAnchorBar='false'
-        showFooter='true'>
+    <f:DynamicPage headerExpanded='{= !%{device>/system/phone} }'>
 
         <!-- HEADER -->
-        <uxap:headerTitle>
+        <f:title>
             <core:Fragment fragmentName='planner.view.arma.sqf.master.component.Header' type='XML' />
-        </uxap:headerTitle>
+        </f:title>
 
         <!-- HEADER CONTENT -->
-        <uxap:headerContent>
+        <f:header>
             <core:Fragment fragmentName='planner.view.arma.sqf.master.component.FilterBar' type='XML' />
-        </uxap:headerContent>
+        </f:header>
 
-        <uxap:sections>
+        <f:content>
             <core:Fragment fragmentName='planner.view.arma.sqf.master.component.SqfCommands' type='XML' />
-        </uxap:sections>
+        </f:content>
 
-    </uxap:ObjectPageLayout>
+    </f:DynamicPage>
 
 </mvc:View>

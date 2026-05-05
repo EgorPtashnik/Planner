@@ -1,12 +1,18 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/arma/sqf/detail/Events'
-], (BaseController, Events) => {
+    'planner/controller/arma/sqf/detail/Events',
+
+    'planner/controller/arma/sqf/detail/component/Header'
+], (BaseController, Events,
+
+    HeaderLogic
+) => {
     'use strict';
 
     return BaseController.extend('planner.controller.arma.sqf.detail.SQFDetail', {
 
         ...Events,
+        ...HeaderLogic,
 
         onInit() {
             this.init();
@@ -14,7 +20,10 @@ sap.ui.define([
 
             this.ODataEventsAttached = false;
 
-            this.Config.setData({});
+            this.Config.setData({
+                ID: null,
+                editMode: false
+            });
         },
 
         _onRouteMatched(oEvent) {
@@ -30,7 +39,7 @@ sap.ui.define([
         bindView(sID) {
             try {
                 this.getView().bindElement({
-                    path: `arma>/SqfCommand(${sID})`,
+                    path: `arma>/SqfCommand('${sID}')`,
                     parameters: {
                         $expand: 'type,source,params,examples'
                     },

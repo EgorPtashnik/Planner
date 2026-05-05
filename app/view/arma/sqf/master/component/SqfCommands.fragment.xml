@@ -1,82 +1,87 @@
 <core:FragmentDefinition
     xmlns='sap.m'
-    xmlns:uxap='sap.uxap'
     xmlns:core='sap.ui.core'>
 
-    <uxap:ObjectPageSection showTitle='false'>
-        <uxap:subSections>
-            <uxap:ObjectPageSubSection>
-                <uxap:blocks>
+    <Table
+        id='idSqfCommandsList'
+        inset='true'
+        sticky='HeaderToolbar'
+        showSeparators='Inner'
+        fixedLayout='false'
+        items="{
+            path: 'arma>/SqfCommand',
+            parameters: {
+                $count: true,
+                $expand: 'type,source'
+            }
+        }">
 
-                    <Table
-                        id='idSqfCommandsList'
-                        sticky='HeaderToolbar'
-                        showSeparators='Inner'
-                        fixedLayout='false'
-                        items="{
-                            path: 'arma>/SqfCommand',
-                            parameters: {
-                                $count: true,
-                                $expand: 'type,source'
-                            }
-                        }">
+        <noData>
+            <IllustratedMessage
+                title='Функции еще не добавлены'
+                description='Создайте функцию чтобы увидеть данные.'
+                illustrationType='sapIllus-NoData' />
+        </noData>
 
-                        <noData>
-                            <IllustratedMessage
-                                title='Функции еще не добавлены'
-                                description='Создайте функцию чтобы увидеть данные.'
-                                illustrationType='sapIllus-NoData' />
-                        </noData>
+        <headerToolbar>
+            <OverflowToolbar design='Solid'>
+                <Title text='Функции ({config>/sqfCommandsCount})' />
 
-                        <headerToolbar>
-                            <OverflowToolbar design='Solid'>
-                                <Title text='Функции ({config>/sqfCommandsCount})' />
+                <ToolbarSpacer />
 
-                                <ToolbarSpacer />
+                <Button
+                    press='onPressCreateSqfCommand'
+                    type='Emphasized'
+                    text='Создать Функцию'
+                    tooltip='Создать Функцию'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                    </layoutData>
+                </Button>
+            </OverflowToolbar>
+        </headerToolbar>
 
-                                <Button
-                                    press='onPressCreateSqfCommand'
-                                    type='Ghost'
-                                    text='Создать'
-                                    tooltip='Создать' />
-                            </OverflowToolbar>
-                        </headerToolbar>
+        <columns>
+            <Column>
+                <Text text='Функция' />
+            </Column>
+            <Column>
+                <Text text='Тип' />
+            </Column>
+            <Column>
+                <Text text='Описание' />
+            </Column>
+        </columns>
 
-                        <columns>
-                            <Column>
-                                <Text text='Функция' />
-                            </Column>
-                            <Column>
-                                <Text text='Тип' />
-                            </Column>
-                            <Column>
-                                <Text text='Описание' />
-                            </Column>
-                        </columns>
+        <items>
+            <ColumnListItem
+                press='onPressSqfCommandItem'
+                navigated='{= %{/detailID} === %{arma>name} }'
+                highlight='{= %{/detailID} === %{arma>name} ? "Information" : "None" }'
+                type='{= %{/detailID} === %{arma>name} ? "Active" : "Navigation" }'>
+                <cells>
 
-                        <items>
-                            <ColumnListItem>
-                                <cells>
+                    <VBox>
+                        <ObjectIdentifier title='{arma>name}' />
+                        <ObjectStatus
+                            state='{=
+                                %{arma>source/code} === 1 ? "Information" :
+                                %{arma>source/code} === 2 ? "Warning" :
+                                "Error"
+                            }'
+                            text='{arma>source/name}' />
+                    </VBox>
 
-                                    <HBox>
-                                        <ObjectIdentifier title='{arma>name}' />
-                                        <GenericTag text='{arma>source/name}' />
-                                    </HBox>
+                    <ObjectStatus
+                        inverted='true'
+                        text='{arma>type/name}' />
 
-                                    <ObjectStatus
-                                        inverted='true'
-                                        text='{arma>type/name}' />
+                    <Text text='{arma>info}' />
+                    
+                </cells>
+            </ColumnListItem>
+        </items>
 
-                                    <Text text='{arma>info}' />
-                                    
-                                </cells>
-                            </ColumnListItem>
-                        </items>
+    </Table>
 
-                    </Table>
-
-                </uxap:blocks>
-            </uxap:ObjectPageSubSection>
-        </uxap:subSections>
-    </uxap:ObjectPageSection>
 </core:FragmentDefinition>

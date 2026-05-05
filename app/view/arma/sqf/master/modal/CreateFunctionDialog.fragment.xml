@@ -1,0 +1,56 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:form='sap.ui.layout.form'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog title='Новая Функция'>
+        
+        <content>
+            <form:SimpleForm
+                layout='ColumnLayout'
+                editable='true'>
+                <form:content>
+                    <Label text='Название' />
+                    <Input width='100%' value='{config>/CreateFunctionDialog/name}' />
+
+                    <Label text='Тип' />
+                    <Select
+                        selectedKey='{config>/CreateFunctionDialog/type_code}'
+                        items='{arma>/SqfCommandType}'>
+                        <items>
+                            <core:Item key='{arma>code}' text='{arma>name}' />
+                        </items>
+                    </Select>
+
+                    <Label text='Источник' />
+                    <Select
+                        selectedKey='{config>/CreateFunctionDialog/source_code}'
+                        items='{arma>/SqfCommandSource}'>
+                        <items>
+                            <core:Item key='{arma>code}' text='{arma>name}' />
+                        </items>
+                    </Select>
+
+                    <Label text='Описание' />
+                    <TextArea
+                        rows='5'
+                        value='{config>/CreateFunctionDialog/info}' />
+                </form:content>
+            </form:SimpleForm>
+        </content>
+
+        <buttons>
+            <Button
+                press='onCreateFunction'
+                type='Emphasized'
+                text='Создать'
+                tooltip='Создать' />
+            <Button
+                press='onPressCloseDialog'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+
+    </Dialog>
+
+</core:FragmentDefinition>

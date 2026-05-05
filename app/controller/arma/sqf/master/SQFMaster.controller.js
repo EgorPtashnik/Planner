@@ -3,10 +3,14 @@ sap.ui.define([
     'planner/controller/arma/sqf/master/Events',
     
     'planner/controller/arma/sqf/master/component/FilterBar',
-    'planner/controller/arma/sqf/master/component/SqfCommands'
+    'planner/controller/arma/sqf/master/component/SqfCommands',
+
+    'planner/controller/arma/sqf/master/modal/CreateFunctionDialog'
 ], (BaseController, Events,
 
-    FilterBarLogic, SqfCommandsLogic
+    FilterBarLogic, SqfCommandsLogic,
+
+    CreateFunctionDialogLogic
 ) => {
     'use strict';
 
@@ -16,6 +20,8 @@ sap.ui.define([
 
         ...FilterBarLogic,
         ...SqfCommandsLogic,
+
+        ...CreateFunctionDialogLogic,
 
         onInit() {
             this.init();

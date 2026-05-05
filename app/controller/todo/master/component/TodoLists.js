@@ -24,7 +24,7 @@ sap.ui.define(() => {
 
 
         // ITEMS
-        onPressListItem(oEvent) {
+        onPressTodoListItem(oEvent) {
             this.publish(this.EVENT.NAV_CHANGED, {
                 route: 'todoDetail',
                 parameters: {

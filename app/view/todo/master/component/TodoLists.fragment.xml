@@ -56,7 +56,7 @@
 
         <items>
             <ColumnListItem
-                press='onPressListItem'
+                press='onPressTodoListItem'
                 navigated='{= %{/detailID} === %{todo>ID} }'
                 highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
                 type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>

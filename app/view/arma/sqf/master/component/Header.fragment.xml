@@ -1,14 +1,14 @@
 <core:FragmentDefinition
     xmlns='sap.m'
-    xmlns:uxap='sap.uxap'
+    xmlns:f='sap.f'
     xmlns:core='sap.ui.core'>
 
-    <uxap:ObjectPageDynamicHeaderTitle>
+    <f:DynamicPageTitle>
 
-        <uxap:heading>
+        <f:heading>
             <Title text='ArmA: SQF Документация' />
-        </uxap:heading>
+        </f:heading>
 
-    </uxap:ObjectPageDynamicHeaderTitle>
+    </f:DynamicPageTitle>
 
 </core:FragmentDefinition>

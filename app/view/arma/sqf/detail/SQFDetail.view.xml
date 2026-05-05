@@ -18,9 +18,13 @@
 
         <!-- HEADER CONTENT -->
         <uxap:headerContent>
+            <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.HeaderContent' type='XML' />
         </uxap:headerContent>
 
         <uxap:sections>
+            <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.Syntax' type='XML' />
+            <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.Parameters' type='XML' />
+            <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.Examples' type='XML' />
         </uxap:sections>
 
         <uxap:footer>

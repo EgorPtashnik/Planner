@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:uxap='sap.uxap'
+    xmlns:core='sap.ui.core'>
+
+    <uxap:ObjectPageSection title='Примеры' titleUppercase='false'>
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection>
+                <uxap:blocks>
+                    <Text text='Примеры' />
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+
+</core:FragmentDefinition>

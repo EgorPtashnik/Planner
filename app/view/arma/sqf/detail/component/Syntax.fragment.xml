@@ -1,0 +1,28 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:uxap='sap.uxap'
+    xmlns:core='sap.ui.core'>
+
+    <uxap:ObjectPageSection title='Синтаксис' titleUppercase='false'>
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection>
+                <uxap:blocks>
+                    <VBox class='sapUiTinyMargin'>
+                        <!-- DISPLAY MODE -->
+                        <FormattedText
+                            htmlText='{arma>syntax}'
+                            visible='{= !%{config>/editMode} }' />
+
+                        <!-- EDIT MODE -->
+                        <TextArea
+                            width='100%'
+                            rows='5'
+                            value='{arma>syntax}'
+                            visible='{config>/editMode}' />
+                    </VBox>
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+
+</core:FragmentDefinition>

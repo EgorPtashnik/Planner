@@ -17,10 +17,10 @@ entity SqfType {
     name: String;
 };
 
-entity SqfCommand: cuid, managed, baseInfo {
-
+entity SqfCommand: managed {
+    key name: String;
+    info: String;
     sourceCode: String;
-
     syntax: String;
 
     type: Association to one SqfCommandType;
