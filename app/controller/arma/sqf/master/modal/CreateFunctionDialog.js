@@ -18,7 +18,7 @@ sap.ui.define(() => {
                     examples: []
                 });
                 await oContext.created();
-                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Функция добавлена.');
+                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Функция создана.');
 
                 this.publish(this.EVENT.NAV_CHANGED, {
                     route: 'sqfDetail',

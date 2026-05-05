@@ -40,7 +40,7 @@ entity SqfCommandSource {
     name: String;
 };
 
-entity SqfCommandParam: cuid, baseInfo {
+entity SqfCommandParam: cuid, managed, baseInfo {
     key command: Association to SqfCommand;
     type: Association to one SqfType;
     isArray: Integer default false;
