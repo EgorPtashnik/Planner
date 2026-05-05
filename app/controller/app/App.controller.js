@@ -34,7 +34,6 @@ sap.ui.define([
             this._applyTheme();
 
             this.DatabaseMenuPopover = null;
-            this.MobileNavMenuPopover = null;
         },
 
         onFCLStateChange(oEvent) {

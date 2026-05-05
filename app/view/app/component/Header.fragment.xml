@@ -6,14 +6,7 @@
     <f:DynamicPageTitle backgroundDesign='{= %{/darkMode} ? "Transparent" : "Solid" }'>
 
         <f:heading>
-            <HBox alignItems='Center' justifyContent='Center' renderType='Bare'>
-                <Button
-                    press='onPressMobileNavMenu'
-                    class='sapUiTinyMarginEnd'
-                    type='Transparent'
-                    icon='sap-icon://menu2'/>
-                <Title text='PlanneR' />
-            </HBox>
+            <Title text='PlanneR' />
         </f:heading>
 
         <f:content>
