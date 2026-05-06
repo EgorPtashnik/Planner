@@ -66,7 +66,17 @@ sap.ui.define([
 
         onPressCloseDialog(oEvent) {
             oEvent.getSource().getParent().close();
+        },
+
+        async onPressCopy(sValue) {
+            console.log("COPY");
+            try {
+                await navigator.clipboard.writeText(sValue);
+                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Сохранено в буфер обмена.');
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_SUCCEEDED, oError);
+            }
         }
-        
+
     });
 });
