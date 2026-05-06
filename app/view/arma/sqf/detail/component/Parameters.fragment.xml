@@ -17,7 +17,6 @@
                     <ToolbarSeparator visible='{config>/editMode}' />
 
                     <OverflowToolbarToggleButton
-                        type='Transparent'
                         icon='sap-icon://detail-more'
                         tooltip='Показать Детали'
                         text='Показать Детали'
@@ -45,11 +44,13 @@
 
                 <uxap:blocks>
                     <Table
-                        id='idSqcCommandParamsList'
+                        id='idSqfCommandParamsList'
+                        delete='onPressDeleteParameter'
                         alternateRowColors='true'
                         showSeparators='Inner'
                         autoPopinMode='true'
                         hiddenInPopin='{= %{config>/showSqfCommandParamsDetails}.toString() === "true" ? [] : ["Low","Medium"]}'
+                        mode='{= %{config>/editMode} ? "Delete" : "None" }'
                         items='{
                             path: "arma>params",
                             parameters: {

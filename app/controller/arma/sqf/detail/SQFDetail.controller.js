@@ -3,10 +3,11 @@ sap.ui.define([
     'planner/controller/arma/sqf/detail/Events',
 
     'planner/controller/arma/sqf/detail/component/Header',
-    'planner/controller/arma/sqf/detail/component/Parameters'
+    'planner/controller/arma/sqf/detail/component/Parameters',
+    'planner/controller/arma/sqf/detail/component/Examples'
 ], (BaseController, Events,
 
-    HeaderLogic, ParametersLogic
+    HeaderLogic, ParametersLogic, ExamplesLogic
 ) => {
     'use strict';
 
@@ -15,6 +16,7 @@ sap.ui.define([
         ...Events,
         ...HeaderLogic,
         ...ParametersLogic,
+        ...ExamplesLogic,
 
         onInit() {
             this.init();

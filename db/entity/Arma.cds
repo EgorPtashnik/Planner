@@ -51,4 +51,5 @@ entity SqfCommandParam: cuid, managed, baseInfo {
 
 entity SqfCommandExample: cuid {
     key command: Association to SqfCommand;
+    text: String;
 }

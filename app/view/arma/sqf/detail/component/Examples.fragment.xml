@@ -3,11 +3,40 @@
     xmlns:uxap='sap.uxap'
     xmlns:core='sap.ui.core'>
 
-    <uxap:ObjectPageSection title='Примеры' titleUppercase='false'>
+    <uxap:ObjectPageSection>
         <uxap:subSections>
-            <uxap:ObjectPageSubSection>
+            <uxap:ObjectPageSubSection title='Примеры / Заметки' titleUppercase='false'>
+                <uxap:actions>
+                    <Button
+                        press='onPressAddExample'
+                        type='Ghost'
+                        text='Добавить'
+                        tooltip='Добавить'
+                        visible='{config>/editMode}' />
+                </uxap:actions>
+
                 <uxap:blocks>
-                    <Text text='Примеры' />
+                    <List
+                        id='idSqfCommandExamplesList'
+                        delete='onPressDeleteExample'
+                        showSeparators='Inner'
+                        mode='{= %{config>/editMode} ? "Delete" : "None" }'
+                        items='{
+                            path: "arma>examples",
+                            parameters: {
+                                $$ownRequest: true
+                            }
+                        }'>
+                        <items>
+                            <CustomListItem>
+                                <VBox class='sapUiSmallMargin'>
+                                    <FormattedText htmlText='{arma>text}' visible='{= !%{config>/editMode} }' />
+                                    <TextArea width='100%' rows='10' value='{arma>text}' visible='{config>/editMode}' />
+                                </VBox>
+                            </CustomListItem>
+                        </items>
+
+                    </List>
                 </uxap:blocks>
             </uxap:ObjectPageSubSection>
         </uxap:subSections>
