@@ -15,8 +15,8 @@
                 <uxap:blocks>
                     <VBox class='sapUiTinyMargin'>
                         <!-- DISPLAY MODE -->
-                        <Text
-                            text='{arma>syntax}'
+                        <FormattedText
+                            htmlText='&lt;code&gt;{arma>syntax}&lt;/code&gt;'
                             visible='{= !%{config>/editMode} }' />
                         <!-- EDIT MODE -->
                         <TextArea

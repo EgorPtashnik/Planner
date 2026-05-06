@@ -49,7 +49,7 @@ sap.ui.define([
                 this.getView().bindElement({
                     path: `arma>/SqfCommand('${sID}')`,
                     parameters: {
-                        $expand: 'type,source,params,examples'
+                        $expand: 'type,source,params,examples,tags'
                     },
                     events: {
                         dataReceived: () => this.getView().setBusy(false)

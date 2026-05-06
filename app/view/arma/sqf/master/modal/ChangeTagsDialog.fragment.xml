@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog stretch='{device>/system/phone}' class='sapUiContentPadding'>
+        
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Title text='Теги ({arma>/SqfTag/$count})' />
+                </contentLeft>
+                
+                <contentRight>
+                    <Button
+                        press='onPressCreateTag'
+                        type='Emphasized'
+                        text='Создать'
+                        tooltip='Создать' />
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <List
+                id='idSqfTagsList'
+                mode='Delete'
+                showSeparators='Inner'
+                items='{
+                    path: "arma>/SqfTag",
+                    parameters: {
+                        $orderby: "name asc"
+                    }
+                }'>
+                <items>
+                    <CustomListItem>
+                        <Input value='{arma>name}' />
+                    </CustomListItem>
+                </items>
+            </List>
+        </content>
+
+        <buttons>
+            <Button
+                press='onPressCloseDialog'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+
+    </Dialog>
+
+</core:FragmentDefinition>

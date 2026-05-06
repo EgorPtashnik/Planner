@@ -8,6 +8,10 @@ sap.ui.define(() => {
             this._openCreateFunctionDialog();
         },
 
+        onPressChangeTags() {
+            this._openChangeTagsDialog();
+        },
+
         // ITEMS
         onPressSqfCommandItem(oEvent) {
             this.publish(this.EVENT.NAV_CHANGED, {

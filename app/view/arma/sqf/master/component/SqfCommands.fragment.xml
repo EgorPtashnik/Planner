@@ -67,6 +67,12 @@
                         <OverflowToolbarLayoutData priority='NeverOverflow' />
                     </layoutData>
                 </SegmentedButton>
+
+                <OverflowToolbarButton
+                    press='onPressChangeTags'
+                    icon='sap-icon://tags'
+                    text='Изменить Теги'
+                    tooltip='Изменить Теги' />
             </OverflowToolbar>
         </headerToolbar>
 

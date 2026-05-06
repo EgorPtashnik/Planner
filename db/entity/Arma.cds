@@ -28,6 +28,7 @@ entity SqfCommand: managed {
 
     params: Composition of many SqfCommandParam on params.command = $self;
     examples: Composition of many SqfCommandExample on examples.command = $self;
+    tags: Composition of many SqfCommandSqfTag on tags.command = $self;
 };
 
 entity SqfCommandType {

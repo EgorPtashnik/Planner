@@ -37,6 +37,7 @@
                     <OverflowToolbarLayoutData priority='NeverOverflow' />
                 </layoutData>
             </ToggleButton>
+
             <OverflowToolbarButton
                 press='onPressSourceCode'
                 icon='sap-icon://source-code'

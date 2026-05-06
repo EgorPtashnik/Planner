@@ -5,12 +5,13 @@ sap.ui.define([
     'planner/controller/arma/sqf/master/component/FilterBar',
     'planner/controller/arma/sqf/master/component/SqfCommands',
 
-    'planner/controller/arma/sqf/master/modal/CreateFunctionDialog'
+    'planner/controller/arma/sqf/master/modal/CreateFunctionDialog',
+    'planner/controller/arma/sqf/master/modal/ChangeTagsDialog'
 ], (BaseController, Events,
 
     FilterBarLogic, SqfCommandsLogic,
 
-    CreateFunctionDialogLogic
+    CreateFunctionDialogLogic, ChangeTagsDialogLogic
 ) => {
     'use strict';
 
@@ -22,12 +23,16 @@ sap.ui.define([
         ...SqfCommandsLogic,
 
         ...CreateFunctionDialogLogic,
+        ...ChangeTagsDialogLogic,
 
         onInit() {
             this.init();
             this.setSubscriptions();
 
             this.ODataEventsAttached = false;
+
+            this.CreateFunctionDialog = null;
+            this.ChangeTagsDialog = null;
 
             this.Config.setData({
                 sqfCommandsCount: 0,

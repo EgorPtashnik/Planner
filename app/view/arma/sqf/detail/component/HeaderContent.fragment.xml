@@ -10,6 +10,12 @@
             htmlText='{arma>info}'
             visible='{= !%{config>/editMode} }' />
 
+        <Tokenizer tokens='{arma>tags}' visible='{= !%{config>/editMode} }'>
+            <tokens>
+                <Token text='{arma>tag/name}' />
+            </tokens>
+        </Tokenizer>
+
         <!-- EDIT MODE -->
         <TextArea
             width='100%'
