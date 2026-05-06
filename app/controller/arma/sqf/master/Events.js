@@ -5,7 +5,8 @@ sap.ui.define(() => {
 
         setSubscriptions() {
             const aEvents = [
-                {id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged}
+                {id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged},
+                {id: this.EVENT.SQFCOMMAND_CHANGED, fnc: this._onSqfCommandChanged}
             ];
                 
             aEvents.forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
@@ -16,7 +17,12 @@ sap.ui.define(() => {
                 this.getView().setBusy(true);
                 this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
                 setTimeout(() => this.getView().setBusy(false));
+                this.byId('idSqfCommandsList').getBinding('items').refresh();
             }
+        },
+
+        _onSqfCommandChanged() {
+            this.byId('idSqfCommandsList').getBinding('items').refresh();
         }
     }
 });

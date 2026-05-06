@@ -16,6 +16,7 @@ sap.ui.define(() => {
                 this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
                 if (oData?.parameters?.id && this.Config.getProperty('/ID') !== oData.parameters.id) {
                     this.getView().setBusy(true);
+                    this.Config.setProperty('/editMode', false);
                     this.Config.setProperty('/ID', oData.parameters.id);
                     this.bindView(oData.parameters.id);
                 }

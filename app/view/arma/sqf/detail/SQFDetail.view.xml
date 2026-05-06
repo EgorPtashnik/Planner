@@ -7,7 +7,6 @@
 	controllerName='planner.controller.arma.sqf.detail.SQFDetail'>
 
     <uxap:ObjectPageLayout
-        preserveHeaderStateOnScroll='true'
         upperCaseAnchorBar='false'
         showFooter='true'>
 
