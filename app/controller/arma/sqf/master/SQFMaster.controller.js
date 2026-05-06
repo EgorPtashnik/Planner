@@ -30,7 +30,8 @@ sap.ui.define([
             this.ODataEventsAttached = false;
 
             this.Config.setData({
-                sqfCommandsCount: 0
+                sqfCommandsCount: 0,
+                showSqfCommandsDetails: false
             });
         },
 

@@ -12,7 +12,7 @@ sap.ui.define(() => {
         },
 
         _onNavChanged(_, sEventId, oData) {
-            if (oData.route === 'todoMaster') {
+            if (oData.route === 'sqfMaster') {
                 this.getView().setBusy(true);
                 this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
                 setTimeout(() => this.getView().setBusy(false));
