@@ -44,7 +44,7 @@ entity SqfCommandParam: cuid, managed, baseInfo {
     key command: Association to SqfCommand;
     sort: Integer not null;
     type: Association to one SqfType;
-    isArray: Integer default false;
+    isArray: Boolean default false;
     defaultValue: String;
 
 };

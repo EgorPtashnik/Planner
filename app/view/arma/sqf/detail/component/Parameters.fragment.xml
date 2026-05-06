@@ -13,32 +13,66 @@
                         text='Добавить'
                         tooltip='Добавить'
                         visible='{config>/editMode}' />
+
+                    <ToolbarSeparator visible='{config>/editMode}' />
+
+                    <OverflowToolbarToggleButton
+                        type='Transparent'
+                        icon='sap-icon://detail-more'
+                        tooltip='Показать Детали'
+                        text='Показать Детали'
+                        visible='{device>/system/phone}'
+                        pressed='{config>/showSqfCommandParamsDetails}' />
+
+                    <SegmentedButton
+                        selectedKey='{path: "config>/showSqfCommandParamsDetails", targetType: "Boolean" }'
+                        visible='{= !%{device>/system/phone} }'>
+                        <items>
+                            <SegmentedButtonItem
+                                key='false'
+                                icon='sap-icon://detail-less'
+                                tooltip='Скрыть Детали' />
+                            <SegmentedButtonItem
+                                key='true'
+                                icon='sap-icon://detail-more'
+                                tooltip='Показать Детали' />
+                        </items>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='NeverOverflow' />
+                        </layoutData>
+                    </SegmentedButton>
                 </uxap:actions>
+
                 <uxap:blocks>
                     <Table
                         id='idSqcCommandParamsList'
-                        autoPopinMode='true'
                         alternateRowColors='true'
+                        showSeparators='Inner'
+                        autoPopinMode='true'
+                        hiddenInPopin='{= %{config>/showSqfCommandParamsDetails}.toString() === "true" ? [] : ["Low","Medium"]}'
                         items='{
                             path: "arma>params",
                             parameters: {
                                 $expand: "type,command",
-                                $orderby: "createdAt asc",
+                                $orderby: "sort asc",
                                 $$ownRequest: true
                             }
                         }'>
-                        
+
                         <columns>
-                            <Column width='8rem'>
+                            <Column width='2rem' hAlign='Center' importance='High' visible='{config>/editMode}'>
+                                <Text text='№' />
+                            </Column>
+                            <Column width='8rem' importance='High' popinDisplay='Inline'>
                                 <Text text='Параметр' />
                             </Column>
-                            <Column width='5rem'>
-                                <Text text='Тип' visible='{config>/editMode}' />
+                            <Column width='8rem' popinDisplay='Inline'>
+                                <Text text='Тип {= %{config>/editMode} ? "/ Массив" : ""}' />
                             </Column>
-                            <Column width='5rem'>
+                            <Column width='10rem' popinDisplay='Inline' importance='Low'>
                                 <Text text='По Умолчанию' />
                             </Column>
-                            <Column width='auto' autoPopinWidth='{= %{config>/editMode} ? 999 : 30 }' popinDisplay='WithoutHeader'>
+                            <Column importance='Low' autoPopinWidth='999' popinDisplay='WithoutHeader'>
                                 <Text text='Описание' />
                             </Column>
                         </columns>
@@ -46,26 +80,34 @@
                         <items>
                             <ColumnListItem vAlign='Top'>
                                 <cells>
+                                    <Input value='{arma>sort}' />
                                     <VBox>
                                         <!-- DISPLAY MODE -->
-                                        <ObjectIdentifier title='{arma>name}' text='{arma>type/name}' visible='{= !%{config>/editMode} }' />
+                                        <ObjectIdentifier title='{arma>name}' text='{= !!%{arma>defaultValue} ? "Опциональный" : "" }' visible='{= !%{config>/editMode} }' />
                                         <!-- EDIT MODE -->
                                         <Input value='{arma>name}' visible='{config>/editMode}' />
                                     </VBox>
 
                                     <!-- EDIT MODE -->
-                                    <ComboBox
-                                        selectedKey='{arma>type_code}'
-                                        visible='{config>/editMode}'
-                                        items='{path: "arma>/SqfType", templateShareable: "false"}'>
-                                        <items>
-                                            <core:Item key='{arma>code}' text='{arma>name}' />
-                                        </items>
-                                    </ComboBox>
+                                    <VBox>
+                                        <!-- DISPLAY MODE -->
+                                        <Link text='{= %{arma>isArray} ? "Array&lt;" + %{arma>type/name} + "&gt;" : %{arma>type/name} }' visible='{= !%{config>/editMode} }' />
+                                        <!-- EDIT MODE -->
+                                        <HBox visible='{config>/editMode}'>
+                                            <ComboBox
+                                                selectedKey='{arma>type_code}'
+                                                items='{path: "arma>/SqfType", templateShareable: "false"}'>
+                                                <items>
+                                                    <core:Item key='{arma>code}' text='{arma>name}' />
+                                                </items>
+                                            </ComboBox>
+                                            <CheckBox selected='{arma>isArray}' />
+                                        </HBox>
+                                    </VBox>
 
                                     <VBox>
                                         <!-- DISPLAY MODE -->
-                                        <Text text='{arma>defaultValue}' visible='{= !%{config>/editMode} }' />
+                                        <Text text='{arma>defaultValue}' emptyIndicatorMode='{= %{arma>defaultValue} ? "Off" : "On" }' visible='{= !%{config>/editMode} }' />
                                         <!-- EDIT MODE -->
                                         <Input value='{arma>defaultValue}' visible='{config>/editMode}' />
                                     </VBox>

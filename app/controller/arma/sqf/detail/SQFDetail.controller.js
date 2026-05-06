@@ -24,7 +24,9 @@ sap.ui.define([
 
             this.Config.setData({
                 ID: null,
-                editMode: false
+                editMode: false,
+
+                showSqfCommandParamsDetails: false
             });
         },
 
