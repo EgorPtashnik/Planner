@@ -37,6 +37,11 @@
                     <OverflowToolbarLayoutData priority='NeverOverflow' />
                 </layoutData>
             </ToggleButton>
+            <OverflowToolbarButton
+                press='onPressSourceCode'
+                icon='sap-icon://source-code'
+                text='Исходный Код'
+                tooltip='Исходный Код' />
         </uxap:actions>
 
         <uxap:snappedHeading>

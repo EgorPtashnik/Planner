@@ -1,0 +1,28 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:ce='sap.ui.codeeditor'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog title='{arma>name}' class='sapUiContentPadding' stretch='true'>
+
+        <content>
+            <VBox fitContainer='true'>
+                <Text text='{arma>sourceCode}' visible='{= !%{config>/editMode} }' />
+                <TextArea width='100%' rows='50' growing='true' value='{arma>sourceCode}' visible='{config>/editMode}' />
+            </VBox>
+        </content>
+
+        <buttons>
+            <Button
+                press='onPressCopy(%{arma>sourceCode})'
+                text='Скопировать'
+                tooltip='Скопировать' />
+            <Button
+                press='onPressCloseDialog'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+
+    </Dialog>
+
+</core:FragmentDefinition>

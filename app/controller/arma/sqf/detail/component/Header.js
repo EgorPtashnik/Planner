@@ -16,6 +16,12 @@ sap.ui.define(() => {
                 this.bindView(this.Config.getProperty('/ID'));
                 this.publish(this.EVENT.SQFCOMMAND_CHANGED);
             }
+        },
+
+        async onPressSourceCode() {
+            this.SourceCodeDialog ??= await this.getFragment('planner.view.arma.sqf.detail.modal.SourceCodeDialog');
+
+            this.SourceCodeDialog.open();
         }
 
     };

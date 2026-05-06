@@ -24,6 +24,8 @@ sap.ui.define([
 
             this.ODataEventsAttached = false;
 
+            this.SourceCodeDialog = null;
+
             this.Config.setData({
                 ID: null,
                 editMode: false,
