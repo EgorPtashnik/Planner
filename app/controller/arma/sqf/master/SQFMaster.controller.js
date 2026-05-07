@@ -6,8 +6,6 @@ sap.ui.define([
     'planner/controller/arma/sqf/master/modal/ChangeTagsDialog'
 ], (BaseController, Events,
 
-    FilterBarLogic, SqfCommandsLogic,
-
     CreateFunctionDialogLogic, ChangeTagsDialogLogic
 ) => {
     'use strict';

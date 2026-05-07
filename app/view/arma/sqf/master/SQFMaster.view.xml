@@ -105,11 +105,7 @@
                             press='onPressCreateSqfCommand'
                             type='Emphasized'
                             text='Создать Функцию'
-                            tooltip='Создать Функцию'>
-                            <layoutData>
-                                <OverflowToolbarLayoutData priority='NeverOverflow' />
-                            </layoutData>
-                        </Button>
+                            tooltip='Создать Функцию' />
 
                         <ToolbarSeparator visible='{= !%{device>/system/phone} }' />
 
