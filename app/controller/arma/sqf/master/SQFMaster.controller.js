@@ -1,9 +1,6 @@
 sap.ui.define([
     'planner/controller/BaseController',
     'planner/controller/arma/sqf/master/Events',
-    
-    'planner/controller/arma/sqf/master/component/FilterBar',
-    'planner/controller/arma/sqf/master/component/SqfCommands',
 
     'planner/controller/arma/sqf/master/modal/CreateFunctionDialog',
     'planner/controller/arma/sqf/master/modal/ChangeTagsDialog'
@@ -18,10 +15,6 @@ sap.ui.define([
     return BaseController.extend('planner.controller.arma.sqf.master.SQFMaster', {
 
         ...Events,
-
-        ...FilterBarLogic,
-        ...SqfCommandsLogic,
-
         ...CreateFunctionDialogLogic,
         ...ChangeTagsDialogLogic,
 
@@ -55,6 +48,25 @@ sap.ui.define([
                     oEvent.getSource().getHeaderContext().requestProperty('$count')
                         .then(value => this.Config.setProperty('/sqfCommandsCount', value))).refresh();
             }
+        },
+
+        onPressCreateSqfCommand() {
+            this._openCreateFunctionDialog();
+        },
+
+        onPressChangeTags() {
+            this._openChangeTagsDialog();
+        },
+
+        onPressSqfCommandItem(oEvent) {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: 'sqfDetail',
+                parameters: {
+                    id: oEvent.getSource().getBindingContext('arma').getProperty('name'),
+                    layout: this.LayoutType.TwoColumnsMidExpanded
+                }
+            });
+
         }
 
     });

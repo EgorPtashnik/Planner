@@ -1,21 +1,13 @@
 sap.ui.define([
     'planner/controller/BaseController',
 
-    'planner/controller/gym/component/Header',
-    'planner/controller/gym/component/Info',
     'planner/controller/gym/modal/AddTrainingDialog'
 ], (BaseController,
-
-    HeaderLogic, InfoLogic,
-
     AddTrainingDialogLogic
 ) => {
     'use strict';
 
     return BaseController.extend('planner.controller.gym.Gym', {
-
-        ...HeaderLogic,
-        ...InfoLogic,
         ...AddTrainingDialogLogic,
 
         onInit() {
@@ -41,6 +33,27 @@ sap.ui.define([
                     this.TrainingListBinding = this.getView().getModel('gym').bindList('/Training');
                 }
             }
+        },
+
+        async onSettle() {
+            this.publish(this.EVENT.ACTION_REQUESTED, {
+                model: 'gym',
+                action: '/Settle(...)',
+                message: 'Тренировки обновлены.',
+                then: (_, oAction) => {
+                    this._getTotalCost();
+                }
+            });
+        },
+
+        async onPressTrainingHistory() {
+            this.TrainingHistoryDialog ??= await this.getFragment('planner.view.gym.modal.TrainingHistoryDialog');
+
+            this.TrainingHistoryDialog.open();
+        },
+
+        onPressAddTraining() {
+            this._openAddTrainingDialog();
         },
 
         _getTotalCost() {

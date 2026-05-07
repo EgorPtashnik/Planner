@@ -19,7 +19,11 @@
                 </f:heading>
 
                 <f:actions>
-                    <Button press='onPressCreateTodoList' type='Emphasized' text='Создать Список' tooltip='Создать Список'>
+                    <Button
+                        press='onPressCreateTodoList'
+                        type='Emphasized'
+                        text='Создать Список'
+                        tooltip='Создать Список'>
                         <layoutData>
                             <OverflowToolbarLayoutData priority='NeverOverflow' />
                         </layoutData>

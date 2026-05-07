@@ -22,9 +22,6 @@
             <u:CalendarLegend id='idTrainingHistoryLegend' standardItems='Today'>
                 <u:items>
                     <u:CalendarLegendItem
-                        type='Type08'
-                        text='Оплачено' />
-                    <u:CalendarLegendItem
                         type='Type06'
                         text='Одиночная' />
                     <u:CalendarLegendItem

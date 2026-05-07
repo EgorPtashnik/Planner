@@ -3,12 +3,8 @@ sap.ui.define([
     'sap/ui/core/Theming',
 
     'planner/controller/app/Events',
-    'planner/controller/app/component/Header',
-    'planner/controller/app/component/Footer',
     'planner/controller/app/modal/DatabaseMenuPopover'
 ], (BaseController, Theming, Events,
-    
-    HeaderLogic, FooterLogic,
     
     DatabaseMenuPopoverLogic) => {
     'use strict';
@@ -16,10 +12,6 @@ sap.ui.define([
     return BaseController.extend('planner.controller.App', {
 
         ...Events,
-
-        ...HeaderLogic,
-        ...FooterLogic,
-
         ...DatabaseMenuPopoverLogic,
 
         THEME: {
@@ -44,6 +36,33 @@ sap.ui.define([
             } else {
                 this.getOwnerComponent().getModel().setProperty('/isOnlyOneColumn', false);
             }
+        },
+
+        onSelectNavItem(oEvent) {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: oEvent.getParameter('selectedKey')
+            });
+        },
+
+        onPressToggleDarkMode() {
+            if (localStorage.getItem('theme') === this.THEME.DARK) {
+                localStorage.setItem('theme', this.THEME.LIGHT);
+            } else {
+                localStorage.setItem('theme', this.THEME.DARK);
+            }
+            this._applyTheme();
+        },
+
+        async onOpenDatabaseMenu(oEvent) {
+            this.DatabaseMenuPopover ??= await this.getFragment('planner.view.app.modal.DatabaseMenuPopover');
+
+            this.DatabaseMenuPopover.openBy(oEvent.getSource());
+        },
+
+        onPressFooterNavItem(oEvent) {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: oEvent.getSource().getBindingContext().getProperty('key')
+            });
         },
 
         _applyTheme() {
