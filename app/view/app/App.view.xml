@@ -12,10 +12,49 @@
         class='sapUiNoContentPadding'
         showFooter='{device>/system/phone}'>
 
+
+        <!-- HEADER -->
         <f:title>
-            <core:Fragment fragmentName='planner.view.app.component.Header' />
+            <f:DynamicPageTitle backgroundDesign='{= %{/darkMode} ? "Transparent" : "Solid" }'>
+
+                <f:heading>
+                    <Title text='PlanneR' />
+                </f:heading>
+
+                <f:content>
+                    <Toolbar style='Clear'>
+                        <IconTabHeader
+                            backgroundDesign='Transparent'
+                            select='onSelectNavItem'
+                            visible='{= !%{device>/system/phone} }'
+                            selectedKey='{/selectedRoute}'
+                            items='{/routes}'>
+                            <items>
+                                <IconTabFilter
+                                    text='{text}'
+                                    key='{key}' />
+                            </items>
+                        </IconTabHeader>
+                    </Toolbar>
+                </f:content>
+
+                <f:actions>
+                    <Button
+                        press='onPressToggleDarkMode'
+                        icon='{= %{/darkMode} ? "sap-icon://light-mode" : "sap-icon://dark-mode" }'
+                        tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
+                    <Button
+                        ariaHasPopup='Menu'
+                        press='onOpenDatabaseMenu'
+                        icon='sap-icon://database'
+                        tooltip='База Данных' />
+                </f:actions>
+
+            </f:DynamicPageTitle>
         </f:title>
 
+
+        <!-- PAGE CONTAINER -->
         <f:content>
             <f:FlexibleColumnLayout
                 id='app'
@@ -23,8 +62,25 @@
                 layout='{/layout}' />
         </f:content>
 
+
+
+        <!-- FOOTER FOR MOBILE -->
         <f:footer>
-            <core:Fragment fragmentName='planner.view.app.component.Footer' />
+            <Toolbar class='mobileFooter'>
+                <ScrollContainer width='100%'>
+                    <HBox
+                        justifyContent='SpaceAround'
+                        alignItems='Center'
+                        items='{/routes}'>
+                        <items>
+                            <Button
+                                press='onPressFooterNavItem'
+                                icon='{icon}'
+                                type='{= %{/selectedRoute} === %{key} ? "Neutral" : "Transparent" }' />
+                        </items>
+                    </HBox>
+                </ScrollContainer>
+            </Toolbar>
         </f:footer>
 
     </f:DynamicPage>

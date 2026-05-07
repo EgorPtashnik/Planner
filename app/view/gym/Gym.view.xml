@@ -1,4 +1,5 @@
 <mvc:View
+    xmlns='sap.m'
     xmlns:f='sap.f'
     xmlns:mvc='sap.ui.core.mvc'
     xmlns:core='sap.ui.core'
@@ -9,12 +10,62 @@
 
         <!-- HEADER -->
         <f:title>
-            <core:Fragment fragmentName='planner.view.gym.component.Header' type='XML' />
+            <f:DynamicPageTitle>
+
+                <f:heading>
+                    <Title text='Тренировки' />
+                </f:heading>
+
+                <f:actions>
+                    <Button
+                        press='onSettle'
+                        icon='sap-icon://payment-approval'
+                        type='Accept'
+                        text='Оплачено'
+                        tooltip='Оплачено'
+                        visible='{= !!%{config>/totalCost} }'>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='NeverOverflow' />
+                        </layoutData>
+                    </Button>
+                    <Button
+                        press='onPressTrainingHistory'
+                        type='Ghost'
+                        icon='sap-icon://calendar'>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='NeverOverflow' />
+                        </layoutData>
+                    </Button>
+                </f:actions>
+
+            </f:DynamicPageTitle>
         </f:title>
 
         <!-- Information Message -->
         <f:content>
-            <core:Fragment fragmentName='planner.view.gym.component.Info' type='XML' />
+            <VBox alignItems='Center' justifyContent='Center' fitContainer='true'>
+                <IllustratedMessage
+                    decorative='true'
+                    enableDefaultTitleAndDescription='false'
+                    illustrationType='sapIllus-EmptyPlanningCalendar'
+                    illustrationSize='Large'
+                    title='Сумма: {config>/totalCost} BYN'>
+                    <additionalContent>
+                        <HBox justifyContent='SpaceBetween'>
+                            <Button
+                                press='onPressAddTraining'
+                                width='100%'
+                                type='Emphasized'
+                                text='Записать Тренировку'
+                                tooltip='Записать Тренировку'>
+                                <layoutData>
+                                    <FlexItemData growFactor='1' />
+                                </layoutData>
+                            </Button>
+                        </HBox>
+                    </additionalContent>
+                </IllustratedMessage>
+            </VBox>
         </f:content>
 
     </f:DynamicPage>

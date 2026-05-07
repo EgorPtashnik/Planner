@@ -1,18 +1,12 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/todo/master/Events',
-
-    'planner/controller/todo/master/component/TodoLists'
-], (BaseController, Events,
-
-    TodoListsLogic
-) => {
+    'planner/controller/todo/master/Events'
+], (BaseController, Events) => {
     'use strict';
 
-    return BaseController.extend('planner.controller.todo.master.TodoLTodoMaster', {
+    return BaseController.extend('planner.controller.todo.master.TodoMaster', {
 
         ...Events,
-        ...TodoListsLogic,
 
         onInit() {
             this.init('todoMaster');
@@ -41,7 +35,35 @@ sap.ui.define([
                     oEvent.getSource().getHeaderContext().requestProperty('$count')
                         .then(value => this.Config.setProperty('/todoListCount', value))).refresh();
             }
-        }
+        },
+
+        onChangeTodoListsSearch(oEvent) {
+            this.byId('idTodoListsList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
+        },
+
+        async onPressCreateTodoList() {
+            const oContext = this.byId('idTodoListsList').getBinding('items').create({name: 'Новый Список'});
+            await oContext.created();
+            this.publish(this.EVENT.ACTION_SUCCEEDED, 'Список создан.');
+
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: 'todoDetail',
+                parameters: {
+                    id: oContext.getProperty('ID'),
+                    layout: this.LayoutType.TwoColumnsMidExpanded
+                }
+            });
+        },
+
+        onPressTodoListItem(oEvent) {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: 'todoDetail',
+                parameters: {
+                    id: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
+                    layout: this.LayoutType.TwoColumnsMidExpanded
+                }
+            });
+        },
 
     });
 });

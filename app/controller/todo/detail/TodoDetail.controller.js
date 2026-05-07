@@ -1,20 +1,12 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/todo/detail/Events',
-
-    'planner/controller/todo/detail/component/Header',
-    'planner/controller/todo/detail/component/TodoParents',
-], (BaseController, Events,
-
-    HeaderLogic, TodoParentsLogic) => {
+    'planner/controller/todo/detail/Events'
+], (BaseController, Events) => {
     'use strict';
 
     return BaseController.extend('planner.controller.todo.detail.TodoDetail', {
 
         ...Events,
-
-        ...HeaderLogic,
-        ...TodoParentsLogic,
 
         onInit() {
             this.init();
@@ -64,6 +56,65 @@ sap.ui.define([
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
+        },
+
+        async onPressClosePage() {
+            this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
+        },
+
+        onPressToggleCompactView() {
+            this.Config.setProperty('/compactView', !this.Config.getProperty('/compactView'));
+        },
+
+        async onPressDeleteTodoList() {
+            try {
+                const oContext = this.getView().getBindingContext('todo');
+                await oContext.delete();
+                if (oContext.isDeleted()) {
+                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Список удален.');
+                    this.publish(this.EVENT.NAV_CHANGED, { route: 'todoMaster' });
+                    this.publish(this.EVENT.TODOLIST_CHANGED);
+                }
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
+        },
+
+        onChangeTodoParentsSearch(oEvent) {
+            this.byId('idTodoParentsList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
+        },
+
+        async onPressAddTodoParent() {
+            try {
+                const oContext = this.byId('idTodoParentsList').getBinding('items').create({
+                    name: 'Новый Этап',
+                    priority: 1
+                });
+                await oContext.created();
+
+                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Этап создан.');
+                this.publish(this.EVENT.NAV_CHANGED, {
+                    route: 'todoDetailDetail',
+                    parameters: {
+                        id: this.AppConfig.getProperty('/detailID'),
+                        item: oContext.getProperty('ID'),
+                        layout: this.LayoutType.ThreeColumnsEndExpanded
+                    }
+                });
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
+        },
+
+        onPressTodoParentItem(oEvent) {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: 'todoDetailDetail',
+                parameters: {
+                    id: this.AppConfig.getProperty('/detailID'),
+                    item: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
+                    layout: this.LayoutType.ThreeColumnsEndExpanded
+                }
+            });
         }
 
     });
