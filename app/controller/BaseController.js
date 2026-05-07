@@ -69,7 +69,6 @@ sap.ui.define([
         },
 
         async onPressCopy(sValue) {
-            console.log("COPY");
             try {
                 await navigator.clipboard.writeText(sValue);
                 this.publish(this.EVENT.ACTION_SUCCEEDED, 'Сохранено в буфер обмена.');
