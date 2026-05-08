@@ -18,10 +18,10 @@ sap.ui.define([
         EVENT,
         Formatter,
         MessageHelper,
-        TableHelper,
 
         init() {
             this.LayoutType = FLib.LayoutType;
+            this.TableHelper = new TableHelper();
 
             this.App = this.getOwnerComponent();
             this.AppConfig = this.App.getModel();

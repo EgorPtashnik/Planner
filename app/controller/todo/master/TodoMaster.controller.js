@@ -19,8 +19,7 @@ sap.ui.define([
             this.ODataEventsAttached = false;
             this.Config.setData({
                 listCount: 0,
-                tagCount: 0,
-                variant: 'Все'
+                tagCount: 0
             });
 
             this.ManageTagsDialog = null;

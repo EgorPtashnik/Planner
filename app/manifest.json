@@ -92,11 +92,6 @@
                     "name": "todoDetail",
                     "target": ["todoMaster", "todoDetail"]
                 },
-                {
-                    "pattern": "todo/{id}/{item}/:layout:",
-                    "name": "todoDetailDetail",
-                    "target": ["todoMaster", "todoDetail", "todoDetailDetail"]
-                },
 
                 {
                     "pattern": "gym",
@@ -136,14 +131,6 @@
                 "todoDetail": {
                     "name": "todo.detail.TodoDetail",
                     "controlAggregation": "midColumnPages",
-                    "placeholder": {
-                        "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
-                        "autoClose": true
-                    }
-                },
-                "todoDetailDetail": {
-                    "name": "todo.detailDetail.TodoDetailDetail",
-                    "controlAggregation": "endColumnPages",
                     "placeholder": {
                         "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
                         "autoClose": true

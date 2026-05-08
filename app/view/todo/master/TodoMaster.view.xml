@@ -46,7 +46,6 @@
         <f:content>
             <Table
                 id='idTodoList'
-                inset='true'
                 sticky='HeaderToolbar'
                 items='{ path: "todo>/List", parameters: { $count: true } }'>
 
@@ -64,6 +63,7 @@
 
                         <Button
                             press='onPressCreateList'
+                            type='Ghost'
                             text='Создать'
                             tooltip='Создать'>
                             <layoutData>

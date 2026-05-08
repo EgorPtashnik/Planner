@@ -5,6 +5,7 @@ using { Aspects.priority, Aspects.baseInfo, Types.ProgressStatus } from '../Reus
 
 entity List: cuid, managed, baseInfo, priority {
     items: Composition of many Item on items.list = $self;
+    tag: Association to ListTag;
 
     status: ProgressStatus default 0;
     doneItems = items [ status > 1 ];

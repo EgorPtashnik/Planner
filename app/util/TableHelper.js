@@ -3,17 +3,17 @@ sap.ui.define([
 ], (JSONModel) => {
     'use strict';
 
-    return {
+    return class TableHelper {
         setController(oController) {
             this.Controller = oController;
             this.Controller.TableSortDialog = null;
-        },
+        };
 
         register(sId, oConfig) {
             this[sId] = { ...oConfig, id: sId };
-        },
+        };
 
-        async onPressSort(sId) {
+        async onPressSort(sId)  {
             this.Controller.TableSortDialog ??= await this.Controller.getFragment('planner.reuse.TableSortDialog').then(oFragment => {
                 oFragment.setModel(new JSONModel({
                     sortOptions: [
@@ -28,7 +28,7 @@ sap.ui.define([
             this.Controller.TableSortDialog.getModel().refresh(true);
 
             this.Controller.TableSortDialog.open();
-        },
+        };
 
         onSort(sId) {
             const sSortOption = this.Controller.byId('idTableHelperSortListOption').getSelectedItem().getBindingContext().getProperty('key');
@@ -38,7 +38,7 @@ sap.ui.define([
                 $orderby: `${sSortColumn} ${sSortOption}`
             });
             this.Controller.TableSortDialog.close();
-        }
+        };
 
     };
 });
