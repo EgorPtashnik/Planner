@@ -1,23 +1,29 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/todo/master/Events'
-], (BaseController, Events) => {
+    'planner/controller/todo/master/ManageTagsDialog'
+], (BaseController, ManageTagsDialog) => {
     'use strict';
 
     return BaseController.extend('planner.controller.todo.master.TodoMaster', {
 
-        ...Events,
+        ...ManageTagsDialog,
 
         onInit() {
-            this.init('todoMaster');
-            this.setSubscriptions();
+            this.init();
+            [
+                { id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged },
+                { id: this.EVENT.TODOLIST_CHANGED, fnc: this._onTodoListChanged }
+            ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
+            this._setTableHelperConfig();
 
             this.ODataEventsAttached = false;
-
             this.Config.setData({
-                todoListCount: 0,
-                showTodoListsSearch: false
+                listCount: 0,
+                tagCount: 0,
+                variant: 'Все'
             });
+
+            this.ManageTagsDialog = null;
         },
 
         _onRouteMatched(oEvent) {
@@ -31,20 +37,24 @@ sap.ui.define([
 
             if (!this.ODataEventsAttached) {
                 this.ODataEventsAttached = true;
-                this.byId('idTodoListsList').getBinding('items').attachDataReceived(oEvent =>
+                this.byId('idTodoList').getBinding('items').attachDataReceived(oEvent =>
                     oEvent.getSource().getHeaderContext().requestProperty('$count')
-                        .then(value => this.Config.setProperty('/todoListCount', value))).refresh();
+                        .then(value => this.Config.setProperty('/listCount', value))).refresh();
             }
         },
 
-        onChangeTodoListsSearch(oEvent) {
-            this.byId('idTodoListsList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
+        onPressManageTags() {
+            this._openManageTagsDialog();
         },
 
-        async onPressCreateTodoList() {
-            const oContext = this.byId('idTodoListsList').getBinding('items').create({name: 'Новый Список'});
+        onChangeTodoListSearch(oEvent) {
+            this.byId('idTodoList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
+        },
+
+        async onPressCreateList() {
+            const oContext = this.byId('idTodoList').getBinding('items').create({name: 'Новый Список'});
             await oContext.created();
-            this.publish(this.EVENT.ACTION_SUCCEEDED, 'Список создан.');
+            this.publish(this.EVENT.ACTION_SUCCEEDED, 'Дело создано.');
 
             this.publish(this.EVENT.NAV_CHANGED, {
                 route: 'todoDetail',
@@ -55,7 +65,7 @@ sap.ui.define([
             });
         },
 
-        onPressTodoListItem(oEvent) {
+        onPressListItem(oEvent) {
             this.publish(this.EVENT.NAV_CHANGED, {
                 route: 'todoDetail',
                 parameters: {
@@ -65,5 +75,30 @@ sap.ui.define([
             });
         },
 
+        _setTableHelperConfig() {
+            this.TableHelper.setController(this);
+            this.TableHelper.register('idTodoTagList', {
+                columns: [
+                    { label: 'Имя', path: 'name' },
+                    { label: 'Описание', path: 'info' },
+                    { label: 'Дата Создания', path: 'createdAt' },
+                    { label: 'Дата Обновления', path: 'modifiedAt' }
+                ],
+                sort: { path: 'createdAt', order: 'desc' }
+            });
+        },
+        
+        // APPLICATION EVENTS
+        _onNavChanged(_, sEventId, oData) {
+            if (oData.route === 'todoMaster') {
+                this.getView().setBusy(true);
+                this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
+                setTimeout(() => this.getView().setBusy(false));
+            }
+        },
+
+        _onTodoListChanged() {
+            this.byId('idTodoList').getBinding('items').refresh();
+        }
     });
 });

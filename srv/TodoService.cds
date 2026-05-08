@@ -2,10 +2,11 @@ using { Todo } from '../db/entity/Todo.cds';
 
 service TodoService {
 
-  entity TodoList as projection on Todo.TodoList;
+  entity List as projection on Todo.List;
+  entity ListTag as projection on Todo.ListTag;
 
-  entity TodoParent as projection on Todo.TodoParent;
+  entity Item as projection on Todo.Item;
 
-  entity TodoItem as projection on Todo.TodoItem;
+
 
 }

@@ -18,7 +18,7 @@ sap.ui.define([
                 ID: null,
                 compactView: true,
 
-                todoParentCount: 0,
+                counter: 0,
                 showTodoParentsSearch: false,
                 showTodoParentsDetails: false
             });
@@ -37,7 +37,7 @@ sap.ui.define([
         bindView(sID) {
             try {
                 this.getView().bindElement({
-                    path: `todo>/TodoList(${sID})`,
+                    path: `todo>/List(${sID})`,
                     parameters: {
                         $expand: 'items'
                     },
@@ -49,8 +49,8 @@ sap.ui.define([
 
                 if (!this.ODataEventsAttached) {
                     this.ODataEventsAttached = true;
-                    this.byId('idTodoParentsList').getBinding('items').attachDataReceived(oEvent => 
-                        this.Config.setProperty('/todoParentCount', oEvent.getSource().getCount()));
+                    this.byId('idTodoItems').getBinding('items').attachDataReceived(oEvent => 
+                        this.Config.setProperty('/counter', oEvent.getSource().getCount()));
                 }
 
             } catch(oError) {

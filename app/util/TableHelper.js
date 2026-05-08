@@ -10,8 +10,7 @@ sap.ui.define([
         },
 
         register(sId, oConfig) {
-            this[sId] = this.Controller.byId(sId);
-            this[sId]._tableHelperConfig = { ...oConfig, id: sId };
+            this[sId] = { ...oConfig, id: sId };
         },
 
         async onPressSort(sId) {
@@ -25,7 +24,7 @@ sap.ui.define([
                 return oFragment;
             });
 
-            this.Controller.TableSortDialog.getModel().setProperty('/tableConfig', this[sId]._tableHelperConfig);
+            this.Controller.TableSortDialog.getModel().setProperty('/tableConfig', this[sId]);
             this.Controller.TableSortDialog.getModel().refresh(true);
 
             this.Controller.TableSortDialog.open();
@@ -34,8 +33,8 @@ sap.ui.define([
         onSort(sId) {
             const sSortOption = this.Controller.byId('idTableHelperSortListOption').getSelectedItem().getBindingContext().getProperty('key');
             const sSortColumn = this.Controller.byId('idTableHelperSortListColumn').getSelectedItem().getBindingContext().getProperty('path');
-            this[sId]._tableHelperConfig.sort = { path: sSortColumn, order: sSortOption };
-            this[sId].getBinding('items').changeParameters({
+            this[sId].sort = { path: sSortColumn, order: sSortOption };
+            this.Controller.byId(sId).getBinding('items').changeParameters({
                 $orderby: `${sSortColumn} ${sSortOption}`
             });
             this.Controller.TableSortDialog.close();

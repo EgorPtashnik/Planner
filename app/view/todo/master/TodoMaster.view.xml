@@ -1,90 +1,92 @@
 <mvc:View
     xmlns='sap.m'
     xmlns:f='sap.f'
+    xmlns:fb='sap.ui.comp.filterbar'
     xmlns:mvc='sap.ui.core.mvc'
     xmlns:core='sap.ui.core'
     busyIndicatorDelay='0'
 	controllerName='planner.controller.todo.master.TodoMaster'>
 
-    <f:DynamicPage>
+    <f:DynamicPage headerExpanded='false'>
 
 
 
-        <!-- HEADER -->
+        <!-- Title -->
         <f:title>
             <f:DynamicPageTitle>
 
                 <f:heading>
-                    <Title text='Дела' />
+                    <Title text='Дела ({config>/listCount})' />
                 </f:heading>
-
-                <f:actions>
-                    <Button
-                        press='onPressCreateTodoList'
-                        type='Emphasized'
-                        text='Создать Список'
-                        tooltip='Создать Список'>
-                        <layoutData>
-                            <OverflowToolbarLayoutData priority='NeverOverflow' />
-                        </layoutData>
-                    </Button>
-                </f:actions>
 
             </f:DynamicPageTitle>
         </f:title>
 
 
 
-        <!-- TODO LISTS -->
+        <!-- FILTER BAR -->
+        <f:header>
+            <f:DynamicPageHeader>
+                <fb:FilterBar showGoOnFB="false" useToolbar="false">
+                    <fb:filterGroupItems>
+
+                        <fb:FilterGroupItem name="fbSearch" label="Поиск" groupName="basic" visibleInFilterBar="true">
+                            <fb:control>
+                                <SearchField change='onChangeTodoListSearch' />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+
+
+        <!-- TABLE <TodoList> -->
         <f:content>
             <Table
-                id='idTodoListsList'
+                id='idTodoList'
                 inset='true'
-                items='{ path: "todo>/TodoList", parameters: { $count: true } }'>
+                sticky='HeaderToolbar'
+                items='{ path: "todo>/List", parameters: { $count: true } }'>
 
                 <noData>
                     <IllustratedMessage
-                        title='Списки еще не добавлены'
-                        description='Создайте новый список чтобы увидеть данные.'
+                        title='Нет данных'
+                        description='Создайте новое дело чтобы увидеть данные.'
                         illustrationType='sapIllus-NoActivities' />
                 </noData>
 
                 <headerToolbar>
                     <OverflowToolbar design='Solid'>
-                        <Title text='Списки ({config>/todoListCount})' visible='{= !%{config>/showTodoListsSearch} }' />
-
-                        <VBox width='100%' visible='{config>/showTodoListsSearch}'>
-                            <SearchField
-                                change='onChangeTodoListsSearch'
-                                showSearchButton='false'>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                </layoutData>
-                            </SearchField>
-                        </VBox>
 
                         <ToolbarSpacer />
 
-                        <ToggleButton
-                            icon='sap-icon://search'
-                            tooltip='Поиск'
-                            pressed='{config>/showTodoListsSearch}'>
+                        <Button
+                            press='onPressCreateList'
+                            text='Создать'
+                            tooltip='Создать'>
                             <layoutData>
                                 <OverflowToolbarLayoutData priority='NeverOverflow' />
                             </layoutData>
-                        </ToggleButton>
+                        </Button>
+                        <OverflowToolbarButton
+                            press='onPressManageTags'
+                            icon='sap-icon://tag'
+                            tooltip='Управление тегами'
+                            text='Теги' />
                     </OverflowToolbar>
                 </headerToolbar>
 
                 <columns>
                     <Column>
-                        <Text text='Список' />
+                        <Text text='Имя' />
                     </Column>
                 </columns>
 
                 <items>
                     <ColumnListItem
-                        press='onPressTodoListItem'
+                        press='onPressListItem'
                         navigated='{= %{/detailID} === %{todo>ID} }'
                         highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
                         type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>

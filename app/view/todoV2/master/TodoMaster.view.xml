@@ -1,0 +1,102 @@
+<mvc:View
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:mvc='sap.ui.core.mvc'
+    xmlns:core='sap.ui.core'
+    busyIndicatorDelay='0'
+	controllerName='planner.controller.todo.master.TodoMaster'>
+
+    <f:DynamicPage>
+
+
+
+        <!-- HEADER -->
+        <f:title>
+            <f:DynamicPageTitle>
+
+                <f:heading>
+                    <Title text='Дела' />
+                </f:heading>
+
+                <f:actions>
+                    <Button
+                        press='onPressCreateTodoList'
+                        type='Emphasized'
+                        text='Создать Список'
+                        tooltip='Создать Список'>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='NeverOverflow' />
+                        </layoutData>
+                    </Button>
+                </f:actions>
+
+            </f:DynamicPageTitle>
+        </f:title>
+
+
+
+        <!-- TODO LISTS -->
+        <f:content>
+            <Table
+                id='idTodoListsList'
+                inset='true'
+                items='{ path: "todo>/TodoList", parameters: { $count: true } }'>
+
+                <noData>
+                    <IllustratedMessage
+                        title='Списки еще не добавлены'
+                        description='Создайте новый список чтобы увидеть данные.'
+                        illustrationType='sapIllus-NoActivities' />
+                </noData>
+
+                <headerToolbar>
+                    <OverflowToolbar design='Solid'>
+                        <Title text='Списки ({config>/todoListCount})' visible='{= !%{config>/showTodoListsSearch} }' />
+
+                        <VBox width='100%' visible='{config>/showTodoListsSearch}'>
+                            <SearchField
+                                change='onChangeTodoListsSearch'
+                                showSearchButton='false'>
+                                <layoutData>
+                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                </layoutData>
+                            </SearchField>
+                        </VBox>
+
+                        <ToolbarSpacer />
+
+                        <ToggleButton
+                            icon='sap-icon://search'
+                            tooltip='Поиск'
+                            pressed='{config>/showTodoListsSearch}'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                            </layoutData>
+                        </ToggleButton>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column>
+                        <Text text='Список' />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        press='onPressTodoListItem'
+                        navigated='{= %{/detailID} === %{todo>ID} }'
+                        highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
+                        type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>
+                        <cells>
+                            <ObjectIdentifier title='{todo>name}' />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+        </f:content>
+
+    </f:DynamicPage>
+
+</mvc:View>

@@ -21,7 +21,7 @@
                 <uxap:breadcrumbs>
                     <Breadcrumbs currentLocationText='{todo>name}'>
                         <links>
-                            <Link press='onPressClosePage' text='Списки Дел' />
+                            <Link press='onPressClosePage' text='Дела' />
                         </links>
                     </Breadcrumbs>
                 </uxap:breadcrumbs>
@@ -39,10 +39,9 @@
 
                 <uxap:actions>
                     <Button
-                        press='onPressAddTodoParent'
-                        type='Emphasized'
-                        text='Создать Этап'
-                        tooltip='Создать Этап'>
+                        press='onPressCreateItem'
+                        text='Создать'
+                        tooltip='Создать'>
                         <layoutData>
                             <OverflowToolbarLayoutData priority='NeverOverflow' />
                         </layoutData>

@@ -1,0 +1,88 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog
+        showHeader='false'
+        stretch='true'>
+
+        <content>
+            <Table
+                id='idTodoTagList'
+                delete='onPressDeleteListTag'
+                fixedLayout='false'
+                mode='Delete'
+                alternateRowColors='true'
+                autoPopinMode='true'
+                items='{
+                    path: "todo>/ListTag",
+                    parameters: { $orderby: "createdAt desc" }
+                }'>
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text='Теги ({config>/tagCount})' />
+
+                        <ToolbarSpacer />
+
+                        <OverflowToolbarButton
+                            press='.TableHelper.onPressSort("idTodoTagList")'
+                            type='Transparent'
+                            icon='sap-icon://sort'
+                            text='Сортировка'
+                            tooltip='Сортировка' />
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column>
+                        <Text text='Имя' />
+                    </Column>
+                    
+                    <Column>
+                        <Text text='Цвет' />
+                    </Column>
+                    
+                    <Column autoPopinWidth='999'>
+                        <Text text='Описание' />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Input value='{todo>name}' />
+
+                            <Select
+                                valueState='{todo>color}'
+                                valueStateText=' '
+                                selectedKey='{todo>color}'>
+                                <items>
+                                    <core:ListItem key='None' text='Серый' />
+                                    <core:ListItem key='Information' text='Синий' />
+                                    <core:ListItem key='Warning' text='Оранжевый' />
+                                    <core:ListItem key='Error' text='Красный' />
+                                    <core:ListItem key='Success' text='Зеленый' />
+                                </items>
+                            </Select>
+
+                            <Input value='{todo>info}' />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+
+        <buttons>
+            <Button
+                press='onPressCreateListTag'
+                type='Emphasized'
+                text='Создать'
+                tooltip='Создать новый тег' />
+            <Button
+                press='onPressCloseDialog'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+    </Dialog>
+
+</core:FragmentDefinition>
