@@ -42,16 +42,17 @@ sap.ui.define([
             }
         },
 
-        onPressManageTags() {
-            this._openManageTagsDialog();
-        },
-
         onChangeTodoListSearch(oEvent) {
             this.byId('idTodoList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
         },
 
         async onPressCreateList() {
-            const oContext = this.byId('idTodoList').getBinding('items').create({name: 'Новый Список'});
+            const oContext = this.byId('idTodoList').getBinding('items').create({
+                name: 'Новый Список',
+                priority: 1,
+                items: [],
+                doneItems: []
+            });
             await oContext.created();
             this.publish(this.EVENT.ACTION_SUCCEEDED, 'Дело создано.');
 
@@ -62,6 +63,14 @@ sap.ui.define([
                     layout: this.LayoutType.TwoColumnsMidExpanded
                 }
             });
+        },
+
+        onPressManageTags() {
+            this._openManageTagsDialog();
+        },
+
+        onPressSort() {
+            this.TableHelper.onPressSort('idTodoList');
         },
 
         onPressListItem(oEvent) {
@@ -80,6 +89,15 @@ sap.ui.define([
                 columns: [
                     { label: 'Имя', path: 'name' },
                     { label: 'Описание', path: 'info' },
+                    { label: 'Дата Создания', path: 'createdAt' },
+                    { label: 'Дата Обновления', path: 'modifiedAt' }
+                ],
+                sort: { path: 'createdAt', order: 'desc' }
+            });
+            this.TableHelper.register('idTodoList', {
+                columns: [
+                    { label: 'Имя', path: 'name' },
+                    { label: 'Приоритет', path: 'priority' },
                     { label: 'Дата Создания', path: 'createdAt' },
                     { label: 'Дата Обновления', path: 'modifiedAt' }
                 ],

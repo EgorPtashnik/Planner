@@ -118,6 +118,7 @@ sap.ui.define([
 
         onPressChangeItemStatus(oEvent, iStatus) {
             oEvent.getSource().getBindingContext('todo').setProperty('status', iStatus);
+            this.publish(this.EVENT.TODOLIST_CHANGED);
         },
 
         async onPressDeleteItem(oEvent) {
@@ -153,6 +154,7 @@ sap.ui.define([
                 if (oData?.parameters?.id && this.Config.getProperty('/ID') !== oData.parameters.id) {
                     this.getView().setBusy(true);
                     this.Config.setProperty('/ID', oData.parameters.id);
+                    this.Config.setProperty('/editMode', false);
                     this.bindView(oData.parameters.id);
                 }
             }

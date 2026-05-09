@@ -53,6 +53,7 @@
                             <Input value='{todo>name}' />
 
                             <Select
+                                width='100%'
                                 valueState='{todo>color}'
                                 valueStateText=' '
                                 selectedKey='{todo>color}'>

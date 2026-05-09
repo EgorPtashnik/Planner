@@ -63,10 +63,10 @@
                     <VBox>
                         <Title text='{todo>name}' wrapping='true' />
                         <GenericTag
-                            visible='{= !%{config>/editMode} }'
                             design='StatusIconHidden'
-                            status='{todo>tag/color}'
-                            text='{todo>tag/name}' />
+                            status='{= %{todo>tag/color} || "None"}'
+                            text='{= %{todo>tag/name} || "Нет" }'
+                            visible='{= !%{config>/editMode} }' />
                     </VBox>
                 </uxap:expandedHeading>
 
@@ -121,92 +121,15 @@
 
         <!-- ITEMS -->
         <uxap:sections>
-            <uxap:ObjectPageSection>
+            <uxap:ObjectPageSection showTitle='false'>
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title='Шаги ({config>/itemCount})'>
-
-                        <uxap:actions>
-                            <Button
-                                press='onPressCreateItem'
-                                type='Ghost'
-                                text='Создать Шаг'
-                                tooltip='Создать Шаг'
-                                visible='{config>/editMode}'>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                </layoutData>
-                            </Button>
-
-                            <OverflowToolbarButton
-                                press='onPressSort'
-                                type='Transparent'
-                                icon='sap-icon://sort'
-                                text='Сортировка'
-                                tooltip='Сортировка'>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData group='1' />
-                                </layoutData>
-                            </OverflowToolbarButton>
-
-                            <OverflowToolbarButton
-                                press='onPressToggleVisibleItems'
-                                type='Transparent'
-                                icon='{= %{config>/showCompletedItems} ? "sap-icon://hide" : "sap-icon://show" }'
-                                text='{= %{config>/showCompletedItems} ? "Скрыть" : "Показать" } Законченные'
-                                tooltip='{= %{config>/showCompletedItems} ? "Скрыть" : "Показать" } Законченные'>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData group='1' />
-                                </layoutData>
-                            </OverflowToolbarButton>
-
-                            <OverflowToolbarButton
-                                press='onPressDeleteCompletedItems'
-                                type='Transparent'
-                                icon='sap-icon://eraser'
-                                text='Удалить Законченные'
-                                tooltip='Удалить Законченные'>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData group='1' />
-                                </layoutData>
-                            </OverflowToolbarButton>
-
-                            <ToggleButton
-                                type='Ghost'
-                                icon='sap-icon://detail-more'
-                                tooltip='Показать Детали'
-                                text='Показать Детали'
-                                visible='{device>/system/phone}'
-                                pressed='{config>/showDetails}'>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData priority='AlwaysOverflow' />
-                                </layoutData>
-                            </ToggleButton>
-
-                            <SegmentedButton
-                                selectedKey='{path: "config>/showDetails", targetType: "Boolean" }'
-                                visible='{= !%{device>/system/phone} }'>
-                                <items>
-                                    <SegmentedButtonItem
-                                        key='false'
-                                        icon='sap-icon://detail-less'
-                                        tooltip='Скрыть Детали' />
-                                    <SegmentedButtonItem
-                                        key='true'
-                                        icon='sap-icon://detail-more'
-                                        tooltip='Показать Детали' />
-                                </items>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                </layoutData>
-                            </SegmentedButton>
-                        </uxap:actions>
+                    <uxap:ObjectPageSubSection showTitle='false'>
 
                         <uxap:blocks>
                             <Table
                                 id='idTodoItems'
                                 delete='onPressDeleteItem'
                                 showSeparators='Inner'
-                                fixedLayout='false'
                                 autoPopinMode='true'
                                 hiddenInPopin='{= %{config>/showDetails}.toString() === "true" || %{config>/editMode} ? [] : ["Low","Medium"]}'
                                 mode='{= %{config>/editMode} ? "Delete" : "None"}'
@@ -226,15 +149,100 @@
                                         illustrationType='sapIllus-NoActivities' />
                                 </noData>
 
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <Title text='Шаги ({config>/itemCount})' />
+
+                                        <ToolbarSpacer />
+
+                                        <Button
+                                            press='onPressCreateItem'
+                                            type='Ghost'
+                                            text='Создать Шаг'
+                                            tooltip='Создать Шаг'
+                                            visible='{config>/editMode}'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                            </layoutData>
+                                        </Button>
+
+                                        <OverflowToolbarButton
+                                            press='onPressSort'
+                                            type='Transparent'
+                                            icon='sap-icon://sort'
+                                            text='Сортировка'
+                                            tooltip='Сортировка'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData group='1' />
+                                            </layoutData>
+                                        </OverflowToolbarButton>
+
+                                        <OverflowToolbarButton
+                                            press='onPressToggleVisibleItems'
+                                            type='Transparent'
+                                            icon='{= %{config>/showCompletedItems} ? "sap-icon://hide" : "sap-icon://show" }'
+                                            text='{= %{config>/showCompletedItems} ? "Скрыть" : "Показать" } Законченные'
+                                            tooltip='{= %{config>/showCompletedItems} ? "Скрыть" : "Показать" } Законченные'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData group='1' />
+                                            </layoutData>
+                                        </OverflowToolbarButton>
+
+                                        <OverflowToolbarButton
+                                            press='onPressDeleteCompletedItems'
+                                            type='Transparent'
+                                            icon='sap-icon://eraser'
+                                            text='Удалить Законченные'
+                                            tooltip='Удалить Законченные'
+                                            visible='{= !%{config>/editMode} }'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData group='1' />
+                                            </layoutData>
+                                        </OverflowToolbarButton>
+
+                                        <OverflowToolbarToggleButton
+                                            icon='sap-icon://detail-more'
+                                            tooltip='Показать Детали'
+                                            text='Показать Детали'
+                                            visible='{device>/system/phone}'
+                                            pressed='{config>/showDetails}'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData  group='1' />
+                                            </layoutData>
+                                        </OverflowToolbarToggleButton>
+
+                                        <SegmentedButton
+                                            selectedKey='{path: "config>/showDetails", targetType: "Boolean" }'
+                                            visible='{= !%{device>/system/phone} }'>
+                                            <items>
+                                                <SegmentedButtonItem
+                                                    key='false'
+                                                    icon='sap-icon://detail-less'
+                                                    tooltip='Скрыть Детали' />
+                                                <SegmentedButtonItem
+                                                    key='true'
+                                                    icon='sap-icon://detail-more'
+                                                    tooltip='Показать Детали' />
+                                            </items>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                            </layoutData>
+                                        </SegmentedButton>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+
                                 <columns>
-                                    <Column width='auto' importance='High' >
+                                    <Column
+                                        width='auto'
+                                        autoPopinWidth='10'
+                                        importance='High' >
                                         <Text text='Имя'/>
                                     </Column>
 
                                     <Column
-                                        hAlign='Right'
+                                        width='8rem'
                                         importance='Medium'
-                                        popinDisplay='{= %{config>/editMode} ? "Block" : "WithoutHeader" }'>
+                                        popinDisplay='Inline'>
                                         <Text text='Приоритет' />
                                     </Column>
 
@@ -245,14 +253,17 @@
                                         <Text text='Заметка' />
                                     </Column>
 
-                                    <Column hAlign='Right' importance='High' visible='{= !%{config>/editMode} }'>
+                                    <Column
+                                        width='8rem'
+                                        hAlign='Right'
+                                        importance='High'
+                                        visible='{= !%{config>/editMode} }'>
                                         <Text text='Выполнение' />
                                     </Column>
                                 </columns>
 
                                 <items>
                                     <ColumnListItem
-                                        vAlign='Top'
                                         visible='{=
                                             %{config>/showCompletedItems} ||
                                             %{todo>status} === 0 || %{todo>status} === 1
@@ -272,10 +283,9 @@
 
                                             <VBox>
                                                 <!-- DISPLAY -->
-                                                <GenericTag
-                                                    design='StatusIconHidden'
+                                                <ObjectStatus
                                                     text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                                                    status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
+                                                    state='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
                                                     visible='{= !%{config>/editMode} }' />
                                                 <!-- EDIT -->
                                                 <Select

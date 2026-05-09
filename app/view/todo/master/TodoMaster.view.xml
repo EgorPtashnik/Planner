@@ -16,7 +16,7 @@
             <f:DynamicPageTitle>
 
                 <f:heading>
-                    <Title text='Дела ({config>/listCount})' />
+                    <Title text='Мои Дела' />
                 </f:heading>
 
             </f:DynamicPageTitle>
@@ -47,7 +47,14 @@
             <Table
                 id='idTodoList'
                 sticky='HeaderToolbar'
-                items='{ path: "todo>/List", parameters: { $count: true } }'>
+                autoPopinMode='true'
+                items='{
+                    path: "todo>/List",
+                    parameters: {
+                        $count: true,
+                        $expand: "items,doneItems,tag"
+                    }
+                }'>
 
                 <noData>
                     <IllustratedMessage
@@ -57,10 +64,11 @@
                 </noData>
 
                 <headerToolbar>
-                    <OverflowToolbar design='Solid'>
+                    <OverflowToolbar>
+                        <Title text='Дела ({config>/listCount})' />
 
                         <ToolbarSpacer />
-
+                        
                         <Button
                             press='onPressCreateList'
                             type='Ghost'
@@ -70,28 +78,93 @@
                                 <OverflowToolbarLayoutData priority='NeverOverflow' />
                             </layoutData>
                         </Button>
+
                         <OverflowToolbarButton
                             press='onPressManageTags'
                             icon='sap-icon://tag'
                             tooltip='Управление тегами'
-                            text='Теги' />
+                            text='Теги'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData group='1' />
+                            </layoutData>
+                        </OverflowToolbarButton>
+
+                        <OverflowToolbarButton
+                            press='onPressSort'
+                            type='Transparent'
+                            icon='sap-icon://sort'
+                            text='Сортировка'
+                            tooltip='Сортировка'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData group='1' />
+                            </layoutData>
+                        </OverflowToolbarButton>
                     </OverflowToolbar>
                 </headerToolbar>
 
                 <columns>
-                    <Column>
+                    <Column
+                        width='auto'
+                        importance='High'>
                         <Text text='Имя' />
+                    </Column>
+
+                    <Column
+                        width='5rem'
+                        importance='Low'
+                        popinDisplay='WithoutHeader'>
+                        <Text text='Тег' />
+                    </Column>
+
+                    <Column
+                        width='8rem'
+                        importance='Low'
+                        popinDisplay='Inline'>
+                        <Text text='Статус' />
+                    </Column>
+
+                    <Column
+                        width='8rem'
+                        hAlign='Right'
+                        importance='High'>
+                        <Text text='Приоритет' />
                     </Column>
                 </columns>
 
                 <items>
                     <ColumnListItem
                         press='onPressListItem'
+                        vAlign='Top'
                         navigated='{= %{/detailID} === %{todo>ID} }'
                         highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
                         type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>
                         <cells>
-                            <ObjectIdentifier title='{todo>name}' />
+                            <ObjectIdentifier
+                                title='{todo>name}'
+                                text='{todo>doneItems/$count} из {todo>items/$count}' />
+
+                            <GenericTag
+                                design='StatusIconHidden'
+                                status='{= %{todo>tag/color} || "None"}'
+                                text='{= %{todo>tag/name} || "Нет" }' />
+
+                            <ObjectStatus
+                                inverted='true'
+                                class='sapMObjectStatusLongText'
+                                text='{=
+                                    %{todo>status} === 1 ? "Выполняется" :
+                                    %{todo>items/$count} === %{todo>doneItems/$count} &amp;&amp; %{todo>doneItems/$count} !== 0 ? "Выполнен" :
+                                    "Не выполняется"
+                                }'
+                                state='{=
+                                    %{todo>status} === 1 ? "Warning" :
+                                    %{todo>items/$count} === %{todo>doneItems/$count} &amp;&amp; %{todo>doneItems/$count} !== 0 ? "Success" :
+                                    "Information"
+                                }' />
+
+                            <ObjectStatus
+                                text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                state='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
                         </cells>
                     </ColumnListItem>
                 </items>

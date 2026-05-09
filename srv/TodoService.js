@@ -16,4 +16,12 @@ async function onAfterUpsertItem(_, req) {
     await UPDATE (this.entities.List)
         .set `priority = ${oHighestPriorityItem?.priority || PriorityType.Low}`
         .where `ID = ${req.data.list_ID}`;
+
+    const oHighestProgressItem = await SELECT.one.from (this.entities.Item)
+        .where `list_ID = ${req.data.list_ID} and status in (${ProgressStatusType.Created}, ${ProgressStatusType.InProgress})`
+        .orderBy `status desc`;
+
+    await UPDATE (this.entities.List)
+        .set `status = ${oHighestProgressItem?.status || ProgressStatusType.Created}`
+        .where `ID = ${req.data.list_ID}`;
 };

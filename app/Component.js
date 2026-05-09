@@ -23,7 +23,7 @@ sap.ui.define([
                 isOnlyOneColumn: false,
                 routes: [
                     {text: 'Овервью', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Дела', icon: 'sap-icon://activities', key: 'todoMaster'},
+                    {text: 'Мои Дела', icon: 'sap-icon://activities', key: 'todoMaster'},
                     {text: 'Тренировки', icon: 'sap-icon://physical-activity', key: 'gym'},
                     {text: 'ArmA: SQF Документация', icon: 'sap-icon://syntax', key: 'sqfMaster'}
                 ],
