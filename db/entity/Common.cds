@@ -5,4 +5,4 @@ using { Types.Priority } from '../Reuse';
 
 entity PriorityCode: CodeList  {
     key code: Priority
-}
+};
