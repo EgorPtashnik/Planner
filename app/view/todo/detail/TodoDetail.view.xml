@@ -61,21 +61,53 @@
 
                 <uxap:expandedHeading>
                     <VBox>
-                        <Title text='{todo>name}' wrapping='true' />
+                        <!-- DISPLAY -->
+                        <Title
+                            wrapping='true'
+                            text='{todo>name}'
+                            visible='{= !%{config>/editMode} }' />
                         <GenericTag
                             design='StatusIconHidden'
                             status='{= %{todo>tag/color} || "None"}'
                             text='{= %{todo>tag/name} || "Нет" }'
                             visible='{= !%{config>/editMode} }' />
+
+                        <!-- EDIT -->
+                        <Input
+                            value='{todo>name}'
+                            visible='{config>/editMode}' />
+                        <Select
+                            forceSelection='false'
+                            selectedKey='{todo>tag_ID}'
+                            visible='{config>/editMode}'
+                            items='{todo>/ListTag}'>
+                            <items>
+                                <core:Item key='{todo>ID}' text='{todo>name}' />
+                            </items>
+                        </Select>
                     </VBox>
                 </uxap:expandedHeading>
 
                 <uxap:expandedContent>
-                    <ObjectStatus title='Обновлено' text='{todo>modifiedAt}' visible='{= !%{config>/editMode} }' />
+                    <ObjectStatus
+                        title='Обновлено'
+                        text='{todo>modifiedAt}'
+                        visible='{= !%{config>/editMode} }' />
                 </uxap:expandedContent>
 
                 <uxap:snappedHeading>
-                    <Title text='{todo>name}' />
+                    <VBox>
+                        <!-- DISPLAY -->
+                        <Title
+                            wrapping='true'
+                            text='{todo>name}'
+                            visible='{= !%{config>/editMode} }' />
+
+                        <!-- EDIT -->
+                        <Input
+                            value='{todo>name}'
+                            visible='{config>/editMode}' />
+                    </VBox>
                 </uxap:snappedHeading>
 
                 <uxap:snappedContent>
@@ -97,20 +129,8 @@
                 labelSpanM='12'
                  visible='{config>/editMode}'>
                 <form:content>
-                    <Label text='Название / Тег' />
-                    <Input value='{todo>name}' />
-                    <Select
-                        forceSelection='false'
-                        selectedKey='{todo>tag_ID}'
-                        items='{todo>/ListTag}'>
-                        <items>
-                            <core:Item key='{todo>ID}' text='{todo>name}' />
-                        </items>
-                    </Select>
-
                     <Label text='Заметки' />
                     <TextArea rows='5' value='{todo>info}' />
-
                 </form:content>
             </form:SimpleForm>
 
