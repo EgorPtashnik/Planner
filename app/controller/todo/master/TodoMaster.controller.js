@@ -22,7 +22,8 @@ sap.ui.define([
                 tagCount: 0,
                 showDetails: false,
                 filterBar: {
-                    ListTag: []
+                    ListTag: [],
+                    Priority: []
                 }
             });
 
