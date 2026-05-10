@@ -167,17 +167,6 @@
                                         </Button>
 
                                         <OverflowToolbarButton
-                                            press='onPressSort'
-                                            type='Transparent'
-                                            icon='sap-icon://sort'
-                                            text='Сортировка'
-                                            tooltip='Сортировка'>
-                                            <layoutData>
-                                                <OverflowToolbarLayoutData group='1' />
-                                            </layoutData>
-                                        </OverflowToolbarButton>
-
-                                        <OverflowToolbarButton
                                             press='onPressToggleVisibleItems'
                                             type='Transparent'
                                             icon='{= %{config>/showCompletedItems} ? "sap-icon://hide" : "sap-icon://show" }'
@@ -195,6 +184,17 @@
                                             text='Удалить Законченные'
                                             tooltip='Удалить Законченные'
                                             visible='{= !%{config>/editMode} }'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData group='1' />
+                                            </layoutData>
+                                        </OverflowToolbarButton>
+
+                                        <OverflowToolbarButton
+                                            press='onPressItemSort'
+                                            type='Transparent'
+                                            icon='sap-icon://sort'
+                                            text='Сортировка'
+                                            tooltip='Сортировка'>
                                             <layoutData>
                                                 <OverflowToolbarLayoutData group='1' />
                                             </layoutData>

@@ -99,7 +99,7 @@ sap.ui.define([
             }
         },
 
-        onPressSort() {
+        onPressItemSort() {
             this.TableHelper.onPressSort('idTodoItems');
         },
 
