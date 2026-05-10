@@ -2,7 +2,10 @@
     xmlns='sap.m'
     xmlns:core='sap.ui.core'>
 
-    <Dialog stretch='{device>/system/phone}' class='sapUiContentPadding'>
+    <Dialog
+        showHeader='false'
+        stretch='true'
+        class='sapUiContentPadding'>
         
         <customHeader>
             <Bar>

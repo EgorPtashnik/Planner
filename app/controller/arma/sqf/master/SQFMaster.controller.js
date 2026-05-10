@@ -1,24 +1,23 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/arma/sqf/master/Events',
 
     'planner/controller/arma/sqf/master/modal/CreateFunctionDialog',
     'planner/controller/arma/sqf/master/modal/ChangeTagsDialog'
-], (BaseController, Events,
-
-    CreateFunctionDialogLogic, ChangeTagsDialogLogic
+], (BaseController, CreateFunctionDialogLogic, ChangeTagsDialogLogic
 ) => {
     'use strict';
 
     return BaseController.extend('planner.controller.arma.sqf.master.SQFMaster', {
 
-        ...Events,
         ...CreateFunctionDialogLogic,
         ...ChangeTagsDialogLogic,
 
         onInit() {
             this.init();
-            this.setSubscriptions();
+            [
+                { id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged },
+                { id: this.EVENT.SQFCOMMAND_CHANGED, fnc: this._onSqfCommandChanged }
+            ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
 
             this.ODataEventsAttached = false;
 
@@ -65,6 +64,20 @@ sap.ui.define([
                 }
             });
 
+        },
+
+        // APPLICATION EVENTS
+        _onNavChanged(_, sEventId, oData) {
+            if (oData.route === 'sqfMaster') {
+                this.getView().setBusy(true);
+                this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
+                setTimeout(() => this.getView().setBusy(false));
+                this.byId('idSqfCommandsList').getBinding('items').refresh();
+            }
+        },
+
+        _onSqfCommandChanged() {
+            this.byId('idSqfCommandsList').getBinding('items').refresh();
         }
 
     });

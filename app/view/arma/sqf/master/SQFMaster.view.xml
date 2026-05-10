@@ -102,19 +102,34 @@
 
                         <Button
                             press='onPressCreateSqfCommand'
-                            type='Emphasized'
-                            text='Создать Функцию'
-                            tooltip='Создать Функцию' />
-
-                        <ToolbarSeparator visible='{= !%{device>/system/phone} }' />
-
-                        <ToggleButton
                             type='Ghost'
+                            text='Создать'
+                            tooltip='Создать'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                            </layoutData>
+                        </Button>
+
+                        <OverflowToolbarButton
+                            press='onPressChangeTags'
+                            icon='sap-icon://tags'
+                            text='Изменить Теги'
+                            tooltip='Изменить Теги'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData group='1' />
+                            </layoutData>
+                        </OverflowToolbarButton>
+
+                        <OverflowToolbarToggleButton
                             icon='sap-icon://detail-more'
                             tooltip='Показать Детали'
                             text='Показать Детали'
                             visible='{device>/system/phone}'
-                            pressed='{config>/showSqfCommandsDetails}' />
+                            pressed='{config>/showSqfCommandsDetails}'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData group='1' />
+                            </layoutData>
+                        </OverflowToolbarToggleButton>
 
                         <SegmentedButton
                             selectedKey='{path: "config>/showSqfCommandsDetails", targetType: "Boolean" }'
@@ -133,12 +148,6 @@
                                 <OverflowToolbarLayoutData priority='NeverOverflow' />
                             </layoutData>
                         </SegmentedButton>
-
-                        <OverflowToolbarButton
-                            press='onPressChangeTags'
-                            icon='sap-icon://tags'
-                            text='Изменить Теги'
-                            tooltip='Изменить Теги' />
                     </OverflowToolbar>
                 </headerToolbar>
 
