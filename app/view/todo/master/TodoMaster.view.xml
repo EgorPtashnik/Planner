@@ -74,6 +74,7 @@
                 id='idTodoList'
                 sticky='HeaderToolbar'
                 autoPopinMode='true'
+                hiddenInPopin='{= %{config>/showDetails}.toString() === "true" ? [] : ["Low","Medium"] }'
                 items='{
                     path: "todo>/List",
                     parameters: {
@@ -125,6 +126,35 @@
                                 <OverflowToolbarLayoutData group='1' />
                             </layoutData>
                         </OverflowToolbarButton>
+
+                        <OverflowToolbarToggleButton
+                            icon='sap-icon://detail-more'
+                            tooltip='Показать Детали'
+                            text='Показать Детали'
+                            visible='{device>/system/phone}'
+                            pressed='{config>/showDetails}'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData  group='1' />
+                            </layoutData>
+                        </OverflowToolbarToggleButton>
+
+                        <SegmentedButton
+                            selectedKey='{config>/showDetails}'
+                            visible='{= !%{device>/system/phone} }'>
+                            <items>
+                                <SegmentedButtonItem
+                                    key='false'
+                                    icon='sap-icon://detail-less'
+                                    tooltip='Скрыть Детали' />
+                                <SegmentedButtonItem
+                                    key='true'
+                                    icon='sap-icon://detail-more'
+                                    tooltip='Показать Детали' />
+                            </items>
+                            <layoutData>
+                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                            </layoutData>
+                        </SegmentedButton>
                     </OverflowToolbar>
                 </headerToolbar>
 

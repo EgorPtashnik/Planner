@@ -20,6 +20,7 @@ sap.ui.define([
             this.Config.setData({
                 listCount: 0,
                 tagCount: 0,
+                showDetails: false,
                 filterBar: {
                     ListTag: []
                 }

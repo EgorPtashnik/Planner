@@ -131,7 +131,7 @@
                                 delete='onPressDeleteItem'
                                 showSeparators='Inner'
                                 autoPopinMode='true'
-                                hiddenInPopin='{= %{config>/showDetails}.toString() === "true" || %{config>/editMode} ? [] : ["Low","Medium"]}'
+                                hiddenInPopin='{= %{config>/showDetails}.toString() === "true" || %{config>/editMode} ? [] : ["Low","Medium"] }'
                                 mode='{= %{config>/editMode} ? "Delete" : "None"}'
                                 items='{
                                     path: "todo>items",
@@ -212,7 +212,7 @@
                                         </OverflowToolbarToggleButton>
 
                                         <SegmentedButton
-                                            selectedKey='{path: "config>/showDetails", targetType: "Boolean" }'
+                                            selectedKey='{config>/showDetails}'
                                             visible='{= !%{device>/system/phone} &amp;&amp; !%{config>/editMode} }'>
                                             <items>
                                                 <SegmentedButtonItem
