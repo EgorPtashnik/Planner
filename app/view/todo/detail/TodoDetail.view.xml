@@ -158,8 +158,8 @@
                                         <Button
                                             press='onPressCreateItem'
                                             type='Ghost'
-                                            text='Создать Шаг'
-                                            tooltip='Создать Шаг'
+                                            text='Создать'
+                                            tooltip='Создать'
                                             visible='{config>/editMode}'>
                                             <layoutData>
                                                 <OverflowToolbarLayoutData priority='NeverOverflow' />
@@ -204,7 +204,7 @@
                                             icon='sap-icon://detail-more'
                                             tooltip='Показать Детали'
                                             text='Показать Детали'
-                                            visible='{device>/system/phone}'
+                                            visible='{= %{device>/system/phone} &amp;&amp; !%{config>/editMode} }'
                                             pressed='{config>/showDetails}'>
                                             <layoutData>
                                                 <OverflowToolbarLayoutData  group='1' />
@@ -213,7 +213,7 @@
 
                                         <SegmentedButton
                                             selectedKey='{path: "config>/showDetails", targetType: "Boolean" }'
-                                            visible='{= !%{device>/system/phone} }'>
+                                            visible='{= !%{device>/system/phone} &amp;&amp; !%{config>/editMode} }'>
                                             <items>
                                                 <SegmentedButtonItem
                                                     key='false'

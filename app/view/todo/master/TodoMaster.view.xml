@@ -36,6 +36,32 @@
                             </fb:control>
                         </fb:FilterGroupItem>
 
+                        <fb:FilterGroupItem name="fbListTag" label="Тег" groupName="basic" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    selectionFinish='onChangeTodoListFilter'
+                                    selectedKeys='{config>/filterBar/ListTag}'
+                                    items='{todo>/ListTag}'>
+                                    <items>
+                                        <core:Item key='{todo>ID}' text='{todo>name}' />
+                                    </items>
+                                </MultiComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem name="fbPriority" label="Приоритет" groupName="basic" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    selectionFinish='onChangeTodoListFilter'
+                                    selectedKeys='{config>/filterBar/Priority}'
+                                    items='{common>/PriorityCode}'>
+                                    <items>
+                                        <core:Item key='{common>code}' text='{common>name}' />
+                                    </items>
+                                </MultiComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
                     </fb:filterGroupItems>
                 </fb:FilterBar>
             </f:DynamicPageHeader>
@@ -90,7 +116,7 @@
                         </OverflowToolbarButton>
 
                         <OverflowToolbarButton
-                            press='onPressSort'
+                            press='onPressTodoListSort'
                             type='Transparent'
                             icon='sap-icon://sort'
                             text='Сортировка'
@@ -134,7 +160,6 @@
                 <items>
                     <ColumnListItem
                         press='onPressListItem'
-                        vAlign='Top'
                         navigated='{= %{/detailID} === %{todo>ID} }'
                         highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
                         type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>

@@ -19,7 +19,10 @@ sap.ui.define([
             this.ODataEventsAttached = false;
             this.Config.setData({
                 listCount: 0,
-                tagCount: 0
+                tagCount: 0,
+                filterBar: {
+                    ListTag: []
+                }
             });
 
             this.ManageTagsDialog = null;
@@ -46,6 +49,11 @@ sap.ui.define([
             this.byId('idTodoList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
         },
 
+        onChangeTodoListFilter() {
+            const sFilters = this._getFilters();
+            this.byId('idTodoList').getBinding('items').changeParameters({ $filter: sFilters || undefined });
+        },
+
         async onPressCreateList() {
             const oContext = this.byId('idTodoList').getBinding('items').create({
                 name: 'Новый Список',
@@ -69,7 +77,7 @@ sap.ui.define([
             this._openManageTagsDialog();
         },
 
-        onPressSort() {
+        onPressTodoListSort() {
             this.TableHelper.onPressSort('idTodoList');
         },
 
@@ -104,7 +112,21 @@ sap.ui.define([
                 sort: { path: 'createdAt', order: 'desc' }
             });
         },
-        
+
+        _getFilters() {
+            const aFilters = [];
+            const oFilterBarData = this.Config.getProperty('/filterBar');
+            if (oFilterBarData.ListTag.length) {
+                aFilters.push('(' + oFilterBarData.ListTag.map(sID => `tag_ID eq ${sID}`).join(' or ') + ')');
+            }
+
+            if (oFilterBarData.Priority.length) {
+                aFilters.push('(' + oFilterBarData.Priority.map(sID => `priority eq ${sID}`).join(' or ') + ')');
+            }
+
+            return aFilters.join(' and ');
+        },
+
         // APPLICATION EVENTS
         _onNavChanged(_, sEventId, oData) {
             if (oData.route === 'todoMaster') {
