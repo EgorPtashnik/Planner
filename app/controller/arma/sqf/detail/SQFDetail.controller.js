@@ -22,6 +22,7 @@ sap.ui.define([
             this.Config.setData({
                 ID: null,
                 editMode: false,
+                selectedTags: [],
 
                 showSqfCommandParamsDetails: false
             });
@@ -62,10 +63,16 @@ sap.ui.define([
             this.publish(this.EVENT.NAV_CHANGED, { route: 'sqfMaster' });
         },
 
-        onToggleEditMode(oEvent) {
+        async onToggleEditMode(oEvent) {
             if (!oEvent.getParameter('pressed')) {
-                this.bindView(this.Config.getProperty('/ID'));
+                await this._updateFunctionTags();
+                this.getView().getBindingContext('arma').refresh();
                 this.publish(this.EVENT.SQFCOMMAND_CHANGED);
+            } else {
+                this.Config.setProperty(
+                    '/selectedTags',
+                    this.getView().getBindingContext('arma').getObject().tags.map(oTag => oTag.tag_ID)
+                );
             }
         },
 
@@ -122,6 +129,21 @@ sap.ui.define([
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
+        },
+
+        async _updateFunctionTags() {
+            const aSelectedTagIDs = this.Config.getProperty('/selectedTags');
+
+            const aDeletePromises = this.byId('idTagsContainer').getTokens()
+                .filter(oToken => !aSelectedTagIDs.includes(oToken.getBindingContext('arma').getProperty('tag_ID')))
+                .map(oToken => oToken.getBindingContext('arma').delete());
+            await Promise.all(aDeletePromises);
+
+            const aNewContexts = aSelectedTagIDs
+                .filter(sTagID => !this.byId('idTagsContainer').getTokens().some(oToken => oToken.getBindingContext('arma').getProperty('tag_ID') === sTagID))
+                .map(sTagID => this.byId('idTagsContainer').getBinding('tokens').create({tag_ID: sTagID}));
+
+            return await Promise.all(aNewContexts.map(oContext => oContext.created()));
         }
 
     });

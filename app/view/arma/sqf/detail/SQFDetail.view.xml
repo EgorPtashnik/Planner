@@ -1,4 +1,5 @@
 <mvc:View
+    xmlns='sap.m'
     xmlns:f='sap.f'
     xmlns:uxap='sap.uxap'
     xmlns:mvc='sap.ui.core.mvc'
@@ -12,14 +13,133 @@
 
         <!-- HEADER -->
         <uxap:headerTitle>
-            <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.Header' type='XML' />
+            <uxap:ObjectPageDynamicHeaderTitle>
+
+                <uxap:breadcrumbs>
+                    <Breadcrumbs currentLocationText='{arma>name}'>
+                        <links>
+                            <Link press='onPressClosePage' text='Функции' />
+                        </links>
+                    </Breadcrumbs>
+                </uxap:breadcrumbs>
+
+                <uxap:navigationActions>
+                    <Button
+                        press='onToggleFullScreen(%{/layout} === "MidColumnFullScreen")'
+                        icon='{= %{/layout} === "MidColumnFullScreen" ? "sap-icon://exit-full-screen" : "sap-icon://full-screen" }'
+                        tooltip='Полный Экран'
+                        visible='{= !%{/isOnlyOneColumn} }' />
+
+                    <Button
+                        press='onPressClosePage'
+                        icon='sap-icon://decline'
+                        visible='{= !%{/layout}.includes("One") &amp;&amp; !%{/layout}.includes("Three") }' />
+                </uxap:navigationActions>
+
+                <uxap:actions>
+                    <ToggleButton
+                        press='onToggleEditMode'
+                        type='Emphasized'
+                        tooltip='Режим редактирования'
+                        icon='sap-icon://edit'
+                        pressed='{config>/editMode}'>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='NeverOverflow' />
+                        </layoutData>
+                    </ToggleButton>
+
+                    <OverflowToolbarButton
+                        press='onPressSourceCode'
+                        icon='sap-icon://source-code'
+                        text='Исходный Код'
+                        tooltip='Исходный Код' />
+                </uxap:actions>
+
+                <uxap:snappedHeading>
+                    <Title text='{arma>name}' />
+                </uxap:snappedHeading>
+
+                <uxap:expandedHeading>
+                    <VBox>
+                        <Title text='{arma>name}' />
+                        <HBox>
+                            <GenericTag
+                                visible='{= !%{config>/editMode} }'
+                                design='StatusIconHidden'
+                                status='{=
+                                    %{arma>source/code} === 1 ? "Information" :
+                                    %{arma>source/code} === 2 ? "Warning" :
+                                    "Error"
+                                }'
+                                text='{arma>source/name}' />
+                            <Select
+                                visible='{config>/editMode}'
+                                selectedKey='{arma>source_code}'
+                                items='{arma>/SqfCommandSource}'>
+                                <items>
+                                    <core:Item key='{arma>code}' text='{arma>name}' />
+                                </items>
+                            </Select>
+                            <GenericTag
+                                visible='{= !%{config>/editMode} }'
+                                class='sapUiTinyMarginBegin' text='{arma>type/name}' />
+                            <Select
+                                visible='{config>/editMode}'
+                                selectedKey='{arma>type_code}'
+                                items='{arma>/SqfCommandType}'>
+                                <items>
+                                    <core:Item key='{arma>code}' text='{arma>name}' />
+                                </items>
+                            </Select>
+                        </HBox>
+                    </VBox>
+                </uxap:expandedHeading>
+
+            </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
+
+
 
         <!-- HEADER CONTENT -->
         <uxap:headerContent>
-            <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.HeaderContent' type='XML' />
+            <VBox>
+                <!-- DISPLAY MODE -->
+                <FormattedText
+                    htmlText='{= %{arma>info} || "Нет описания" }'
+                    visible='{= !%{config>/editMode} }' />
+
+                <Tokenizer
+                    id='idTagsContainer'
+                    visible='{= !%{config>/editMode} }'
+                    tokens='{
+                        path: "arma>tags",
+                        parameters: { $$ownRequest: true, $expand: "tag" }
+                    }'>
+                    <tokens>
+                        <Token text='{arma>tag/name}' editable='false' />
+                    </tokens>
+                </Tokenizer>
+
+                <!-- EDIT MODE -->
+                <TextArea
+                    width='100%'
+                    rows='5'
+                    value='{arma>info}'
+                    visible='{config>/editMode}' />
+
+                <MultiComboBox
+                    selectedKeys='{config>/selectedTags}'
+                    items='{arma>/SqfTag}'
+                    visible='{config>/editMode}'>
+                    <items>
+                        <core:Item key='{arma>ID}' text='{arma>name}' />
+                    </items>
+                </MultiComboBox>
+            </VBox>
         </uxap:headerContent>
 
+
+        <!-- SECTIONS -->
         <uxap:sections>
             <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.Syntax' type='XML' />
             <core:Fragment fragmentName='planner.view.arma.sqf.detail.component.Parameters' type='XML' />
