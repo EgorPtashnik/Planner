@@ -58,6 +58,21 @@
                     </Button>
                 </uxap:actions>
 
+                <uxap:snappedHeading>
+                    <VBox>
+                        <!-- DISPLAY -->
+                        <Title
+                            wrapping='true'
+                            text='{todo>name}'
+                            visible='{= !%{config>/editMode} }' />
+
+                        <!-- EDIT -->
+                        <Input
+                            value='{todo>name}'
+                            visible='{config>/editMode}' />
+                    </VBox>
+                </uxap:snappedHeading>
+
                 <uxap:expandedHeading>
                     <VBox>
                         <!-- DISPLAY -->
@@ -94,24 +109,6 @@
                         visible='{= !%{config>/editMode} }' />
                 </uxap:expandedContent>
 
-                <uxap:snappedHeading>
-                    <VBox>
-                        <!-- DISPLAY -->
-                        <Title
-                            wrapping='true'
-                            text='{todo>name}'
-                            visible='{= !%{config>/editMode} }' />
-
-                        <!-- EDIT -->
-                        <Input
-                            value='{todo>name}'
-                            visible='{config>/editMode}' />
-                    </VBox>
-                </uxap:snappedHeading>
-
-                <uxap:snappedContent>
-                </uxap:snappedContent>
-
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
@@ -119,20 +116,22 @@
 
         <!-- HEADER CONTENT -->
         <uxap:headerContent>
+
             <!-- DISPLAY MODE -->
-            <Text
-                text='{= %{todo>info} || "Нет описания" }'
-                visible='{= !%{config>/editMode} }' />
+            <VBox visible='{= !%{config>/editMode} }'>
+                <Text
+                    text='{= %{todo>info} || "Нет описания" }'
+                    visible='{= !%{config>/editMode} }' />
+            </VBox>
 
             <!-- EDIT MODE -->
-            <VBox visible='{config>/editMode}'>
-                <Label text='Заметки' showColon='true' />
-
+            <VBox visible='{config>/editMode}' >
                 <TextArea
                     width='100%'
                     rows='5'
                     value='{todo>info}' />
             </VBox>
+
         </uxap:headerContent>
 
 
