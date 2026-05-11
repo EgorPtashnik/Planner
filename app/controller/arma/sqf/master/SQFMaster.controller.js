@@ -62,7 +62,6 @@ sap.ui.define([
                     layout: this.LayoutType.TwoColumnsMidExpanded
                 }
             });
-
         },
 
         // APPLICATION EVENTS

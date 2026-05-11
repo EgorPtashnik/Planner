@@ -18,4 +18,6 @@ service ArmaService {
 
     entity SqfCommandExample as projection on Arma.SqfCommandExample;
 
+    entity SqfCommandRelated as projection on Arma.SqfCommandRelated;
+
 }

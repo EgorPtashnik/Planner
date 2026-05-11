@@ -29,6 +29,7 @@ entity SqfCommand: managed {
     params: Composition of many SqfCommandParam on params.command = $self;
     examples: Composition of many SqfCommandExample on examples.command = $self;
     tags: Composition of many SqfCommandSqfTag on tags.command = $self;
+    related: Composition of many SqfCommandRelated on related.command = $self;
 };
 
 entity SqfCommandType {
@@ -53,4 +54,9 @@ entity SqfCommandParam: cuid, managed, baseInfo {
 entity SqfCommandExample: cuid {
     key command: Association to SqfCommand;
     text: String;
+};
+
+entity SqfCommandRelated: cuid {
+    key command: Association to SqfCommand;
+    related: String;
 }

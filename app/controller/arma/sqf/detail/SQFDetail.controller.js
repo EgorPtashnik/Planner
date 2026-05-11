@@ -43,7 +43,7 @@ sap.ui.define([
                 this.getView().bindElement({
                     path: `arma>/SqfCommand('${sID}')`,
                     parameters: {
-                        $expand: 'type,source,params,examples,tags'
+                        $expand: 'type,source,params,examples,tags,related'
                     },
                     events: {
                         dataReceived: () => this.getView().setBusy(false)
@@ -129,6 +129,38 @@ sap.ui.define([
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
+        },
+
+        async onPressAddRelated() {
+            try {
+                const oContext = this.byId('idSqfCommandRelatedList').getBinding('items').create();
+                await oContext.created();
+                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Ссылка добавлена.');
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
+        },
+
+        async onPressDeleteRelated(oEvent) {
+            try {
+                const oContext = oEvent.getParameter('listItem').getBindingContext('arma');
+                await oContext.delete();
+                if (oContext.isDeleted()) {
+                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Ссылка удалена.');
+                }
+            } catch(oError) {
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
+        },
+
+        onPressRelatedItem(oEvent) {
+            this.publish(this.EVENT.NAV_CHANGED, {
+                route: 'sqfDetail',
+                parameters: {
+                    id: oEvent.getSource().getBindingContext('arma').getProperty('related'),
+                    layout: this.LayoutType.TwoColumnsMidExpanded
+                }
+            });
         },
 
         async _updateFunctionTags() {

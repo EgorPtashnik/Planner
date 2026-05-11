@@ -213,7 +213,7 @@
 
                                 <headerToolbar>
                                     <OverflowToolbar>
-                                        <Title text='Параметры ({arma>params/$count})' />
+                                        <Title text='Параметры' />
 
                                         <ToolbarSpacer />
 
@@ -328,8 +328,6 @@
             <uxap:ObjectPageSection title='Примеры / Заметки' showTitle='false'>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection showTitle='false'>
-                        <uxap:actions>
-                        </uxap:actions>
 
                         <uxap:blocks>
                             <List
@@ -368,6 +366,68 @@
                                     </CustomListItem>
                                 </items>
 
+                            </List>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+
+            
+            <!-- RELATED -->
+            <uxap:ObjectPageSection title='Дополнительно' showTitle='false'>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle='false'>
+
+                        <uxap:blocks>
+                            <List
+                                id='idSqfCommandRelatedList'
+                                delete='onPressDeleteRelated'
+                                showSeparators='Inner'
+                                mode='{= %{config>/editMode} ? "Delete" : "None" }'
+                                items='{
+                                    path: "arma>related",
+                                    parameters: {
+                                        $$ownRequest: true
+                                    }
+                                }'>
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <Title text='Дополнительно' />
+
+                                        <ToolbarSpacer />
+
+                                        <Button
+                                            press='onPressAddRelated'
+                                            type='Ghost'
+                                            text='Добавить'
+                                            tooltip='Добавить'
+                                            visible='{config>/editMode}' />
+                                    </OverflowToolbar>
+                                </headerToolbar>
+
+                                <items>
+                                    <CustomListItem
+                                        press='onPressRelatedItem'
+                                        type='{= %{config>/editMode} ? "Inactive" : "Navigation" }'>
+                                        <VBox class='sapUiSmallMargin'>
+                                            <Text
+                                                text='{arma>related}'
+                                                visible='{= !%{config>/editMode} }' />
+                                            <ComboBox
+                                                selectedKey='{arma>related}'
+                                                visible='{config>/editMode}'
+                                                items='{
+                                                    path: "arma>/SqfCommand",
+                                                    templateShareable: false
+                                                }'>
+                                                <items>
+                                                    <core:Item key='{arma>name}' text='{arma>name}' />
+                                                </items>
+                                            </ComboBox>
+                                        </VBox>
+                                    </CustomListItem>
+                                </items>
                             </List>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
