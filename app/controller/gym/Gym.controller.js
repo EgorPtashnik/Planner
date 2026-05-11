@@ -1,13 +1,15 @@
 sap.ui.define([
     'planner/controller/BaseController',
 
-    'planner/controller/gym/modal/AddTrainingDialog'
-], (BaseController, AddTrainingDialog) => {
+    'planner/controller/gym/AddTrainingDialog',
+    'planner/controller/gym/TrainingHistoryDialog'
+], (BaseController, AddTrainingDialog, TrainingHistoryDialog) => {
     'use strict';
 
     return BaseController.extend('planner.controller.gym.Gym', {
 
         ...AddTrainingDialog,
+        ...TrainingHistoryDialog,
 
         onInit() {
             this.init();
@@ -45,10 +47,8 @@ sap.ui.define([
             });
         },
 
-        async onPressTrainingHistory() {
-            this.TrainingHistoryDialog ??= await this.getFragment('planner.view.gym.modal.TrainingHistoryDialog');
-
-            this.TrainingHistoryDialog.open();
+        onPressTrainingHistory() {
+            this._openTrainingHistoryDialog();
         },
 
         onPressAddTraining() {

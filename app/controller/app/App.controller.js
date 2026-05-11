@@ -3,7 +3,7 @@ sap.ui.define([
     'sap/ui/core/Theming',
 
     'planner/controller/app/Events',
-    'planner/controller/app/modal/DatabaseMenuPopover'
+    'planner/controller/app/DatabaseMenuPopover'
 ], (BaseController, Theming, Events,
     
     DatabaseMenuPopoverLogic) => {
@@ -54,7 +54,7 @@ sap.ui.define([
         },
 
         async onOpenDatabaseMenu(oEvent) {
-            this.DatabaseMenuPopover ??= await this.getFragment('planner.view.app.modal.DatabaseMenuPopover');
+            this.DatabaseMenuPopover ??= await this.getFragment('planner.view.app.DatabaseMenuPopover');
 
             this.DatabaseMenuPopover.openBy(oEvent.getSource());
         },

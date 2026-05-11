@@ -14,7 +14,7 @@ sap.ui.define(() => {
         },
 
         async _openManageSqfTagsDialog() {
-            this.ManageSqfTagsDialog ??= await this.getFragment('planner.view.arma.sqf.master.modal.ManageSqfTagsDialog');
+            this.ManageSqfTagsDialog ??= await this.getFragment('planner.view.arma.sqf.master.ManageSqfTagsDialog');
 
             this.ManageSqfTagsDialog.open();
         }

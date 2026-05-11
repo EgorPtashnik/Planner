@@ -33,7 +33,7 @@ sap.ui.define(() => {
         },
 
         async _openCreateFunctionDialog() {
-            this.CreateFunctionDialog ??= await this.getFragment('planner.view.arma.sqf.master.modal.CreateFunctionDialog');
+            this.CreateFunctionDialog ??= await this.getFragment('planner.view.arma.sqf.master.CreateFunctionDialog');
 
             this.Config.setProperty('/CreateFunctionDialog', {
                 name: 'EP_fnc_newFunction',

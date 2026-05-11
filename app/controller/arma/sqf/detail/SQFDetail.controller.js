@@ -73,7 +73,7 @@ sap.ui.define([
         },
 
         async onPressSourceCode() {
-            this.SourceCodeDialog ??= await this.getFragment('planner.view.arma.sqf.detail.modal.SourceCodeDialog');
+            this.SourceCodeDialog ??= await this.getFragment('planner.view.arma.sqf.detail.SourceCodeDialog');
 
             this.SourceCodeDialog.open();
         },

@@ -3,22 +3,6 @@ sap.ui.define(() => {
 
     return {
 
-        async onAddTraining() {
-            try {
-                this.AddTrainingDialog.close();
-                const oData = this.Config.getProperty('/AddTrainingDialog');
-                const oContext = this.TrainingListBinding.create({
-                    solo: oData.selectedType === 0,
-                    date: oData.date
-                });
-                await oContext.created();
-                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Тренировка записана.');
-                this._getTotalCost();
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            }
-        },
-
         onSelectTrainingHistoryDate(oEvent) {
             this.MessageHelper.confirm({
                 message: 'Удалить тренировку?',
@@ -42,16 +26,12 @@ sap.ui.define(() => {
                 }
             });
         },
-        
-        async _openAddTrainingDialog() {
-            this.AddTrainingDialog = await this.getFragment('planner.view.gym.modal.AddTrainingDialog');
-            this.Config.setProperty('/AddTrainingDialog', {
-                selectedType: 0,
-                date: new Date()
-            });
 
-            this.AddTrainingDialog.open();
+        async _openTrainingHistoryDialog() {
+            this.TrainingHistoryDialog ??= await this.getFragment('planner.view.gym.TrainingHistoryDialog');
+
+            this.TrainingHistoryDialog.open();
         }
 
-    }
+    };
 });
