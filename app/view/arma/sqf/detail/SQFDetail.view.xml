@@ -115,6 +115,7 @@
 
                 <Tokenizer
                     id='idTagsContainer'
+                    width='100%'
                     tokens='{
                         path: "arma>tags",
                         parameters: { $$ownRequest: true, $expand: "tag" }

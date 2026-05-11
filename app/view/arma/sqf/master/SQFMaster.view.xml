@@ -32,13 +32,15 @@
 
                         <fb:FilterGroupItem name="fbSearch" label="Поиск" groupName="basic" visibleInFilterBar="true">
                             <fb:control>
-                                <SearchField />
+                                <SearchField change='onChangeSqfCommandSearch' />
                             </fb:control>
                         </fb:FilterGroupItem>
 
                         <fb:FilterGroupItem name="fbType" label="Тип" groupName="basic" visibleInFilterBar="true">
                             <fb:control>
                                 <ComboBox
+                                    selectionChange='onChangeSqfCommandFilter'
+                                    selectedKey='{config>/filterBar/type}'
                                     items='{arma>/SqfCommandType}'>
                                     <items>
                                         <core:Item key='{arma>code}' text='{arma>name}' />
@@ -50,6 +52,8 @@
                         <fb:FilterGroupItem name="fbSource" label="Источник" groupName="basic" visibleInFilterBar="true">
                             <fb:control>
                                 <ComboBox
+                                    selectionChange='onChangeSqfCommandFilter'
+                                    selectedKey='{config>/filterBar/source}'
                                     items='{arma>/SqfCommandSource}'>
                                     <items>
                                         <core:Item key='{arma>code}' text='{arma>name}' />
@@ -60,7 +64,14 @@
 
                         <fb:FilterGroupItem name="fbTags" label="Теги" groupName="basic" visibleInFilterBar="true">
                             <fb:control>
-                                <MultiComboBox />
+                                <MultiComboBox
+                                    selectionFinish='onChangeSqfCommandFilter'
+                                    selectedKeys='{config>/filterBar/tags}'
+                                    items='{arma>/SqfTag}'>
+                                    <items>
+                                        <core:Item key='{arma>ID}' text='{arma>name}' />
+                                    </items>
+                                </MultiComboBox>
                             </fb:control>
                         </fb:FilterGroupItem>
 

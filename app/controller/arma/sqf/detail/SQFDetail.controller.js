@@ -1,19 +1,15 @@
 sap.ui.define([
-    'planner/controller/BaseController',
-    'planner/controller/arma/sqf/detail/Events'
-], (BaseController, Events,
-
-    HeaderLogic, ParametersLogic, ExamplesLogic
-) => {
+    'planner/controller/BaseController'
+], (BaseController) => {
     'use strict';
 
     return BaseController.extend('planner.controller.arma.sqf.detail.SQFDetail', {
 
-        ...Events,
-
         onInit() {
             this.init();
-            this.setSubscriptions();
+            [
+                { id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged }
+            ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
 
             this.ODataEventsAttached = false;
 
@@ -176,7 +172,19 @@ sap.ui.define([
                 .map(sTagID => this.byId('idTagsContainer').getBinding('tokens').create({tag_ID: sTagID}));
 
             return await Promise.all(aNewContexts.map(oContext => oContext.created()));
-        }
+        },
 
+        // APPLICATION EVENTS
+        _onNavChanged(_, sEventId, oData) {
+            if (oData.route.includes('sqf')) {
+                this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
+                if (oData?.parameters?.id && this.Config.getProperty('/ID') !== oData.parameters.id) {
+                    this.getView().setBusy(true);
+                    this.Config.setProperty('/editMode', false);
+                    this.Config.setProperty('/ID', oData.parameters.id);
+                    this.bindView(oData.parameters.id);
+                }
+            }
+        }
     });
 });

@@ -1,8 +1,8 @@
 sap.ui.define([
     'planner/controller/BaseController',
 
-    'planner/controller/arma/sqf/master/modal/CreateFunctionDialog',
-    'planner/controller/arma/sqf/master/modal/ManageSqfTagsDialog'
+    'planner/controller/arma/sqf/master/CreateFunctionDialog',
+    'planner/controller/arma/sqf/master/ManageSqfTagsDialog'
 ], (BaseController, CreateFunctionDialog, ManageSqfTagsDialog) => {
     'use strict';
 
@@ -25,7 +25,12 @@ sap.ui.define([
 
             this.Config.setData({
                 sqfCommandsCount: 0,
-                showSqfCommandsDetails: false
+                showSqfCommandsDetails: false,
+                filterBar: {
+                    type: null,
+                    source: null,
+                    tags: []
+                }
             });
         },
 
@@ -46,6 +51,15 @@ sap.ui.define([
             }
         },
 
+        onChangeSqfCommandSearch(oEvent) {
+            this.byId('idSqfCommandsList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
+        },
+
+        onChangeSqfCommandFilter() {
+            const sFilters = this._getFilters();
+            this.byId('idSqfCommandsList').getBinding('items').changeParameters({ $filter: sFilters || undefined });
+        },
+
         onPressCreateSqfCommand() {
             this._openCreateFunctionDialog();
         },
@@ -62,6 +76,24 @@ sap.ui.define([
                     layout: this.LayoutType.TwoColumnsMidExpanded
                 }
             });
+        },
+
+        _getFilters() {
+            const aFilters = [];
+            const oFilterBarData = this.Config.getProperty('/filterBar');
+            if (oFilterBarData.type) {
+                aFilters.push(`(type_code eq ${oFilterBarData.type})`);
+            }
+
+            if (oFilterBarData.source) {
+                aFilters.push(`(source_code eq ${oFilterBarData.source})`);
+            }
+
+            if (oFilterBarData.tags.length) {
+                aFilters.push('(tags/any(tag:' + oFilterBarData.tags.map(sID => `tag/tag_ID eq ${sID}`).join(' or ') + '))');
+            }
+
+            return aFilters.join(' and ');
         },
 
         // APPLICATION EVENTS
