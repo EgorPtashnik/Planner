@@ -78,6 +78,22 @@ sap.ui.define([
             this.SourceCodeDialog.open();
         },
 
+        async onPressDeleteSqfCommand() {
+            try {
+                this.getView().setBusy(true);
+                const oContext = this.getView().getBindingContext('arma');
+                await oContext.delete();
+                if (oContext.isDeleted()) {
+                    this.publish(this.EVENT.SQFCOMMAND_CHANGED);
+                    this.publish(this.EVENT.NAV_CHANGED, { route: 'sqfMaster' });
+                    this.publish(this.EVENT.ACTION_SUCCEEDED, 'Функция удалена.');
+                }
+            } catch(oError) {
+                this.getView().setBusy(false);
+                this.publish(this.EVENT.ACTION_FAILED, oError);
+            }
+        },
+
         async onPressAddParameter() {
             try {
                 const oContext = this.byId('idSqfCommandParamsList').getBinding('items').create({
@@ -178,7 +194,7 @@ sap.ui.define([
         _onNavChanged(_, sEventId, oData) {
             if (oData.route.includes('sqf')) {
                 this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
-                if (oData?.parameters?.id && this.Config.getProperty('/ID') !== oData.parameters.id) {
+                if (oData?.parameters?.id) {
                     this.getView().setBusy(true);
                     this.Config.setProperty('/editMode', false);
                     this.Config.setProperty('/ID', oData.parameters.id);

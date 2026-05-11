@@ -48,8 +48,8 @@
 
                     <Button
                         press='onPressDeleteTodoList'
-                        text='Удалить Список'
-                        tooltip='Удалить Список'
+                        text='Удалить'
+                        tooltip='Удалить'
                         icon='sap-icon://delete'
                         type='Negative'>
                         <layoutData>

@@ -151,7 +151,7 @@ sap.ui.define([
         _onNavChanged(_, sEventId, oData) {
             if (oData.route.includes('todo')) {
                 this.AppConfig.setProperty('/selectedRoute', 'todoMaster');
-                if (oData?.parameters?.id && this.Config.getProperty('/ID') !== oData.parameters.id) {
+                if (oData?.parameters?.id) {
                     this.getView().setBusy(true);
                     this.Config.setProperty('/ID', oData.parameters.id);
                     this.Config.setProperty('/editMode', false);

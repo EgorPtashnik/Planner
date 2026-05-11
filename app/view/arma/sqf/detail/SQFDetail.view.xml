@@ -51,6 +51,17 @@
                         icon='sap-icon://source-code'
                         text='Исходный Код'
                         tooltip='Исходный Код' />
+
+                    <Button
+                        press='onPressDeleteSqfCommand'
+                        text='Удалить'
+                        tooltip='Удалить'
+                        icon='sap-icon://delete'
+                        type='Negative'>
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                        </layoutData>
+                    </Button>
                 </uxap:actions>
 
                 <uxap:snappedHeading>
@@ -387,10 +398,7 @@
                                 showSeparators='Inner'
                                 mode='{= %{config>/editMode} ? "Delete" : "None" }'
                                 items='{
-                                    path: "arma>related",
-                                    parameters: {
-                                        $$ownRequest: true
-                                    }
+                                    path: "arma>related"
                                 }'>
                                 <headerToolbar>
                                     <OverflowToolbar>
