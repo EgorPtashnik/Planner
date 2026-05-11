@@ -411,7 +411,8 @@
                                         press='onPressRelatedItem'
                                         type='{= %{config>/editMode} ? "Inactive" : "Navigation" }'>
                                         <VBox class='sapUiSmallMargin'>
-                                            <Text
+                                            <Link
+                                                press='onPressRelatedItem'
                                                 text='{arma>related}'
                                                 visible='{= !%{config>/editMode} }' />
                                             <ComboBox
