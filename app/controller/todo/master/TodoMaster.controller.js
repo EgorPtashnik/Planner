@@ -1,12 +1,12 @@
 sap.ui.define([
     'planner/controller/BaseController',
-    'planner/controller/todo/master/ManageTagsDialog'
-], (BaseController, ManageTagsDialog) => {
+    'planner/controller/todo/master/ManageListTagsDialog'
+], (BaseController, ManageListTagsDialog) => {
     'use strict';
 
     return BaseController.extend('planner.controller.todo.master.TodoMaster', {
 
-        ...ManageTagsDialog,
+        ...ManageListTagsDialog,
 
         onInit() {
             this.init();
@@ -27,7 +27,7 @@ sap.ui.define([
                 }
             });
 
-            this.ManageTagsDialog = null;
+            this.ManageListTagsDialog = null;
         },
 
         _onRouteMatched(oEvent) {
@@ -75,8 +75,8 @@ sap.ui.define([
             });
         },
 
-        onPressManageTags() {
-            this._openManageTagsDialog();
+        onPressManageListTags() {
+            this._openManageListTagsDialog();
         },
 
         onPressTodoListSort() {

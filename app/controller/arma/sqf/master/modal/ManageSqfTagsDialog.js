@@ -13,10 +13,10 @@ sap.ui.define(() => {
             }
         },
 
-        async _openChangeTagsDialog() {
-            this.ChangeTagsDialog ??= await this.getFragment('planner.view.arma.sqf.master.modal.ChangeTagsDialog');
+        async _openManageSqfTagsDialog() {
+            this.ManageSqfTagsDialog ??= await this.getFragment('planner.view.arma.sqf.master.modal.ManageSqfTagsDialog');
 
-            this.ChangeTagsDialog.open();
+            this.ManageSqfTagsDialog.open();
         }
 
     };

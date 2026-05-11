@@ -107,7 +107,7 @@
                         </Button>
 
                         <OverflowToolbarButton
-                            press='onPressManageTags'
+                            press='onPressManageListTags'
                             icon='sap-icon://tags'
                             tooltip='Управление тегами'
                             text='Теги'>

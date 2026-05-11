@@ -111,7 +111,7 @@
                         </Button>
 
                         <OverflowToolbarButton
-                            press='onPressChangeTags'
+                            press='onPressManageSqfTags'
                             icon='sap-icon://tags'
                             text='Изменить Теги'
                             tooltip='Изменить Теги'>

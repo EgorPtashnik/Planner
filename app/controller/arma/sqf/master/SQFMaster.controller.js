@@ -2,15 +2,14 @@ sap.ui.define([
     'planner/controller/BaseController',
 
     'planner/controller/arma/sqf/master/modal/CreateFunctionDialog',
-    'planner/controller/arma/sqf/master/modal/ChangeTagsDialog'
-], (BaseController, CreateFunctionDialogLogic, ChangeTagsDialogLogic
-) => {
+    'planner/controller/arma/sqf/master/modal/ManageSqfTagsDialog'
+], (BaseController, CreateFunctionDialog, ManageSqfTagsDialog) => {
     'use strict';
 
     return BaseController.extend('planner.controller.arma.sqf.master.SQFMaster', {
 
-        ...CreateFunctionDialogLogic,
-        ...ChangeTagsDialogLogic,
+        ...CreateFunctionDialog,
+        ...ManageSqfTagsDialog,
 
         onInit() {
             this.init();
@@ -22,7 +21,7 @@ sap.ui.define([
             this.ODataEventsAttached = false;
 
             this.CreateFunctionDialog = null;
-            this.ChangeTagsDialog = null;
+            this.ManageSqfTagsDialog = null;
 
             this.Config.setData({
                 sqfCommandsCount: 0,
@@ -51,8 +50,8 @@ sap.ui.define([
             this._openCreateFunctionDialog();
         },
 
-        onPressChangeTags() {
-            this._openChangeTagsDialog();
+        onPressManageSqfTags() {
+            this._openManageSqfTagsDialog();
         },
 
         onPressSqfCommandItem(oEvent) {

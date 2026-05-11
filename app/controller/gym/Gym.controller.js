@@ -2,12 +2,12 @@ sap.ui.define([
     'planner/controller/BaseController',
 
     'planner/controller/gym/modal/AddTrainingDialog'
-], (BaseController, AddTrainingDialogLogic) => {
+], (BaseController, AddTrainingDialog) => {
     'use strict';
 
     return BaseController.extend('planner.controller.gym.Gym', {
 
-        ...AddTrainingDialogLogic,
+        ...AddTrainingDialog,
 
         onInit() {
             this.init();

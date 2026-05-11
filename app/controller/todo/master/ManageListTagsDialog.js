@@ -27,13 +27,13 @@ sap.ui.define(() => {
             }
         },
         
-        async _openManageTagsDialog() {
-            this.ManageTagsDialog ??= await this.getFragment('planner.view.todo.master.ManageTagsDialog').then(oFragment => {
+        async _openManageListTagsDialog() {
+            this.ManageListTagsDialog ??= await this.getFragment('planner.view.todo.master.ManageListTagsDialog').then(oFragment => {
                 this.byId('idTodoTagList').getBinding('items').attachDataReceived(() => this._updateTagCount());
                 return oFragment;
             });
 
-            this.ManageTagsDialog.open();
+            this.ManageListTagsDialog.open();
         },
 
         _updateTagCount() {
