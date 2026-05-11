@@ -18,7 +18,7 @@
             <f:DynamicPageTitle backgroundDesign='{= %{/darkMode} ? "Transparent" : "Solid" }'>
 
                 <f:heading>
-                    <Title text='PlanneR' />
+                    <Title text='PlanneR 1.2' />
                 </f:heading>
 
                 <f:content>
