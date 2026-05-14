@@ -1,0 +1,50 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core">
+
+    <tnt:ToolHeader>
+        <tnt:content>
+            <ToggleButton
+                icon="sap-icon://menu2"
+                pressed='{/sideNavExpanded}'
+                visible='{device>/system/phone}' >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </ToggleButton>
+
+            <Title text="PlanneR 2.0" />
+            
+            <IconTabHeader
+                backgroundDesign='Transparent'
+                select='onSelectNavItem'
+                visible='{= !%{device>/system/phone} }'
+                selectedKey='{/selectedRoute}'
+                items='{/routes}'>
+                <items>
+                    <IconTabFilter
+                        text='{text}'
+                        key='{key}' />
+                </items>
+            </IconTabHeader>
+
+            <ToolbarSpacer />
+
+            <Button
+                press='onPressToggleDarkMode'
+                icon='{= %{/darkMode} ? "sap-icon://light-mode" : "sap-icon://dark-mode" }'
+                tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
+
+            <Button
+                press='onOpenDatabaseMenu'
+                ariaHasPopup='Menu'
+                icon='sap-icon://database'
+                busyIndicatorSize='Small'
+                busyIndicatorDelay='0'
+                tooltip='База Данных' />
+
+        </tnt:content>
+    </tnt:ToolHeader>
+
+</core:FragmentDefinition>

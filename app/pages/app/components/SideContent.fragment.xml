@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.tnt"
+    xmlns:core="sap.ui.core">
+
+    <SideNavigation
+        itemSelect='onSelectNavItem'
+        visible='{device>/system/phone}'>
+
+        <NavigationList
+            selectedKey='{/selectedRoute}'
+            items='{/routes}'>
+            <items>
+                <NavigationListItem
+                    text='{text}'
+                    key='{key}'
+                    icon='{icon}' />
+            </items>
+        </NavigationList>
+    </SideNavigation>
+
+</core:FragmentDefinition>

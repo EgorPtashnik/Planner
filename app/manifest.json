@@ -60,7 +60,7 @@
             "arma": { "dataSource": "armaService", "type": "sap.ui.model.odata.v4.ODataModel" }
         },
         "rootView": {
-            "viewName": "planner.view.app.App",
+            "viewName": "planner.pages.app.App",
             "type": "XML",
             "async": true,
             "id": "app"
@@ -70,7 +70,7 @@
                 "routerClass": "sap.f.routing.Router",
                 "type": "View",
                 "viewType": "XML",
-                "path": "planner.view",
+                "path": "planner.pages",
                 "controlId": "app",
                 "transition": "slide",
                 "async": "true"

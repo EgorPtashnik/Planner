@@ -21,6 +21,7 @@ sap.ui.define([
             this.setModel(new JSONModel({
                 layout: LayoutType.OneColumn,
                 isOnlyOneColumn: false,
+                sideNavExpanded: false,
                 routes: [
                     {text: 'Овервью', icon: 'sap-icon://home', key: 'home'},
                     {text: 'Мои Дела', icon: 'sap-icon://activities', key: 'todoMaster'},
