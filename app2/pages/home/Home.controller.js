@@ -10,8 +10,10 @@ sap.ui.define([
         },
 
         _onRouteMatched(oEvent) {
-            console.log('HOME MATCHED');
-            this.AppConfig.setProperty('/selectedRoute', 'home');
+            const oParameters = oEvent.getParameters();
+            if (oParameters.name === 'home') {
+                this.App.getModel().setProperty('/selectedRoute', 'home');
+            }
         }
 
     });

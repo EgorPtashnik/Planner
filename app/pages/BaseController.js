@@ -3,32 +3,39 @@ sap.ui.define([
     'sap/ui/core/UIComponent',
     'sap/f/library',
     'sap/ui/model/json/JSONModel',
-    'planner/pages/EventCatalog',
 
-    'planner/util/Formatter',
-    'planner/util/MessageHelper',
-    'planner/util/TableHelper'
+    'planner/utils/Formatter',
+    'planner/utils/MessageHelper',
+    'planner/utils/TableHelper'
 ], (Controller, UIComponent, FLib, JSONModel,
-    
-    EVENT, Formatter, MessageHelper, TableHelper) => {
+
+    Formatter, MessageHelper, TableHelper
+) => {
     'use strict';
 
     return Controller.extend('planner.pages.BaseController', {
 
-        EVENT,
         Formatter,
         MessageHelper,
 
-        init() {
+        EVENT: {
+            ACTION_FAILED: 'ACTION_FAILED',
+
+            TODOLIST_CHANGED: 'TODOLIST_CHANGED',
+            TODOLIST_TAG_CHANGED: 'TODOLIST_TAG_CHANGED'
+        },
+
+        init(sRoute) {
             this.LayoutType = FLib.LayoutType;
             this.TableHelper = new TableHelper();
-
             this.App = this.getOwnerComponent();
             this.AppConfig = this.App.getModel();
-            this.Config = new JSONModel();
-            this.getView().setModel(this.Config, 'config');
+            this.State = new JSONModel();
+            this.getView().setModel(this.State, 'state');
 
-            this.getRouter().attachRoutePatternMatched(this._onRouteMatched, this);
+            if (sRoute !== 'app') {
+                this.getRouter().getRoute(sRoute).attachPatternMatched(this._onRouteMatched, this);
+            }
         },
 
         getRouter() {
@@ -45,8 +52,15 @@ sap.ui.define([
                 return oFragment;
             });
         },
-        
-        //Event Bus Methods
+
+        createJSONModel() {
+            return new JSONModel();
+        },
+
+        onPressCloseDialog(oEvent) {
+            oEvent.getSource().getParent().close();
+        },
+
         subscribe(sEventId, fnFunction) {
             this.getOwnerComponent().getEventBus().subscribe(sEventId, fnFunction, this);
         },
@@ -55,27 +69,18 @@ sap.ui.define([
             this.getOwnerComponent().getEventBus().subscribe(sEventId, fnFunction, this);
         },
 
-        publish(sEventId, vData) {
-            const oData = typeof vData === 'object' ? vData : {value: vData};
-            this.getOwnerComponent().getEventBus().publish(sEventId, oData);
-        },
-
         unsubscribe(sEventId, fnFunction) {
             this.getOwnerComponent().getEventBus().unsubscribe(sEventId, fnFunction, this);
         },
 
-        onPressCloseDialog(oEvent) {
-            oEvent.getSource().getParent().close();
-        },
-
-        async onPressCopy(sValue) {
-            try {
-                await navigator.clipboard.writeText(sValue);
-                this.publish(this.EVENT.ACTION_SUCCEEDED, 'Сохранено в буфер обмена.');
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_SUCCEEDED, oError);
+        publish(vEvent, vData) {
+            if (typeof vEvent === 'array') {
+                vEvent.forEach(oEvent => this.publish(oEvent.id, oEvent.fnc));
+            } else {
+                const oData = typeof vData === 'object' ? vData : {value: vData};
+                this.getOwnerComponent().getEventBus().publish(vEvent, oData);
             }
-        }
+        },
 
     });
 });

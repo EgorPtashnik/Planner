@@ -19,7 +19,7 @@
                         <MultiComboBox
                             id='idTodoListTagFilter'
                             selectionFinish='onChangeTodoListFilter'
-                            selectedKeys='{config>/filterBar/ListTag}'
+                            selectedKeys='{state>/filterBar/ListTag}'
                             items='{todo>/ListTag}'>
                             <items>
                                 <core:Item key='{todo>ID}' text='{todo>name}' />
@@ -32,7 +32,7 @@
                     <fb:control>
                         <MultiComboBox
                             selectionFinish='onChangeTodoListFilter'
-                            selectedKeys='{config>/filterBar/Priority}'
+                            selectedKeys='{state>/filterBar/Priority}'
                             items='{common>/PriorityCode}'>
                             <items>
                                 <core:Item key='{common>code}' text='{common>name}' />

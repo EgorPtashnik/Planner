@@ -11,26 +11,27 @@
             <Table
                 id='idTodoTagList'
                 delete='onPressDeleteListTag'
-                fixedLayout='false'
                 mode='Delete'
+                busyIndicatorDelay='0'
+                fixedLayout='false'
                 alternateRowColors='true'
                 autoPopinMode='true'
+                sticky='HeaderToolbar'
                 items='{
                     path: "todo>/ListTag",
                     parameters: { $orderby: "createdAt desc" }
                 }'>
                 <headerToolbar>
                     <OverflowToolbar>
-                        <Title text='Теги ({config>/tagCount})' />
+                        <Title text='Теги ({state>/tagCount})' />
 
                         <ToolbarSpacer />
 
-                        <OverflowToolbarButton
-                            press='.TableHelper.onPressSort("idTodoTagList")'
-                            type='Transparent'
-                            icon='sap-icon://sort'
-                            text='Сортировка'
-                            tooltip='Сортировка' />
+                        <Button
+                            press='onPressCreateListTag'
+                            type='Ghost'
+                            text='Создать'
+                            tooltip='Создать новый тег' />
                     </OverflowToolbar>
                 </headerToolbar>
 
@@ -72,11 +73,6 @@
         </content>
 
         <buttons>
-            <Button
-                press='onPressCreateListTag'
-                type='Emphasized'
-                text='Создать'
-                tooltip='Создать новый тег' />
             <Button
                 press='onPressCloseDialog'
                 text='Закрыть'

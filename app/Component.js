@@ -23,10 +23,8 @@ sap.ui.define([
                 isOnlyOneColumn: false,
                 sideNavExpanded: false,
                 routes: [
-                    {text: 'Овервью', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Мои Дела', icon: 'sap-icon://activities', key: 'todoMaster'},
-                    {text: 'Тренировки', icon: 'sap-icon://physical-activity', key: 'gym'},
-                    {text: 'ArmA: SQF Документация', icon: 'sap-icon://syntax', key: 'sqfMaster'}
+                    {text: 'Главная', icon: 'sap-icon://home', key: 'home'},
+                    {text: 'Мои Дела', icon: 'sap-icon://activities', key: 'todoMaster'}
                 ],
                 selectedRoute: 'home',
                 detailID: null,
@@ -58,15 +56,6 @@ sap.ui.define([
             if (oParameters.id) {
                 this.getModel().setProperty('/detailID', oParameters.id);
             }
-
-            if (oParameters.item) {
-                this.getModel().setProperty('/detailDetailID', oParameters.item);
-            }
-
-            this.getEventBus().publish('NAV_CHANGED', {
-                route: oEvent.getParameters().name,
-                parameters: oEvent.getParameters().arguments
-            })
         },
 
 	});

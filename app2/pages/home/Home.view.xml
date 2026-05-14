@@ -12,7 +12,7 @@
             <f:DynamicPageTitle>
 
                 <f:heading>
-                    <Title text='Главная' />
+                    <Title text='Dashboard' />
                 </f:heading>
 
             </f:DynamicPageTitle>

@@ -7,7 +7,6 @@
         sticky='HeaderToolbar'
         fixedLayout='false'
         autoPopinMode='true'
-        hiddenInPopin='{= %{config>/showDetails}.toString() === "true" ? [] : ["Low","Medium"] }'
         items='{
             path: "todo>/List",
             parameters: {
@@ -19,7 +18,7 @@
         <noData>
             <IllustratedMessage
                 title='Нет данных'
-                description='Создайте новое дело чтобы увидеть данные.'
+                description='Создайте новый список чтобы увидеть данные.'
                 illustrationType='sapIllus-NoActivities' />
         </noData>
 
@@ -90,7 +89,6 @@
                         <ObjectIdentifier
                             title='{todo>name}' />
                     </HBox>
-
 
                     <ObjectStatus
                         class='sapMObjectStatusLongText'

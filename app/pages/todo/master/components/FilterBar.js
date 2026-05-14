@@ -14,7 +14,7 @@ sap.ui.define(() => {
 
         _getFilters() {
             const aFilters = [];
-            const oFilterBarData = this.Config.getProperty('/filterBar');
+            const oFilterBarData = this.State.getProperty('/filterBar');
             if (oFilterBarData.ListTag.length) {
                 aFilters.push('(' + oFilterBarData.ListTag.map(sID => `tag_ID eq ${sID}`).join(' or ') + ')');
             }

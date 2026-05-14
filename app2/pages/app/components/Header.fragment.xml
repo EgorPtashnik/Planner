@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core">
+
+    <tnt:ToolHeader>
+        <tnt:content>
+
+            <ToolbarSpacer />
+
+            <Button
+                press='onOpenDatabaseMenu'
+                ariaHasPopup='Menu'
+                icon='sap-icon://database'
+                busyIndicatorSize='Small'
+                busyIndicatorDelay='0'
+                tooltip='База Данных' />
+
+        </tnt:content>
+    </tnt:ToolHeader>
+
+</core:FragmentDefinition>

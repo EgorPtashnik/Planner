@@ -1,0 +1,220 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:uxap='sap.uxap'
+    xmlns:core='sap.ui.core'>
+
+    <uxap:ObjectPageSection showTitle='false'>
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection showTitle='false'>
+
+                <uxap:blocks>
+                    <Table
+                        id='idTodoItems'
+                        delete='onPressDeleteItem'
+                        busyIndicatorDelay='0'
+                        showSeparators='Inner'
+                        autoPopinMode='true'
+                        hiddenInPopin='{= %{state>/showDetails}.toString() === "true" || %{state>/editItems} ? [] : ["Low","Medium"] }'
+                        mode='{= %{state>/editItems} ? "Delete" : "None"}'
+                        items='{
+                            path: "todo>items",
+                            parameters: {
+                                $$ownRequest: true,
+                                $count: true,
+                                $orderby: "createdAt desc"
+                            }
+                        }'>
+
+                        <noData>
+                            <IllustratedMessage
+                                title='Шаги еще не добавлены'
+                                description='Создайте шаг чтобы увидеть данные.'
+                                illustrationType='sapIllus-NoActivities' />
+                        </noData>
+
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text='Шаги ({state>/itemCount})' />
+
+                                <ToolbarSpacer />
+
+                                <Button
+                                    press='onPressCreateItem'
+                                    type='Ghost'
+                                    text='Создать'
+                                    tooltip='Создать'
+                                    visible='{state>/editItems}'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                    </layoutData>
+                                </Button>
+
+                                <OverflowToolbarToggleButton
+                                    type='Emphasized'
+                                    text='Редактировать'
+                                    tooltip='Редактировать'
+                                    icon='sap-icon://edit'
+                                    pressed='{state>/editItems}'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData group='1' />
+                                    </layoutData>
+                                </OverflowToolbarToggleButton>
+
+                                <OverflowToolbarButton
+                                    press='onPressToggleVisibleItems'
+                                    type='Transparent'
+                                    icon='{= %{state>/showCompletedItems} ? "sap-icon://show" : "sap-icon://hide" }'
+                                    text='Показать законченные'
+                                    tooltip='Показать законченные'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData group='1' />
+                                    </layoutData>
+                                </OverflowToolbarButton>
+
+                                <OverflowToolbarButton
+                                    press='onPressDeleteCompletedItems'
+                                    type='Transparent'
+                                    icon='sap-icon://eraser'
+                                    text='Удалить Законченные'
+                                    tooltip='Удалить Законченные'
+                                    visible='{= !%{state>/editItems} }'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData group='1' />
+                                    </layoutData>
+                                </OverflowToolbarButton>
+
+                                <OverflowToolbarButton
+                                    press='onPressItemSort'
+                                    type='Transparent'
+                                    icon='sap-icon://sort'
+                                    text='Сортировка'
+                                    tooltip='Сортировка'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData group='1' />
+                                    </layoutData>
+                                </OverflowToolbarButton>
+
+                                <OverflowToolbarToggleButton
+                                    icon='sap-icon://detail-more'
+                                    tooltip='Показать Детали'
+                                    text='Показать Детали'
+                                    visible='{= %{device>/system/phone} &amp;&amp; !%{state>/editItems} }'
+                                    pressed='{state>/showDetails}'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData  group='1' />
+                                    </layoutData>
+                                </OverflowToolbarToggleButton>
+
+                                <SegmentedButton
+                                    selectedKey='{state>/showDetails}'
+                                    visible='{= !%{device>/system/phone} &amp;&amp; !%{state>/editItems} }'>
+                                    <items>
+                                        <SegmentedButtonItem
+                                            key='false'
+                                            icon='sap-icon://detail-less'
+                                            tooltip='Скрыть Детали' />
+                                        <SegmentedButtonItem
+                                            key='true'
+                                            icon='sap-icon://detail-more'
+                                            tooltip='Показать Детали' />
+                                    </items>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                    </layoutData>
+                                </SegmentedButton>
+                            </OverflowToolbar>
+                        </headerToolbar>
+
+                        <columns>
+                            <Column
+                                width='auto'
+                                autoPopinWidth='10'
+                                importance='High' >
+                                <Text text='Имя'/>
+                            </Column>
+
+                            <Column
+                                width='auto'
+                                autoPopinWidth='10'
+                                importance='High' >
+                                <Text text='Начало'/>
+                            </Column>
+
+                            <Column
+                                importance='Low'
+                                autoPopinWidth='999'
+                                popinDisplay='{= %{state>/editItems} ? "Block" : "WithoutHeader" }'>
+                                <Text text='Заметка' />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem
+                                visible='{=
+                                    %{state>/showCompletedItems} ||
+                                    %{todo>status} === 0 || %{todo>status} === 1
+                                }'>
+                                <cells>
+                                    <VBox>
+                                        <!-- DISPLAY -->
+                                        <HBox
+                                            alignItems='Center'
+                                            visible='{= !%{state>/editItems} }'>
+                                            <GenericTag
+                                                class='sapUiTinyMarginEnd'
+                                                design='StatusIconHidden'
+                                                text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
+                                            <ObjectIdentifier
+                                                title='{todo>name}'/>
+                                        </HBox>
+
+                                        <!-- EDIT -->
+                                        <HBox
+                                            alignItems='Center'
+                                            visible='{state>/editItems}'>
+                                            <Select
+                                                selectedKey='{todo>priority}'
+                                                items='{path: "common>/PriorityCode", templateShareable: false}'>
+                                                <items>
+                                                    <core:Item key='{common>code}' text='{common>name}' />
+                                                </items>
+                                            </Select>
+                                            <Input
+                                                width='100%'
+                                                value='{todo>name}'
+                                                visible='{state>/editItems}' />
+                                        </HBox>
+                                    </VBox>
+
+                                    <VBox>
+                                        <Text text='{todo>startDate}' />
+                                    </VBox>
+
+                                    <VBox>
+                                        <!-- DISPLAY -->
+                                        <ExpandableText
+                                            maxCharacters='50'
+                                            emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'
+                                            text='{todo>info}'
+                                            visible='{= !%{state>/editItems} }' />
+
+                                        <!-- EDIT -->
+                                        <TextArea
+                                            width='100%'
+                                            rows='1'
+                                            growing='true'  
+                                            value='{todo>info}'
+                                            visible='{state>/editItems}' />
+                                    </VBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </uxap:blocks>
+
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+
+</core:FragmentDefinition>

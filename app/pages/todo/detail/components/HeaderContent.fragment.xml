@@ -1,0 +1,7 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Text text='{= %{todo>info} || "Нет описания" }' />
+
+</core:FragmentDefinition>

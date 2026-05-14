@@ -6,7 +6,7 @@
     <f:DynamicPageTitle>
 
         <f:heading>
-            <Title text='Дела ({config>/listCount})' />
+            <Title text='Дела ({state>/listCount})' />
         </f:heading>
 
     </f:DynamicPageTitle>

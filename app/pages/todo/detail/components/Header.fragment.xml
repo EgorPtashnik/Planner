@@ -1,0 +1,92 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:uxap='sap.uxap'
+    xmlns:core='sap.ui.core'>
+
+    <uxap:ObjectPageDynamicHeaderTitle>
+
+        <uxap:breadcrumbs>
+            <Breadcrumbs currentLocationText='{todo>name}'>
+                <links>
+                    <Link press='onPressClosePage' text='Дела' />
+                </links>
+            </Breadcrumbs>
+        </uxap:breadcrumbs>
+
+        <uxap:navigationActions>
+            <Button
+                press='onPressToggleFullScreen(%{/layout} === "MidColumnFullScreen")'
+                icon='{= %{/layout} === "MidColumnFullScreen" ? "sap-icon://exit-full-screen" : "sap-icon://full-screen" }'
+                tooltip='Полный Экран'
+                visible='{= !%{/isOnlyOneColumn} }' />
+
+            <Button
+                press='onPressClosePage'
+                icon='sap-icon://decline' />
+        </uxap:navigationActions>
+
+        <uxap:actions>
+            <Button
+                press='onPressEditTodoList'
+                text='Редактировать'
+                tooltip='Редактировать'
+                icon='sap-icon://edit'
+                type='Ghost'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                </layoutData>
+            </Button>
+
+            <ToolbarSeparator>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                </layoutData>
+            </ToolbarSeparator>
+
+            <Button
+                press='onPressDeleteTodoList'
+                text='Удалить'
+                tooltip='Удалить'
+                icon='sap-icon://delete'
+                type='Negative'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                </layoutData>
+            </Button>
+        </uxap:actions>
+
+        <uxap:snappedHeading>
+            <Title
+                wrapping='false'
+                text='{todo>name}' />
+        </uxap:snappedHeading>
+
+        <uxap:expandedHeading>
+            <VBox>
+                <Title
+                    wrapping='true'
+                    text='{todo>name}' />
+                <HBox>
+                    <GenericTag
+                        class='sapUiTinyMarginEnd'
+                        design='StatusIconHidden'
+                        text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                        status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
+                    <GenericTag
+                        id='idListTag'
+                        design='StatusIconHidden'
+                        status='{= %{todo>tag/color} || "None"}'
+                        text='{= %{todo>tag/name} || "Нет" }' />
+                </HBox>
+            </VBox>
+        </uxap:expandedHeading>
+
+        <uxap:expandedContent>
+            <ObjectStatus
+                title='Обновлено'
+                text='{todo>modifiedAt}' />
+        </uxap:expandedContent>
+
+    </uxap:ObjectPageDynamicHeaderTitle>
+
+</core:FragmentDefinition>

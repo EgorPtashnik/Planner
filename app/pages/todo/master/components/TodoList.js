@@ -2,34 +2,32 @@ sap.ui.define(() => {
     'use strict';
 
     return {
-
+        
         async onPressCreateList() {
-            const oContext = this.byId('idTodoList').getBinding('items').create({
+            this.CreateListDialog = await this.CreateListDialog;
+
+            this.State.setProperty('/CreateListDialog', {
                 name: 'Новый Список',
+                info: 'Описание',
                 priority: 1,
+                tag_ID: null,
                 items: [],
                 doneItems: []
             });
-            await oContext.created();
-            this.publish(this.EVENT.ACTION_SUCCEEDED, 'Дело создано.');
-
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetail',
-                parameters: {
-                    id: oContext.getProperty('ID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                }
-            });
+            
+            this.CreateListDialog.open();
         },
 
         async onPressManageListTags() {
             this.ManageListTagsDialog = await this.ManageListTagsDialog;
-            if (!this.ManageListTagsDialog._odataAttached) {
-                this.ManageListTagsDialog._odataAttached = true;
-                this.byId('idTodoTagList').getBinding('items').attachPatchCompleted(() => this.publish(this.EVENT.TODOLIST_TAG_CHANGED));
+            const oTagListBinding = this.byId('idTodoTagList').getBinding('items');
+            this.State.setProperty('/tagCount', oTagListBinding.getCount());
+
+            if (!this.ManageListTagsDialog._attached) {
+                this.ManageListTagsDialog._attached = true;
+                oTagListBinding.attachPatchCompleted(() => this.publish(this.EVENT.TODOLIST_TAG_CHANGED));
             }
 
-            this.publish(this.EVENT.TODOLIST_TAG_CHANGED);
             this.ManageListTagsDialog.open();
         },
 
@@ -38,14 +36,11 @@ sap.ui.define(() => {
         },
 
         onPressListItem(oEvent) {
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetail',
-                parameters: {
+            this.getRouter().navTo('todoDetail', {
                     id: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
                     layout: this.LayoutType.TwoColumnsMidExpanded
-                }
             });
-        },
+        }
 
     };
 });
