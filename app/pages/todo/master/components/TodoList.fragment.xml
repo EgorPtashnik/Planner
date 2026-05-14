@@ -1,0 +1,133 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Table
+        id='idTodoList'
+        sticky='HeaderToolbar'
+        autoPopinMode='true'
+        hiddenInPopin='{= %{config>/showDetails}.toString() === "true" ? [] : ["Low","Medium"] }'
+        items='{
+            path: "todo>/List",
+            parameters: {
+                $count: true,
+                $expand: "items,doneItems,tag"
+            }
+        }'>
+
+        <noData>
+            <IllustratedMessage
+                title='Нет данных'
+                description='Создайте новое дело чтобы увидеть данные.'
+                illustrationType='sapIllus-NoActivities' />
+        </noData>
+
+        <headerToolbar>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                
+                <Button
+                    press='onPressCreateList'
+                    type='Ghost'
+                    text='Создать'
+                    tooltip='Создать'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                    </layoutData>
+                </Button>
+
+                <OverflowToolbarButton
+                    press='onPressManageListTags'
+                    icon='sap-icon://tags'
+                    tooltip='Управление тегами'
+                    text='Теги'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData group='1' />
+                    </layoutData>
+                </OverflowToolbarButton>
+
+                <OverflowToolbarButton
+                    press='onPressTodoListSort'
+                    type='Transparent'
+                    icon='sap-icon://sort'
+                    text='Сортировка'
+                    tooltip='Сортировка'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData group='1' />
+                    </layoutData>
+                </OverflowToolbarButton>
+
+                <OverflowToolbarToggleButton
+                    icon='sap-icon://detail-more'
+                    tooltip='Показать Детали'
+                    text='Показать Детали'
+                    visible='{device>/system/phone}'
+                    pressed='{config>/showDetails}'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData  group='1' />
+                    </layoutData>
+                </OverflowToolbarToggleButton>
+
+                <SegmentedButton
+                    selectedKey='{config>/showDetails}'
+                    visible='{= !%{device>/system/phone} }'>
+                    <items>
+                        <SegmentedButtonItem
+                            key='false'
+                            icon='sap-icon://detail-less'
+                            tooltip='Скрыть Детали' />
+                        <SegmentedButtonItem
+                            key='true'
+                            icon='sap-icon://detail-more'
+                            tooltip='Показать Детали' />
+                    </items>
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                    </layoutData>
+                </SegmentedButton>
+            </OverflowToolbar>
+        </headerToolbar>
+
+        <columns>
+            <Column
+                importance='High'>
+                <Text text='Имя' />
+            </Column>
+
+            <Column
+                width='8rem'
+                popinDisplay='Inline'>
+                <Text text='Статус' />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem
+                press='onPressListItem'
+                navigated='{= %{/detailID} === %{todo>ID} }'
+                highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
+                type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>
+                <cells>
+                    <HBox alignItems='Center'>
+                        <GenericTag
+                            class='sapUiTinyMarginEnd'
+                            design='StatusIconHidden'
+                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
+                        <ObjectIdentifier
+                            title='{todo>name}' />
+                    </HBox>
+
+
+                    <ObjectStatus
+                        inverted='true'
+                        class='sapMObjectStatusLongText'
+                        text='{ path: "todo>status", formatter: ".Formatter.getProgressStatusText" }'
+                        state='{ path: "todo>status", formatter: ".Formatter.getProgressStatusState" }' />
+                </cells>
+            </ColumnListItem>
+        </items>
+
+    </Table>
+
+</core:FragmentDefinition>

@@ -22,6 +22,6 @@ async function onAfterUpsertItem(_, req) {
         .orderBy `status desc`;
 
     await UPDATE (this.entities.List)
-        .set `status = ${oHighestProgressItem?.status || ProgressStatusType.Created}`
+        .set `status = ${oHighestProgressItem ? oHighestProgressItem.status : ProgressStatusType.Completed}`
         .where `ID = ${req.data.list_ID}`;
 };

@@ -26,7 +26,7 @@ sap.ui.define([
 
         getProgressStatusText(iPriorityCode) {
             switch(iPriorityCode) {
-                case '0': return 'Создан';
+                case '0': return 'Не выполняется';
                 case '1': return 'Выполняется';
                 case '2': return 'Сделан';
                 case '3': return 'Закрыт';

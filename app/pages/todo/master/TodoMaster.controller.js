@@ -1,11 +1,15 @@
 sap.ui.define([
     'planner/pages/BaseController',
+    'planner/pages/todo/master/components/FilterBar',
+    'planner/pages/todo/master/components/TodoList',
     'planner/pages/todo/master/components/ManageListTagsDialog'
-], (BaseController, ManageListTagsDialog) => {
+], (BaseController, FilterBar, TodoList, ManageListTagsDialog) => {
     'use strict';
 
     return BaseController.extend('planner.pages.todo.master.TodoMaster', {
 
+        ...FilterBar,
+        ...TodoList,
         ...ManageListTagsDialog,
 
         onInit() {
@@ -47,52 +51,6 @@ sap.ui.define([
             }
         },
 
-        onChangeTodoListSearch(oEvent) {
-            this.byId('idTodoList').getBinding('items').changeParameters({ $search: oEvent.getParameter('value') });
-        },
-
-        onChangeTodoListFilter() {
-            const sFilters = this._getFilters();
-            this.byId('idTodoList').getBinding('items').changeParameters({ $filter: sFilters || undefined });
-        },
-
-        async onPressCreateList() {
-            const oContext = this.byId('idTodoList').getBinding('items').create({
-                name: 'Новый Список',
-                priority: 1,
-                items: [],
-                doneItems: []
-            });
-            await oContext.created();
-            this.publish(this.EVENT.ACTION_SUCCEEDED, 'Дело создано.');
-
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetail',
-                parameters: {
-                    id: oContext.getProperty('ID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                }
-            });
-        },
-
-        onPressManageListTags() {
-            this._openManageListTagsDialog();
-        },
-
-        onPressTodoListSort() {
-            this.TableHelper.onPressSort('idTodoList');
-        },
-
-        onPressListItem(oEvent) {
-            this.publish(this.EVENT.NAV_CHANGED, {
-                route: 'todoDetail',
-                parameters: {
-                    id: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                }
-            });
-        },
-
         _setTableHelperConfig() {
             this.TableHelper.setController(this);
             this.TableHelper.register('idTodoTagList', {
@@ -113,20 +71,6 @@ sap.ui.define([
                 ],
                 sort: { path: 'createdAt', order: 'desc' }
             });
-        },
-
-        _getFilters() {
-            const aFilters = [];
-            const oFilterBarData = this.Config.getProperty('/filterBar');
-            if (oFilterBarData.ListTag.length) {
-                aFilters.push('(' + oFilterBarData.ListTag.map(sID => `tag_ID eq ${sID}`).join(' or ') + ')');
-            }
-
-            if (oFilterBarData.Priority.length) {
-                aFilters.push('(' + oFilterBarData.Priority.map(sID => `priority eq ${sID}`).join(' or ') + ')');
-            }
-
-            return aFilters.join(' and ');
         },
 
         // APPLICATION EVENTS
