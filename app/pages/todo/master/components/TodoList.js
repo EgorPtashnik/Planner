@@ -22,8 +22,15 @@ sap.ui.define(() => {
             });
         },
 
-        onPressManageListTags() {
-            this._openManageListTagsDialog();
+        async onPressManageListTags() {
+            this.ManageListTagsDialog = await this.ManageListTagsDialog;
+            if (!this.ManageListTagsDialog._odataAttached) {
+                this.ManageListTagsDialog._odataAttached = true;
+                this.byId('idTodoTagList').getBinding('items').attachPatchCompleted(() => this.publish(this.EVENT.TODOLIST_TAG_CHANGED));
+            }
+
+            this.publish(this.EVENT.TODOLIST_TAG_CHANGED);
+            this.ManageListTagsDialog.open();
         },
 
         onPressTodoListSort() {

@@ -16,22 +16,21 @@ sap.ui.define([
             this.init();
             [
                 { id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged },
-                { id: this.EVENT.TODOLIST_CHANGED, fnc: this._onTodoListChanged }
+                { id: this.EVENT.TODOLIST_CHANGED, fnc: this._onTodoListChanged },
+                { id: this.EVENT.TODOLIST_TAG_CHANGED, fnc: this._onTodoListTagChanged }
             ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
             this._setTableHelperConfig();
+            this._loadFragments();
 
             this.ODataEventsAttached = false;
             this.Config.setData({
                 listCount: 0,
                 tagCount: 0,
-                showDetails: false,
                 filterBar: {
                     ListTag: [],
                     Priority: []
                 }
             });
-
-            this.ManageListTagsDialog = null;
         },
 
         _onRouteMatched(oEvent) {
@@ -73,6 +72,10 @@ sap.ui.define([
             });
         },
 
+        _loadFragments() {
+            this.ManageListTagsDialog = this.getFragment('planner.pages.todo.master.components.ManageListTagsDialog');
+        },
+
         // APPLICATION EVENTS
         _onNavChanged(_, sEventId, oData) {
             if (oData.route === 'todoMaster') {
@@ -84,6 +87,17 @@ sap.ui.define([
 
         _onTodoListChanged() {
             this.byId('idTodoList').getBinding('items').refresh();
+        },
+
+        _onTodoListTagChanged(_, sEventId, oData) {
+            this.Config.setProperty('/tagCount', this.byId('idTodoTagList').getBinding('items').getCount());
+
+            this.byId('idTodoListTagFilter').getBinding('items').refresh();
+            if (oData.value) {
+                this.Config.setProperty('/filterBar/ListTag', []);
+                this.onChangeTodoListFilter();
+            }
+
         }
     });
 });

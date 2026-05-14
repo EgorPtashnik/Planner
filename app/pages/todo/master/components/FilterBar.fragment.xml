@@ -17,6 +17,7 @@
                 <fb:FilterGroupItem name="fbListTag" label="Тег" groupName="basic" visibleInFilterBar="true">
                     <fb:control>
                         <MultiComboBox
+                            id='idTodoListTagFilter'
                             selectionFinish='onChangeTodoListFilter'
                             selectedKeys='{config>/filterBar/ListTag}'
                             items='{todo>/ListTag}'>

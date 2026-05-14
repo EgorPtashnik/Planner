@@ -9,6 +9,7 @@ sap.ui.define(() => {
                 });
                 await oContext.created();
                 this.publish(this.EVENT.ACTION_SUCCEEDED, 'Тег создан.');
+                this.publish(this.EVENT.TODOLIST_TAG_CHANGED, true);
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
@@ -20,24 +21,11 @@ sap.ui.define(() => {
                 await oContext.delete();
                 if (oContext.isDeleted()) {
                     this.publish(this.EVENT.ACTION_SUCCEEDED, 'Тег удален.');
-                    this._updateTagCount();
+                    this.publish(this.EVENT.TODOLIST_TAG_CHANGED, true);
                 }
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             }
-        },
-        
-        async _openManageListTagsDialog() {
-            this.ManageListTagsDialog ??= await this.getFragment('planner.pages.todo.master.components.ManageListTagsDialog').then(oFragment => {
-                this.byId('idTodoTagList').getBinding('items').attachDataReceived(() => this._updateTagCount());
-                return oFragment;
-            });
-
-            this.ManageListTagsDialog.open();
-        },
-
-        _updateTagCount() {
-            this.Config.setProperty('/tagCount', this.byId('idTodoTagList').getBinding('items').getCount());
         }
     };
 });

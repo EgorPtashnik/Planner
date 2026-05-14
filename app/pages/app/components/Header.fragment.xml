@@ -33,7 +33,7 @@
 
             <Button
                 press='onPressToggleDarkMode'
-                icon='{= %{/darkMode} ? "sap-icon://light-mode" : "sap-icon://dark-mode" }'
+                icon='{= %{/darkMode} ? "sap-icon://dark-mode" : "sap-icon://light-mode" }'
                 tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
 
             <Button

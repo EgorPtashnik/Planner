@@ -4,7 +4,8 @@
 
     <Dialog
         showHeader='false'
-        stretch='true'>
+        horizontalScrolling='false'
+        stretch='{device>/system/phone}'>
 
         <content>
             <Table
@@ -42,7 +43,7 @@
                         <Text text='Цвет' />
                     </Column>
                     
-                    <Column autoPopinWidth='999'>
+                    <Column>
                         <Text text='Описание' />
                     </Column>
                 </columns>
@@ -53,9 +54,6 @@
                             <Input value='{todo>name}' />
 
                             <Select
-                                width='100%'
-                                valueState='{todo>color}'
-                                valueStateText=' '
                                 selectedKey='{todo>color}'>
                                 <items>
                                     <core:ListItem key='None' text='Серый' />
