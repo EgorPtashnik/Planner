@@ -36,6 +36,14 @@
                 icon='{= %{/darkMode} ? "sap-icon://dark-mode" : "sap-icon://light-mode" }'
                 tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
 
+            <Button
+                press='onPressDatabaseMenu'
+                ariaHasPopup='Menu'
+                icon='sap-icon://database'
+                busyIndicatorSize='Small'
+                busyIndicatorDelay='0'
+                tooltip='База Данных' />
+
         </tnt:content>
     </tnt:ToolHeader>
 

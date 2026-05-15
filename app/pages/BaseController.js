@@ -19,6 +19,7 @@ sap.ui.define([
         MessageHelper,
 
         EVENT: {
+            ACTION_REQUESTED: 'ACTION_REQUESTED',
             ACTION_FAILED: 'ACTION_FAILED',
 
             TODOLIST_CHANGED: 'TODOLIST_CHANGED',

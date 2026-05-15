@@ -3,16 +3,18 @@ sap.ui.define([
     'sap/ui/core/Theming',
 
     'planner/pages/app/Events',
-    'planner/pages/app/components/Header'
+    'planner/pages/app/components/Header',
+    'planner/pages/app/components/DatabaseMenuPopover'
 ], (BaseController, Theming,
 
-    Events, Header
+    Events, Header, DatabaseMenuPopover
 ) => {
     'use strict';
 
     return BaseController.extend('planner.pages.app.App', {
         ...Events,
         ...Header,
+        ...DatabaseMenuPopover,
         THEME: {
             LIGHT: 'sap_horizon',
             DARK: 'sap_horizon_dark'
@@ -21,6 +23,7 @@ sap.ui.define([
         onInit() {
             this.init('app');
             this._setSubscriptions();
+            this._loadFragments();
 
             this.getView().addStyleClass(this.getContentDensityClass());
             Theming.attachApplied(() => this.getView().setBusy(false));
@@ -41,13 +44,18 @@ sap.ui.define([
             this.getRouter().navTo(oEvent.getSource().getSelectedKey());
         },
 
+        _loadFragments() {
+            this.DatabaseMenuPopover = this.getFragment('planner.pages.app.components.DatabaseMenuPopover');
+        },
+
         _applyTheme() {
             if (localStorage.getItem('theme') && localStorage.getItem('theme') !== Theming.getTheme()) {
                 this.getView().setBusy(true);
                 Theming.setTheme(localStorage.getItem('theme') );
                 this.AppConfig.setProperty('/darkMode', localStorage.getItem('theme') === this.THEME.DARK);
             }
-        }
+        },
+
 
     });
 });

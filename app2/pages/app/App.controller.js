@@ -11,29 +11,6 @@ sap.ui.define([
 
     return BaseController.extend('planner.pages.app.App', {
 
-        ...Header,
-        ...DatabaseMenuPopoverLogic,
-
-        onInit() {
-            this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
-            [{id: this.EVENT.NAV_CHANGED, fnc: this._onNavChanged},
-                {id: this.EVENT.ACTION_REQUESTED, fnc: this._onActionRequested},
-                {id: this.EVENT.ACTION_SUCCEEDED, fnc: this._onActionSucceeded},
-                {id: this.EVENT.ACTION_FAILED, fnc: this._onActionFailed}
-            ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
-
-            this._loadFragments();
-        },
-
-        _loadFragments() {
-            this.DatabaseMenuPopover = this.getFragment('planner.pages.app.components.DatabaseMenuPopover');
-        },
-
-        //APPLICATION EVENT HANDLERS
-        _onNavChanged(_, sEventId, oData) {
-            this.getRouter().navTo(oData.route, oData.parameters);
-        },
-
         _onActionRequested(_, sEventId, oData) {
             const oAction = this.getView().getModel(oData.model).bindContext(oData.action, oData.context);
             Object.entries(oData.parameters || {}).forEach(entry => oAction.setParameter(entry[0], entry[1]));
