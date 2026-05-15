@@ -31,6 +31,10 @@ sap.ui.define(() => {
             this.ManageListTagsDialog.open();
         },
 
+        onPressToggleVisibleLists() {
+            this.State.setProperty('/showCompletedLists', !this.State.getProperty('/showCompletedLists'));
+        },
+
         onPressTodoListSort() {
             this.TableHelper.onPressSort('idTodoList');
         },

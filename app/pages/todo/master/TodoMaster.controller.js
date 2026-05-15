@@ -28,6 +28,7 @@ sap.ui.define([
             this.ODataEventsAttached = false;
             this.State.setData({
                 listCount: 0,
+                showCompletedLists: false,
                 tagCount: 0,
                 filterBar: {
                     ListTag: [],

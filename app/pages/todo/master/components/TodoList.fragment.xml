@@ -47,6 +47,23 @@
                 </OverflowToolbarButton>
 
                 <OverflowToolbarButton
+                    press='onPressToggleVisibleLists'
+                    type='Transparent'
+                    icon='{= %{state>/showCompletedLists} ? "sap-icon://show" : "sap-icon://hide" }'
+                    text='Показать законченные'
+                    tooltip='Показать законченные'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData group='1' />
+                    </layoutData>
+                </OverflowToolbarButton>
+
+                <ToolbarSeparator>
+                    <layoutData>
+                        <OverflowToolbarLayoutData group='1' />
+                    </layoutData>
+                </ToolbarSeparator>
+
+                <OverflowToolbarButton
                     press='onPressTodoListSort'
                     type='Transparent'
                     icon='sap-icon://sort'
@@ -78,7 +95,11 @@
                 press='onPressListItem'
                 navigated='{= %{/detailID} === %{todo>ID} }'
                 highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
-                type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'>
+                type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'
+                visible='{=
+                    %{state>/showCompletedLists} ||
+                    %{todo>status} === 0 || %{todo>status} === 1
+                }'>
                 <cells>
                     <HBox alignItems='Center'>
                         <GenericTag
@@ -92,6 +113,11 @@
 
                     <ObjectStatus
                         class='sapMObjectStatusLongText'
+                        icon='{=
+                            %{todo>status} === 2 ? "sap-icon://accept" :
+                            %{todo>status} === 1 ? "sap-icon://pending" :
+                            "sap-icon://process"
+                        }'
                         text='{ path: "todo>status", formatter: ".Formatter.getProgressStatusText" }'
                         state='{ path: "todo>status", formatter: ".Formatter.getProgressStatusState" }' />
                 </cells>
