@@ -8,15 +8,16 @@
     <f:DynamicPage>
 
         <f:title>
-
-            <f:DynamicPageTitle>
-
-                <f:heading>
-                    <Title text='Главная' />
-                </f:heading>
-
-            </f:DynamicPageTitle>
+            <core:Fragment fragmentName='planner.pages.home.components.Header' />
         </f:title>
+
+        <f:content>
+            <f:GridContainer>
+                <f:items>
+                    <core:Fragment fragmentName='planner.pages.home.components.CurrentActivitiesTile' />
+                </f:items>
+            </f:GridContainer>
+        </f:content>
 
     </f:DynamicPage>
 

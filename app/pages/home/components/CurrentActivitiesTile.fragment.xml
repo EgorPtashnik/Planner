@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:card='sap.f.cards'
+    xmlns:core='sap.ui.core'>
+
+    <f:Card>
+        <f:header>
+            <card:Header
+                iconSrc='sap-icon://activity-items'
+                statusText='Status text'
+                title='Списки Дел' />
+        </f:header>
+
+        <f:content>
+
+        </f:content>
+
+        <f:layoutData>
+            <f:GridContainerItemLayoutData
+                minRows='3'
+                columns='6' />
+        </f:layoutData>
+    </f:Card>
+
+    <f:Card>
+        <f:header>
+            <card:NumericHeader
+                details='details'
+                iconSrc='sap-icon://activity-items'
+                number='5'
+                statusText='Status Text'
+                title='Title'
+                subtitle='subtitle'
+                 />
+        </f:header>
+
+        <f:content>
+
+        </f:content>
+
+        <f:layoutData>
+            <f:GridContainerItemLayoutData
+                minRows='3'
+                columns='4' />
+        </f:layoutData>
+    </f:Card>
+
+</core:FragmentDefinition>
