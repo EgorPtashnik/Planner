@@ -7,6 +7,7 @@
         sticky='HeaderToolbar'
         fixedLayout='false'
         autoPopinMode='true'
+        busyIndicatorDelay='0'
         items='{
             path: "todo>/List",
             parameters: {
@@ -116,7 +117,7 @@
                         icon='{=
                             %{todo>status} === 2 ? "sap-icon://accept" :
                             %{todo>status} === 1 ? "sap-icon://pending" :
-                            "sap-icon://process"
+                            ""
                         }'
                         text='{ path: "todo>status", formatter: ".Formatter.getProgressStatusText" }'
                         state='{ path: "todo>status", formatter: ".Formatter.getProgressStatusState" }' />
