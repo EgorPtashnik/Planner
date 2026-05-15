@@ -17,7 +17,7 @@ entity ListTag: cuid, managed, baseInfo {
 
 entity Item: cuid, managed, baseInfo, priority {
     key list: Association to List;
-    startDate: Timestamp @cds.on.insert : $now;
+    startDate: Timestamp default $now;
 
     status: ProgressStatus default 0;
 };

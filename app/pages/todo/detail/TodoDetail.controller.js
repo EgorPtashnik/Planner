@@ -21,6 +21,7 @@ sap.ui.define([
             this.init('todoDetail');
             this._setSubscriptions();
             this._loadFragments();
+            this._setTableHelperConfig();
 
             this.ODataEventsAttached = false;
             this.State.setData({
@@ -60,7 +61,22 @@ sap.ui.define([
 
         _loadFragments() {
             this.EditListDialog = this.getFragment('planner.pages.todo.detail.components.EditListDialog');
-        }
+        },
+
+        _setTableHelperConfig() {
+            this.TableHelper.setController(this);
+            this.TableHelper.register('idTodoItems', {
+                columns: [
+                    { label: 'Имя', path: 'name' },
+                    { label: 'Приоритет', path: 'priority' },
+                    { label: 'Статус', path: 'status'},
+                    { label: 'Дата Создания', path: 'createdAt' },
+                    { label: 'Дата Обновления', path: 'modifiedAt' },
+                    { label: 'Начало', path: 'startDate' }
+                ],
+                sort: { path: 'createdAt', order: 'desc' }
+            });
+        },
 
     });
 });

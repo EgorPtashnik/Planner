@@ -14,6 +14,7 @@
                         busyIndicatorDelay='0'
                         showSeparators='Inner'
                         autoPopinMode='true'
+                        fixedLayout='false'
                         hiddenInPopin='{= %{state>/showDetails}.toString() === "true" || %{state>/editItems} ? [] : ["Low","Medium"] }'
                         mode='{= %{state>/editItems} ? "Delete" : "None"}'
                         items='{
@@ -56,7 +57,7 @@
                                     icon='sap-icon://edit'
                                     pressed='{state>/editItems}'>
                                     <layoutData>
-                                        <OverflowToolbarLayoutData group='1' />
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
                                     </layoutData>
                                 </OverflowToolbarToggleButton>
 
@@ -76,8 +77,7 @@
                                     type='Transparent'
                                     icon='sap-icon://eraser'
                                     text='Удалить Законченные'
-                                    tooltip='Удалить Законченные'
-                                    visible='{= !%{state>/editItems} }'>
+                                    tooltip='Удалить Законченные'>
                                     <layoutData>
                                         <OverflowToolbarLayoutData group='1' />
                                     </layoutData>
@@ -98,8 +98,9 @@
                                     icon='sap-icon://detail-more'
                                     tooltip='Показать Детали'
                                     text='Показать Детали'
-                                    visible='{= %{device>/system/phone} &amp;&amp; !%{state>/editItems} }'
-                                    pressed='{state>/showDetails}'>
+                                    pressed='{state>/showDetails}'
+                                    visible='{= %{device>/system/phone} }'
+                                    enabled='{= !%{state>/editItems} }'>
                                     <layoutData>
                                         <OverflowToolbarLayoutData  group='1' />
                                     </layoutData>
@@ -107,7 +108,8 @@
 
                                 <SegmentedButton
                                     selectedKey='{state>/showDetails}'
-                                    visible='{= !%{device>/system/phone} &amp;&amp; !%{state>/editItems} }'>
+                                    visible='{= !%{device>/system/phone} }'
+                                    enabled='{= !%{state>/editItems} }'>
                                     <items>
                                         <SegmentedButtonItem
                                             key='false'
@@ -128,28 +130,33 @@
                         <columns>
                             <Column
                                 width='auto'
-                                autoPopinWidth='10'
                                 importance='High' >
                                 <Text text='Имя'/>
                             </Column>
 
                             <Column
-                                width='auto'
-                                autoPopinWidth='10'
-                                importance='High' >
+                                importance='Medium'>
                                 <Text text='Начало'/>
                             </Column>
 
                             <Column
                                 importance='Low'
-                                autoPopinWidth='999'
-                                popinDisplay='{= %{state>/editItems} ? "Block" : "WithoutHeader" }'>
+                                autoPopinWidth='999'>
                                 <Text text='Заметка' />
+                            </Column>
+
+                            <Column
+                                width='8rem'
+                                hAlign='Right'
+                                importance='High'
+                                visible='{= !%{state>/editItems} }'>
+                                <Text text='Выполнение' />
                             </Column>
                         </columns>
 
                         <items>
                             <ColumnListItem
+                                vAlign='{= %{state>/editItems} || %{device>/system/phone} ? "Top" : "Middle"}'
                                 visible='{=
                                     %{state>/showCompletedItems} ||
                                     %{todo>status} === 0 || %{todo>status} === 1
@@ -157,38 +164,54 @@
                                 <cells>
                                     <VBox>
                                         <!-- DISPLAY -->
-                                        <HBox
-                                            alignItems='Center'
+                                        <FlexBox
+                                            direction='{= %{device>/system/phone} ? "Column" : "Row" }'
+                                            alignItems='{= %{device>/system/phone} ? "Start" : "Center" }'
                                             visible='{= !%{state>/editItems} }'>
                                             <GenericTag
                                                 class='sapUiTinyMarginEnd'
                                                 design='StatusIconHidden'
                                                 text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
+                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
+                                                visible='{= !%{device>/system/phone} }' />
                                             <ObjectIdentifier
                                                 title='{todo>name}'/>
-                                        </HBox>
+                                            <GenericTag
+                                                class='sapUiTinyMarginTop'
+                                                design='StatusIconHidden'
+                                                text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
+                                                visible='{device>/system/phone}' />
+                                        </FlexBox>
 
                                         <!-- EDIT -->
-                                        <HBox
-                                            alignItems='Center'
+                                        <VBox
+                                            fitContainer='true'
                                             visible='{state>/editItems}'>
+                                            <Input
+                                                value='{todo>name}'
+                                                visible='{state>/editItems}' />
                                             <Select
+                                                width='100%'
                                                 selectedKey='{todo>priority}'
                                                 items='{path: "common>/PriorityCode", templateShareable: false}'>
                                                 <items>
                                                     <core:Item key='{common>code}' text='{common>name}' />
                                                 </items>
                                             </Select>
-                                            <Input
-                                                width='100%'
-                                                value='{todo>name}'
-                                                visible='{state>/editItems}' />
-                                        </HBox>
+                                        </VBox>
                                     </VBox>
 
                                     <VBox>
-                                        <Text text='{todo>startDate}' />
+                                        <!-- DISPLAY -->
+                                        <Text
+                                            text='{ path: "todo>startDate", formatter: ".Formatter.getDateWithoutTime" }'
+                                            visible='{= !%{state>/editItems} }' />
+
+                                        <!-- EDIT -->
+                                        <DatePicker
+                                            dateValue='{todo>startDate}'
+                                            visible='{state>/editItems}' />
                                     </VBox>
 
                                     <VBox>
@@ -207,6 +230,54 @@
                                             value='{todo>info}'
                                             visible='{state>/editItems}' />
                                     </VBox>
+
+                                    <OverflowToolbar style='Clear'>
+                                        <ToolbarSpacer />
+
+                                        <Button
+                                            press='onPressChangeItemStatus($event, 1)'
+                                            type='Accept'
+                                            text='Начать'
+                                            tooltip='Начать'
+                                            visible='{= %{todo>status} === 0 }'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                            </layoutData>
+                                        </Button>
+
+                                        <Button
+                                            press='onPressChangeItemStatus($event, 2)'
+                                            type='Accept'
+                                            icon='sap-icon://accept'
+                                            tooltip='Завершить'
+                                            visible='{= %{todo>status} === 1 }'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                            </layoutData>
+                                        </Button>
+
+                                        <Button
+                                            press='onPressChangeItemStatus($event, 3)'
+                                            type='Reject'
+                                            icon='sap-icon://decline'
+                                            tooltip='Отменить'
+                                            visible='{= %{todo>status} === 1 }'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                            </layoutData>
+                                        </Button>
+
+                                        <ObjectStatus
+                                            inverted='true'
+                                            icon='{= %{todo>status} === 2 ? "sap-icon://accept" : "sap-icon://decline"}'
+                                            text='{path: "todo>status", formatter: ".Formatter.getProgressStatusText"}' 
+                                            state='{path: "todo>status", formatter: ".Formatter.getProgressStatusState"}'
+                                            visible='{= %{todo>status} &gt; 1 }'>
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority='NeverOverflow' />
+                                            </layoutData>
+                                        </ObjectStatus>
+                                    </OverflowToolbar>
                                 </cells>
                             </ColumnListItem>
                         </items>

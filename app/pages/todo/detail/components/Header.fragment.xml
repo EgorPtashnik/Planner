@@ -84,7 +84,7 @@
         <uxap:expandedContent>
             <ObjectStatus
                 title='Обновлено'
-                text='{todo>modifiedAt}' />
+                text='{ path: "todo>modifiedAt", formatter: ".Formatter.getDateWithoutTime" }' />
         </uxap:expandedContent>
 
     </uxap:ObjectPageDynamicHeaderTitle>

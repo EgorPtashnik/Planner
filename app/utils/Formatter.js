@@ -40,6 +40,10 @@ sap.ui.define([
                 case '2': return ValueState.Success;
                 case '3': return ValueState.Error;
             }
+        },
+
+        getDateWithoutTime(vDate) {
+            return vDate?.split(',')?.[0] || '';
         }
     };
 });
