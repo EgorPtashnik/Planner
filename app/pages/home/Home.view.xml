@@ -7,15 +7,14 @@
 
     <f:DynamicPage>
 
-        <f:title>
-            <core:Fragment fragmentName='planner.pages.home.components.Header' />
-        </f:title>
-
         <f:content>
             <f:GridContainer>
                 <f:items>
                     <core:Fragment fragmentName='planner.pages.home.components.CurrentActivitiesTile' />
                 </f:items>
+				<f:layoutS>
+					<f:GridContainerSettings columnSize='25%' gap="0px" />
+				</f:layoutS>
             </f:GridContainer>
         </f:content>
 

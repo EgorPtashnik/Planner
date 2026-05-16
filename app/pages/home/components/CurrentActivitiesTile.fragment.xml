@@ -2,47 +2,110 @@
     xmlns='sap.m'
     xmlns:f='sap.f'
     xmlns:card='sap.f.cards'
+    xmlns:chart='sap.suite.ui.microchart'
     xmlns:core='sap.ui.core'>
 
     <f:Card>
         <f:header>
             <card:Header
-                iconSrc='sap-icon://activity-items'
-                statusText='Status text'
-                title='Списки Дел' />
+                title='Дела Сегодня ({home>/StartedTodo/$count})'>
+                <card:toolbar>
+                    <OverflowToolbar
+                        class='sapUiTinyMarginTop'
+                        style='Clear'>
+                        <OverflowToolbarButton
+                            press='onPressToggleVisibleLists'
+                            type='Transparent'
+                            icon='{= %{state>/showCompletedLists} ? "sap-icon://show" : "sap-icon://hide" }'
+                            text='Показать законченные'
+                            tooltip='Показать законченные'>
+                            <layoutData>
+                                <OverflowToolbarLayoutData priority='AlwaysOverflow' />
+                            </layoutData>
+                        </OverflowToolbarButton>
+
+                        <chart:RadialMicroChart
+                            size='XS'
+                            alignContent='Right'
+                            valueColor='Good'
+                            total='{= %{home>/StartedTodo/$count} }'
+                            fraction='{
+                                path: "home>/StartedTodo/$count",
+                                parameters: { $filter: "status gt 1" },
+                                targetType: "any"
+                            }' />
+                    </OverflowToolbar>
+                </card:toolbar>
+            </card:Header>
         </f:header>
 
         <f:content>
+            <Table
+                fixedLayout='false'
+                autoPopinMode='true'
+                busyIndicatorDelay='0'
+                showSeparators='Inner'
+                items='{
+                    path: "home>/StartedTodo",
+                    parameters: {
+                        $filter: "status le 1",
+                        $orderby: "priority desc"
+                    
+                    }    
+                }'>
 
+                <columns>
+                    <Column
+                        width='auto'
+                        importance='High' >
+                        <Text text='Имя'/>
+                    </Column>
+
+                    <Column
+                        importance='Low'
+                        autoPopinWidth='999'>
+                        <Text text='Заметка' />
+                    </Column>
+
+                    <Column
+                        width='8rem'
+                        popinDisplay='WithoutHeader'>
+                        <Text text='Статус' />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        highlight='{ path: "home>priority", formatter: ".Formatter.getPriorityState" }'>
+                        <cells>
+                            <ObjectIdentifier
+                                titleActive='true'
+                                title='{home>name}' />
+
+                            <ExpandableText
+                                maxCharacters='50'
+                                emptyIndicatorMode='{= !!%{home>info} ? "Off" : "On" }'
+                                text='{home>info}' />
+
+                            <ObjectStatus
+                                class='sapMObjectStatusLongText'
+                                icon='{=
+                                    %{home>status} === 2 ? "sap-icon://accept" :
+                                    %{home>status} === 1 ? "sap-icon://pending" :
+                                    ""
+                                }'
+                                text='{ path: "home>status", formatter: ".Formatter.getProgressStatusText" }'
+                                state='{ path: "home>status", formatter: ".Formatter.getProgressStatusState" }' />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
         </f:content>
 
         <f:layoutData>
             <f:GridContainerItemLayoutData
                 minRows='3'
                 columns='6' />
-        </f:layoutData>
-    </f:Card>
-
-    <f:Card>
-        <f:header>
-            <card:NumericHeader
-                details='details'
-                iconSrc='sap-icon://activity-items'
-                number='5'
-                statusText='Status Text'
-                title='Title'
-                subtitle='subtitle'
-                 />
-        </f:header>
-
-        <f:content>
-
-        </f:content>
-
-        <f:layoutData>
-            <f:GridContainerItemLayoutData
-                minRows='3'
-                columns='4' />
         </f:layoutData>
     </f:Card>
 
