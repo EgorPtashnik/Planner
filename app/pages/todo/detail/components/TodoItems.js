@@ -14,6 +14,7 @@ sap.ui.define(() => {
                 await oContext.created();
 
                 this.MessageHelper.toast({ message: 'Шаг создан.' });
+                this.publish(this.EVENT.TODOITEM_CHANGED);
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             } finally {
@@ -36,6 +37,7 @@ sap.ui.define(() => {
                 );
                 this.MessageHelper.toast({ message: 'Законченные шаги удалены.' });
                 this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount());
+                this.publish(this.EVENT.TODOITEM_CHANGED);
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             } finally {
@@ -55,6 +57,7 @@ sap.ui.define(() => {
                 if (oContext.isDeleted()) {
                     this.MessageHelper.toast({ message: 'Шаг удален.' });
                     this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount());
+                    this.publish(this.EVENT.TODOITEM_CHANGED);
                 }
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);

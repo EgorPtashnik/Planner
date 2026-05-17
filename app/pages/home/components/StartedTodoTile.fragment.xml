@@ -92,6 +92,8 @@
                             <ObjectStatus
                                 class='sapMObjectStatusLongText'
                                 icon='{=
+                                    %{home>status} === 3 ? "sap-icon://decline" :
+                                    %{home>status} === 2 ? "sap-icon://accept" :
                                     %{home>status} === 2 ? "sap-icon://accept" :
                                     %{home>status} === 1 ? "sap-icon://pending" :
                                     ""

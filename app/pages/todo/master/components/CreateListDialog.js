@@ -20,7 +20,6 @@ sap.ui.define(() => {
 
                 this.publish(this.EVENT.TODOLIST_CHANGED);
             } catch(oError) {
-                console.log(oError);
                 this.publish(this.EVENT.ACTION_FAILED, oError);
             } finally {
                 this.byId('idTodoList').setBusy(false);

@@ -23,7 +23,8 @@ sap.ui.define([
             ACTION_FAILED: 'ACTION_FAILED',
 
             TODOLIST_CHANGED: 'TODOLIST_CHANGED',
-            TODOLIST_TAG_CHANGED: 'TODOLIST_TAG_CHANGED'
+            TODOLIST_TAG_CHANGED: 'TODOLIST_TAG_CHANGED',
+            TODOITEM_CHANGED: 'TODOITEM_CHANGED'
         },
 
         init(sRoute) {
