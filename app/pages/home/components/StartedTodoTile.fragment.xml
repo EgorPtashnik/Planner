@@ -14,9 +14,9 @@
                         class='sapUiTinyMarginTop'
                         style='Clear'>
                         <OverflowToolbarButton
-                            press='onPressToggleVisibleLists'
+                            press='onPressToggleVisibleStartedTodos'
                             type='Transparent'
-                            icon='{= %{state>/showCompletedLists} ? "sap-icon://show" : "sap-icon://hide" }'
+                            icon='{= %{state>/StartedTodoTile/showCompleted} ? "sap-icon://show" : "sap-icon://hide" }'
                             text='Показать законченные'
                             tooltip='Показать законченные'>
                             <layoutData>
@@ -41,6 +41,7 @@
 
         <f:content>
             <Table
+                id='idStartedTodos'
                 fixedLayout='false'
                 autoPopinMode='true'
                 busyIndicatorDelay='0'
@@ -79,6 +80,7 @@
                         highlight='{ path: "home>priority", formatter: ".Formatter.getPriorityState" }'>
                         <cells>
                             <ObjectIdentifier
+                                titlePress='onPressStartedTodoLink'
                                 titleActive='true'
                                 title='{home>name}' />
 

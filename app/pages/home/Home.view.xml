@@ -10,7 +10,7 @@
         <f:content>
             <f:GridContainer>
                 <f:items>
-                    <core:Fragment fragmentName='planner.pages.home.components.CurrentActivitiesTile' />
+                    <core:Fragment fragmentName='planner.pages.home.components.StartedTodoTile' />
                 </f:items>
 				<f:layoutS>
 					<f:GridContainerSettings columnSize='25%' gap="0px" />
