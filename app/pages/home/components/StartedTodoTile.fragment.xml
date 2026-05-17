@@ -50,6 +50,12 @@
                     }    
                 }'>
 
+                <noData>
+                    <IllustratedMessage
+                        illustrationType='sapIllus-NoTasks'
+                        illustrationSize='{= %{device>/system/phone} ? "Medium" : "Large" }' />
+                </noData>
+
                 <columns>
                     <Column
                         width='auto'

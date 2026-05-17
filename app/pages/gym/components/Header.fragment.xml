@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:core='sap.ui.core'>
+
+    <f:DynamicPageTitle>
+
+        <f:heading>
+            <Title text='Тренировки' />
+        </f:heading>
+
+        <f:actions>
+            <Button
+                press='onPressSettle'
+                icon='sap-icon://payment-approval'
+                type='Accept'
+                text='Оплачено'
+                tooltip='Оплачено'
+                visible='{= !!%{state>/totalCost} }'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                </layoutData>
+            </Button>
+            <Button
+                press='onPressTrainingHistory'
+                type='Ghost'
+                icon='sap-icon://calendar'>
+                <layoutData>
+                    <OverflowToolbarLayoutData priority='NeverOverflow' />
+                </layoutData>
+            </Button>
+        </f:actions>
+
+    </f:DynamicPageTitle>
+
+</core:FragmentDefinition>

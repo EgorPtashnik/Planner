@@ -24,7 +24,8 @@ sap.ui.define([
                 sideNavExpanded: false,
                 routes: [
                     {text: 'Главная', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Мои Дела', icon: 'sap-icon://activities', key: 'todoMaster'}
+                    {text: 'Мои Дела', icon: 'sap-icon://activities', key: 'todoMaster'},
+                    {text: 'Тренировки', icon: 'sap-icon://physical-activity', key: 'gym'}
                 ],
                 selectedRoute: 'home',
                 detailID: null,

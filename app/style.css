@@ -15,3 +15,7 @@ code {
     position: relative;
     tab-size: 4;
 }
+
+.sapMBtnInner {
+    border-radius: 5rem !important;
+}

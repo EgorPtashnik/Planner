@@ -25,12 +25,6 @@ sap.ui.define(() => {
                     }
                 }
             });
-        },
-
-        async _openTrainingHistoryDialog() {
-            this.TrainingHistoryDialog ??= await this.getFragment('planner.pages.gym.components.TrainingHistoryDialog');
-
-            this.TrainingHistoryDialog.open();
         }
 
     };

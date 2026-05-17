@@ -30,6 +30,11 @@
                 "uri": "/odata/v4/todo/",
                 "type": "OData",
                 "settings": { "odataVersion": "4.0" }
+            },
+            "gymService": {
+                "uri": "/odata/v4/gym/",
+                "type": "OData",
+                "settings": { "odataVersion": "4.0" }
             }
         }
     },
@@ -50,8 +55,9 @@
         },
         "models": {
             "common": { "dataSource": "commonService", "type": "sap.ui.model.odata.v4.ODataModel" },
+            "home": { "dataSource": "homeService", "type": "sap.ui.model.odata.v4.ODataModel" },
             "todo": { "dataSource": "todoService", "type": "sap.ui.model.odata.v4.ODataModel" },
-            "home": { "dataSource": "homeService", "type": "sap.ui.model.odata.v4.ODataModel" }
+            "gym": { "dataSource": "gymService", "type": "sap.ui.model.odata.v4.ODataModel" }
         },
         "rootView": {
             "viewName": "planner.pages.app.App",
@@ -66,7 +72,7 @@
                 "viewType": "XML",
                 "path": "planner.pages",
                 "controlId": "app",
-                "transition": "slide",
+                "transition": "show",
                 "async": "true"
             },
             "routes": [
@@ -85,6 +91,12 @@
                     "pattern": "todo/{id}/:layout:",
                     "name": "todoDetail",
                     "target": ["todoMaster", "todoDetail"]
+                },
+
+                {
+                    "pattern": "gym",
+                    "name": "gym",
+                    "target": ["gym"]
                 }
             ],
             "targets": {
@@ -108,6 +120,15 @@
                 "todoDetail": {
                     "name": "todo.detail.TodoDetail",
                     "controlAggregation": "midColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
+                        "autoClose": true
+                    }
+                },
+
+                "gym": {
+                    "name": "gym.Gym",
+                    "controlAggregation": "beginColumnPages",
                     "placeholder": {
                         "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
                         "autoClose": true
