@@ -11,7 +11,6 @@ sap.ui.define(() => {
         },
 
         _refreshStartedTodos() {
-            console.log('refresh');
             this.byId('idStartedTodos').getBinding('items').refresh();
         }
     };

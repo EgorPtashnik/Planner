@@ -51,8 +51,9 @@ sap.ui.define([
 
                 if (!this.ODataEventsAttached) {
                     this.ODataEventsAttached = true;
-                    this.byId('idTodoItems').getBinding('items').attachDataReceived(oEvent => 
-                        this.State.setProperty('/itemCount', oEvent.getSource().getCount()));
+                    this.byId('idTodoItems').getBinding('items')
+                        .attachDataReceived(oEvent => this.State.setProperty('/itemCount', oEvent.getSource().getCount()))
+                        .attachPatchCompleted(() => this.publish(this.EVENT.TODOITEM_CHANGED))
                 }
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);

@@ -5,9 +5,6 @@ sap.ui.define(() => {
 
         onPressToggleVisibleStartedTodos() {
             this.State.setProperty('/StartedTodoTile/showCompleted', !this.State.getProperty('/StartedTodoTile/showCompleted'));
-            this.byId('idStartedTodos').getBinding('items').changeParameters({
-                $filter: this.State.getProperty('/StartedTodoTile/showCompleted') ? undefined : 'status le 1'
-            })
         },
 
         onPressStartedTodoLink(oEvent) {

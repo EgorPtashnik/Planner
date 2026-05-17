@@ -100,7 +100,7 @@
                 type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'
                 visible='{=
                     %{state>/showCompletedLists} ||
-                    %{todo>status} === 0 || %{todo>status} === 1
+                    %{todo>status} &lt; 2
                 }'>
                 <cells>
                     <HBox alignItems='Center'>

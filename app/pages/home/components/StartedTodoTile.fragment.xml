@@ -8,7 +8,7 @@
     <f:Card>
         <f:header>
             <card:Header
-                title='Дела Сегодня ({home>/StartedTodo/$count})'>
+                title='Дела Сегодня ({state>/StartedTodoTile/allItems})'>
                 <card:toolbar>
                     <OverflowToolbar
                         class='sapUiTinyMarginTop'
@@ -25,15 +25,12 @@
                         </OverflowToolbarButton>
 
                         <chart:RadialMicroChart
+                            id='idStartedTodoChart'
                             size='XS'
                             alignContent='Right'
                             valueColor='Good'
-                            total='{= %{home>/StartedTodo/$count} }'
-                            fraction='{
-                                path: "home>/StartedTodo/$count",
-                                parameters: { $filter: "status gt 1" },
-                                targetType: "any"
-                            }' />
+                            total='{state>/StartedTodoTile/allItems}'
+                            fraction='{state>/StartedTodoTile/doneItems}' />
                     </OverflowToolbar>
                 </card:toolbar>
             </card:Header>
@@ -49,9 +46,7 @@
                 items='{
                     path: "home>/StartedTodo",
                     parameters: {
-                        $filter: "status le 1",
                         $orderby: "priority desc"
-                    
                     }    
                 }'>
 
@@ -77,7 +72,14 @@
 
                 <items>
                     <ColumnListItem
-                        highlight='{ path: "home>priority", formatter: ".Formatter.getPriorityState" }'>
+                        highlight='{
+                            path: "home>priority",
+                            formatter: ".Formatter.getPriorityState"
+                        }'
+                        visible='{=
+                            %{state>/StartedTodoTile/showCompleted} ||
+                            %{home>status} &lt; 2
+                        }'>
                         <cells>
                             <ObjectIdentifier
                                 titlePress='onPressStartedTodoLink'

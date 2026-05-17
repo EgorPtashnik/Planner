@@ -4,6 +4,8 @@ service HomeService {
 
     view StartedTodo as select from Todo.Item {
         Item.*
-    } where startDate <= $now;
+    } where
+        (status <= 1 and startDate <= $now) or
+        (status > 1 and date(startDate) >= date($now));
 
 }
