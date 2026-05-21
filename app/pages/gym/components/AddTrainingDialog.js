@@ -6,7 +6,7 @@ sap.ui.define(() => {
         async onAddTraining() {
             try {
                 this.AddTrainingDialog.close();
-                const oData = this.Config.getProperty('/AddTrainingDialog');
+                const oData = this.State.getProperty('/AddTrainingDialog');
                 const oContext = this.TrainingListBinding.create({
                     solo: oData.selectedType === 0,
                     date: oData.date
@@ -21,7 +21,7 @@ sap.ui.define(() => {
         
         async _openAddTrainingDialog() {
             this.AddTrainingDialog = await this.getFragment('planner.pages.gym.components.AddTrainingDialog');
-            this.Config.setProperty('/AddTrainingDialog', {
+            this.State.setProperty('/AddTrainingDialog', {
                 selectedType: 0,
                 date: new Date()
             });
