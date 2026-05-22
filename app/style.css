@@ -16,6 +16,26 @@ code {
     tab-size: 4;
 }
 
+.HeaderBtn > span{
+    border-style: none !important;
+}
+.HeaderBtn:hover {
+    border-style: none !important;
+    color: red !important;
+}
+
+.sapMBtnGhost {
+    border-style: solid !important;
+}
+.sapMBtnTransparent {
+    border-style: none !important;
+}
 .sapMBtnInner {
+    border-radius: 5rem !important;
+}
+.sapMBtnInner::after {
+    border-radius: 5rem !important;
+}
+.sapMBtnInner::before {
     border-radius: 5rem !important;
 }

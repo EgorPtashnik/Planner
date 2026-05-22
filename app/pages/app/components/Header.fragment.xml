@@ -6,6 +6,7 @@
     <tnt:ToolHeader>
         <tnt:content>
             <ToggleButton
+                class='HeaderBtn'
                 icon="sap-icon://menu2"
                 pressed='{/sideNavExpanded}'
                 visible='{device>/system/phone}' >
@@ -15,33 +16,26 @@
             </ToggleButton>
 
             <Title text="PlanneR 2.0" />
-            
-            <IconTabHeader
-                backgroundDesign='Transparent'
-                select='onSelectNavItem'
-                visible='{= !%{device>/system/phone} }'
-                selectedKey='{/selectedRoute}'
-                items='{/routes}'>
-                <items>
-                    <IconTabFilter
-                        text='{text}'
-                        key='{key}' />
-                </items>
-            </IconTabHeader>
 
-            <ToolbarSpacer />
+            <ToolbarSeparator />
+            
+            <core:Fragment fragmentName='planner.pages.app.components.HeaderNav' type='XML' />
+
+            <ToolbarSpacer width="{= %{device>/system/phone} ? '' : 'auto' }" />
 
             <Button
                 press='onPressToggleDarkMode'
+                class='HeaderBtn'
                 icon='{= %{/darkMode} ? "sap-icon://dark-mode" : "sap-icon://light-mode" }'
                 tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
 
             <Button
                 press='onPressDatabaseMenu'
+                class='HeaderBtn'
                 ariaHasPopup='Menu'
-                icon='sap-icon://database'
                 busyIndicatorSize='Small'
                 busyIndicatorDelay='0'
+                icon='sap-icon://database'
                 tooltip='База Данных' />
 
         </tnt:content>
