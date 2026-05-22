@@ -4,26 +4,20 @@ sap.ui.define(() => {
     return {
 
         async onCreateList() {
-            try {
-                this.CreateListDialog.close();
-                const oNewListData = this.State.getProperty('/CreateListDialog');
-                const oContext = this.byId('idTodoList')
-                .setBusy(true)
-                .getBinding('items').create({ ...oNewListData, priority: +oNewListData.priority });
-                await oContext.created();
-                this.MessageHelper.toast({ message: 'Список создан.' });
+            this.CreateListDialog.close();
+            const oNewListData = this.State.getProperty('/CreateListDialog');
 
-                this.getRouter().navTo('todoDetail', {
-                    id: oContext.getProperty('ID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
-                });
-
-                this.publish(this.EVENT.TODOLIST_CHANGED);
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            } finally {
-                this.byId('idTodoList').setBusy(false);
-            }
+            this.publish(this.EVENT.TODO.CREATE_LIST, {
+                table: this.byId('idTodoList'),
+                data: oNewListData,
+                then: async oContext => {
+                    const sID = await oContext.requestProperty('ID');
+                    this.getRouter().navTo('todoDetail', {
+                        id: sID,
+                        layout: this.LayoutType.TwoColumnsMidExpanded
+                    });
+                }
+            });
         }
 
     };

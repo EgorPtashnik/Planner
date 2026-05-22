@@ -41,8 +41,8 @@ sap.ui.define(() => {
 
         onPressListItem(oEvent) {
             this.getRouter().navTo('todoDetail', {
-                    id: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
-                    layout: this.LayoutType.TwoColumnsMidExpanded
+                id: oEvent.getSource().getBindingContext('todo').getProperty('ID'),
+                layout: this.LayoutType.TwoColumnsMidExpanded
             });
         }
 

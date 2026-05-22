@@ -30,6 +30,12 @@ sap.ui.define([
                 DOWNLOAD_DATABASE: 'DOWNLOAD_DATABASE',
                 BACKUP_DATABASE: 'BACKUP_DATABASE',
                 RESTORE_DATABASE: 'RESTORE_DATABASE'
+            },
+
+            TODO: {
+                CREATE_LIST: 'CREATE_LIST',
+                CREATE_LISTTAG: 'CREATE_LISTTAG',
+                DELETE_LISTTAG: 'DELETE_LISTTAG'
             }
         },
 

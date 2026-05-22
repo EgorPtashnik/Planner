@@ -1,6 +1,7 @@
 sap.ui.define([
-    'planner/pages/app/logic/CommonService'
-], (CommonService) => {
+    'planner/pages/app/logic/CommonService',
+    'planner/pages/app/logic/TodoService'
+], (CommonService, TodoService) => {
     'use strict';
 
     return {
@@ -12,7 +13,12 @@ sap.ui.define([
 
                 { id: this.EVENT.COMMON.DOWNLOAD_DATABASE, fnc: CommonService.downloadDatabase },
                 { id: this.EVENT.COMMON.BACKUP_DATABASE, fnc: CommonService.backupDatabase },
-                { id: this.EVENT.COMMON.RESTORE_DATABASE, fnc: CommonService.restoreDatabase }
+                { id: this.EVENT.COMMON.RESTORE_DATABASE, fnc: CommonService.restoreDatabase },
+
+                { id: this.EVENT.TODO.CREATE_LIST, fnc: TodoService.TodoList.create },
+                { id: this.EVENT.TODO.CREATE_LISTTAG, fnc: TodoService.TodoListTag.create },
+                { id: this.EVENT.TODO.DELETE_LISTTAG, fnc: TodoService.TodoListTag.delete }
+
             ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
         },
 
