@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:card='sap.f.cards'
+    xmlns:chart='sap.suite.ui.microchart'
+    xmlns:core='sap.ui.core'>
+
+    <f:Card
+        press='onPressTrainingTile'
+        height='100%'>
+        <f:header>
+            <card:NumericHeader
+                binding='{gym>/GetTotalCost}'
+                title='Тренировки'
+                number='{gym>value}'
+                state='{= %{gym>value} ? "Error" : "Good" }'
+                scale='BYN' />
+        </f:header>
+
+        <f:content>
+            <VBox
+                class='sapUiTinyMargin'
+                width='100%'
+                alignItems='Center'
+                justifyContent='End'>
+                <Button
+                    width='10rem'
+                    type='Transparent'
+                    text='Записать' />
+            </VBox>
+        </f:content>
+
+        <f:layoutData>
+            <f:GridContainerItemLayoutData
+                rows='2'
+                columns='2' />
+        </f:layoutData>
+    </f:Card>
+
+</core:FragmentDefinition>

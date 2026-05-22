@@ -11,9 +11,10 @@
             <f:GridContainer>
                 <f:items>
                     <core:Fragment fragmentName='planner.pages.home.components.StartedTodoTile' />
+                    <core:Fragment fragmentName='planner.pages.home.components.TrainingTile' />
                 </f:items>
 				<f:layoutS>
-					<f:GridContainerSettings columnSize='25%' gap="0px" />
+					<f:GridContainerSettings maxColumnSize='10rem' gap="0px" />
 				</f:layoutS>
             </f:GridContainer>
         </f:content>

@@ -1,4 +1,6 @@
-sap.ui.define(() => {
+sap.ui.define([
+    'planner/pages/app/logic/CommonService'
+], (CommonService) => {
     'use strict';
 
     return {
@@ -6,7 +8,11 @@ sap.ui.define(() => {
         _setSubscriptions() {
             [
                 { id: this.EVENT.ACTION_REQUESTED, fnc: this._onActionRequested },
-                { id: this.EVENT.ACTION_FAILED, fnc: this._onActionFailed }
+                { id: this.EVENT.ACTION_FAILED, fnc: this._onActionFailed },
+
+                { id: this.EVENT.COMMON.DOWNLOAD_DATABASE, fnc: CommonService.downloadDatabase },
+                { id: this.EVENT.COMMON.BACKUP_DATABASE, fnc: CommonService.backupDatabase },
+                { id: this.EVENT.COMMON.RESTORE_DATABASE, fnc: CommonService.restoreDatabase }
             ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
         },
 

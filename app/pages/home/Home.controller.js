@@ -2,17 +2,20 @@ sap.ui.define([
     'planner/pages/BaseController',
 
     'planner/pages/home/Events',
-    'planner/pages/home/components/StartedTodoTile'
+    'planner/pages/home/components/StartedTodoTile',
+    'planner/pages/home/components/TrainingTile'
 ], (BaseController,
 
-    Events, StartedTodoTile
+    Events, StartedTodoTile, TrainingTile
 ) => {
+
     'use strict';
 
     return BaseController.extend('planner.pages.home.Home', {
 
         ...Events,
         ...StartedTodoTile,
+        ...TrainingTile,
 
         onInit() {
             this.init('home');

@@ -1,12 +1,11 @@
 <core:FragmentDefinition
     xmlns='sap.m'
+    xmlns:plugin='sap.m.plugins'
     xmlns:core='sap.ui.core'>
 
     <Table
         id='idTodoList'
         sticky='HeaderToolbar'
-        fixedLayout='false'
-        autoPopinMode='true'
         busyIndicatorDelay='0'
         items='{
             path: "todo>/List",
@@ -47,6 +46,12 @@
                     </layoutData>
                 </OverflowToolbarButton>
 
+                <ToolbarSeparator>
+                    <layoutData>
+                        <OverflowToolbarLayoutData group='1' />
+                    </layoutData>
+                </ToolbarSeparator>
+
                 <OverflowToolbarButton
                     press='onPressToggleVisibleLists'
                     type='Transparent'
@@ -57,12 +62,6 @@
                         <OverflowToolbarLayoutData group='1' />
                     </layoutData>
                 </OverflowToolbarButton>
-
-                <ToolbarSeparator>
-                    <layoutData>
-                        <OverflowToolbarLayoutData group='1' />
-                    </layoutData>
-                </ToolbarSeparator>
 
                 <OverflowToolbarButton
                     press='onPressTodoListSort'
@@ -79,14 +78,16 @@
 
         <columns>
             <Column
-                autoPopinWidth='20'
+                width='auto'
                 importance='High'>
                 <Text text='Имя' />
             </Column>
 
             <Column
                 width='8rem'
+                minScreenWidth='Tablet'
                 hAlign='Right'
+                demandPopin='true'
                 popinDisplay='WithoutHeader'>
                 <Text text='Статус' />
             </Column>
@@ -96,7 +97,6 @@
             <ColumnListItem
                 press='onPressListItem'
                 navigated='{= %{/detailID} === %{todo>ID} }'
-                highlight='{= %{/detailID} === %{todo>ID} ? "Information" : "None" }'
                 type='{= %{/detailID} === %{todo>ID} ? "Active" : "Navigation" }'
                 visible='{=
                     %{state>/showCompletedLists} ||

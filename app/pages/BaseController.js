@@ -24,7 +24,13 @@ sap.ui.define([
 
             TODOLIST_CHANGED: 'TODOLIST_CHANGED',
             TODOLIST_TAG_CHANGED: 'TODOLIST_TAG_CHANGED',
-            TODOITEM_CHANGED: 'TODOITEM_CHANGED'
+            TODOITEM_CHANGED: 'TODOITEM_CHANGED',
+
+            COMMON: {
+                DOWNLOAD_DATABASE: 'DOWNLOAD_DATABASE',
+                BACKUP_DATABASE: 'BACKUP_DATABASE',
+                RESTORE_DATABASE: 'RESTORE_DATABASE'
+            }
         },
 
         init(sRoute) {
