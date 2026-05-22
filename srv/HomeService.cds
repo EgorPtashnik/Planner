@@ -6,6 +6,6 @@ service HomeService {
         Item.*
     } where
         (status <= 1 and startDate <= $now) or
-        (status > 1 and date(startDate) >= date($now));
+        date(endDate) = date($now);
 
 }

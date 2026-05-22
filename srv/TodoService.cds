@@ -6,7 +6,4 @@ service TodoService {
   entity ListTag as projection on Todo.ListTag;
 
   entity Item as projection on Todo.Item;
-
-
-
 }

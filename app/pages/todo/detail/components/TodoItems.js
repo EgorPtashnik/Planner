@@ -69,7 +69,11 @@ sap.ui.define(() => {
         onPressChangeItemStatus(oEvent, iStatus) {
             try {
                 this.byId('idTodoItems').setBusy(true);
-                oEvent.getSource().getBindingContext('todo').setProperty('status', iStatus);
+                const oContext = oEvent.getSource().getBindingContext('todo');
+                oContext.setProperty('status', iStatus);
+                if (iStatus > 1) {
+                    oContext.setProperty('endDate', new Date().toISOString().slice(0, 10));
+                }
                 this.publish(this.EVENT.TODOLIST_CHANGED);
             } catch(oError) {
                 this.publish(this.EVENT.ACTION_FAILED, oError);
