@@ -3,7 +3,7 @@ sap.ui.define(() => {
 
     return {
 
-        async onCreateList() {
+        onCreateList() {
             this.CreateListDialog.close();
             const oNewListData = this.State.getProperty('/CreateListDialog');
 

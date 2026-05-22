@@ -8,8 +8,10 @@ sap.ui.define(() => {
         },
 
         onPressDeleteListTag(oEvent) {
+            this.byId('idTodoTagList').setBusy(true);
             this.publish(this.EVENT.TODO.DELETE_LISTTAG, {
-                context: oEvent.getParameter('listItem').getBindingContext('todo')
+                context: oEvent.getParameter('listItem').getBindingContext('todo'),
+                finally: () => this.byId('idTodoTagList').setBusy(false)
             });
         }
     };

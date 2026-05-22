@@ -34,8 +34,15 @@ sap.ui.define([
 
             TODO: {
                 CREATE_LIST: 'CREATE_LIST',
+                DELETE_LIST: 'DELETE_LIST',
+                UPDATE_LIST: 'UPDATE_LIST',
                 CREATE_LISTTAG: 'CREATE_LISTTAG',
-                DELETE_LISTTAG: 'DELETE_LISTTAG'
+                DELETE_LISTTAG: 'DELETE_LISTTAG',
+                CREATE_ITEM: 'CREATE_ITEM',
+                DELETE_ITEM: 'DELETE_ITEM',
+                DELETE_COMPLETED_ITEMS: 'DELETE_COMPLETED_ITEMS',
+                UPDATE_ITEM_STATUS: 'UPDATE_ITEM_STATUS'
+
             }
         },
 

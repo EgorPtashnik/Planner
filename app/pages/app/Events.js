@@ -16,8 +16,15 @@ sap.ui.define([
                 { id: this.EVENT.COMMON.RESTORE_DATABASE, fnc: CommonService.restoreDatabase },
 
                 { id: this.EVENT.TODO.CREATE_LIST, fnc: TodoService.TodoList.create },
+                { id: this.EVENT.TODO.DELETE_LIST, fnc: TodoService.TodoList.delete },
+                { id: this.EVENT.TODO.UPDATE_LIST, fnc: TodoService.TodoList.update },
                 { id: this.EVENT.TODO.CREATE_LISTTAG, fnc: TodoService.TodoListTag.create },
-                { id: this.EVENT.TODO.DELETE_LISTTAG, fnc: TodoService.TodoListTag.delete }
+                { id: this.EVENT.TODO.DELETE_LISTTAG, fnc: TodoService.TodoListTag.delete },
+                { id: this.EVENT.TODO.CREATE_ITEM, fnc: TodoService.TodoItem.create },
+                { id: this.EVENT.TODO.DELETE_ITEM, fnc: TodoService.TodoItem.delete },
+                { id: this.EVENT.TODO.DELETE_COMPLETED_ITEMS, fnc: TodoService.TodoItem.deleteCompleted },
+                { id: this.EVENT.TODO.UPDATE_ITEM_STATUS, fnc: TodoService.TodoItem.updateStatus }
+
 
             ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
         },

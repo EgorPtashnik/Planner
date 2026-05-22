@@ -3,23 +3,11 @@ sap.ui.define(() => {
 
     return {
 
-        async onPressCreateItem() {
-            try {
-                const oContext = this.byId('idTodoItems')
-                    .setBusy(true)
-                    .getBinding('items').create({
-                        name: 'Новый Шаг',
-                        priority: 2
-                    });
-                await oContext.created();
-
-                this.MessageHelper.toast({ message: 'Шаг создан.' });
-                this.publish(this.EVENT.TODOITEM_CHANGED);
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            } finally {
-                this.byId('idTodoItems').setBusy(false);
-            }
+        onPressCreateItem() {
+            this.publish(this.EVENT.TODO.CREATE_ITEM, {
+                table: this.byId('idTodoItems'),
+                data: { name: 'Новый Шаг', priority: 2 }
+            });
         },
 
         onPressToggleVisibleItems() {
@@ -27,59 +15,34 @@ sap.ui.define(() => {
         },
 
         async onPressDeleteCompletedItems() {
-            try {
-                await Promise.all(
-                    this.byId('idTodoItems')
-                        .setBusy(true)
-                        .getBinding('items').getContexts()
-                        .filter(oContext => oContext.getProperty('status') > 1)
-                        .map(oContext => oContext.delete())
-                );
-                this.MessageHelper.toast({ message: 'Законченные шаги удалены.' });
-                this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount());
-                this.publish(this.EVENT.TODOITEM_CHANGED);
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            } finally {
-                this.byId('idTodoItems').setBusy(false);
-            }
+            const oTable = this.byId('idTodoItems').setBusy(true);
+            this.publish(this.EVENT.TODO.DELETE_COMPLETED_ITEMS, {
+                contexts: oTable.getBinding('items').getContexts(),
+                then: () => this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount()),
+                finally: () => oTable.setBusy(false)
+            });
         },
 
         onPressItemSort() {
             this.TableHelper.onPressSort('idTodoItems');
         },
 
-        async onPressDeleteItem(oEvent) {
-            try {
-                this.byId('idTodoItems').setBusy(true);
-                const oContext = oEvent.getParameter('listItem').getBindingContext('todo');
-                await oContext.delete();
-                if (oContext.isDeleted()) {
-                    this.MessageHelper.toast({ message: 'Шаг удален.' });
-                    this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount());
-                    this.publish(this.EVENT.TODOITEM_CHANGED);
-                }
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            } finally {
-                this.byId('idTodoItems').setBusy(false);
-            }
+        onPressDeleteItem(oEvent) {
+            this.byId('idTodoItems').setBusy(true);
+            this.publish(this.EVENT.TODO.DELETE_ITEM, {
+                context: oEvent.getParameter('listItem').getBindingContext('todo'),
+                then: () => this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount()),
+                finally: () => this.byId('idTodoItems').setBusy(false)
+            });
         },
 
         onPressChangeItemStatus(oEvent, iStatus) {
-            try {
-                this.byId('idTodoItems').setBusy(true);
-                const oContext = oEvent.getSource().getBindingContext('todo');
-                oContext.setProperty('status', iStatus);
-                if (iStatus > 1) {
-                    oContext.setProperty('endDate', new Date().toISOString().slice(0, 10));
-                }
-                this.publish(this.EVENT.TODOLIST_CHANGED);
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            } finally {
-                this.byId('idTodoItems').setBusy(false);
-            }
+            this.byId('idTodoItems').setBusy(true);
+            this.publish(this.EVENT.TODO.UPDATE_ITEM_STATUS, {
+                context:  oEvent.getSource().getBindingContext('todo'),
+                status: iStatus,
+                finally: () => this.byId('idTodoItems').setBusy(false)
+            });
         },
 
     };

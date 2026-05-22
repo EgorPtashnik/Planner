@@ -25,20 +25,11 @@ sap.ui.define(() => {
         },
 
         async onPressDeleteTodoList() {
-            try {
-                this.getView().setBusy(true);
-                const oContext = this.getView().getBindingContext('todo');
-                await oContext.delete();
-                if (oContext.isDeleted()) {
-                    this.publish(this.EVENT.TODOLIST_CHANGED);
-                    this.onPressClosePage();
-                    this.MessageHelper.toast({ message: 'Список удален.' });
-                }
-            } catch(oError) {
-                this.publish(this.EVENT.ACTION_FAILED, oError);
-            } finally {
-                this.getView().setBusy(false);
-            }
+            this.publish(this.EVENT.TODO.DELETE_LIST, {
+                context: this.getView().setBusy(true).getBindingContext('todo'),
+                then: () => this.onPressClosePage(),
+                finally: () => this.getView().setBusy(false)
+            });
         }
     };
 });
