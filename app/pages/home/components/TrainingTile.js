@@ -5,6 +5,10 @@ sap.ui.define(() => {
 
         onPressTrainingTile() {
             this.getRouter().navTo('gym');
+        },
+
+        onPressAddTraining() {
+            this._openAddTrainingDialog();
         }
 
     };

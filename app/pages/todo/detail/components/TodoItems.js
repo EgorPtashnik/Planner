@@ -10,6 +10,12 @@ sap.ui.define(() => {
             });
         },
 
+        onPressEditItems(oEvent) {
+            if (!oEvent.getParameter('pressed')) {
+                this.publish(this.EVENT.TODOLIST_CHANGED);
+            }
+        },
+
         onPressToggleVisibleItems() {
             this.State.setProperty('/showCompletedItems', !this.State.getProperty('/showCompletedItems'));
         },

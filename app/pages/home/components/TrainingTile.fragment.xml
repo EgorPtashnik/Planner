@@ -10,6 +10,7 @@
         height='100%'>
         <f:header>
             <card:NumericHeader
+                id='idTrainingTileHeader'
                 binding='{gym>/GetTotalCost}'
                 title='Тренировки'
                 number='{gym>value}'
@@ -24,9 +25,11 @@
                 alignItems='Center'
                 justifyContent='End'>
                 <Button
+                    press='onPressAddTraining'
                     width='10rem'
                     type='Transparent'
-                    text='Записать' />
+                    text='Записать'
+                    tooltip='Записать тренировку' />
             </VBox>
         </f:content>
 

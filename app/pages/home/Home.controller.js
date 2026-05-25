@@ -1,11 +1,12 @@
 sap.ui.define([
     'planner/pages/BaseController',
+    'planner/reuse/AddTrainingDialog',
 
     'planner/pages/home/Events',
     'planner/pages/home/components/StartedTodoTile',
     'planner/pages/home/components/StartedTodoTable',
     'planner/pages/home/components/TrainingTile'
-], (BaseController,
+], (BaseController, AddTrainingDialog,
 
     Events, StartedTodoTile, StartedTodoTable, TrainingTile
 ) => {
@@ -13,6 +14,8 @@ sap.ui.define([
     'use strict';
 
     return BaseController.extend('planner.pages.home.Home', {
+
+        ...AddTrainingDialog,
 
         ...Events,
         ...StartedTodoTile,
@@ -22,6 +25,7 @@ sap.ui.define([
         onInit() {
             this.init('home');
             this._setSubscriptions();
+            this._loadFragments();
 
             this.ODataEventsAttached = false;
             this.State.setData({
@@ -46,6 +50,10 @@ sap.ui.define([
 
                 this.byId('idHomePage').addStyleClass(this.getView().getModel('device').getProperty('/system/phone') ? 'sapUiNoContentPadding' : 'sapUiResponsiveContnetPadding');
             }
+        },
+
+        _loadFragments() {
+            this.AddTrainingDialog = this.getFragment('planner.reuse.AddTrainingDialog');
         }
 
     });

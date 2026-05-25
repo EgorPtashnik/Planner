@@ -51,6 +51,7 @@
                                 </Button>
 
                                 <OverflowToolbarToggleButton
+                                    press='onPressEditItems'
                                     type='Emphasized'
                                     text='Редактировать'
                                     tooltip='Редактировать'
