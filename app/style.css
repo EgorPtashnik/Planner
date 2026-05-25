@@ -36,11 +36,11 @@ code {
     border-style: none !important;
 }
 .sapMBtnInner {
-    border-radius: 5rem;
+    border-radius: 5rem !important;
 }
 .sapMBtnInner::after {
-    border-radius: 5rem;
+    border-radius: 5rem !important;
 }
 .sapMBtnInner::before {
-    border-radius: 5rem;
+    border-radius: 5rem !important;
 }
