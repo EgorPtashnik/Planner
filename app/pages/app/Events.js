@@ -1,7 +1,8 @@
 sap.ui.define([
     'planner/pages/app/logic/CommonService',
-    'planner/pages/app/logic/TodoService'
-], (CommonService, TodoService) => {
+    'planner/pages/app/logic/TodoService',
+    'planner/pages/app/logic/GymService'
+], (CommonService, TodoService, GymService) => {
     'use strict';
 
     return {
@@ -23,8 +24,12 @@ sap.ui.define([
                 { id: this.EVENT.TODO.CREATE_ITEM, fnc: TodoService.TodoItem.create },
                 { id: this.EVENT.TODO.DELETE_ITEM, fnc: TodoService.TodoItem.delete },
                 { id: this.EVENT.TODO.DELETE_COMPLETED_ITEMS, fnc: TodoService.TodoItem.deleteCompleted },
-                { id: this.EVENT.TODO.UPDATE_ITEM_STATUS, fnc: TodoService.TodoItem.updateStatus }
+                { id: this.EVENT.TODO.UPDATE_ITEM_STATUS, fnc: TodoService.TodoItem.updateStatus },
 
+                { id: this.EVENT.GYM.CREATE_TRAINING, fnc: GymService.Training.create },
+                { id: this.EVENT.GYM.DELETE_TRAINING, fnc: GymService.Training.delete },
+                { id: this.EVENT.GYM.SETTLE, fnc: GymService.settle },
+                { id: this.EVENT.GYM.GET_TOTAL_COST, fnc: GymService.getTotalCost }
 
             ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
         },

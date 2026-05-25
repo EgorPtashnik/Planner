@@ -15,7 +15,14 @@
                 </layoutData>
             </ToggleButton>
 
-            <Title text="PlanneR 2.0" />
+            <Image
+                class="sapUiSmallMarginBegin"
+                height="2.5rem"
+                mode="Image"
+                src="./icons/512.png"
+                visible="{= !%{device>/system/phone} }" />
+
+            <Title titleStyle="{= %{device>/system/phone} ? 'H5' : 'H4' }" text="PlanneR 2.0" />
 
             <ToolbarSeparator />
             

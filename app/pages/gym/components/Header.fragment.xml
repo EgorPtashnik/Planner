@@ -11,20 +11,10 @@
 
         <f:actions>
             <Button
-                press='onPressSettle'
-                icon='sap-icon://payment-approval'
-                type='Accept'
-                text='Оплачено'
-                tooltip='Оплачено'
-                visible='{= !!%{state>/totalCost} }'>
-                <layoutData>
-                    <OverflowToolbarLayoutData priority='NeverOverflow' />
-                </layoutData>
-            </Button>
-            <Button
-                press='onPressTrainingHistory'
-                type='Ghost'
-                icon='sap-icon://calendar'>
+                press='onPressAddTraining'
+                type='Emphasized'
+                text='Создать Запись'
+                tooltip='Записать тренировку'>
                 <layoutData>
                     <OverflowToolbarLayoutData priority='NeverOverflow' />
                 </layoutData>

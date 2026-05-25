@@ -13,17 +13,6 @@
                     <OverflowToolbar
                         class='sapUiTinyMarginTop'
                         style='Clear'>
-                        <OverflowToolbarButton
-                            press='onPressToggleVisibleStartedTodos'
-                            type='Transparent'
-                            icon='{= %{state>/StartedTodoTile/showCompleted} ? "sap-icon://show" : "sap-icon://hide" }'
-                            text='Показать законченные'
-                            tooltip='Показать законченные'>
-                            <layoutData>
-                                <OverflowToolbarLayoutData priority='AlwaysOverflow' />
-                            </layoutData>
-                        </OverflowToolbarButton>
-
                         <chart:RadialMicroChart
                             id='idStartedTodoChart'
                             size='XS'
@@ -31,86 +20,20 @@
                             valueColor='Good'
                             total='{state>/StartedTodoTile/allItems}'
                             fraction='{state>/StartedTodoTile/doneItems}' />
+
+                        <OverflowToolbarButton
+                            press='onPressToggleVisibleStartedTodos'
+                            type='Transparent'
+                            icon='{= %{state>/StartedTodoTile/showCompleted} ? "sap-icon://show" : "sap-icon://hide" }'
+                            text='Показать законченные'
+                            tooltip='Показать законченные' />
                     </OverflowToolbar>
                 </card:toolbar>
             </card:Header>
         </f:header>
 
         <f:content>
-            <Table
-                id='idStartedTodos'
-                fixedLayout='false'
-                autoPopinMode='true'
-                busyIndicatorDelay='0'
-                showSeparators='Inner'
-                items='{
-                    path: "home>/StartedTodo",
-                    parameters: {
-                        $orderby: "priority desc"
-                    }    
-                }'>
-
-                <noData>
-                    <IllustratedMessage
-                        illustrationType='sapIllus-NoTasks' />
-                </noData>
-
-                <columns>
-                    <Column
-                        width='auto'
-                        importance='High' >
-                        <Text text='Имя'/>
-                    </Column>
-
-                    <Column
-                        importance='Low'
-                        autoPopinWidth='999'>
-                        <Text text='Заметка' />
-                    </Column>
-
-                    <Column
-                        width='8rem'
-                        popinDisplay='WithoutHeader'>
-                        <Text text='Статус' />
-                    </Column>
-                </columns>
-
-                <items>
-                    <ColumnListItem
-                        highlight='{
-                            path: "home>priority",
-                            formatter: ".Formatter.getPriorityState"
-                        }'
-                        visible='{=
-                            %{state>/StartedTodoTile/showCompleted} ||
-                            %{home>status} &lt; 2
-                        }'>
-                        <cells>
-                            <ObjectIdentifier
-                                titlePress='onPressStartedTodoLink'
-                                titleActive='true'
-                                title='{home>name}' />
-
-                            <ExpandableText
-                                maxCharacters='50'
-                                emptyIndicatorMode='{= !!%{home>info} ? "Off" : "On" }'
-                                text='{home>info}' />
-
-                            <ObjectStatus
-                                class='sapMObjectStatusLongText'
-                                icon='{=
-                                    %{home>status} === 3 ? "sap-icon://decline" :
-                                    %{home>status} === 2 ? "sap-icon://accept" :
-                                    %{home>status} === 2 ? "sap-icon://accept" :
-                                    %{home>status} === 1 ? "sap-icon://pending" :
-                                    ""
-                                }'
-                                text='{ path: "home>status", formatter: ".Formatter.getProgressStatusText" }'
-                                state='{ path: "home>status", formatter: ".Formatter.getProgressStatusState" }' />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
+            <core:Fragment fragmentName='planner.pages.home.components.StartedTodoTable' type='XML' />
         </f:content>
 
         <f:layoutData>

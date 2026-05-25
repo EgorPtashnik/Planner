@@ -6,16 +6,22 @@
     busyIndicatorDelay='0'
 	controllerName='planner.pages.gym.Gym'>
 
-    <f:DynamicPage>
+    <f:DynamicPage
+        class='sapUiResponsiveContentPadding'
+        toggleHeaderOnTitleClick='false'
+        preserveHeaderStateOnScroll='true'>
 
-        <!-- HEADER -->
         <f:title>
-            <core:Fragment fragmentName='planner.pages.gym.components.Header' type='XML' />
+            <core:Fragment fragmentName='planner.pages.gym.components.Header' />
         </f:title>
 
-        <!-- Information Message -->
+        <f:header>
+            <core:Fragment fragmentName='planner.pages.gym.components.Summary' />
+        </f:header>
+
         <f:content>
-            <VBox alignItems='Center' justifyContent='Center' fitContainer='true'>
+            <core:Fragment fragmentName='planner.pages.gym.components.Calendar' type='XML' />
+            <!-- <VBox alignItems='Center' justifyContent='Center' fitContainer='true'>
                 <IllustratedMessage
                     decorative='true'
                     enableDefaultTitleAndDescription='false'
@@ -37,7 +43,7 @@
                         </HBox>
                     </additionalContent>
                 </IllustratedMessage>
-            </VBox>
+            </VBox> -->
         </f:content>
 
     </f:DynamicPage>

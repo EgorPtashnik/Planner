@@ -3,21 +3,12 @@ sap.ui.define(() => {
 
     return {
 
-        async onPressSettle() {
-            this.publish(this.EVENT.ACTION_REQUESTED, {
-                model: 'gym',
-                action: '/Settle(...)',
-                message: 'Тренировки обновлены.',
-                then: (_, oAction) => {
-                    this._getTotalCost();
-                }
-            });
+        onPressAddTraining() {
+             this._openAddTrainingDialog();
         },
 
-        async onPressTrainingHistory() {
-            this.TrainingHistoryDialog = await this.TrainingHistoryDialog;
-
-            this.TrainingHistoryDialog.open();
+        async onPressSettle() {
+            this.publish(this.EVENT.GYM.SETTLE);
         }
 
     };

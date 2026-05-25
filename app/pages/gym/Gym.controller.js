@@ -1,58 +1,47 @@
 sap.ui.define([
     'planner/pages/BaseController',
+    'planner/reuse/AddTrainingDialog',
 
+    'planner/pages/gym/Events',
     'planner/pages/gym/components/Header',
-    'planner/pages/gym/components/AddTrainingDialog',
-    'planner/pages/gym/components/TrainingHistoryDialog'
-], (BaseController,
+    'planner/pages/gym/components/Calendar'
+], (BaseController, AddTrainingDialog,
     
-    Header, AddTrainingDialog, TrainingHistoryDialog) => {
+    Events, Header, Calendar) => {
     'use strict';
 
     return BaseController.extend('planner.pages.gym.Gym', {
 
-        ...Header,
         ...AddTrainingDialog,
-        ...TrainingHistoryDialog,
+
+        ...Events,
+        ...Header,
+        ...Calendar,
 
         onInit() {
             this.init('gym');
+            this._setSubscriptions();
             this._loadFragments();
-
-            this.TrainingListBinding = null;
             
             this.State.setData({
-                totalCost: 0
+                total: 0
             });
+
         },
 
         _onRouteMatched(oEvent) {
             this.AppConfig.setProperty('/selectedRoute', 'gym');
-            this._getTotalCost();
-
-            if (!this.TrainingListBinding) {
-                this.TrainingListBinding = this.getView().getModel('gym').bindList('/Training');
-            }
+            this._getTotal();
         },
 
         _loadFragments() {
-            this.AddTrainingDialog = this.getFragment('planner.pages.gym.components.AddTrainingDialog');
-            this.TrainingHistoryDialog = this.getFragment('planner.pages.gym.components.TrainingHistoryDialog');
+            this.AddTrainingDialog = this.getFragment('planner.reuse.AddTrainingDialog');
+            this.CalendarItemMenuDialog = this.getFragment('planner.pages.gym.components.CalendarItemMenuDialog');
         },
 
-        onPressAddTraining() {
-            this._openAddTrainingDialog();
-        },
-
-        _getTotalCost() {
-            this.publish(this.EVENT.ACTION_REQUESTED, {
-                model: 'gym',
-                action: '/GetTotalCost(...)',
-                message: null,
-                then: (_, oFunciton) => {
-                    this.State.setProperty('/totalCost', oFunciton.getBoundContext().getObject().value);
-                    this.byId('idTrainingHistoryCalendar')?.getBinding('specialDates').refresh();
-                }
+        _getTotal() {
+            this.publish(this.EVENT.GYM.GET_TOTAL_COST, {
+                then: iTotal => this.State.setProperty('/total', iTotal)
             });
         }
 

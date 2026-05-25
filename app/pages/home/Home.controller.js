@@ -3,10 +3,11 @@ sap.ui.define([
 
     'planner/pages/home/Events',
     'planner/pages/home/components/StartedTodoTile',
+    'planner/pages/home/components/StartedTodoTable',
     'planner/pages/home/components/TrainingTile'
 ], (BaseController,
 
-    Events, StartedTodoTile, TrainingTile
+    Events, StartedTodoTile, StartedTodoTable, TrainingTile
 ) => {
 
     'use strict';
@@ -15,6 +16,7 @@ sap.ui.define([
 
         ...Events,
         ...StartedTodoTile,
+        ...StartedTodoTable,
         ...TrainingTile,
 
         onInit() {
@@ -41,6 +43,8 @@ sap.ui.define([
                     this.State.setProperty('/StartedTodoTile/allItems', aData.length);
                     this.State.setProperty('/StartedTodoTile/doneItems', aData.filter(oItem => oItem?.status >= 2).length);
                 });
+
+                this.byId('idHomePage').addStyleClass(this.getView().getModel('device').getProperty('/system/phone') ? 'sapUiNoContentPadding' : 'sapUiResponsiveContnetPadding');
             }
         }
 

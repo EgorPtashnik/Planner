@@ -16,6 +16,11 @@ code {
     tab-size: 4;
 }
 
+.tileContainer {
+    margin-left: 3px;
+    margin-top: 5px;
+}
+
 .HeaderBtn > span{
     border-style: none !important;
 }
@@ -31,11 +36,11 @@ code {
     border-style: none !important;
 }
 .sapMBtnInner {
-    border-radius: 5rem !important;
+    border-radius: 5rem;
 }
 .sapMBtnInner::after {
-    border-radius: 5rem !important;
+    border-radius: 5rem;
 }
 .sapMBtnInner::before {
-    border-radius: 5rem !important;
+    border-radius: 5rem;
 }

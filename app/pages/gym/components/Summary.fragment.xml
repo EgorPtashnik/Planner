@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:core='sap.ui.core'>
+
+    <f:DynamicPageHeader pinnable='false'>
+        <f:content>
+            <HBox justifyContent='SpaceBetween' alignItems='Center'>
+                <ObjectNumber
+                    number='{state>/total}'
+                    state='{= %{state>/total} ? "Error" : "Success" }'
+                    unit='BYN'
+                    class='sapMObjectNumberLarge sapUiTinyMarginEnd' />
+
+                <Button
+                    id='idSettleButton'
+                    press='onPressSettle'
+                    icon='sap-icon://payment-approval'
+                    type='Accept'
+                    text='Оплатить'
+                    tooltip='Пометить тренировки как оплаченные'
+                    visible='{= !!%{state>/total} }' />
+            </HBox>
+        </f:content>
+    </f:DynamicPageHeader>
+
+</core:FragmentDefinition>

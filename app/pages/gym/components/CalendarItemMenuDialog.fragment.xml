@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog
+        showHeader='false'
+        type='Message'>
+
+        <content>
+            <HBox justifyContent='SpaceBetween' alignItems='Start'>
+                <ObjectIdentifier
+                    text='{state>/CalendarItemMenuDialog/date}'
+                    title='{= %{state>/CalendarItemMenuDialog/solo} ? "Одиночная" : "Групповая" }' />
+                <ObjectStatus
+                    text='{= %{state>/CalendarItemMenuDialog/paid} ? "Оплачено" : "Не оплачено" }'
+                    state='{= %{state>/CalendarItemMenuDialog/paid} ? "Success" : "Error" }' />
+            </HBox>
+        </content>
+
+        <buttons>
+            <Button
+                press='onDeleteCalendarItem'
+                visible='{= !!%{state>/CalendarItemMenuDialog/date} }'
+                icon='sap-icon://delete'
+                type='Negative'
+                text='Удалить'
+                tooltip='Удалить запись' />
+            <Button
+                press='onPressCloseDialog'
+                type='Transparent'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+
+    </Dialog>
+
+</core:FragmentDefinition>

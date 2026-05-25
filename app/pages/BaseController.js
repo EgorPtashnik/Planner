@@ -26,6 +26,8 @@ sap.ui.define([
             TODOLIST_TAG_CHANGED: 'TODOLIST_TAG_CHANGED',
             TODOITEM_CHANGED: 'TODOITEM_CHANGED',
 
+            GYMTRAINING_CHANGED: 'GYMTRAINING_CHANGED',
+
             COMMON: {
                 DOWNLOAD_DATABASE: 'DOWNLOAD_DATABASE',
                 BACKUP_DATABASE: 'BACKUP_DATABASE',
@@ -42,7 +44,13 @@ sap.ui.define([
                 DELETE_ITEM: 'DELETE_ITEM',
                 DELETE_COMPLETED_ITEMS: 'DELETE_COMPLETED_ITEMS',
                 UPDATE_ITEM_STATUS: 'UPDATE_ITEM_STATUS'
+            },
 
+            GYM: {
+                CREATE_TRAINING: 'CREATE_TRAINING',
+                DELETE_TRAINING: 'DELETE_TRAINING',
+                SETTLE: 'SETTLE',
+                GET_TOTAL_COST: 'GET_TOTAL_COST'
             }
         },
 

@@ -11,13 +11,13 @@
                 <Label text='Тип' />
                 <RadioButtonGroup
                     columns='2'
-                    selectedIndex='{config>/AddTrainingDialog/selectedType}'>
+                    selectedIndex='{state>/AddTrainingDialog/selectedType}'>
                     <RadioButton text='Одиночная' />
                     <RadioButton text='Групповая' />
                 </RadioButtonGroup>
                 
                 <Label text='Дата' />
-                <DatePicker dateValue='{config>/AddTrainingDialog/date}' />
+                <DatePicker dateValue='{state>/AddTrainingDialog/date}' />
             </form:SimpleForm>
         </content>
 

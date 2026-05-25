@@ -5,17 +5,14 @@
     xmlns:core='sap.ui.core'
 	controllerName='planner.pages.home.Home'>
 
-    <f:DynamicPage>
+    <f:DynamicPage id='idHomePage'>
 
         <f:content>
-            <f:GridContainer>
+            <f:GridContainer class='tileContainer'>
                 <f:items>
-                    <core:Fragment fragmentName='planner.pages.home.components.StartedTodoTile' />
                     <core:Fragment fragmentName='planner.pages.home.components.TrainingTile' />
+                    <core:Fragment fragmentName='planner.pages.home.components.StartedTodoTile' />
                 </f:items>
-				<f:layoutS>
-					<f:GridContainerSettings maxColumnSize='10rem' gap="0px" />
-				</f:layoutS>
             </f:GridContainer>
         </f:content>
 
