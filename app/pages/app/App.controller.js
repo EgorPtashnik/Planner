@@ -41,11 +41,17 @@ sap.ui.define([
         },
 
         onSelectNavItem(oEvent) {
-            this.getRouter().navTo(oEvent.getSource().getSelectedKey());
+            const sSelectedKey = oEvent?.getSource?.().getSelectedKey() || oEvent;
+
+            switch(sSelectedKey) {
+                case 'arma': this._openNestedNavPopover(oEvent.getParameter('item')); break;
+                default: this.getRouter().navTo(sSelectedKey);
+            }
         },
 
         _loadFragments() {
             this.DatabaseMenuPopover = this.getFragment('planner.pages.app.components.DatabaseMenuPopover');
+            this.NestedNavPopover = this.getFragment('planner.pages.app.components.NestedNavPopover');
         },
 
         _applyTheme() {
@@ -55,6 +61,28 @@ sap.ui.define([
                 this.AppConfig.setProperty('/darkMode', localStorage.getItem('theme') === this.THEME.DARK);
             }
         },
+
+        async _openNestedNavPopover(oControl) {
+            this.NestedNavPopover = await this.NestedNavPopover;
+
+            this.State.setProperty('/NestedNavPopover', {
+                title: oControl.getText(),
+                items: this._getNestedNavItems(oControl.getKey())
+            });
+
+            this.NestedNavPopover.openBy(oControl);
+        },
+
+        _getNestedNavItems(sKey) {
+            switch(sKey) {
+                case 'arma': return [
+                    {icon: 'sap-icon://syntax', text: 'SQF Документация', key: 'sqf'},
+                    {icon: 'sap-icon://share-2', text: 'Редактор Сценариев', key: 'sqf'}
+                ];
+                default:
+                    return []
+            }
+        }
 
 
     });

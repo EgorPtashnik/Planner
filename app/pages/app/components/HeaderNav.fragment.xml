@@ -28,6 +28,12 @@
                 text='Тренировки'
                 key='gym' />
             <IconTabSeparator />
+
+            <IconTabFilter
+                icon='sap-icon://shield'
+                text='ArmA'
+                key='arma' />
+            <IconTabSeparator />
         </items>
     </IconTabHeader>
 
