@@ -1,0 +1,166 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:card='sap.f.cards'
+    xmlns:chart='sap.suite.ui.microchart'
+    xmlns:core='sap.ui.core'>
+
+    <f:Card>
+        <f:header>
+            <card:Header
+                title='Test (12)'>
+                <card:toolbar>
+                    <OverflowToolbar
+                        class='sapUiTinyMarginTop'
+                        style='Clear'>
+
+                        <OverflowToolbarButton
+                            press='onPressToggleVisibleStartedTodos'
+                            type='Transparent'
+                            icon='{= %{state>/StartedTodoTile/showCompleted} ? "sap-icon://show" : "sap-icon://hide" }'
+                            text='Показать законченные'
+                            tooltip='Показать законченные' />
+                    </OverflowToolbar>
+                </card:toolbar>
+            </card:Header>
+        </f:header>
+
+        <f:content>
+        <Table
+            fixedLayout='false'
+            autoPopinMode='true'
+            busyIndicatorDelay='0'
+            showSeparators='Inner'>
+
+        <noData>
+            <IllustratedMessage
+                illustrationType='sapIllus-NoTasks' />
+        </noData>
+
+        <columns>
+            <Column
+                width='auto'
+                importance='High' >
+                <Text text='Имя'/>
+            </Column>
+
+            <Column
+                importance='Low'
+                autoPopinWidth='999'>
+                <Text text='Заметка' />
+            </Column>
+
+            <Column
+                width='8rem'
+                popinDisplay='WithoutHeader'>
+                <Text text='Статус' />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem
+                highlight='Warning'>
+                <cells>
+                    <ObjectIdentifier
+                        titlePress='onPressStartedTodoLink'
+                        titleActive='true'
+                        title='Name' />
+
+                    <ExpandableText
+                        maxCharacters='50'
+                        text='DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription DescriptionDescriptionDescription' />
+
+                    <ObjectStatus
+                        class='sapMObjectStatusLongText'
+                        icon='sap-icon://accept"'
+                        text='test'
+                        state='Success' />
+                </cells>
+            </ColumnListItem>
+            <ColumnListItem
+                highlight='Error'>
+                <cells>
+                    <ObjectIdentifier
+                        titlePress='onPressStartedTodoLink'
+                        titleActive='true'
+                        title='Name' />
+
+                    <ExpandableText
+                        maxCharacters='50'
+                        text='DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription DescriptionDescriptionDescription' />
+
+                    <ObjectStatus
+                        class='sapMObjectStatusLongText'
+                        icon='sap-icon://accept"'
+                        text='test'
+                        state='Success' />
+                </cells>
+            </ColumnListItem>
+            <ColumnListItem
+                highlight='Success'>
+                <cells>
+                    <ObjectIdentifier
+                        titlePress='onPressStartedTodoLink'
+                        titleActive='true'
+                        title='Name' />
+
+                    <ExpandableText
+                        maxCharacters='50'
+                        text='DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription DescriptionDescriptionDescription' />
+
+                    <ObjectStatus
+                        class='sapMObjectStatusLongText'
+                        icon='sap-icon://accept"'
+                        text='test'
+                        state='Success' />
+                </cells>
+            </ColumnListItem>
+            <ColumnListItem
+                highlight='Information'>
+                <cells>
+                    <ObjectIdentifier
+                        titlePress='onPressStartedTodoLink'
+                        titleActive='true'
+                        title='Name' />
+
+                    <ExpandableText
+                        maxCharacters='50'
+                        text='DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription DescriptionDescriptionDescription' />
+
+                    <ObjectStatus
+                        class='sapMObjectStatusLongText'
+                        icon='sap-icon://accept"'
+                        text='test'
+                        state='Success' />
+                </cells>
+            </ColumnListItem>
+            <ColumnListItem>
+                <cells>
+                    <ObjectIdentifier
+                        titlePress='onPressStartedTodoLink'
+                        titleActive='true'
+                        title='Name' />
+
+                    <ExpandableText
+                        maxCharacters='50'
+                        text='DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription DescriptionDescriptionDescription' />
+
+                    <ObjectStatus
+                        class='sapMObjectStatusLongText'
+                        icon='sap-icon://accept"'
+                        text='test'
+                        state='Success' />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+        </f:content>
+
+        <f:layoutData>
+            <f:GridContainerItemLayoutData
+                minRows='2'
+                columns='6' />
+        </f:layoutData>
+    </f:Card>
+
+</core:FragmentDefinition>
