@@ -4,6 +4,6 @@
 
     <BusyDialog
         text='{state>/BusyDialog/text}'
-        showCancelButton='{state>/BusyDialog/showCancelButton}' />
+        showCancelButton='false' />
 
 </core:FragmentDefinition>
