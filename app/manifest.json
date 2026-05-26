@@ -97,6 +97,12 @@
                     "pattern": "gym",
                     "name": "gym",
                     "target": ["gym"]
+                },
+
+                {
+                    "pattern": "sqf",
+                    "name": "sqfMaster",
+                    "target": ["sqfMaster"]
                 }
             ],
             "targets": {
@@ -131,6 +137,15 @@
                     "controlAggregation": "beginColumnPages",
                     "placeholder": {
                         "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
+                        "autoClose": true
+                    }
+                },
+
+                "sqfMaster": {
+                    "name": "sqf.master.SqfMaster",
+                    "controlAggregation": "beginColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
                         "autoClose": true
                     }
                 }

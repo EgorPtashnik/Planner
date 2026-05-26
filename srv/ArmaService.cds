@@ -10,10 +10,6 @@ service ArmaService {
 
     entity SqfCommand as projection on Arma.SqfCommand;
 
-    entity SqfCommandType as projection on Arma.SqfCommandType;
-
-    entity SqfCommandSource as projection on Arma.SqfCommandSource;
-
     entity SqfCommandParam as projection on Arma.SqfCommandParam;
 
     entity SqfCommandExample as projection on Arma.SqfCommandExample;

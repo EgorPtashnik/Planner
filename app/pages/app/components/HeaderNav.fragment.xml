@@ -32,7 +32,7 @@
             <IconTabFilter
                 icon='sap-icon://syntax'
                 text='ArmA: SQF Документация'
-                key='sqf' />
+                key='sqfMaster' />
             <IconTabSeparator />
         </items>
     </IconTabHeader>

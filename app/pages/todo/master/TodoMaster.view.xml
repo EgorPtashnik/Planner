@@ -1,26 +1,24 @@
 <mvc:View
-    xmlns='sap.m'
-    xmlns:f='sap.f'
-    xmlns:fb='sap.ui.comp.filterbar'
+    xmlns='sap.f'
     xmlns:mvc='sap.ui.core.mvc'
     xmlns:core='sap.ui.core'
     busyIndicatorDelay='0'
 	controllerName='planner.pages.todo.master.TodoMaster'>
 
-    <f:DynamicPage headerExpanded='false'>
+    <DynamicPage headerExpanded='false'>
 
-        <f:title>
+        <title>
             <core:Fragment fragmentName='planner.pages.todo.master.components.Header' type='XML' />
-        </f:title>
+        </title>
 
-        <f:header>
+        <header>
             <core:Fragment fragmentName='planner.pages.todo.master.components.FilterBar' type='XML' />
-        </f:header>
+        </header>
 
-        <f:content>
+        <content>
             <core:Fragment fragmentName='planner.pages.todo.master.components.TodoList' type='XML' />
-        </f:content>
+        </content>
 
-    </f:DynamicPage>
+    </DynamicPage>
 
 </mvc:View>

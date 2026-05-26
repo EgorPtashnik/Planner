@@ -3,6 +3,17 @@ namespace Arma;
 using { cuid, managed } from '@sap/cds/common';
 using { Aspects.baseInfo } from '../Reuse';
 
+type SqfCommandType: String(10) enum {
+    Command = 'Команда';
+    Function = 'Функция';
+};
+
+type SqfSourceType: String(5) enum {
+    BIS = 'BIS';
+    CBA = 'CBA';
+    EP = 'EP';
+};
+
 entity SqfTag: cuid {
     name: String;
 };
@@ -23,23 +34,13 @@ entity SqfCommand: managed {
     sourceCode: String;
     syntax: String;
 
-    type: Association to one SqfCommandType;
-    source: Association to one SqfCommandSource;
+    type: SqfCommandType default 'Функция';
+    source: SqfSourceType default 'EP';
 
     params: Composition of many SqfCommandParam on params.command = $self;
     examples: Composition of many SqfCommandExample on examples.command = $self;
     tags: Composition of many SqfCommandSqfTag on tags.command = $self;
     related: Composition of many SqfCommandRelated on related.command = $self;
-};
-
-entity SqfCommandType {
-    key code: Integer;
-    name: String;
-};
-
-entity SqfCommandSource {
-    key code: Integer;
-    name: String;
 };
 
 entity SqfCommandParam: cuid, managed, baseInfo {
