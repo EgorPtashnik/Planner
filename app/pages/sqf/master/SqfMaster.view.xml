@@ -6,18 +6,18 @@
     busyIndicatorDelay='0'
 	controllerName='planner.pages.sqf.master.SqfMaster'>
 
-    <f:DynamicPage headerExpanded='false'>
+    <f:DynamicPage>
 
         <f:title>
             <core:Fragment fragmentName='planner.pages.sqf.master.components.Header' type='XML' />
         </f:title>
 
         <f:header>
-            <!-- <core:Fragment fragmentName='planner.pages.todo.master.components.FilterBar' type='XML' /> -->
+            <core:Fragment fragmentName='planner.pages.sqf.master.components.FilterBar' type='XML' />
         </f:header>
 
         <f:content>
-            <!-- <core:Fragment fragmentName='planner.pages.todo.master.components.TodoList' type='XML' /> -->
+            <core:Fragment fragmentName='planner.pages.sqf.master.components.SqfCommandList' type='XML' />
         </f:content>
 
     </f:DynamicPage>

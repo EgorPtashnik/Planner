@@ -1,8 +1,9 @@
 sap.ui.define([
     'planner/pages/app/logic/CommonService',
     'planner/pages/app/logic/TodoService',
-    'planner/pages/app/logic/GymService'
-], (CommonService, TodoService, GymService) => {
+    'planner/pages/app/logic/GymService',
+    'planner/pages/app/logic/ArmaService'
+], (CommonService, TodoService, GymService, ArmaService) => {
     'use strict';
 
     return {

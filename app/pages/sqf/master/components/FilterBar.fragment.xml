@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:fb='sap.ui.comp.filterbar'
+    xmlns:core='sap.ui.core'>
+    
+    <f:DynamicPageHeader>
+        <fb:FilterBar showGoOnFB="false" useToolbar="false">
+            <fb:filterGroupItems>
+
+                <fb:FilterGroupItem name="fbSearch" label="Поиск" groupName="basic" visibleInFilterBar="true">
+                    <fb:control>
+                        <SearchField change='' />
+                    </fb:control>
+                </fb:FilterGroupItem>
+
+                <fb:FilterGroupItem name="fbSource" label="Источник" groupName="basic" visibleInFilterBar="true">
+                    <fb:control>
+                        <MultiComboBox
+                            id=''
+                            selectionFinish=''
+                            selectedKeys=''>
+                            <items>
+                                <!-- <core:Item key='{todo>ID}' text='{todo>name}' /> -->
+                            </items>
+                        </MultiComboBox>
+                    </fb:control>
+                </fb:FilterGroupItem>
+
+                <fb:FilterGroupItem name="fbTag" label="Тег" groupName="basic" visibleInFilterBar="true">
+                    <fb:control>
+                        <MultiComboBox
+                            selectionFinish=''
+                            selectedKeys=''>
+                            <items>
+                                <!-- <core:Item key='{common>code}' text='{common>name}' /> -->
+                            </items>
+                        </MultiComboBox>
+                    </fb:control>
+                </fb:FilterGroupItem>
+
+            </fb:filterGroupItems>
+        </fb:FilterBar>
+    </f:DynamicPageHeader>
+
+</core:FragmentDefinition>

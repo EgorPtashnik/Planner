@@ -1,6 +1,5 @@
 <core:FragmentDefinition
     xmlns='sap.m'
-    xmlns:plugin='sap.m.plugins'
     xmlns:core='sap.ui.core'>
 
     <Table
@@ -109,8 +108,7 @@
                             design='StatusIconHidden'
                             text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
                             status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }' />
-                        <ObjectIdentifier
-                            title='{todo>name}' />
+                        <ObjectIdentifier title='{todo>name}' />
                     </HBox>
 
                     <ObjectStatus

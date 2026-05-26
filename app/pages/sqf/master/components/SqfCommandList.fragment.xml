@@ -1,0 +1,115 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Table
+        id='idSqfCommandList'
+        sticky='HeaderToolbar'
+        items='{
+            path: "arma>/SqfCommand"
+        }'>
+
+        <noData>
+            <IllustratedMessage
+                title='Нет данных'
+                description='Создайте новую запись чтобы увидеть данные.'
+                illustrationType='sapIllus-NoData' />
+        </noData>
+
+        <headerToolbar>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+
+                <Button
+                    press=''
+                    type='Ghost'
+                    text='Создать'
+                    tooltip='Создать'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                    </layoutData>
+                </Button>
+
+                <ToolbarSeparator>
+                    <layoutData>
+                        <OverflowToolbarLayoutData group='1' />
+                    </layoutData>
+                </ToolbarSeparator>
+
+                <OverflowToolbarButton
+                    press=''
+                    type='Transparent'
+                    icon='sap-icon://sort'
+                    text='Сортировка'
+                    tooltip='Сортировка'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData group='1' />
+                    </layoutData>
+                </OverflowToolbarButton>
+
+                <OverflowToolbarToggleButton
+                    icon='sap-icon://detail-more'
+                    tooltip='Показать Детали'
+                    text='Показать Детали'
+                    visible='{= %{device>/system/phone} }'>
+                    <layoutData>
+                        <OverflowToolbarLayoutData  group='1' />
+                    </layoutData>
+                </OverflowToolbarToggleButton>
+
+                <SegmentedButton
+                    visible='{= !%{device>/system/phone} }'>
+                    <items>
+                        <SegmentedButtonItem
+                            key='false'
+                            icon='sap-icon://detail-less'
+                            tooltip='Скрыть Детали' />
+                        <SegmentedButtonItem
+                            key='true'
+                            icon='sap-icon://detail-more'
+                            tooltip='Показать Детали' />
+                    </items>
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority='NeverOverflow' />
+                    </layoutData>
+                </SegmentedButton>
+            </OverflowToolbar>
+        </headerToolbar>
+
+        <columns>
+            <Column>
+                <Text text='Имя' />
+            </Column>
+
+            <Column>
+                <Text text='Описание' />
+            </Column>
+
+            <Column>
+                <Text text='Ещё' />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem
+                navigated='{= %{/detailID} === %{arma>name} }'
+                type='{= %{/detailID} === %{arma>name} ? "Active" : "Navigation" }'>
+                <cells>
+                    <HBox alignItems='Center'>
+                        <GenericTag
+                            class='sapUiTinyMarginEnd'
+                            design='StatusIconHidden'
+                            text='{arma>source}'
+                            status='{=
+                                %{arma>source} === "BIS" ? "Information" :
+                                %{arma>source} === "CBA" ? "Error" : "Success"
+                            }' />
+                        <ObjectIdentifier title='{arma>name}' />
+                    </HBox>
+                </cells>
+            </ColumnListItem>
+        </items>
+
+    </Table>
+
+</core:FragmentDefinition>
