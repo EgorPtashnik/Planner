@@ -2,12 +2,13 @@ sap.ui.define([
     'sap/ui/core/mvc/Controller',
     'sap/ui/core/UIComponent',
     'sap/f/library',
+    'sap/m/library',
     'sap/ui/model/json/JSONModel',
 
     'planner/utils/Formatter',
     'planner/utils/MessageHelper',
     'planner/utils/TableHelper'
-], (Controller, UIComponent, FLib, JSONModel,
+], (Controller, UIComponent, FLib, MLib, JSONModel,
 
     Formatter, MessageHelper, TableHelper
 ) => {
@@ -21,6 +22,8 @@ sap.ui.define([
         EVENT: {
             ACTION_REQUESTED: 'ACTION_REQUESTED',
             ACTION_FAILED: 'ACTION_FAILED',
+            OPEN_BUSY_DIALOG: 'OPEN_BUSY_DIALOG',
+            CLOSE_BUSY_DIALOG: 'CLOSE_BUSY_DIALOG',
 
             TODOLIST_CHANGED: 'TODOLIST_CHANGED',
             TODOLIST_TAG_CHANGED: 'TODOLIST_TAG_CHANGED',
@@ -56,6 +59,8 @@ sap.ui.define([
 
         init(sRoute) {
             this.LayoutType = FLib.LayoutType;
+            this.URLHelper = MLib.URLHelper;
+
             this.TableHelper = new TableHelper();
             this.App = this.getOwnerComponent();
             this.AppConfig = this.App.getModel();

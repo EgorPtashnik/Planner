@@ -31,19 +31,29 @@
             <ToolbarSpacer width="{= %{device>/system/phone} ? '' : 'auto' }" />
 
             <Button
+                press='onPressRefreshPage'
+                class='HeaderBtn'
+                icon='sap-icon://refresh'
+                tooltip='Перезагрузить страницу' />
+
+            <Button
                 press='onPressToggleDarkMode'
                 class='HeaderBtn'
                 icon='{= %{/darkMode} ? "sap-icon://dark-mode" : "sap-icon://light-mode" }'
-                tooltip='{= %{/darkMode} ? "Светлая Тема" : "Тёмная Тема" }' />
+                tooltip='{= %{/darkMode} ? "Светлая тема" : "Тёмная тема" }' />
 
             <Button
                 press='onPressDatabaseMenu'
                 class='HeaderBtn'
                 ariaHasPopup='Menu'
-                busyIndicatorSize='Small'
-                busyIndicatorDelay='0'
                 icon='sap-icon://database'
-                tooltip='База Данных' />
+                tooltip='База данных' />
+
+            <Button
+                press='onPressOpenRender'
+                class='HeaderBtn'
+                icon='sap-icon://bbyd-dashboard'
+                tooltip='Администрирование' />
 
         </tnt:content>
     </tnt:ToolHeader>

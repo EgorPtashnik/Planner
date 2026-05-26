@@ -3,8 +3,7 @@ sap.ui.define(() => {
 
     return {
 
-        downloadDatabase(_, sEventId, oButton) {
-            oButton.setBusy(true);
+        downloadDatabase(_, sEventId, oData) {
             const oLink = document.createElement('a');
             oLink.href = '/api/database/download';
             oLink.download = 'db.sqlite';
@@ -12,28 +11,27 @@ sap.ui.define(() => {
             document.body.appendChild(oLink);
             oLink.click();
             oLink.remove();
-            oButton.setBusy(false);
         },
 
-        backupDatabase(_, sEventId, oButton) {
-            oButton.setBusy(true);
+        backupDatabase(_, sEventId, oData) {
+            this.publish(this.EVENT.OPEN_BUSY_DIALOG, 'Сохраняю данные...');
             this.publish(this.EVENT.ACTION_REQUESTED, {
                 model: 'common',
                 action: '/BackupDatabase(...)',
                 message: 'Копия сохранена.',
-                then: () => oButton.setBusy(false),
-                catch: () => oButton.setBusy(false)
+                then: () => this.publish(this.EVENT.CLOSE_BUSY_DIALOG),
+                catch: () => this.publish(this.EVENT.CLOSE_BUSY_DIALOG)
             });
         },
 
-        restoreDatabase(_, sEventId, oButton) {
-            oButton.setBusy(true);
+        restoreDatabase(_, sEventId, oData) {
+            this.publish(this.EVENT.OPEN_BUSY_DIALOG, 'Восстанавливаю данные...');
             this.publish(this.EVENT.ACTION_REQUESTED, {
                 model: 'common',
                 action: '/RestoreDatabase(...)',
                 message: 'Данные восстановлены.',
                 then: (_, oAction) => {
-                    oButton.setBusy(false);
+                    this.publish(this.EVENT.CLOSE_BUSY_DIALOG);
                     if (oAction.getBoundContext().getObject().value) {
                         this.MessageHelper.success({
                             message: 'Данные восстановлены успешно. Приложение будет перезагружена после подтверждения.',
@@ -44,7 +42,7 @@ sap.ui.define(() => {
                         });
                     }
                 },
-                catch: () => oButton.setBusy(false)
+                catch: () => this.publish(this.EVENT.CLOSE_BUSY_DIALOG)
             });
         }
 

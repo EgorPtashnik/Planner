@@ -26,7 +26,7 @@ sap.ui.define([
             this._loadFragments();
 
             this.getView().addStyleClass(this.getContentDensityClass());
-            Theming.attachApplied(() => this.getView().setBusy(false));
+            Theming.attachApplied(() => setTimeout(() => this.publish(this.EVENT.CLOSE_BUSY_DIALOG, 500)));
 
             this._applyTheme();
         },
@@ -46,11 +46,12 @@ sap.ui.define([
 
         _loadFragments() {
             this.DatabaseMenuPopover = this.getFragment('planner.pages.app.components.DatabaseMenuPopover');
+            this.BusyDialog = this.getFragment('planner.pages.app.components.BusyDialog');
         },
 
         _applyTheme() {
             if (localStorage.getItem('theme') && localStorage.getItem('theme') !== Theming.getTheme()) {
-                this.getView().setBusy(true);
+                this.publish(this.EVENT.OPEN_BUSY_DIALOG, 'Меняю тему...');
                 Theming.setTheme(localStorage.getItem('theme') );
                 this.AppConfig.setProperty('/darkMode', localStorage.getItem('theme') === this.THEME.DARK);
             }

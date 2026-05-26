@@ -11,7 +11,10 @@ sap.ui.define([
             [
                 { id: this.EVENT.ACTION_REQUESTED, fnc: this._onActionRequested },
                 { id: this.EVENT.ACTION_FAILED, fnc: this._onActionFailed },
+                { id: this.EVENT.OPEN_BUSY_DIALOG, fnc: this._onOpenBusyDialog},
+                { id: this.EVENT.CLOSE_BUSY_DIALOG, fnc: this._onCloseBusyDialog},
 
+                //BACKEND SERVICES
                 { id: this.EVENT.COMMON.DOWNLOAD_DATABASE, fnc: CommonService.downloadDatabase },
                 { id: this.EVENT.COMMON.BACKUP_DATABASE, fnc: CommonService.backupDatabase },
                 { id: this.EVENT.COMMON.RESTORE_DATABASE, fnc: CommonService.restoreDatabase },
@@ -52,6 +55,18 @@ sap.ui.define([
 
         _onActionFailed(_, sEventId, oData) {
             this.MessageHelper.error({ message: oData.error?.message || oData.message || 'Произошла ошибка.' });
+        },
+
+        async _onOpenBusyDialog(_, sEventId, oData) {
+            this.BusyDialog = await this.BusyDialog;
+
+            this.State.setProperty('/BusyDialog', {text: oData.value || 'Загружаю...'});
+
+            this.BusyDialog.open();
+        },
+
+        _onCloseBusyDialog(_, sEventId, oData) {
+            this.BusyDialog?.close?.();
         }
     }
 });

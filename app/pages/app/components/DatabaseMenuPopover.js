@@ -5,17 +5,17 @@ sap.ui.define(() => {
 
         onPressDownloadDatabase() {
             this.DatabaseMenuPopover.close();
-            this.publish(this.EVENT.COMMON.DOWNLOAD_DATABASE, this.DatabaseMenuPopover._button);
+            this.publish(this.EVENT.COMMON.DOWNLOAD_DATABASE);
         },
 
         onPressBackupDatabase() {
             this.DatabaseMenuPopover.close();
-            this.publish(this.EVENT.COMMON.BACKUP_DATABASE, this.DatabaseMenuPopover._button);
+            this.publish(this.EVENT.COMMON.BACKUP_DATABASE);
         },
 
         onPressRestoreDatabase() {
             this.DatabaseMenuPopover.close();
-            this.publish(this.EVENT.COMMON.RESTORE_DATABASE, this.DatabaseMenuPopover._button);
+            this.publish(this.EVENT.COMMON.RESTORE_DATABASE);
         }
 
     }
