@@ -6,14 +6,27 @@
         itemSelect='onSelectNavItem'
         visible='{device>/system/phone}'>
 
-        <NavigationList
-            selectedKey='{/selectedRoute}'
-            items='{/routes}'>
+        <NavigationList selectedKey='{/selectedRoute}'>
             <items>
                 <NavigationListItem
-                    text='{text}'
-                    key='{key}'
-                    icon='{icon}' />
+                    icon='sap-icon://home'
+                    text='Главная'
+                    key='home' />
+
+                <NavigationListItem
+                    icon='sap-icon://activities'
+                    text='Мои Дела'
+                    key='todoMaster' />
+
+                <NavigationListItem
+                    icon='sap-icon://physical-activity'
+                    text='Тренировки'
+                    key='gym' />
+
+                <NavigationListItem
+                    icon='sap-icon://syntax'
+                    text='ArmA: SQF Документация'
+                    key='sqf' />
             </items>
         </NavigationList>
     </SideNavigation>

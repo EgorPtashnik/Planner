@@ -28,6 +28,12 @@
                 text='Тренировки'
                 key='gym' />
             <IconTabSeparator />
+
+            <IconTabFilter
+                icon='sap-icon://syntax'
+                text='ArmA: SQF Документация'
+                key='sqf' />
+            <IconTabSeparator />
         </items>
     </IconTabHeader>
 

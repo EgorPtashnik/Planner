@@ -22,14 +22,8 @@ sap.ui.define([
                 layout: LayoutType.OneColumn,
                 isOnlyOneColumn: false,
                 sideNavExpanded: false,
-                routes: [
-                    {text: 'Главная', icon: 'sap-icon://home', key: 'home'},
-                    {text: 'Мои Дела', icon: 'sap-icon://activities', key: 'todoMaster'},
-                    {text: 'Тренировки', icon: 'sap-icon://physical-activity', key: 'gym'}
-                ],
                 selectedRoute: 'home',
-                detailID: null,
-                detailDetailID: null
+                detailID: null
             }));
             this.setModel(new JSONModel(Device), 'device');
             
