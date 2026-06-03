@@ -3,17 +3,18 @@ sap.ui.define(() => {
 
     return {
 
-        onPressCreateItem() {
-            this.publish(this.EVENT.TODO.CREATE_ITEM, {
-                table: this.byId('idTodoItems'),
-                data: { name: 'Новый Шаг', priority: 2 }
-            });
-        },
+        async onPressCreateItem() {
+            this.CreateItemDialog = await this.CreateItemDialog;
 
-        onPressEditItems(oEvent) {
-            if (!oEvent.getParameter('pressed')) {
-                this.publish(this.EVENT.TODOLIST_CHANGED);
-            }
+            this.State.setProperty('/CreateItemDialog', {
+                name: '',
+                info: '',
+                startDate: null,
+                priority: 2
+            });
+            
+            this.ValidationHelper.resetFieldGroup('CreateTodoItemFG')
+            this.CreateItemDialog.open();
         },
 
         onPressToggleVisibleItems() {

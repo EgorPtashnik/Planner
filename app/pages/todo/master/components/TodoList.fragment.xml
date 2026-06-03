@@ -87,7 +87,7 @@
             <Column
                 width='auto'
                 importance='High'>
-                <Text text='Имя' />
+                <Text text='Список' />
             </Column>
 
             <Column

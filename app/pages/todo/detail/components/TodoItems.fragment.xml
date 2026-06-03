@@ -16,8 +16,7 @@
                         showSeparators='Inner'
                         autoPopinMode='true'
                         fixedLayout='false'
-                        hiddenInPopin='{= %{state>/showDetails}.toString() === "true" || %{state>/editItems} ? [] : ["Low","Medium"] }'
-                        mode='{= %{state>/editItems} ? "Delete" : "None"}'
+                        hiddenInPopin='{= %{state>/showDetails}.toString() === "true" ? [] : ["Low","Medium"] }'
                         items='{
                             path: "todo>items",
                             parameters: {
@@ -44,24 +43,11 @@
                                     press='onPressCreateItem'
                                     type='Ghost'
                                     text='Создать'
-                                    tooltip='Создать'
-                                    visible='{state>/editItems}'>
+                                    tooltip='Создать'>
                                     <layoutData>
                                         <OverflowToolbarLayoutData priority='NeverOverflow' />
                                     </layoutData>
                                 </Button>
-
-                                <OverflowToolbarToggleButton
-                                    press='onPressEditItems'
-                                    type='Emphasized'
-                                    text='Редактировать'
-                                    tooltip='Редактировать'
-                                    icon='sap-icon://edit'
-                                    pressed='{state>/editItems}'>
-                                    <layoutData>
-                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
-                                    </layoutData>
-                                </OverflowToolbarToggleButton>
 
                                 <OverflowToolbarButton
                                     press='onPressDeleteCompletedItems'
@@ -76,7 +62,7 @@
 
                                 <ToolbarSeparator>
                                     <layoutData>
-                                        <OverflowToolbarLayoutData group='1' />
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
                                     </layoutData>
                                 </ToolbarSeparator>
 
@@ -107,17 +93,15 @@
                                     tooltip='Показать Детали'
                                     text='Показать Детали'
                                     pressed='{state>/showDetails}'
-                                    visible='{= %{device>/system/phone} }'
-                                    enabled='{= !%{state>/editItems} }'>
+                                    visible='{= %{device>/system/phone} }'>
                                     <layoutData>
-                                        <OverflowToolbarLayoutData  group='1' />
+                                        <OverflowToolbarLayoutData priority='NeverOverflow' />
                                     </layoutData>
                                 </OverflowToolbarToggleButton>
 
                                 <SegmentedButton
                                     selectedKey='{state>/showDetails}'
-                                    visible='{= !%{device>/system/phone} }'
-                                    enabled='{= !%{state>/editItems} }'>
+                                    visible='{= !%{device>/system/phone} }'>
                                     <items>
                                         <SegmentedButtonItem
                                             key='false'
@@ -139,7 +123,7 @@
                             <Column
                                 width='auto'
                                 importance='High' >
-                                <Text text='Имя'/>
+                                <Text text='Приоритет / Шаг'/>
                             </Column>
 
                             <Column
@@ -156,88 +140,44 @@
                             <Column
                                 width='8rem'
                                 hAlign='Right'
-                                importance='High'
-                                visible='{= !%{state>/editItems} }'>
+                                importance='High'>
                                 <Text text='Выполнение' />
                             </Column>
                         </columns>
 
                         <items>
                             <ColumnListItem
-                                vAlign='{= %{state>/editItems} || %{device>/system/phone} ? "Top" : "Middle"}'
+                                vAlign='{= %{device>/system/phone} ? "Top" : "Middle"}'
                                 visible='{=
                                     %{state>/showCompletedItems} ||
                                     %{todo>status} === 0 || %{todo>status} === 1
                                 }'>
                                 <cells>
-                                    <VBox>
-                                        <!-- DISPLAY -->
-                                        <FlexBox
-                                            direction='{= %{device>/system/phone} ? "Column" : "Row" }'
-                                            alignItems='{= %{device>/system/phone} ? "Start" : "Center" }'
-                                            visible='{= !%{state>/editItems} }'>
-                                            <GenericTag
-                                                class='sapUiTinyMarginEnd'
-                                                design='StatusIconHidden'
-                                                text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
-                                                visible='{= !%{device>/system/phone} }' />
-                                            <ObjectIdentifier
-                                                title='{todo>name}'/>
-                                            <GenericTag
-                                                class='sapUiTinyMarginTop'
-                                                design='StatusIconHidden'
-                                                text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
-                                                status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
-                                                visible='{device>/system/phone}' />
-                                        </FlexBox>
+                                    <FlexBox
+                                        direction='{= %{device>/system/phone} ? "Column" : "Row" }'
+                                        alignItems='{= %{device>/system/phone} ? "Start" : "Center" }'>
+                                        <GenericTag
+                                            class='sapUiTinyMarginEnd'
+                                            design='StatusIconHidden'
+                                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
+                                            visible='{= !%{device>/system/phone} }' />
+                                        <ObjectIdentifier
+                                            title='{todo>name}'/>
+                                        <GenericTag
+                                            class='sapUiTinyMarginTop'
+                                            design='StatusIconHidden'
+                                            text='{ path: "todo>priority", formatter: ".Formatter.getPriorityText" }'
+                                            status='{ path: "todo>priority", formatter: ".Formatter.getPriorityState" }'
+                                            visible='{device>/system/phone}' />
+                                    </FlexBox>
 
-                                        <!-- EDIT -->
-                                        <VBox
-                                            fitContainer='true'
-                                            visible='{state>/editItems}'>
-                                            <Input
-                                                value='{todo>name}'
-                                                visible='{state>/editItems}' />
-                                            <Select
-                                                width='100%'
-                                                selectedKey='{todo>priority}'
-                                                items='{path: "common>/PriorityCode", templateShareable: false}'>
-                                                <items>
-                                                    <core:Item key='{common>code}' text='{common>name}' />
-                                                </items>
-                                            </Select>
-                                        </VBox>
-                                    </VBox>
+                                    <Text text='{ path: "todo>startDate", formatter: ".Formatter.getDateWithoutTime" }' />
 
-                                    <VBox>
-                                        <!-- DISPLAY -->
-                                        <Text
-                                            text='{ path: "todo>startDate", formatter: ".Formatter.getDateWithoutTime" }'
-                                            visible='{= !%{state>/editItems} }' />
-
-                                        <!-- EDIT -->
-                                        <DatePicker
-                                            dateValue='{todo>startDate}'
-                                            visible='{state>/editItems}' />
-                                    </VBox>
-
-                                    <VBox>
-                                        <!-- DISPLAY -->
-                                        <ExpandableText
-                                            maxCharacters='50'
-                                            emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'
-                                            text='{todo>info}'
-                                            visible='{= !%{state>/editItems} }' />
-
-                                        <!-- EDIT -->
-                                        <TextArea
-                                            width='100%'
-                                            rows='1'
-                                            growing='true'  
-                                            value='{todo>info}'
-                                            visible='{state>/editItems}' />
-                                    </VBox>
+                                    <ExpandableText
+                                        maxCharacters='50'
+                                        emptyIndicatorMode='{= !!%{todo>info} ? "Off" : "On" }'
+                                        text='{todo>info}' />
 
                                     <OverflowToolbar style='Clear'>
                                         <ToolbarSpacer />

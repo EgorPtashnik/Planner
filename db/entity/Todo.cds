@@ -17,7 +17,7 @@ entity ListTag: cuid, managed, baseInfo {
 
 entity Item: cuid, managed, baseInfo, priority {
     key list: Association to List;
-    startDate: Date default $now;
+    startDate: Date;
     endDate: Date;
 
     status: ProgressStatus default 0;

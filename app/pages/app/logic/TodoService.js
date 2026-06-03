@@ -100,6 +100,7 @@ sap.ui.define(() => {
                         .getBinding('items')
                         .create(oData.data);
                     await oContext.created();
+                    this.publish(this.EVENT.TODOLIST_CHANGED);
                     this.publish(this.EVENT.TODOITEM_CHANGED);
                     this.MessageHelper.toast({ message: 'Шаг создан.' });
 
@@ -117,6 +118,7 @@ sap.ui.define(() => {
                 try {
                     await oData.context.delete();
                     if (oData.context.isDeleted()) {
+                        this.publish(this.EVENT.TODOLIST_CHANGED);
                         this.publish(this.EVENT.TODOITEM_CHANGED);
                         this.MessageHelper.toast({ message: 'Шаг удален.' });
 

@@ -5,9 +5,10 @@ sap.ui.define([
     'planner/pages/todo/detail/components/Header',
     'planner/pages/todo/detail/components/TodoItems',
     'planner/pages/todo/detail/components/EditListDialog',
+    'planner/pages/todo/detail/components/CreateItemDialog',
 ], (BaseController,
 
-    Events, Header, TodoItems, EditListDialog) => {
+    Events, Header, TodoItems, EditListDialog, CreateItemDialog) => {
     'use strict';
 
     return BaseController.extend('planner.pages.todo.detail.TodoDetail', {
@@ -16,6 +17,7 @@ sap.ui.define([
         ...Header,
         ...TodoItems,
         ...EditListDialog,
+        ...CreateItemDialog,
 
         onInit() {
             this.init('todoDetail');
@@ -26,7 +28,6 @@ sap.ui.define([
             this.ODataEventsAttached = false;
             this.State.setData({
                 itemCount: 0,
-                editItems: false,
                 showDetails: false,
                 showCompletedItems: false
             })
@@ -62,6 +63,7 @@ sap.ui.define([
 
         _loadFragments() {
             this.EditListDialog = this.getFragment('planner.pages.todo.detail.components.EditListDialog');
+            this.CreateItemDialog = this.getFragment('planner.pages.todo.detail.components.CreateItemDialog');
         },
 
         _setTableHelperConfig() {

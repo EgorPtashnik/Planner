@@ -44,6 +44,10 @@ sap.ui.define([
 
         getDateWithoutTime(vDate) {
             return vDate?.split(',')?.[0] || '';
+        },
+
+        getCDSDate(vDate) {
+            return vDate?.toLocaleString("sv", {timeZoneName: "short"}).substring(0, 10);
         }
     };
 });
