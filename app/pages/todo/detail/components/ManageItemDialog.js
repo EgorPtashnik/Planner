@@ -37,7 +37,22 @@ sap.ui.define(() => {
                             oContext.setProperty('priority', +oNewItemData.priority),
                             oContext.setProperty('startDate', this.Formatter.getCDSDate(oNewItemData.startDate))
                         ]);
-                        this.publish(this.EVENT.TODOITEM_CHANGED);
+
+                        if (oContext.getProperty('list_ID') !== oNewItemData.list_ID) {
+                            this.publish(this.EVENT.ACTION_REQUESTED, {
+                                model: 'todo',
+                                context: oContext,
+                                action: 'TodoService.Move(...)',
+                                message: 'Шаг перемещен.',
+                                parameters: {
+                                    list_ID: oNewItemData.list_ID
+                                },
+                                then: () => this.publish(this.EVENT.TODOITEM_CHANGED)
+                            });
+                        } else {
+                            this.publish(this.EVENT.TODOITEM_CHANGED);
+                        }
+
                     } catch(oError) {
                         this.publish(this.EVENT.ACTION_FAILED, oError);
                     }
@@ -62,7 +77,8 @@ sap.ui.define(() => {
                 name: oContext.getProperty('name'),
                 info: oContext.getProperty('info'),
                 startDate: new Date(oContext.getProperty('startDate')),
-                priority: oContext.getProperty('priority')
+                priority: oContext.getProperty('priority'),
+                list_ID: oContext.getProperty('list_ID')
             });
 
             this.ValidationHelper.resetFieldGroup('ManageTodoItemFG');

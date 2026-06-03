@@ -26,13 +26,38 @@
         <content>
             <form:SimpleForm
                 layout='ColumnLayout'
-                editable='true'>
+                editable='true'
+                columnsL='1'
+                columnsXL='1'>
                 <form:content>
+
                     <Label text='Шаг' required='true' />
                     <Input
                         fieldGroupIds='ManageTodoItemFG'
                         width='100%'
                         value='{state>/ManageItemDialog/name}' />
+
+                    <Label text='Список' required='true' visible='{= !%{state>/ManageItemDialog/toCreate} }' />
+                    <ComboBox
+                        id='idManageItemDialogListComboBox'
+                        fieldGroupIds='ManageTodoItemFG'
+                        showSecondaryValues='true'
+                        visible='{= !%{state>/ManageItemDialog/toCreate} }'
+                        selectedKey='{state>/ManageItemDialog/list_ID}'
+                        items='{
+                            path: "todo>/List",
+                            parameters: {
+                                $orderby: "name asc",
+                                $expand: "tag"
+                            }
+                        }'>
+                        <items>
+                            <core:ListItem
+                                key='{todo>ID}'
+                                text='{todo>name}'
+                                additionalText='{todo>tag/name}' />
+                        </items>
+                    </ComboBox>
 
                     <Label text='Приоритет' required='true' />
                     <Select
