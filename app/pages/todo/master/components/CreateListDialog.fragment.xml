@@ -41,8 +41,6 @@
                     <Label text='Описание' />
                     <TextArea
                         rows='5'
-                        growing='true'
-                        growingMaxLines='20'
                         value='{state>/CreateListDialog/info}' />
                 </form:content>
             </form:SimpleForm>

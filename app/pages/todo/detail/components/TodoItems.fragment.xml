@@ -64,22 +64,28 @@
                                 </OverflowToolbarToggleButton>
 
                                 <OverflowToolbarButton
-                                    press='onPressToggleVisibleItems'
-                                    type='Transparent'
-                                    icon='{= %{state>/showCompletedItems} ? "sap-icon://show" : "sap-icon://hide" }'
-                                    text='Показать законченные'
-                                    tooltip='Показать законченные'>
-                                    <layoutData>
-                                        <OverflowToolbarLayoutData group='1' />
-                                    </layoutData>
-                                </OverflowToolbarButton>
-
-                                <OverflowToolbarButton
                                     press='onPressDeleteCompletedItems'
                                     type='Transparent'
                                     icon='sap-icon://eraser'
                                     text='Удалить Законченные'
                                     tooltip='Удалить Законченные'>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData group='1' />
+                                    </layoutData>
+                                </OverflowToolbarButton>
+
+                                <ToolbarSeparator>
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData group='1' />
+                                    </layoutData>
+                                </ToolbarSeparator>
+
+                                <OverflowToolbarButton
+                                    press='onPressToggleVisibleItems'
+                                    type='Transparent'
+                                    icon='{= %{state>/showCompletedItems} ? "sap-icon://show" : "sap-icon://hide" }'
+                                    text='Показать законченные'
+                                    tooltip='Показать законченные'>
                                     <layoutData>
                                         <OverflowToolbarLayoutData group='1' />
                                     </layoutData>
