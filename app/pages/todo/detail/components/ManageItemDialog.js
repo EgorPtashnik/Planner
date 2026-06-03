@@ -3,6 +3,17 @@ sap.ui.define(() => {
 
     return {
 
+        onDeleteItem() {
+            this.ManageItemDialog.close();
+
+            this.byId('idTodoItems').setBusy(true);
+            this.publish(this.EVENT.TODO.DELETE_ITEM, {
+                context: this.State.getProperty('/ManageItemDialog/context'),
+                then: () => this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount()),
+                finally: () => this.byId('idTodoItems').setBusy(false)
+            });
+        },
+
         async onSaveItem(bToCreate) {
             if (this.ValidationHelper.validateFieldGroup('ManageTodoItemFG')) {
                 this.ManageItemDialog.close();

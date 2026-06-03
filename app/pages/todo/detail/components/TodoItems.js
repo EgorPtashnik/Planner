@@ -28,15 +28,6 @@ sap.ui.define(() => {
             this._openManageItemDialog(false, oEvent.getSource().getBindingContext('todo'));
         },
 
-        onPressDeleteItem(oEvent) {
-            this.byId('idTodoItems').setBusy(true);
-            this.publish(this.EVENT.TODO.DELETE_ITEM, {
-                context: oEvent.getParameter('listItem').getBindingContext('todo'),
-                then: () => this.State.setProperty('/itemCount', this.byId('idTodoItems').getBinding('items').getCount()),
-                finally: () => this.byId('idTodoItems').setBusy(false)
-            });
-        },
-
         onPressChangeItemStatus(oEvent, iStatus) {
             this.byId('idTodoItems').setBusy(true);
             this.publish(this.EVENT.TODO.UPDATE_ITEM_STATUS, {

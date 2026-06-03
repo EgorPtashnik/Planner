@@ -7,6 +7,23 @@
         title='{= %{state>/ManageItemDialog/toCreate} ? "Создать" : "Редактировать"} Шаг'
         stretch='{device>/system/phone}'>
 
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                </contentLeft>
+
+                <contentRight>
+                    <Button
+                        press='onDeleteItem'
+                        type='Negative'
+                        icon='sap-icon://delete'
+                        text='Удалить'
+                        tooltip='Удалить'
+                        visible='{= !%{state>/ManageItemDialog/toCreate} }' />
+                </contentRight>
+            </Bar>
+        </customHeader>
+
         <content>
             <form:SimpleForm
                 layout='ColumnLayout'
@@ -52,7 +69,6 @@
                 type='Transparent'
                 text='Отменить'
                 tooltip='Отменить' />
-
         </buttons>
 
     </Dialog>
