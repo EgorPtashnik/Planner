@@ -20,7 +20,12 @@
                             id='idTodoListTagFilter'
                             selectionFinish='onChangeTodoListFilter'
                             selectedKeys='{state>/filterBar/ListTag}'
-                            items='{todo>/ListTag}'>
+                            items='{
+                                path: "todo>/ListTag",
+                                parameters: {
+                                    $orderby: "name asc"
+                                }
+                            }'>
                             <items>
                                 <core:Item key='{todo>ID}' text='{todo>name}' />
                             </items>
