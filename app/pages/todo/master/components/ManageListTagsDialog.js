@@ -3,7 +3,7 @@ sap.ui.define(() => {
         onPressCreateListTag() {
             this.publish(this.EVENT.TODO.CREATE_LISTTAG, {
                 table: this.byId('idTodoTagList'),
-                data: { name: 'Новый тег', color: 'None', info: 'Описание' }
+                data: { name: 'Новый тег', color: 'None', info: '' }
             });
         },
 

@@ -24,14 +24,6 @@
                 <headerToolbar>
                     <OverflowToolbar>
                         <Title text='Теги ({state>/tagCount})' />
-
-                        <ToolbarSpacer />
-
-                        <Button
-                            press='onPressCreateListTag'
-                            type='Ghost'
-                            text='Создать'
-                            tooltip='Создать новый тег' />
                     </OverflowToolbar>
                 </headerToolbar>
 
@@ -73,6 +65,12 @@
         </content>
 
         <buttons>
+            <Button
+                press='onPressCreateListTag'
+                type='Emphasized'
+                text='Создать'
+                tooltip='Создать новый тег' />
+
             <Button
                 press='onPressCloseDialog'
                 text='Закрыть'
