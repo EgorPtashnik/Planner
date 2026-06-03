@@ -11,6 +11,7 @@
                     <Table
                         id='idTodoItems'
                         delete='onPressDeleteItem'
+                        sticky='HeaderToolbar'
                         busyIndicatorDelay='0'
                         showSeparators='Inner'
                         autoPopinMode='true'
