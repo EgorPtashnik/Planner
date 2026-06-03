@@ -7,14 +7,15 @@ sap.ui.define(() => {
             this.CreateListDialog = await this.CreateListDialog;
 
             this.State.setProperty('/CreateListDialog', {
-                name: 'Новый Список',
-                info: 'Описание',
+                name: '',
+                info: '',
                 priority: 1,
                 tag_ID: null,
                 items: [],
                 doneItems: []
             });
             
+            this.ValidationHelper.resetFieldGroup('CreateTodoListFG')
             this.CreateListDialog.open();
         },
 

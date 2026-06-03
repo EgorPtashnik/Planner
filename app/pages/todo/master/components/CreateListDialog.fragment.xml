@@ -12,13 +12,15 @@
                 layout='ColumnLayout'
                 editable='true'>
                 <form:content>
-                    <Label text='Имя' />
+                    <Label text='Имя' required='true' />
                     <Input
+                        fieldGroupIds="CreateTodoListFG"
                         width='100%'
                         value='{state>/CreateListDialog/name}' />
 
-                    <Label text='Приоритет' />
+                    <Label text='Приоритет' required='true' />
                     <Select
+                        fieldGroupIds="CreateTodoListFG"
                         selectedKey='{state>/CreateListDialog/priority}'
                         items='{common>/PriorityCode}'>
                         <items>

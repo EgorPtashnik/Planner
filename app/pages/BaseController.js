@@ -7,10 +7,11 @@ sap.ui.define([
 
     'planner/utils/Formatter',
     'planner/utils/MessageHelper',
-    'planner/utils/TableHelper'
+    'planner/utils/TableHelper',
+    'planner/utils/ValidationHelper'
 ], (Controller, UIComponent, FLib, MLib, JSONModel,
 
-    Formatter, MessageHelper, TableHelper
+    Formatter, MessageHelper, TableHelper, ValidationHelper
 ) => {
     'use strict';
 
@@ -62,6 +63,7 @@ sap.ui.define([
             this.URLHelper = MLib.URLHelper;
 
             this.TableHelper = new TableHelper();
+            this.ValidationHelper = new ValidationHelper(this);
             this.App = this.getOwnerComponent();
             this.AppConfig = this.App.getModel();
             this.State = new JSONModel();
