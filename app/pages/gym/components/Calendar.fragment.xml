@@ -3,37 +3,38 @@
     xmlns:u='sap.ui.unified'
     xmlns:core='sap.ui.core'>
 
-    <VBox
-        fitContainer='true'
-        justifyContent='Center'>
-        <u:Calendar
-            id='idTrainingHistoryCalendar'
-            select='onPressCalendarItem'
-            width='100%'
-            showWeekNumbers='false'
-            months='{= %{device>/resize/width} &gt; 2000 ? 12 : 6 }'
-            legend='idTrainingHistoryLegend'
-            specialDates='{gym>/Training}'>
-            <u:specialDates>
-                <u:DateTypeRange
-                    type='{=
-                        %{gym>paid} ? "Type08" :
-                        %{gym>solo} ? "Type06" : "Type02"
-                    }'
-                    secondaryType='{= %{gym>paid} ? "NonWorking" : "Working" }'
-                    startDate='{gym>date}' />
-            </u:specialDates>
-        </u:Calendar>
-        <u:CalendarLegend id='idTrainingHistoryLegend' standardItems=''>
-            <u:items>
-                <u:CalendarLegendItem
-                    type='Type06'
-                    text='Одиночная' />
-                <u:CalendarLegendItem
-                    type='Type02'
-                    text='Групповая' />
-            </u:items>
-        </u:CalendarLegend>
+    <VBox fitContainer='true'>
+        <items>
+            <u:Calendar
+                id='idTrainingHistoryCalendar'
+                select='onPressCalendarItem'
+                width='100%'
+                showWeekNumbers='false'
+                months='{= %{device>/resize/width} &gt; 2000 ? 12 : 6 }'
+                legend='idTrainingHistoryLegend'
+                specialDates='{gym>/Training}'>
+                <u:specialDates>
+                    <u:DateTypeRange
+                        type='{=
+                            %{gym>paid} ? "Type08" :
+                            %{gym>solo} ? "Type06" : "Type02"
+                        }'
+                        secondaryType='{= %{gym>paid} ? "NonWorking" : "Working" }'
+                        startDate='{gym>date}' />
+                </u:specialDates>
+            </u:Calendar>
+
+            <u:CalendarLegend id='idTrainingHistoryLegend' standardItems=''>
+                <u:items>
+                    <u:CalendarLegendItem
+                        type='Type06'
+                        text='Одиночная' />
+                    <u:CalendarLegendItem
+                        type='Type02'
+                        text='Групповая' />
+                </u:items>
+            </u:CalendarLegend>
+        </items>
     </VBox>
 
 </core:FragmentDefinition>
