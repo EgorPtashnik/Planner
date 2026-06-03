@@ -5,16 +5,16 @@
     xmlns:core='sap.ui.core'>
     
     <f:DynamicPageHeader>
-        <fb:FilterBar showGoOnFB="false" useToolbar="false">
+        <fb:FilterBar showGoOnFB='false' useToolbar='false'>
             <fb:filterGroupItems>
 
-                <fb:FilterGroupItem name="fbSearch" label="Поиск" groupName="basic" visibleInFilterBar="true">
+                <fb:FilterGroupItem name='fbSearch' label='Поиск' groupName='basic' visibleInFilterBar='true'>
                     <fb:control>
                         <SearchField change='onChangeTodoListSearch' />
                     </fb:control>
                 </fb:FilterGroupItem>
 
-                <fb:FilterGroupItem name="fbListTag" label="Тег" groupName="basic" visibleInFilterBar="true">
+                <fb:FilterGroupItem name='fbListTag' label='Тег' groupName='basic' visibleInFilterBar='true'>
                     <fb:control>
                         <MultiComboBox
                             id='idTodoListTagFilter'
@@ -28,7 +28,7 @@
                     </fb:control>
                 </fb:FilterGroupItem>
 
-                <fb:FilterGroupItem name="fbPriority" label="Приоритет" groupName="basic" visibleInFilterBar="true">
+                <fb:FilterGroupItem name='fbPriority' label='Приоритет' groupName='basic' visibleInFilterBar='true'>
                     <fb:control>
                         <MultiComboBox
                             id='idTodoListPriorityFilter'

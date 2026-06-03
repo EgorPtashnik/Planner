@@ -3,18 +3,8 @@ sap.ui.define(() => {
 
     return {
 
-        async onPressCreateItem() {
-            this.CreateItemDialog = await this.CreateItemDialog;
-
-            this.State.setProperty('/CreateItemDialog', {
-                name: '',
-                info: '',
-                startDate: null,
-                priority: 2
-            });
-            
-            this.ValidationHelper.resetFieldGroup('CreateTodoItemFG')
-            this.CreateItemDialog.open();
+        onPressCreateItem() {
+            this._openManageItemDialog(true);
         },
 
         onPressToggleVisibleItems() {
@@ -34,6 +24,10 @@ sap.ui.define(() => {
             this.TableHelper.onPressSort('idTodoItems');
         },
 
+        onPressEditItem(oEvent) {
+            this._openManageItemDialog(false, oEvent.getSource().getBindingContext('todo'));
+        },
+
         onPressDeleteItem(oEvent) {
             this.byId('idTodoItems').setBusy(true);
             this.publish(this.EVENT.TODO.DELETE_ITEM, {
@@ -50,7 +44,7 @@ sap.ui.define(() => {
                 status: iStatus,
                 finally: () => this.byId('idTodoItems').setBusy(false)
             });
-        },
+        }
 
     };
 });

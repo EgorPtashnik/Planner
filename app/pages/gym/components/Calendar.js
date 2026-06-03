@@ -16,7 +16,7 @@ sap.ui.define(() => {
                 this.State.setProperty('/CalendarItemMenuDialog', {
                     ...oData,
                     context: oCalendarItem.getBindingContext('gym'),
-                    date: new Date(oData.date).toLocaleString("ru-RU", {timeZoneName: "short"}).substring(0, 10)
+                    date: new Date(oData.date).toLocaleString('ru-RU', {timeZoneName: 'short'}).substring(0, 10)
                 });
                 this.CalendarItemMenuDialog.open();
             } else {

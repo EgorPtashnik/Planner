@@ -5,10 +5,10 @@ sap.ui.define([
     'planner/pages/todo/detail/components/Header',
     'planner/pages/todo/detail/components/TodoItems',
     'planner/pages/todo/detail/components/EditListDialog',
-    'planner/pages/todo/detail/components/CreateItemDialog',
+    'planner/pages/todo/detail/components/ManageItemDialog',
 ], (BaseController,
 
-    Events, Header, TodoItems, EditListDialog, CreateItemDialog) => {
+    Events, Header, TodoItems, EditListDialog, ManageItemDialog) => {
     'use strict';
 
     return BaseController.extend('planner.pages.todo.detail.TodoDetail', {
@@ -17,7 +17,7 @@ sap.ui.define([
         ...Header,
         ...TodoItems,
         ...EditListDialog,
-        ...CreateItemDialog,
+        ...ManageItemDialog,
 
         onInit() {
             this.init('todoDetail');
@@ -63,7 +63,7 @@ sap.ui.define([
 
         _loadFragments() {
             this.EditListDialog = this.getFragment('planner.pages.todo.detail.components.EditListDialog');
-            this.CreateItemDialog = this.getFragment('planner.pages.todo.detail.components.CreateItemDialog');
+            this.ManageItemDialog = this.getFragment('planner.pages.todo.detail.components.ManageItemDialog');
         },
 
         _setTableHelperConfig() {
@@ -77,7 +77,7 @@ sap.ui.define([
                     { label: 'Дата Обновления', path: 'modifiedAt' },
                     { label: 'Начало', path: 'startDate' }
                 ],
-                sort: { path: 'createdAt', order: 'desc' }
+                sort: { path: 'status', order: 'desc' }
             });
         },
 

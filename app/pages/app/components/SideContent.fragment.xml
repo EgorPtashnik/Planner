@@ -1,6 +1,6 @@
 <core:FragmentDefinition
-    xmlns="sap.tnt"
-    xmlns:core="sap.ui.core">
+    xmlns='sap.tnt'
+    xmlns:core='sap.ui.core'>
 
     <SideNavigation
         itemSelect='onSelectNavItem'

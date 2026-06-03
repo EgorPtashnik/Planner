@@ -22,7 +22,7 @@
                             parameters: {
                                 $$ownRequest: true,
                                 $count: true,
-                                $orderby: "createdAt desc"
+                                $orderby: "status desc"
                             }
                         }'>
 
@@ -147,6 +147,8 @@
 
                         <items>
                             <ColumnListItem
+                                detailPress='onPressEditItem'
+                                type='Detail'
                                 vAlign='{= %{device>/system/phone} ? "Top" : "Middle"}'
                                 visible='{=
                                     %{state>/showCompletedItems} ||

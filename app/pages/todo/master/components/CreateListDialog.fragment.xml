@@ -14,13 +14,13 @@
                 <form:content>
                     <Label text='Имя' required='true' />
                     <Input
-                        fieldGroupIds="CreateTodoListFG"
+                        fieldGroupIds='CreateTodoListFG'
                         width='100%'
                         value='{state>/CreateListDialog/name}' />
 
                     <Label text='Приоритет' required='true' />
                     <Select
-                        fieldGroupIds="CreateTodoListFG"
+                        fieldGroupIds='CreateTodoListFG'
                         selectedKey='{state>/CreateListDialog/priority}'
                         items='{common>/PriorityCode}'>
                         <items>

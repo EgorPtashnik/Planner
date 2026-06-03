@@ -37,6 +37,7 @@
 
                 <OverflowToolbarButton
                     press='onPressManageListTags'
+                    type='Transparent'
                     icon='sap-icon://tags'
                     tooltip='Управление тегами'
                     text='Теги'>

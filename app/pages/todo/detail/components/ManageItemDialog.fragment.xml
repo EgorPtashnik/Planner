@@ -4,7 +4,7 @@
     xmlns:core='sap.ui.core'>
 
     <Dialog
-        title='Создать Шаг'
+        title='{= %{state>/ManageItemDialog/toCreate} ? "Создать" : "Редактировать"} Шаг'
         stretch='{device>/system/phone}'>
 
         <content>
@@ -14,14 +14,14 @@
                 <form:content>
                     <Label text='Шаг' required='true' />
                     <Input
-                        fieldGroupIds="CreateTodoItemFG"
+                        fieldGroupIds='ManageTodoItemFG'
                         width='100%'
-                        value='{state>/CreateItemDialog/name}' />
+                        value='{state>/ManageItemDialog/name}' />
 
                     <Label text='Приоритет' required='true' />
                     <Select
-                        fieldGroupIds="CreateTodoItemFG"
-                        selectedKey='{state>/CreateItemDialog/priority}'
+                        fieldGroupIds='ManageTodoItemFG'
+                        selectedKey='{state>/ManageItemDialog/priority}'
                         items='{common>/PriorityCode}'>
                         <items>
                             <core:Item key='{common>code}' text='{common>name}' />
@@ -30,22 +30,22 @@
 
                     <Label text='Начало' />
                     <DatePicker
-                        dateValue='{state>/CreateItemDialog/startDate}' />
+                        dateValue='{state>/ManageItemDialog/startDate}' />
 
                     <Label text='Описание' />
                     <TextArea
                         rows='5'
-                        value='{state>/CreateItemDialog/info}' />
+                        value='{state>/ManageItemDialog/info}' />
                 </form:content>
             </form:SimpleForm>
         </content>
     
         <buttons>
             <Button
-                press='onCreateItem'
+                press='onSaveItem(%{state>/ManageItemDialog/toCreate})'
                 type='Emphasized'
-                text='Создать'
-                tooltip='Создать' />
+                text='{= %{state>/ManageItemDialog/toCreate} ? "Создать" : "Сохранить" }'
+                tooltip='{= %{state>/ManageItemDialog/toCreate} ? "Создать" : "Сохранить" }' />
 
             <Button
                 press='onPressCloseDialog'

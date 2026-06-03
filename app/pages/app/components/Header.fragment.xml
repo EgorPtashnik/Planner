@@ -1,34 +1,34 @@
 <core:FragmentDefinition
-    xmlns="sap.m"
-    xmlns:tnt="sap.tnt"
-    xmlns:core="sap.ui.core">
+    xmlns='sap.m'
+    xmlns:tnt='sap.tnt'
+    xmlns:core='sap.ui.core'>
 
     <tnt:ToolHeader>
         <tnt:content>
             <ToggleButton
                 class='HeaderBtn'
-                icon="sap-icon://menu2"
+                icon='sap-icon://menu2'
                 pressed='{/sideNavExpanded}'
                 visible='{device>/system/phone}' >
                 <layoutData>
-                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    <OverflowToolbarLayoutData priority='NeverOverflow' />
                 </layoutData>
             </ToggleButton>
 
             <Image
-                class="sapUiSmallMarginBegin"
-                height="2.5rem"
-                mode="Image"
-                src="./icons/512.png"
-                visible="{= !%{device>/system/phone} }" />
+                class='sapUiSmallMarginBegin'
+                height='2.5rem'
+                mode='Image'
+                src='./icons/512.png'
+                visible='{= !%{device>/system/phone} }' />
 
-            <Title titleStyle="{= %{device>/system/phone} ? 'H5' : 'H4' }" text="PlanneR 2.0" />
+            <Title titleStyle='{= %{device>/system/phone} ? "H5" : "H4" }' text='PlanneR 2.1' />
 
             <ToolbarSeparator />
             
             <core:Fragment fragmentName='planner.pages.app.components.HeaderNav' type='XML' />
 
-            <ToolbarSpacer width="{= %{device>/system/phone} ? '' : 'auto' }" />
+            <ToolbarSpacer width='{= %{device>/system/phone} ? "" : "auto" }' />
 
             <Button
                 press='onPressRefreshPage'

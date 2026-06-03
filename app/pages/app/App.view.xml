@@ -8,7 +8,7 @@
     busyIndicatorDelay='0'
 	controllerName='planner.pages.app.App'>
 
-    <ToolPage sideExpanded="{/sideNavExpanded}">
+    <ToolPage sideExpanded='{/sideNavExpanded}'>
 
         <header>
             <core:Fragment fragmentName='planner.pages.app.components.Header' type='XML' />

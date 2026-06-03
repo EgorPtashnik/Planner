@@ -42,7 +42,7 @@ sap.ui.define([
             const oAction = this.getView().getModel(oData.model).bindContext(oData.action, oData.context);
             Object.entries(oData.parameters || {}).forEach(entry => oAction.setParameter(entry[0], entry[1]));
 
-            return oAction.invoke(oData.group || "$auto")
+            return oAction.invoke(oData.group || '$auto')
                 .then(oResult => {
                     this.MessageHelper.toast({ message:  oData.message });
                     oData.then?.call(this, oResult, oAction);

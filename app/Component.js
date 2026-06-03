@@ -3,7 +3,7 @@ sap.ui.define([
     'sap/ui/model/json/JSONModel',
     'sap/f/library',
     'sap/ui/Device',
-    "sap/base/i18n/Localization"
+    'sap/base/i18n/Localization'
 ], (UIComponent, JSONModel, FLib, Device, Localization) => {
 	'use strict';
 

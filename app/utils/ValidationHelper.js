@@ -1,7 +1,7 @@
 sap.ui.define([
-    "sap/ui/core/library"
+    'sap/ui/core/library'
 ], function(CoreLib) {
-    "use strict";
+    'use strict';
 
     const { ValueState } = CoreLib;
 
@@ -40,11 +40,11 @@ sap.ui.define([
             }
 
             if (!sErrorText) {
-                sErrorText = oControl.data?.("validationText") || "Не может быть пустым.";
+                sErrorText = oControl.data?.('validationText') || 'Не может быть пустым.';
             }
 
             let sValueState = this.ValueState.None;
-            let sValueStateText = "";
+            let sValueStateText = '';
             if ((oControl.getValue?.().length === 0 && !oControl.getSelectedItems) ||
                 (oControl.getSelectedItems?.().length === 0)) {
                 sValueState = this.ValueState.Error;
@@ -70,7 +70,7 @@ sap.ui.define([
         };
 
         _getControl(control) {
-            if (typeof control === "string") {
+            if (typeof control === 'string') {
                 control = this.View.byId(control);
             }
             return control;
