@@ -30,6 +30,7 @@ sap.ui.define([
                 listCount: 0,
                 showCompletedLists: false,
                 tagCount: 0,
+                infoText: '',
                 filterBar: {
                     ListTag: [],
                     Priority: []

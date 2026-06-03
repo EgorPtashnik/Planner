@@ -75,6 +75,14 @@
             </OverflowToolbar>
         </headerToolbar>
 
+        <infoToolbar>
+            <Toolbar visible='{= !!%{state>/infoText} }'>
+                <Text
+                    text='{state>/infoText}'
+                    tooltip='{state>/infoText}' />
+            </Toolbar>
+        </infoToolbar>
+
         <columns>
             <Column
                 width='auto'

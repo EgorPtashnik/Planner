@@ -31,6 +31,7 @@
                 <fb:FilterGroupItem name="fbPriority" label="Приоритет" groupName="basic" visibleInFilterBar="true">
                     <fb:control>
                         <MultiComboBox
+                            id='idTodoListPriorityFilter'
                             selectionFinish='onChangeTodoListFilter'
                             selectedKeys='{state>/filterBar/Priority}'
                             items='{common>/PriorityCode}'>
