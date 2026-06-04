@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns='sap.m'
+    xmlns:core='sap.ui.core'>
+
+    <Dialog
+        title='SQF: Мастер Данные'
+        resizable='true'
+        draggable='true'
+        busyIndicatorDelay='0'>
+
+        <buttons>
+            <Button
+                press='onPressCloseDialog'
+                text='Закрыть'
+                tooltip='Закрыть' />
+        </buttons>
+    </Dialog>
+
+</core:FragmentDefinition>

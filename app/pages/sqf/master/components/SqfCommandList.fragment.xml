@@ -21,7 +21,7 @@
                 <ToolbarSpacer />
 
                 <Button
-                    press=''
+                    press='onPressCreateSqfCommand'
                     type='Ghost'
                     text='Создать'
                     tooltip='Создать'>
@@ -29,6 +29,12 @@
                         <OverflowToolbarLayoutData priority='NeverOverflow' />
                     </layoutData>
                 </Button>
+
+                <Button
+                    press='onPressManageSqfMasterData'
+                    type='Transparent'
+                    icon='sap-icon://wrench'
+                    tooltip='Изменить мастер данные' />
 
                 <ToolbarSeparator>
                     <layoutData>
