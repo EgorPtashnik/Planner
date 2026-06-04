@@ -46,8 +46,10 @@ sap.ui.define([
                 DELETE_LISTTAG: 'DELETE_LISTTAG',
                 CREATE_ITEM: 'CREATE_ITEM',
                 DELETE_ITEM: 'DELETE_ITEM',
+                UPDATE_ITEM: 'UPDATE_ITEM',
                 DELETE_COMPLETED_ITEMS: 'DELETE_COMPLETED_ITEMS',
-                UPDATE_ITEM_STATUS: 'UPDATE_ITEM_STATUS'
+                UPDATE_ITEM_STATUS: 'UPDATE_ITEM_STATUS',
+                MOVE_ITEM: 'MOVE_ITEM',
             },
 
             GYM: {

@@ -27,8 +27,10 @@ sap.ui.define([
                 { id: this.EVENT.TODO.DELETE_LISTTAG, fnc: TodoService.TodoListTag.delete },
                 { id: this.EVENT.TODO.CREATE_ITEM, fnc: TodoService.TodoItem.create },
                 { id: this.EVENT.TODO.DELETE_ITEM, fnc: TodoService.TodoItem.delete },
+                { id: this.EVENT.TODO.UPDATE_ITEM, fnc: TodoService.TodoItem.update },
                 { id: this.EVENT.TODO.DELETE_COMPLETED_ITEMS, fnc: TodoService.TodoItem.deleteCompleted },
                 { id: this.EVENT.TODO.UPDATE_ITEM_STATUS, fnc: TodoService.TodoItem.updateStatus },
+                { id: this.EVENT.TODO.MOVE_ITEM, fnc: TodoService.TodoItem.move },
 
                 { id: this.EVENT.GYM.CREATE_TRAINING, fnc: GymService.Training.create },
                 { id: this.EVENT.GYM.DELETE_TRAINING, fnc: GymService.Training.delete },

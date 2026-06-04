@@ -33,6 +33,7 @@ sap.ui.define(() => {
 
                         oData.then?.call(this, oData.context);
                     }
+
                 } catch(oError) {
                     this.publish(this.EVENT.ACTION_FAILED, oError);
                 } finally {
@@ -46,6 +47,7 @@ sap.ui.define(() => {
                         .map(entry => oData.context.setProperty(entry[0], entry[1])));
                     this.MessageHelper.toast({ message: 'Список изменен.' });
                     this.publish(this.EVENT.TODOLIST_TAG_CHANGED);
+
                 } catch(oError) {
                     this.publish(this.EVENT.ACTION_FAILED, oError);
                 } finally {
@@ -93,7 +95,7 @@ sap.ui.define(() => {
         },
 
         TodoItem: {
-            async create(_, sEventId, oData= { table: null, data: null, then: null }) {
+            async create(_, sEventId, oData = { table: null, data: null, then: null }) {
                 try {
                     const oContext = oData.table
                         .setBusy(true)
@@ -113,6 +115,31 @@ sap.ui.define(() => {
                 }
             },
 
+            async update(_, sEventId, oData = { context: null, table: null, data: null, then: null }) {
+                try {
+                    oData.table.setBusy(true);
+                    await Promise.all(Object.entries(oData.data)
+                        .map(entry => oData.context.setProperty(entry[0], entry[1])));
+                    
+                    if (oData.context.getProperty('list_ID') !== oData.data.list_ID) {
+                        this.publish(this.EVENT.TODO.MOVE_ITEM, {
+                            context: oData.context,
+                            list_ID: oData.data.list_ID
+                        });
+                    } else {
+                        this.publish(this.EVENT.TODOITEM_CHANGED);
+                        this.MessageHelper.toast({ message: 'Шаг изменен.' });
+                    }
+
+                    oData.then?.call(this);
+                } catch(oError) {
+                    this.publish(this.EVENT.ACTION_FAILED, oError);
+                } finally {
+                    oData.table.setBusy(false).getBinding('items').refresh();
+                    oData.finally?.call(this);
+                }
+            },
+
             async delete(_, sEventId, oData = { context: null, then: null }) {
                 try {
                     await oData.context.delete();
@@ -122,6 +149,7 @@ sap.ui.define(() => {
 
                         oData.then?.call(this, oData.context);
                     }
+
                 } catch(oError) {
                     this.publish(this.EVENT.ACTION_FAILED, oError);
                 } finally {
@@ -162,6 +190,22 @@ sap.ui.define(() => {
                 } finally {
                     oData.finally?.call(this);
                 }
+            },
+
+            async move(_, sEventId, oData = {context: null, list_ID: null, then: null}) {
+                this.publish(this.EVENT.ACTION_REQUESTED, {
+                    model: 'todo',
+                    context: oData.context,
+                    action: 'TodoService.Move(...)',
+                    message: 'Шаг перемещен.',
+                    parameters: {
+                        list_ID: oData.list_ID
+                    },
+                    then: () => {
+                        this.MessageHelper.toast({ message: 'Шаг изменен.' });
+                        this.publish(this.EVENT.TODOITEM_CHANGED);
+                    }
+                });
             }
         }
 

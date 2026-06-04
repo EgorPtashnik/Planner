@@ -29,33 +29,17 @@ sap.ui.define(() => {
                         }
                     });
                 } else {
-                    try {
-                        const oContext = this.State.getProperty('/ManageItemDialog/context');
-                        await Promise.all([
-                            oContext.setProperty('name', oNewItemData.name),
-                            oContext.setProperty('info', oNewItemData.info),
-                            oContext.setProperty('priority', +oNewItemData.priority),
-                            oContext.setProperty('startDate', this.Formatter.getCDSDate(oNewItemData.startDate))
-                        ]);
-
-                        if (oContext.getProperty('list_ID') !== oNewItemData.list_ID) {
-                            this.publish(this.EVENT.ACTION_REQUESTED, {
-                                model: 'todo',
-                                context: oContext,
-                                action: 'TodoService.Move(...)',
-                                message: 'Шаг перемещен.',
-                                parameters: {
-                                    list_ID: oNewItemData.list_ID
-                                },
-                                then: () => this.publish(this.EVENT.TODOITEM_CHANGED)
-                            });
-                        } else {
-                            this.publish(this.EVENT.TODOITEM_CHANGED);
+                    this.publish(this.EVENT.TODO.UPDATE_ITEM, {
+                        context: this.State.getProperty('/ManageItemDialog/context'),
+                        table: this.byId('idTodoItems'),
+                        data: {
+                            name: oNewItemData.name,
+                            info: oNewItemData.info,
+                            priority: +oNewItemData.priority,
+                            startDate: this.Formatter.getCDSDate(oNewItemData.startDate),
+                            list_ID: oNewItemData.list_ID
                         }
-
-                    } catch(oError) {
-                        this.publish(this.EVENT.ACTION_FAILED, oError);
-                    }
+                    });
                 }
             }
         },
@@ -76,7 +60,7 @@ sap.ui.define(() => {
                 context: oContext,
                 name: oContext.getProperty('name'),
                 info: oContext.getProperty('info'),
-                startDate: new Date(oContext.getProperty('startDate')),
+                startDate: oContext.getProperty('startDate') ? new Date(oContext.getProperty('startDate')) : null,
                 priority: oContext.getProperty('priority'),
                 list_ID: oContext.getProperty('list_ID')
             });

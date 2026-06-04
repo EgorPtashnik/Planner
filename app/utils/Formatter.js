@@ -47,7 +47,7 @@ sap.ui.define([
         },
 
         getCDSDate(vDate) {
-            return vDate?.toLocaleString('sv', {timeZoneName: 'short'}).substring(0, 10);
+            return vDate?.toLocaleString('sv', {timeZoneName: 'short'}).substring(0, 10) || null;
         }
     };
 });
