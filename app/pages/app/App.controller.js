@@ -26,7 +26,6 @@ sap.ui.define([
             this._loadFragments();
 
             this.getView().addStyleClass(this.getContentDensityClass());
-            Theming.attachApplied(() => setTimeout(() => this.publish(this.EVENT.CLOSE_BUSY_DIALOG, 500)));
 
             this._applyTheme();
         },
@@ -54,9 +53,9 @@ sap.ui.define([
                 this.publish(this.EVENT.OPEN_BUSY_DIALOG, 'Меняю тему...');
                 Theming.setTheme(localStorage.getItem('theme') );
                 this.AppConfig.setProperty('/darkMode', localStorage.getItem('theme') === this.THEME.DARK);
+                setTimeout(() => this.publish(this.EVENT.CLOSE_BUSY_DIALOG, 500));
             }
-        },
-
+        }
 
     });
 });
