@@ -68,7 +68,7 @@ sap.ui.define([
             this.BusyDialog.open();
         },
 
-        _onCloseBusyDialog(_, sEventId, oData) {
+        async _onCloseBusyDialog(_, sEventId, oData) {
             this.BusyDialog = await this.BusyDialog;
             this.BusyDialog.close();
         }
