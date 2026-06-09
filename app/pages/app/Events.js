@@ -69,7 +69,8 @@ sap.ui.define([
         },
 
         _onCloseBusyDialog(_, sEventId, oData) {
-            this.BusyDialog?.close?.();
+            this.BusyDialog = await this.BusyDialog;
+            this.BusyDialog.close();
         }
     }
 });
