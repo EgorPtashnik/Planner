@@ -8,8 +8,8 @@ service GymService {
         key ID,
         solo,
         case
-            when solo = true then 45
-            else 80
+            when solo = true then 50
+            else 90
         end as cost : Integer
     } where paid = false;
 
