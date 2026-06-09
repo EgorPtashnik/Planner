@@ -53,7 +53,7 @@ sap.ui.define([
                 this.publish(this.EVENT.OPEN_BUSY_DIALOG, 'Меняю тему...');
                 Theming.setTheme(localStorage.getItem('theme') );
                 this.AppConfig.setProperty('/darkMode', localStorage.getItem('theme') === this.THEME.DARK);
-                setTimeout(() => this.publish(this.EVENT.CLOSE_BUSY_DIALOG, 500));
+                setTimeout(() => this.publish(this.EVENT.CLOSE_BUSY_DIALOG, 1000));
             }
         }
 
