@@ -10,45 +10,47 @@
         <content>
             <form:SimpleForm
                 layout='ColumnLayout'
-                editable='true'>
+                editable='true'
+                columnsM='1'
+                columnsL='1'
+                columnsXL='1'>
                 <form:content>
-                    <Label text='Название' />
-                    <Input width='100%' value='{config>/CreateFunctionDialog/name}' />
+                    <Label text='Название' required='true' />
+                    <Input width='100%' value='{state>/CreateSqfCommandDialog/name}' />
 
                     <Label text='Тип' />
-                    <Select
-                        selectedKey='{config>/CreateFunctionDialog/type_code}'
-                        items='{arma>/SqfCommandType}'>
-                        <items>
-                            <core:Item key='{arma>code}' text='{arma>name}' />
-                        </items>
-                    </Select>
+                    <Input editable='false' value='{state>/CreateSqfCommandDialog/type}' />
 
                     <Label text='Источник' />
-                    <Select
-                        selectedKey='{config>/CreateFunctionDialog/source_code}'
-                        items='{arma>/SqfCommandSource}'>
-                        <items>
-                            <core:Item key='{arma>code}' text='{arma>name}' />
-                        </items>
-                    </Select>
+                    <Input editable='false' value='{state>/CreateSqfCommandDialog/source}' />
 
                     <Label text='Описание' />
                     <TextArea
                         rows='5'
-                        value='{config>/CreateFunctionDialog/info}' />
+                        value='{state>/CreateSqfCommandDialog/info}' />
+
+                    <Label text='Теги' />
+                    <MultiComboBox
+                        id='idCreateSqfCommandDialogTagComboBox'
+                        selectedKeys='{state>/CreateSqfCommandDialog/tags}'
+                        items='{arma>/SqfTag}'>
+                        <items>
+                            <core:Item key='{arma>ID}' text='{arma>name}' />
+                        </items>
+                    </MultiComboBox>
                 </form:content>
             </form:SimpleForm>
         </content>
 
         <buttons>
             <Button
-                press='onCreateFunction'
+                press='onCreateSqfCommand'
                 type='Emphasized'
                 text='Создать'
                 tooltip='Создать' />
             <Button
                 press='onPressCloseDialog'
+                type='Transparent'
                 text='Закрыть'
                 tooltip='Закрыть' />
         </buttons>

@@ -6,11 +6,73 @@
         title='SQF: Мастер Данные'
         resizable='true'
         draggable='true'
-        busyIndicatorDelay='0'>
+        busyIndicatorDelay='0'
+        stretch='{device>/system/phone}'>
+
+        <content>
+            <IconTabBar>
+                <items>
+                    <IconTabFilter text='Изменить Теги'>
+                        <content>
+                            <List
+                                id='idSqfTagList'
+                                delete='onPressDeleteSqfTag'
+                                mode='Delete'
+                                busyIndicatorDelay='0'
+                                sticky='HeaderToolbar'
+                                items='{arma>/SqfTag}'>
+
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <Title text='Теги ({state>/tagCount})' />
+
+                                        <ToolbarSpacer />
+
+                                        <Button
+                                            press='onPressCreateSqfTag'
+                                            type='Transparent'
+                                            icon='sap-icon://add'
+                                            tooltip='Создать новый тег' />
+                                    </OverflowToolbar>
+                                </headerToolbar>
+
+                                <items>
+                                    <CustomListItem>
+                                        <Input value='{arma>name}' />
+                                    </CustomListItem>
+                                </items>
+                            </List>
+                        </content>
+                    </IconTabFilter>
+
+                    <IconTabFilter text='Изменить Переаресацию'>
+                        <content>
+                            <Table
+                                id='idSqfRedirectionList'>
+
+                                <headerToolbar>
+                                </headerToolbar>
+
+                                <columns>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
 
         <buttons>
             <Button
                 press='onPressCloseDialog'
+                type='Transparent'
                 text='Закрыть'
                 tooltip='Закрыть' />
         </buttons>

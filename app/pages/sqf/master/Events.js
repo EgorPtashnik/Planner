@@ -5,13 +5,13 @@ sap.ui.define(() => {
 
         _setSubscriptions() {
             [
-                // { id: this.EVENT.TODOLIST_CHANGED, fnc: this._onTodoListChanged }
+                { id: this.EVENT.SQF_TAG_CHANGED, fnc: this._onSqfTagChanged }
             ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
         },
 
-        // _onTodoListChanged() {
-        //     this.byId('idTodoList').getBinding('items').refresh();
-        // }
+        _onSqfTagChanged() {
+            this.State.setProperty('/tagCount', this.byId('idSqfTagList').getBinding('items').getCount());
+        }
 
     };
 });

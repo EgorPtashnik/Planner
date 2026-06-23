@@ -21,29 +21,6 @@
 
         <f:content>
             <core:Fragment fragmentName='planner.pages.gym.components.Calendar' type='XML' />
-            <!-- <VBox alignItems='Center' justifyContent='Center' fitContainer='true'>
-                <IllustratedMessage
-                    decorative='true'
-                    enableDefaultTitleAndDescription='false'
-                    illustrationType='sapIllus-EmptyPlanningCalendar'
-                    illustrationSize='Large'
-                    title='Сумма: {state>/totalCost} BYN'>
-                    <additionalContent>
-                        <HBox justifyContent='SpaceBetween'>
-                            <Button
-                                press='onPressAddTraining'
-                                width='100%'
-                                type='Emphasized'
-                                text='Записать Тренировку'
-                                tooltip='Записать Тренировку'>
-                                <layoutData>
-                                    <FlexItemData growFactor='1' />
-                                </layoutData>
-                            </Button>
-                        </HBox>
-                    </additionalContent>
-                </IllustratedMessage>
-            </VBox> -->
         </f:content>
 
     </f:DynamicPage>

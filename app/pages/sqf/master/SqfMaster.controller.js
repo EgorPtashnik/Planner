@@ -22,14 +22,21 @@ sap.ui.define([
             this._setTableHelperConfig();
 
             this.ODataEventsAttached = false;
-            this.State.setData({});
+            this.State.setData({
+                sqfCommandCount: 0,
+
+                tagCount: 0
+            });
         },
 
         _onRouteMatched(oEvent) {
             this.AppConfig.setProperty('/selectedRoute', 'sqfMaster');
 
             if (!this.ODataEventsAttached) {
-               
+               this.ODataEventsAttached = true;
+               this.byId('idSqfCommandList').getBinding('items').attachDataReceived(oEvent =>
+                    oEvent.getSource().getHeaderContext().requestProperty('$count')
+                        .then(value => this.State.setProperty('/sqfCommandCount', value))).refresh();
             }
         },
 

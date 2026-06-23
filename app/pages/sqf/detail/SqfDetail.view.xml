@@ -1,0 +1,13 @@
+<mvc:View
+    xmlns='sap.m'
+    xmlns:f='sap.f'
+    xmlns:mvc='sap.ui.core.mvc'
+    xmlns:core='sap.ui.core'
+    busyIndicatorDelay='0'
+	controllerName='planner.pages.sqf.detail.SqfDetail'>
+
+    <ObjectPageLayout upperCaseAnchorBar='false'>
+
+    </ObjectPageLayout>
+
+</mvc:View>

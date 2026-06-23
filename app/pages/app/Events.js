@@ -23,8 +23,10 @@ sap.ui.define([
                 { id: this.EVENT.TODO.CREATE_LIST, fnc: TodoService.TodoList.create },
                 { id: this.EVENT.TODO.DELETE_LIST, fnc: TodoService.TodoList.delete },
                 { id: this.EVENT.TODO.UPDATE_LIST, fnc: TodoService.TodoList.update },
+
                 { id: this.EVENT.TODO.CREATE_LISTTAG, fnc: TodoService.TodoListTag.create },
                 { id: this.EVENT.TODO.DELETE_LISTTAG, fnc: TodoService.TodoListTag.delete },
+
                 { id: this.EVENT.TODO.CREATE_ITEM, fnc: TodoService.TodoItem.create },
                 { id: this.EVENT.TODO.DELETE_ITEM, fnc: TodoService.TodoItem.delete },
                 { id: this.EVENT.TODO.UPDATE_ITEM, fnc: TodoService.TodoItem.update },
@@ -34,8 +36,12 @@ sap.ui.define([
 
                 { id: this.EVENT.GYM.CREATE_TRAINING, fnc: GymService.Training.create },
                 { id: this.EVENT.GYM.DELETE_TRAINING, fnc: GymService.Training.delete },
+
                 { id: this.EVENT.GYM.SETTLE, fnc: GymService.settle },
-                { id: this.EVENT.GYM.GET_TOTAL_COST, fnc: GymService.getTotalCost }
+                { id: this.EVENT.GYM.GET_TOTAL_COST, fnc: GymService.getTotalCost },
+
+                { id: this.EVENT.ARMA.CREATE_SQFTAG, fnc: ArmaService.SqfTag.create },
+                { id: this.EVENT.ARMA.DELETE_SQFTAG, fnc: ArmaService.SqfTag.delete }
 
             ].forEach(oEvent => this.subscribe(oEvent.id, oEvent.fnc));
         },

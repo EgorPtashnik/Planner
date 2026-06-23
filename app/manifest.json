@@ -35,6 +35,11 @@
                 "uri": "/odata/v4/gym/",
                 "type": "OData",
                 "settings": { "odataVersion": "4.0" }
+            },
+            "armaService": {
+                "uri": "/odata/v4/arma/",
+                "type": "OData",
+                "settings": { "odataVersion": "4.0" }
             }
         }
     },
@@ -57,7 +62,8 @@
             "common": { "dataSource": "commonService", "type": "sap.ui.model.odata.v4.ODataModel" },
             "home": { "dataSource": "homeService", "type": "sap.ui.model.odata.v4.ODataModel" },
             "todo": { "dataSource": "todoService", "type": "sap.ui.model.odata.v4.ODataModel" },
-            "gym": { "dataSource": "gymService", "type": "sap.ui.model.odata.v4.ODataModel" }
+            "gym": { "dataSource": "gymService", "type": "sap.ui.model.odata.v4.ODataModel" },
+            "arma": { "dataSource": "armaService", "type": "sap.ui.model.odata.v4.ODataModel" }
         },
         "rootView": {
             "viewName": "planner.pages.app.App",
@@ -103,6 +109,11 @@
                     "pattern": "sqf",
                     "name": "sqfMaster",
                     "target": ["sqfMaster"]
+                },
+                {
+                    "pattern": "sqf/{name}/:layout:",
+                    "name": "sqfDetail",
+                    "target": ["sqfMaster", "sqfDetail"]
                 }
             ],
             "targets": {
@@ -146,6 +157,14 @@
                     "controlAggregation": "beginColumnPages",
                     "placeholder": {
                         "html": "sap/fe/placeholder/view/PlaceholderLR.fragment.html",
+                        "autoClose": true
+                    }
+                },
+                "sqfDetail": {
+                    "name": "sqf.detail.sqfDetail",
+                    "controlAggregation": "midColumnPages",
+                    "placeholder": {
+                        "html": "sap/fe/placeholder/view/PlaceholderOP.fragment.html",
                         "autoClose": true
                     }
                 }

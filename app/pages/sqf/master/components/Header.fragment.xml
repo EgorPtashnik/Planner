@@ -6,7 +6,7 @@
     <f:DynamicPageTitle>
 
         <f:heading>
-            <Title text='SQF Документация' />
+            <Title text='ArmA: SQF Команды ({state>/sqfCommandCount})' />
         </f:heading>
 
     </f:DynamicPageTitle>

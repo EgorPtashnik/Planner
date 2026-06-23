@@ -32,6 +32,8 @@ sap.ui.define([
 
             GYMTRAINING_CHANGED: 'GYMTRAINING_CHANGED',
 
+            SQF_TAG_CHANGED: 'SQF_TAG_CHANGED',
+
             COMMON: {
                 DOWNLOAD_DATABASE: 'DOWNLOAD_DATABASE',
                 BACKUP_DATABASE: 'BACKUP_DATABASE',
@@ -57,6 +59,11 @@ sap.ui.define([
                 DELETE_TRAINING: 'DELETE_TRAINING',
                 SETTLE: 'SETTLE',
                 GET_TOTAL_COST: 'GET_TOTAL_COST'
+            },
+
+            ARMA: {
+                CREATE_SQFTAG: 'CREATE_SQFTAG',
+                DELETE_SQFTAG: 'DELETE_SQFTAG'
             }
         },
 
